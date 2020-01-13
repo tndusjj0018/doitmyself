@@ -3,10 +3,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases><!-- 별칭 -->
-		<typeAlias alias="member" type="com.myhome.dim.domain.Member"/>
-		<typeAlias alias="category" type="com.myhome.dim.domain.Category"/>
-		<typeAlias alias="product" type="com.myhome.dim.domain.Product"/>
-		<typeAlias alias="seller" type="com.myhome.dim.domain.Seller"/>
+		<typeAlias alias="member" type="com.kh.dim2.domain.Member"/>
+		<typeAlias alias="category" type="com.kh.dim2.domain.Category"/>
+		<typeAlias alias="product" type="com.kh.dim.domain.Product"/>
+		<typeAlias alias="seller" type="com.kh.dim2.domain.Seller"/>
 	</typeAliases>
 	
 	<mappers>
