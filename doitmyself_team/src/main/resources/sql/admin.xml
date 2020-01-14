@@ -11,5 +11,11 @@
 			
 		</where>
 	</select>
-	
+	<select id="reviewListCount" resultType="int">
+		select count(*) from review_tbl
+	</select>
+	<select id="reviewList" resultType="review">
+		select * from review_tbl
+		
+	</select>
 </mapper>
