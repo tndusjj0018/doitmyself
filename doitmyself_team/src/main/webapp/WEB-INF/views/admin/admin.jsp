@@ -34,7 +34,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/admin.js"></script>
 	
 	
@@ -45,6 +45,17 @@
 		}
 		.admin_aside{
 			width:220px;
+		}
+		#admin_viewtitle {
+		    font-size: x-large;
+		    width: 600px;
+		    display: inline-block;
+		    margin-bottom: 16px;
+		    float: left;
+		}
+		.admin_content{
+			padding-left:50px;
+			width: 1200px
 		}
 	</style>
   </head>
@@ -63,7 +74,7 @@
             <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item dropdown messages-menu">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-bell-o"></i>
                     <span class="label label-success bg-success">10</span>
                   </a>
@@ -141,7 +152,7 @@
                 </div>
               </li>
               <li class="nav-item dropdown notifications-menu">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-warning bg-warning">10</span>
                 </a>
@@ -226,8 +237,6 @@
   <script src="resources/js/jquery.animateNumber.min.js"></script>
   <script src="resources/js/bootstrap-datepicker.js"></script>
   <script src="resources/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="resources/js/google-map.js"></script>
   <script src="resources/js/main.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
