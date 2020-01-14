@@ -3,13 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<style>
-	#mytable{
-		margin-left: 50px;
-	}
-	
-</style>
+	<style>
+		.search{
+			width: 550px;
+			display: inline-block;
+			text-align: right;
+			
+		}
+		.user_search{
+			width: 285px;
+			height: 40px;
+			
+		}
+		.user_searchbtn{
+			width:65px;
+			height: 40px;
+		}
+		#mytable{
+			margin-top: 40px;
+		}
+	</style>
 <script>
 	$.ajax({
 		type:"POST",
@@ -128,6 +141,8 @@
 </script>
 </head>
 <body>
+	<font id = "admin_viewtitle">회원 정보 조회</font><br>
+	<div class="search"><input type="text" name="user_search" class = "user_search"><input type="button" value = "검색" class="user_searchbtn"></div>
 	<table id="mytable" class="table table-bordred table-striped">
                   
 				        

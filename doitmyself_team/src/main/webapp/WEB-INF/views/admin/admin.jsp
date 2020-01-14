@@ -46,6 +46,17 @@
 		.admin_aside{
 			width:220px;
 		}
+		#admin_viewtitle {
+		    font-size: x-large;
+		    width: 600px;
+		    display: inline-block;
+		    margin-bottom: 16px;
+		    float: left;
+		}
+		.admin_content{
+			padding-left:50px;
+			width: 1200px
+		}
 	</style>
   </head>
   <body class="goto-here">
