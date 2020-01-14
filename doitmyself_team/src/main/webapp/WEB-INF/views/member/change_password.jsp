@@ -14,7 +14,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 	
 	<!-- CSS Files -->
-	<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="resources/css/bootstrap-soo.css" rel="stylesheet">
 	<link href="resources/demo/demo.css" rel="stylesheet">
 	<link href="resources/css/paper-dashboard.css" rel="stylesheet">
 	
