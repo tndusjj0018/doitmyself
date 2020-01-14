@@ -8,10 +8,6 @@
  	나의 상품 리뷰
 	</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
-	
-	<!--     Fonts and icons     -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   
 	<!-- CSS Files -->	
 	<link href="resources/css/reviewList.css" rel="stylesheet">
@@ -114,7 +110,7 @@
 			        	<div class="container">
 							<ul>
 								<li>고객님께서 작성하신 상품 리뷰를 조회하고 수정할 수 있습니다.</li>
-								<li>컨텐츠 운영 정책에 맞지 않는 리뷰는 비공개 될 수 있습니다.</li>
+								<li>컨텐츠 운영 정책에 맞지 않는 리뷰는 삭제 될 수 있습니다.</li>
 							</ul>
 
 							<ul class="nav nav-tabs">

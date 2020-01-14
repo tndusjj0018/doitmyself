@@ -9,6 +9,8 @@
 	</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
+	<!-- CSS Files -->
+	<link href="resources/css/orderDelivery.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -66,7 +68,38 @@
 			        <div class="card-header">
 			          <h5 class="card-title">주문 / 배송 조회</h5>
 			        </div>
-			        <div class="card-body"></div>
+			        <div class="card-body">
+			        	<div class="container">
+			        	<table class="table">
+							<tr>
+								<td>주문 일자</td> <td>주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>주문상태</td> <td>취소 / 리뷰</td>
+							</tr>
+							<tr>
+								<td>
+								2020-01-08
+								</td>
+								<td>
+									<img src="resources/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
+								</td>
+								<td>
+									1000원<br>
+									(1개)
+								</td>
+								<td>
+									<span class="order_status">배송완료</span><br>
+									<button type="button" class="btn" id="btn-order">배송조회</button>
+								</td>
+								
+								<td>
+									<button type="button" class="btn" id="btn-return">반품 신청</button>
+								</td>
+								
+								
+							</tr>
+						</table>
+						</div>
+			        </div>
 			      </div>
 			    </div>
 			  </div>

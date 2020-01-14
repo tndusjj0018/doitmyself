@@ -5,8 +5,8 @@
 
 	<select id="readinfo" resultType="member" parameterType="String">
 		select *
-		from user_tbl
-		where id = #{id}
+		from USER_TBL
+		where user_id = #{id}
 	</select>
 
 </mapper>

@@ -52,7 +52,10 @@ public class Member {
 		USER_POSTCODE = uSER_POSTCODE;
 	}
 	public String getUSER_PHONE() {
-		return USER_PHONE;
+		String fir = USER_PHONE.substring(0, 3);
+		String sec = USER_PHONE.substring(3, 7);
+		String thi = USER_PHONE.substring(7, 11);
+		return fir+"-"+sec+"-"+thi;
 	}
 	public void setUSER_PHONE(String uSER_PHONE) {
 		USER_PHONE = uSER_PHONE;
@@ -64,7 +67,7 @@ public class Member {
 		USER_EMAIL = uSER_EMAIL;
 	}
 	public String getUSER_BIRTH() {
-		return USER_BIRTH;
+		return USER_BIRTH.substring(0, 10);
 	}
 	public void setUSER_BIRTH(String uSER_BIRTH) {
 		USER_BIRTH = uSER_BIRTH;
