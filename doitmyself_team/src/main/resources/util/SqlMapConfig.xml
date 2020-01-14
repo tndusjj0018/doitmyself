@@ -5,7 +5,7 @@
 	<typeAliases><!-- 별칭 -->
 		<typeAlias alias="member" type="com.kh.dim2.domain.Member"/>
 		<typeAlias alias="category" type="com.kh.dim2.domain.Category"/>
-		<typeAlias alias="product" type="com.kh.dim.domain.Product"/>
+		<typeAlias alias="product" type="com.kh.dim2.domain.Product"/>
 		<typeAlias alias="seller" type="com.kh.dim2.domain.Seller"/>
 	</typeAliases>
 	

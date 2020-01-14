@@ -4,8 +4,7 @@ public class Member {
 	private int USER_NO;
 	private String USER_ID;
 	private String USER_PASSWORD;
-	private String USER_NAME; 
-	private String USER_NICKNAME;
+	private String USER_NAME;
 	private String USER_ADDRESS;
 	private String USER_POSTCODE;
 	private String USER_PHONE;
@@ -39,12 +38,6 @@ public class Member {
 	}
 	public void setUSER_NAME(String uSER_NAME) {
 		USER_NAME = uSER_NAME;
-	}
-	public String getUSER_NICKNAME() {
-		return USER_NICKNAME;
-	}
-	public void setUSER_NICKNAME(String uSER_NICKNAME) {
-		USER_NICKNAME = uSER_NICKNAME;
 	}
 	public String getUSER_ADDRESS() {
 		return USER_ADDRESS;

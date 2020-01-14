@@ -3,4 +3,4 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:forward  page="login.net"></jsp:forward>
+<jsp:forward  page="/memberInfo"></jsp:forward>

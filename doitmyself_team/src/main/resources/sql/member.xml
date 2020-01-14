@@ -3,5 +3,10 @@
 
 <mapper namespace="Member">
 
+	<select id="readinfo" resultType="member" parameterType="String">
+		select *
+		from user_tbl
+		where id = #{id}
+	</select>
 
 </mapper>
