@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+.mytmall_tab1 {
+    position: relative;
+    margin: 29px 0 0 0;
+    height: 45px;
+    background: none;
+}
+
+.marT0 {
+    margin-top: 0 !important;
+}
+
+.mytmall_tab1 ul {
+    height: 30px;
+    overflow: hidden;
+    list-style: none;
+}
+
+.mytmall_tab1 ul li.on {
+    position: relative;
+    width: 159px;
+}
+
+#home > table {
+	margin-top: 40px;
+	text-align: center;
+}
+
+#home > table > tbody > tr:nth-child(1) > td:nth-child(1) {
+	width:20%;
+}
+
+.product_img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+#home > table > tbody > tr:nth-child(2) > td:nth-child(2) > span, #menu1 > table > tbody > tr:nth-child(2) > td:nth-child(2) > span {
+	cursor: pointer;
+}
+
+#home > table > tbody > tr:nth-child(2) > td:nth-child(4) > button, #menu1 > table > tbody > tr:nth-child(2) > td:nth-child(5) > button {
+	background: #f4f3ef;
+	color: #252422;
+}
+
+#home > table > tbody > tr:nth-child(2) > td:nth-child(4) > button:hover, #menu1 > table > tbody > tr:nth-child(2) > td:nth-child(5) > button:hover {
+	background: #3a8aa2 !important;
+}
+
+<!--모달 --> /* #myModal > div > div > div.modal-header > h4  {
+    position: relative;
+    right: 370px;
+} */
+
+.star {
+	font-size: 35px
+}
+
+.star_style {
+	margin-left: 30px;
+}
+
+.checked {
+	color: orange;
+}
+
+.review_content {
+	width: 100%;
+	height: 100px;
+	margin-top: 35px;	
+	padding: 5px 0 0 10px;
+}
+
+#myModal > div > div > form > div.modal-body > div > span{
+    height: 14px;
+    color: #757575;
+    font-size: 11px;
+}
+
+#myModal > div > div > form > div.modal-body > div > ul li {
+    margin: 0 0 5px 0;
+    padding: 0 0 0 7px;
+    color: #757575;
+    font-size: 11px;
+    line-height: 16px;
+    vertical-align: top;
+}
+
+
+
+body > div > div.main-panel.ps-container.ps-theme-default > div.content > div > div > div > div.card-body > div > ul:nth-child(1) {
+	margin-top: -10px;
+	margin-bottom: 30px;
+}
+
+body > div > div.main-panel.ps-container.ps-theme-default > div.content > div > div > div > div.card-body > div > ul:nth-child(1) > li {
+	padding: 5px;
+}
+
+#menu1 > table {
+	margin-top: 40px;
+	text-align: center;
+}
+#menu1 > table > tbody > tr > td:nth-child(1) {
+	width: 20%;
+}
