@@ -1,0 +1,27 @@
+.sidebar_category{
+	list-style: none !important;
+	color: black;
+}
+.sidebar_category li{
+	
+}
+
+
+
+.admin_sidebar{
+	display: inline-block;
+	float: left;
+	background: #f7f7f7;
+	width: 100%;
+	padding-top: 20px;
+    padding-bottom: 20px;
+}
+}
+.sidebar_category a {
+	color: grey;
+}
+.first_category a, .first_category{
+	font-weight: bold;
+	font-size: 100;	
+	color:black !important;
+}
