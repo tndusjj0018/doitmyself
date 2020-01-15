@@ -14,9 +14,9 @@
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   
    <!-- CSS Files -->
-   <link href="resources/css/bootstrap2.min.css" rel="stylesheet">
-   <link href="resources/demo/demo.css" rel="stylesheet">
-   <link href="resources/css/paper-dashboard.css" rel="stylesheet">
+   <link href="resources/css/homecss/bootstrap2.min.css" rel="stylesheet">
+   <link href="resources/css/homecss/demo.css" rel="stylesheet">
+   <link href="resources/css/homecss/paper-dashboard.css" rel="stylesheet">
    <style type="text/css">/* Chart.js */
       @-webkit-keyframes chartjs-render-animation{
          from{opacity:0.99}

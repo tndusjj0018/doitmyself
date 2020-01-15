@@ -4,9 +4,9 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login</title>
-    <link rel="stylesheet" href="resources/css/style_login.css">
-    <script src="resources/js/jquery.min.css"></script>
-    <script src="resources/js/login.js"></script>
+    <link rel="stylesheet" href="resources/css/homecss/style_login.css">
+    <script src="resources/js/home_js/jquery.min.css"></script>
+    <script src="resources/js/home_js/login.js"></script>
   </head>
   <body>
     <div class="container-scroller">
