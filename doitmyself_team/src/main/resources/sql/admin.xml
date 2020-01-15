@@ -11,11 +11,14 @@
 			
 		</where>
 	</select>
-	<select id="reviewListCount" resultType="int">
+	<select id="reviewCount" resultType="int">
 		select count(*) from review_tbl
 	</select>
-	<select id="reviewList" resultType="review">
+	<select id="reviewList" resultType="review" parameterType="map">
 		select * from review_tbl
-		
+		<where>
+			
+		</where>
+		order by #{orderBy} 
 	</select>
 </mapper>

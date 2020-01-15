@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Review;
 
 @Repository
 public class adminDAO {
@@ -21,5 +22,13 @@ public class adminDAO {
 
 	public List<Member> getMemberList(Map<String, Object> map) {
 		return sqlSession.selectList("Admin.memberList",map);
+	}
+
+	public int getReviewCount() {
+		return sqlSession.selectOne("Admin.reviewCount");
+	}
+
+	public List<Review> getReviewList(Map<String, Object> map) {
+		return sqlSession.selectList("Admin.reviewList",map);
 	}
 }
