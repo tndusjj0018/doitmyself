@@ -27,19 +27,23 @@
   </head>
   <body class="goto-here">
     <section id="home-section" class="hero">
-    	<!-- <div id="floatMenu" style="text-align:center">
-			로그인
+    	<div id="floatMenu">
+			<span><a href="/login.jsp" style="color:white;">로그인</a></span>
 			<br>
 			<br>
 			방금 본 DIM
 			<br>
-			<img src="resources/images/product-1.jpg" style="width:150px; height:150px">
+			<img src="resources/images/product-1.jpg" style="width:100px; height:100px; border-radius:40px;">
 			<br>
 			방금 본 DIM
 			<br>
-			<img src="resources/images/product-2.jpg" style="width:150px; height:150px">
+			<img src="resources/images/product-2.jpg" style="width:100px; height:100px; border-radius:40px;">
 			<br>
-		</div> -->
+			방금 본 DIM
+			<br>
+			<img src="resources/images/product-3.jpg" style="width:100px; height:100px; border-radius:40px;">
+			<br>
+		</div>
 		  <div class="home-slider owl-carousel">
 	      <div class="slider-item" style="background-image: url(resources/images/img_w_banner_30406_ctc.jpg);">
 	      	<div class="overlay"></div>
@@ -47,7 +51,6 @@
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-md-12 ftco-animate text-center">
-	              
 	              <h1 class="mb-2">Do It Myself</h1>
 	              <h2 class="subheading mb-4">DIM - final project</h2>
 	              <p><a href="#" class="btn btn-primary">View Details</a></p>
