@@ -14,13 +14,6 @@ import com.kh.dim2.domain.Member;
 public class memberDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	public int getListCount() {
-		return sqlSession.selectOne("");
-	}
 
-	public List<Member> getMemberList(Map<String, Object> map) {
-		return sqlSession.selectList("");
-	}
 
 }

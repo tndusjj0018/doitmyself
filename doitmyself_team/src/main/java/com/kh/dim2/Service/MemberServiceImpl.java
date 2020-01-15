@@ -12,20 +12,6 @@ import com.kh.dim2.DAO.memberDAO;;
 
 @Service
 public class MemberServiceImpl implements MemberService{
-	@Autowired
-	private memberDAO memberDAO;
-	
-	@Override
-	public int getListCount() {
-		return memberDAO.getListCount();
-	}
 
-	@Override
-	public List<Member> getMemberList(int page, int limit) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("page", page);
-		map.put("limit", limit);
-		return memberDAO.getMemberList(map);
-	}
 	
 }

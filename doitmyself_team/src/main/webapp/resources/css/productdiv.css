@@ -1,0 +1,20 @@
+.productsection{
+	width:75%;
+	
+}
+.sub_li{
+	text-indent: 15px;
+}
+.block-27  a:hover{
+	background: rgba(0, 123, 255, 0.08);
+	text-decoration: none;
+}
+.allcategory_li{
+	color: #bfbfbf;
+	text-align: center;
+	font-weight: 700 !important;
+	font-size: 20px !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
