@@ -15,9 +15,9 @@ public class adminDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int getListCount() {
+	public int getListCount(Map<String, Object> map) {
 		System.out.println("여기는 adminDAO getListCount()");
-		return sqlSession.selectOne("Admin.memberListCount");
+		return sqlSession.selectOne("Admin.memberListCount", map);
 	}
 
 	public List<Member> getMemberList(Map<String, Object> map) {

@@ -31,15 +31,18 @@
 	</style>
 <script>
 	$(document).ready(function(){
-		var search_word = "${search_word}";
+		search_word = "";
 		var search = function(search_word){
+			console.log(search_word);
 			$.ajax({
 				type:"POST",
-				data:{num:"${num}", search_word:search_word},
+				data:{num:"${num}", search_word:search_word, search_col:$(".search_col").val()},
 				dataType:"json",
 				url:"userList",
 				success:function(rdata){
+					search_word = rdata.search_word;
 					console.log(rdata);
+					console.log("검색 기준 = "+rdata.search_col+", 검색어= "+rdata.search_word);
 					$("#mytable").empty();
 					if(rdata.userlist.length == 0){
 						output = "<tr><td>조회된 데이터가 없습니다.</td></tr>";
@@ -149,14 +152,16 @@
 		}//function end
 		
 		//처음 로드 했을 때 실행 
-		search();
+		search(search_word);
 		
 		
 		$(".user_searchbtn").click(function(){
+			
 			search_word = $(".user_search").val();
 			if(search_word == null || search_word == ""){
 				alert("검색어를 입력하세요");
 			}else{
+				$(".clearfix").remove();
 				search(search_word);
 			}
 		});//click end
@@ -173,11 +178,11 @@
 	<font id = "admin_viewtitle">회원 정보 조회</font><br>
 	<div class="search">
 		<select class = "search_col">
-			<option value="">아이디</option>
-			<option value="">휴대전화</option>
-			<option value="">이름</option>
-			<option value="">이메일</option>
-			<option value="">생년월일</option>		
+			<option value="USER_ID">아이디</option>
+			<option value="USER_PHONE">휴대전화</option>
+			<option value="USER_NAME">이름</option>
+			<option value="USER_EMAIl">이메일</option>
+			<option value="USER_BIRTH">생년월일</option>		
 		</select>
 		<input type="text" name="user_search" class = "user_search">
 		<input type="button" value = "검색" class="user_searchbtn">

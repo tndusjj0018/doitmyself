@@ -20,6 +20,7 @@ import com.kh.dim2.domain.Review;
 
 @Controller
 public class AdminController {
+	String word ="";// 검색어를 저장할 변수  => ajax를 통해 검색을 할 수 있지만, 저장할 변수가 없으면 제대로 기능을 수행하지 못함
 	@Autowired
 	AdminService adminService;
 	
@@ -41,12 +42,16 @@ public class AdminController {
 	@ResponseBody//Ajax쓸 때 꼭 써야함
 	@PostMapping("userList")
 	public Object userList(@RequestParam(value = "num", defaultValue = "1", required = false)int num, 
-							@RequestParam(value = "search_word", defaultValue = "", required = false)String search_word){
+							@RequestParam(value = "search_word", defaultValue = "", required = false)String search_word,
+							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col){
+		if(!search_word.equals("")) {
+			word = search_word;
+		}
 		
 		System.out.println("여기는 AdminController userList()");
-		System.out.println("search_word = "+search_word);
+		System.out.println("search_col = "+search_col+", search_word = "+word);
 		int limit =10;//한 페이지에 출력할 레코드 갯수
-		int listcount = adminService.getListCount();
+		int listcount = adminService.getListCount(word, search_col);
 		System.out.println("adminService getListCount()갔다옴");
 		
 		//총 페이지 수 
@@ -59,8 +64,14 @@ public class AdminController {
 		
 		if (endpage > maxpage)
 			endpage = maxpage;
+		List<Member> memberlist;
+		if(search_word == "") {
+			memberlist = adminService.getMemberList(num, limit);
+			System.out.println("모든 유저 리스트 보여주기");
+		}else {
+			memberlist = adminService.getMemberList(num, limit, word, search_col);
+		}
 		
-		List<Member> memberlist = adminService.getMemberList(num, limit, search_word);
 		//System.out.println("adminService getMemberList()갔다옴" + memberlist.get(1));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -71,6 +82,9 @@ public class AdminController {
 		map.put("listcount", listcount);
 		map.put("userlist", memberlist);
 		map.put("limit", limit);
+		map.put("search_word", word);
+		map.put("search_col", search_col);
+		
 		
 		return map;
 	}
