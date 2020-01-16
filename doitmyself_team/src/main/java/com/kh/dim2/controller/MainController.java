@@ -35,5 +35,8 @@ public class MainController {
 		
 		return "main/join";
 	}
+	
+//	@RequestMapping(value="/joinProcess" , method = RequestMethod.POST)
+//	public 
 
 }

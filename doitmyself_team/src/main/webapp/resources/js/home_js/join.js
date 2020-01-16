@@ -61,10 +61,10 @@ $(document).ready(function(){
 			data:{"USER_ID" : USER_ID},
 			success: function(resp) {
 				if(resp == -1) {
-					$('#message').css('color', 'green').html("사용 가능한 아이디 입니다.");					
+					$('i:eq(0)').css('opacity', '0.95');					
 					checkid = true;
 				} else {
-					$('#message').css('color', 'blue').html("사용중인 아이디 입니다.");
+					$('i:eq(0)').css('opacity', '0');
 					checkid = false;
 				}
 			}

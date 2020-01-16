@@ -3,4 +3,10 @@
 
 <mapper namespace="Main">
 	
+	<select id="idcheck" parameterType="String">
+		SELECT * FROM USER_TBL WHERE USER_ID=#{USER_ID}
+	</select>
+	
+	<insert id=""></insert>
+	
 </mapper>

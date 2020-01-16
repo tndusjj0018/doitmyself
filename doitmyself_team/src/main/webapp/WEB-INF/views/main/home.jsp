@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="resources/css/homecss/home.css">
     <jsp:include page="header.jsp"/>
   </head>
+  
   <body class="goto-here">
     <section id="home-section" class="hero">
     	<div id="floatMenu">
