@@ -14,17 +14,68 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 	
 	<!-- CSS Files -->
-	<link href="resources/css/bootstrap-soo.css" rel="stylesheet">
-	<link href="resources/demo/demo.css" rel="stylesheet">
-	<link href="resources/css/paper-dashboard.css" rel="stylesheet">
+	<link href="resources/soo/css/bootstrap-soo.css" rel="stylesheet">
+	<link href="resources/soo/demo/demo.css" rel="stylesheet">
+	<link href="resources/soo/css/paper-dashboard.css" rel="stylesheet">
 	
-	<script src="resources/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
 	
 	<style>
 		.font-size {
 			font-size: 12px;
 		}
 	</style>
+	<script>
+	$(document).ready(function(){
+		pattern = /^[a-zA-z0-9]{5,15}$/;
+		
+		$("#user_password").blur(function(){
+			
+			var currpass = $('#user_password').val();
+			
+		});
+		
+		$("#change_password").blur(function(){
+			
+			var pass = $("#change_password").val();
+			
+			if(!pattern.test(pass)){
+				$("#change_password").css("border","1px solid #fda4a4")
+								.prop("type","text")
+								.css("color","red")
+								.val("5글자 이상 설정하세요");
+				
+				$("#change_password").focus(function(){
+					$("#change_password").css("border","1px solid #DDDDDD")
+									.prop("type","password")
+									.val('')
+									.css("color","#66615b");
+				});			
+			}
+		});
+		
+		$("form").submit(function(){
+			var pass=$("#change_password").val();
+			var passcheck = $("#change_password_chk").val();
+			
+			if(pass != passcheck){
+				$("#change_password_chk").css("border","1px solid #fda4a4")
+								.prop("type", "text")
+								.css("color","red")
+								.val("비밀번호가 일치하지 않습니다.");
+				
+				$("#change_password_chk").focus(function(){
+					$("#change_password").css("border","1px solid #DDDDDD")
+									.prop("type","password")
+									.val('')
+									.css("color","#66615b");
+				});	
+				
+				return false;								
+			}
+		});
+	});
+	</script>
 </head>
 
 <body class="">
@@ -41,12 +92,12 @@
 								<h5 class="card-title">비밀번호 변경</h5>
 							</div>
 							<div class="card-body">
-								<form>									
+								<form action="passChange.net" method="post">									
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>현재 비밀번호</label>
-												<input type="password" id="user_pssword" name="user_pssword" class="form-control font-size" placeholder="현재 비밀번호를 입력하세요" required>
+												<input type="password" id="user_password" name="user_password" class="form-control font-size" placeholder="현재 비밀번호를 입력하세요" required>
 											</div>											
 										</div>											
 									</div>

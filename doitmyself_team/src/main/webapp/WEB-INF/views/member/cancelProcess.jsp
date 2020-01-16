@@ -82,20 +82,20 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.min.js"></script>
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 	<!--  Google Maps Plugin    -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 	
 </body>
 </html>
