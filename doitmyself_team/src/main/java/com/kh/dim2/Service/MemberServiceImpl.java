@@ -47,4 +47,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.passChange(map);
 	}
 
+	@Override
+	public int memberLeave(String user_id) {
+		return dao.memberLeave(user_id);
+	}
+
 }

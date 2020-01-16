@@ -12,6 +12,7 @@
 	<!-- CSS Files -->
 	<link href="resources/soo/css/memberLeave.css" rel="stylesheet">
 	
+	<script src="resources/soo/js/core/jquery.min.js"></script>
 	<script>
 	function memberLeave(){
 		//window.open();
@@ -87,13 +88,36 @@
 			        		</ul>
 			        		</div>
 			        		<input type="button" id="memberLeave_btn" name="memberLeave_btn" class="btn btn-primary btn-round" value="회원 탈퇴 신청" 
-			        			   style="margin-left:33%; margin-right:15px;" onclick="memberLeave()">
-							<input type="button" id="memberCancel_btn" name="memberCancel_btn" class="btn  btn-round memberCancel_btn" value="취소">
+			        			   style="margin-left:38%; margin-right:15px;" data-toggle="modal" data-target="#memberLeave">
 			        	</div>
 			        </div>
 			      </div>
 			    </div>
 			  </div>
+			</div>
+			
+			<!-- The Modal -->
+			<div class="modal" id="memberLeave">
+				<div class="modal-dialog">
+					<div class="modal-content">
+		
+						<!-- Modal body -->
+						<div class="modal-body">
+							<form name="memberLeaveForm" action="memberLeaveAction" method="post">
+								<input type="hidden" name="num" value="${param.num }">
+		
+								<div class="form-group">
+									<label for="pwd">비밀번호 확인</label> 
+									   <input type="password"
+										class="form-control" placeholder="Enter password"
+										name="user_pass" id="user_pass">
+								</div>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
     		
     		<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
@@ -110,8 +134,7 @@
 	<script src="resources/soo/js/core/popper.min.js"></script>
 	<script src="resources/soo/js/core/bootstrap.min.js"></script>
 	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	
 	<!-- Chart JS -->
 	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->

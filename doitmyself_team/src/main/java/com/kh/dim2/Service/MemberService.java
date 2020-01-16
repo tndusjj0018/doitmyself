@@ -16,6 +16,10 @@ public interface MemberService {
 	//현재 비밀번호 확인
 	public int passCheck(String user_id, String user_password);
 
+	//비밀번호 수정하기
 	public int passChange(String change_password, String user_id);
+
+	//회원 탈퇴하기
+	public int memberLeave(String user_id);
 
 }
