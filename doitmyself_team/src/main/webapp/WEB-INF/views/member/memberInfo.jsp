@@ -49,7 +49,7 @@
 	    }).open();
 	}
 	</script>
-	<script src="resources/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$("#change_password").click(function(){
@@ -116,18 +116,18 @@
 								<h5 class="card-title">회원 정보 변경</h5>
 							</div>
 							<div class="card-body">
-								<form>
+								<form action="updateProcess" method="post">
 									<div class="row">
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>ID</label>
-												<input type="text" id="user_id" name="user_id" class="form-control" readOnly value="${memberinfo.USER_ID }">
+												<input type="text" id="USER_ID" name="USER_ID" class="form-control" readOnly value="${memberinfo.USER_ID }">
 											</div>
 										</div>
 										<div class="col-md-7">
 											<div class="form-group">
 												<label>NAME</label>
-												<input type="text" id="user_name" name="user_name" class="form-control" placeholder="Username" value="${memberinfo.USER_NAME }">
+												<input type="text" id="USER_NAME" name="USER_NAME" class="form-control" placeholder="Username" value="${memberinfo.USER_NAME }">
 											</div>
 										</div>
 							
@@ -137,7 +137,7 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>PASSWORD</label>
-												<input type="password" id="user_pssword" name="user_pssword" readOnly class="form-control" value="${memberinfo.USER_PASSWORD }">
+												<input type="password" id="USER_PASSWORD" name="USER_PASSWORD" readOnly class="form-control" value="${memberinfo.USER_PASSWORD }">
 											</div>											
 										</div>
 										<div class="col-md-3">
@@ -151,13 +151,13 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>BIRTH</label>
-												<input type="text" id="user_birth" name="user_birth" class="form-control" readOnly value="${memberinfo.USER_BIRTH }">
+												<input type="text" id="USER_BIRTH" name="USER_BIRTH" class="form-control" readOnly value="${memberinfo.USER_BIRTH }">
 											</div>
 										</div>
 										<div class="col-md-7">
 											<div class="form-group">
 												<label>PHONE</label>
-												<input type="text" id="user_phone" name="user_phone" class="form-control" placeholder="Phone Number" value="${memberinfo.USER_PHONE }">
+												<input type="text" id="USER_PHONE" name="USER_PHONE" class="form-control" placeholder="Phone Number" value="${memberinfo.USER_PHONE }">
 											</div>
 										</div>
 									</div>
@@ -166,7 +166,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Email</label>
-												<input type="text" id="user_email" name="user_email" class="form-control" placeholder="Email" value="${memberinfo.USER_EMAIL }">
+												<input type="email" id="USER_EMAIL" name="USER_EMAIL" class="form-control" placeholder="Email" value="${memberinfo.USER_EMAIL }">
 											</div>
 										</div>
 									</div>
@@ -175,7 +175,7 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>ADDRESS</label>
-												<input type="text" id="changePostcode" name="chagePostcode" class="form-control" value="${memberinfo.USER_POSTCODE }">
+												<input type="text" id="USER_POSTCODE" name="USER_POSTCODE" class="form-control" value="${memberinfo.USER_POSTCODE }">
 											</div>											
 										</div>
 										<div class="col-md-3">
@@ -188,7 +188,7 @@
 									<div class="row">	
 										<div class="col-md-12">
 											<div class="form-group">
-												<input type="text" id="changeAddress" name="changeAddress" class="form-control" placeholder="상세 주소" value="${memberinfo.USER_ADDRESS }">
+												<input type="text" id="USER_ADDRESS" name="USER_ADDRESS" class="form-control" placeholder="상세 주소" value="${memberinfo.USER_ADDRESS }">
 											</div>
 										</div>
 									</div>
@@ -217,19 +217,19 @@
 	
 	<!--   Core JS Files   -->
 	
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 	<!--  Google Maps Plugin    -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 	
 </body>
 </html>
