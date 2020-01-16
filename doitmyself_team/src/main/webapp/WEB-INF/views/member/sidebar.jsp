@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!--     Fonts and icons     -->
+	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   
 	<!-- CSS Files -->
-	<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="resources/css/bootstrap-soo.css" rel="stylesheet">
 	<link href="resources/demo/demo.css" rel="stylesheet">
 	<link href="resources/css/paper-dashboard.css" rel="stylesheet">
 	<style type="text/css">/* Chart.js */
@@ -24,7 +24,7 @@
 <body>
 <div class="sidebar" data-color="white" data-active-color="danger">     
 			<div class="logo">
-        		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center">
+        		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
           		USER_NAME 님
         		</a>
       		</div>
@@ -52,7 +52,7 @@
             			<div class="collapse" id="toggleDemo2" style="height: 0px;">
 							<ul class="nav nav-list">
 								<li class="mar20"><a href="orderDelivery">주문 / 배송 조회</a></li>
-								<li class="mar20"><a href="#">취소 / 반품 / 교환 현황</a></li>
+								<li class="mar20"><a href="cancelProcess">취소 / 반품 / 교환 현황</a></li>
 							</ul>
 						</div>
           			</li>
@@ -65,14 +65,14 @@
 		            	<div class="collapse" id="toggleDemo3" style="height: 0px;">
 							<ul class="nav nav-list">
 								<li class="mar20"><a href="reviewList">나의 상품 리뷰</a></li>
-								<li class="mar20"><a href="#">나의 QnA</a></li>
+								<li class="mar20"><a href="qnaList">나의 QnA</a></li>
 							</ul>
 						</div>
 		          	</li>
 		          	<li>
             			<a href="wishList" class="collapsed">
 	              			<i class="nc-icon nc-favourite-28"></i>
-	              			<p>나의 관심 목록 <span class="badge pull-right" style="float: right!important; position:relative; top:6px">42</span></p>
+	              			<p>나의 관심 목록 <span class="badge pull-right" style="float: right!important; position:relative; top:6px">8</span></p>
 	              			
 						</a>
           			</li>

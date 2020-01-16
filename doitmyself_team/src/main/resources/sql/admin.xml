@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Admin">
-	<select id="memberlist" resultType="member">
-		select * from user_tbl
+	<select id="memberListCount" resultType="int">
+		select count(*) from user_tbl
 	</select>
-	
+	<select id="memberList" resultType="member" parameterType="map">
+		select * from user_tbl
+		<where>
+			
+		</where>
+	</select>
+	<select id="reviewCount" resultType="int">
+		select count(*) from review_tbl
+	</select>
+	<select id="reviewList" resultType="review" parameterType="map">
+		select * from review_tbl
+		<where>
+			
+		</where>
+		order by #{orderBy} 
+	</select>
 </mapper>

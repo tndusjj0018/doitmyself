@@ -12,12 +12,7 @@
 	<!-- 우편번호 -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/191007/1570443254160/191007.js"></script>
-	<script>
-	function windowopenPopup(){
-		//window.open();
-		alert('비밀번호 변경 창 떠야함');
-	}
-	
+	<script>	
 	function Postcode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
@@ -53,6 +48,14 @@
 	        }
 	    }).open();
 	}
+	</script>
+	<script src="resources/js/core/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#change_password").click(function(){
+				var popup= window.open("change_password","","width=500,height=500,left=550,top=300");
+			});
+		});
 	</script>
 </head>
 
@@ -118,13 +121,13 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>ID</label>
-												<input type="text" id="user_id" name="user_id" class="form-control" readOnly placeholder="Company" value="USER_ID">
+												<input type="text" id="user_id" name="user_id" class="form-control" readOnly value="${memberinfo.USER_ID }">
 											</div>
 										</div>
 										<div class="col-md-7">
 											<div class="form-group">
 												<label>NAME</label>
-												<input type="text" id="user_name" name="user_name" class="form-control" placeholder="Username" value="USER_NAME">
+												<input type="text" id="user_name" name="user_name" class="form-control" placeholder="Username" value="${memberinfo.USER_NAME }">
 											</div>
 										</div>
 							
@@ -134,12 +137,12 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>PASSWORD</label>
-												<input type="password" readOnly class="form-control" value="password">
+												<input type="password" id="user_pssword" name="user_pssword" readOnly class="form-control" value="${memberinfo.USER_PASSWORD }">
 											</div>											
 										</div>
 										<div class="col-md-3">
 											<div class="form-group">
-												<button type="button" class="btn btn-primary btn-round" onclick="windowopenPopup()"style="position: relative; top: 16px;">비밀번호 변경</button>
+												<button type="button" class="btn btn-primary btn-round" id="change_password" style="position: relative; top: 16px;">비밀번호 변경</button>
 											</div>
 										</div>												
 									</div>
@@ -148,13 +151,13 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>BIRTH</label>
-												<input type="text" id="user_birth" name="user_birth" class="form-control" readOnly value="1995-01-08">
+												<input type="text" id="user_birth" name="user_birth" class="form-control" readOnly value="${memberinfo.USER_BIRTH }">
 											</div>
 										</div>
 										<div class="col-md-7">
 											<div class="form-group">
 												<label>PHONE</label>
-												<input type="text" id="user_phone" name="user_phone" class="form-control" placeholder="Phone Number" value="USER_PHONE">
+												<input type="text" id="user_phone" name="user_phone" class="form-control" placeholder="Phone Number" value="${memberinfo.USER_PHONE }">
 											</div>
 										</div>
 									</div>
@@ -163,7 +166,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Email</label>
-												<input type="text" class="form-control" placeholder="Email" value="abc@naver.com">
+												<input type="text" id="user_email" name="user_email" class="form-control" placeholder="Email" value="${memberinfo.USER_EMAIL }">
 											</div>
 										</div>
 									</div>
@@ -172,7 +175,7 @@
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
 												<label>ADDRESS</label>
-												<input type="text" id="changePostcode" name="chagePostcode" class="form-control" value="postcode">
+												<input type="text" id="changePostcode" name="chagePostcode" class="form-control" value="${memberinfo.USER_POSTCODE }">
 											</div>											
 										</div>
 										<div class="col-md-3">
@@ -182,23 +185,15 @@
 										</div>												
 									</div>
 									
-									<div class="row">
+									<div class="row">	
 										<div class="col-md-12">
 											<div class="form-group">
-												<input type="text" id="changeAddress" name="changeAddress" class="form-control" placeholder="상세 주소" value="">
+												<input type="text" id="changeAddress" name="changeAddress" class="form-control" placeholder="상세 주소" value="${memberinfo.USER_ADDRESS }">
 											</div>
 										</div>
 									</div>
-									
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label>About Me</label>
-												<textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
-											</div>
-										</div>
-									</div>
-									
+						
+								
 									<div class="row">
 										<div class="update ml-auto mr-auto">
 											<button type="submit" class="btn btn-primary btn-round">Update Profile</button>
@@ -221,7 +216,7 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.min.js"></script>
+	
 	<script src="resources/js/core/popper.min.js"></script>
 	<script src="resources/js/core/bootstrap.min.js"></script>
 	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>

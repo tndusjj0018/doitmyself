@@ -10,44 +10,47 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="resources/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="resources/css/animate.css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="resources/css/aos.css">
-    <link rel="stylesheet" href="resources/css/ionicons.min.css">
-    <link rel="stylesheet" href="resources/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="resources/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="resources/css/flaticon.css">
-    <link rel="stylesheet" href="resources/css/icomoon.css">
-    <link rel="stylesheet" href="resources/css/style.css">
-    <link rel="stylesheet" href="resources/css/home.css">
+    <link rel="stylesheet" href="resources/css/homecss/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/homecss/animate.css">
+    <link rel="stylesheet" href="resources/css/homecss/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/css/homecss/owl.theme.default.min.css">
+    <link rel="stylesheet" href="resources/css/homecss/magnific-popup.css">
+    <link rel="stylesheet" href="resources/css/homecss/aos.css">
+    <link rel="stylesheet" href="resources/css/homecss/ionicons.min.css">
+    <link rel="stylesheet" href="resources/css/homecss/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="resources/css/homecss/jquery.timepicker.css">
+    <link rel="stylesheet" href="resources/css/homecss/flaticon.css">
+    <link rel="stylesheet" href="resources/css/homecss/icomoon.css">
+    <link rel="stylesheet" href="resources/css/homecss/style.css">
+    <link rel="stylesheet" href="resources/css/homecss/home.css">
     <jsp:include page="header.jsp"/>
   </head>
   <body class="goto-here">
     <section id="home-section" class="hero">
-    	<!-- <div id="floatMenu" style="text-align:center">
-			로그인
+    	<div id="floatMenu">
+			<span><a href="/login.jsp" style="color:white;">로그인</a></span>
 			<br>
 			<br>
 			방금 본 DIM
 			<br>
-			<img src="resources/images/product-1.jpg" style="width:150px; height:150px">
+			<img src="resources/img/product-1.jpg" style="width:100px; height:100px; border-radius:40px;">
 			<br>
 			방금 본 DIM
 			<br>
-			<img src="resources/images/product-2.jpg" style="width:150px; height:150px">
+			<img src="resources/img/product-2.jpg" style="width:100px; height:100px; border-radius:40px;">
 			<br>
-		</div> -->
+			방금 본 DIM
+			<br>
+			<img src="resources/img/product-3.jpg" style="width:100px; height:100px; border-radius:40px;">
+			<br>
+		</div>
 		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url(resources/images/img_w_banner_30406_ctc.jpg);">
+	      <div class="slider-item" style="background-image: url(resources/img/img_w_banner_30406_ctc.jpg);">
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-md-12 ftco-animate text-center">
-	              
 	              <h1 class="mb-2">Do It Myself</h1>
 	              <h2 class="subheading mb-4">DIM - final project</h2>
 	              <p><a href="#" class="btn btn-primary">View Details</a></p>
@@ -57,7 +60,7 @@
 	        </div>
 	      </div>
 
-	      <div class="slider-item" style="background-image: url(resources/images/img_w_banner_legacy.jpg);">
+	      <div class="slider-item" style="background-image: url(resources/img/img_w_banner_legacy.jpg);">
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -151,7 +154,7 @@
     		<div class="row">
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-1.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-1.jpg" alt="Colorlib Template">
     						<span class="status">30%</span>
     						<div class="overlay"></div>
     					</a>
@@ -180,7 +183,7 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-2.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-2.jpg" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -208,7 +211,7 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-3.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-3.jpg" alt="Colorlib Template">
 	    					<div class="overlay"></div>
 	    				</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -236,7 +239,7 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-4.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-4.jpg" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -266,7 +269,7 @@
 
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-5.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-5.jpg" alt="Colorlib Template">
     						<span class="status">30%</span>
     						<div class="overlay"></div>
     					</a>
@@ -295,7 +298,7 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-6.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-6.jpg" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -323,7 +326,7 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-7.jpg" altsrc="resources/orlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-7.jpg" altsrc="resources/orlib Template">
 	    					<div class="overlay"></div>
 	    				</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -351,7 +354,7 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/images/product-8.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="resources/img/product-8.jpg" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -403,22 +406,22 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="resources/js/jquery.min.js"></script>
-  <script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="resources/js/popper.min.js"></script>
-  <script src="resources/js/bootstrap.min.js"></script>
-  <script src="resources/js/jquery.easing.1.3.js"></script>
-  <script src="resources/js/jquery.waypoints.min.js"></script>
-  <script src="resources/js/jquery.stellar.min.js"></script>
-  <script src="resources/js/owl.carousel.min.js"></script>
-  <script src="resources/js/jquery.magnific-popup.min.js"></script>
-  <script src="resources/js/aos.js"></script>
-  <script src="resources/js/jquery.animateNumber.min.js"></script>
-  <script src="resources/js/bootstrap-datepicker.js"></script>
-  <script src="resources/js/scrollax.min.js"></script>
+  <script src="resources/js/home_js/jquery.min.js"></script>
+  <script src="resources/js/home_js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="resources/js/home_js/popper.min.js"></script>
+  <script src="resources/js/home_js/bootstrap.min.js"></script>
+  <script src="resources/js/home_js/jquery.easing.1.3.js"></script>
+  <script src="resources/js/home_js/jquery.waypoints.min.js"></script>
+  <script src="resources/js/home_js/jquery.stellar.min.js"></script>
+  <script src="resources/js/home_js/owl.carousel.min.js"></script>
+  <script src="resources/js/home_js/jquery.magnific-popup.min.js"></script>
+  <script src="resources/js/home_js/aos.js"></script>
+  <script src="resources/js/home_js/jquery.animateNumber.min.js"></script>
+  <script src="resources/js/home_js/bootstrap-datepicker.js"></script>
+  <script src="resources/js/home_js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="resources/js/google-map.js"></script>
-  <script src="resources/js/main.js"></script>
+  <script src="resources/js/home_js/google-map.js"></script>
+  <script src="resources/js/home_js/main.js"></script>
   <script>
 	    $(function(){
 	      	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.

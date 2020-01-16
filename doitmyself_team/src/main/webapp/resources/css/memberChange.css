@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+.seller_process_num {
+	color: #3a8aa2;
+	font-weight: bolder;
+	font-size: 35px;
+	margin: 0px 7px 0px 0px;
+}
+
+.seller_process_title {
+	font-size: 20px;
+	color: #66615b;
+}
+
+.process_right {
+	font-size: 30px !important;
+	margin: 25px;
+	color: #d2d1cf;
+	font-weight: bolder !important;
+}
+
+.seller_process_cont {
+	font-size: 12px;
+	color: #66615b;
+}
+
+.privacy_agree {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0 10px 0 15px;
+    width: 80%;
+    height: 92px;
+    border: 1px solid #dbdbdb;
+    margin: 0 0 0 50px;
+    background: #FFF;
+    font-size:11px;
+}
+
+.agree_bold {
+	font-weight: bolder;
+	font-size:13px;
+}
+
+.placeholder_font {
+	font-size:10pt
+}
+
+.memberReset_btn {
+	background:#bbbbbb !important;
+}
+
+.memberReset_btn:hover{
+	background: #96918b !important;
+}
