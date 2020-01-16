@@ -29,5 +29,9 @@ public class memberDAO {
 	public int passChange(Map<String, Object> map) {
 		return sqlSession.update("Member.passchange", map);
 	}
+	
+	public int memberLeave(String user_id) {
+		return sqlSession.delete("Member.memberLeave", user_id);
+	}
 
 }

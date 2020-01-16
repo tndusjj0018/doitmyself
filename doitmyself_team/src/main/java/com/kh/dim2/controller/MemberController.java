@@ -21,7 +21,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	String user_id = "sooyeon";
+	String user_id = "sooyeon3";
 
 	// 회원 정보 가지고 옴
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
@@ -104,6 +104,32 @@ public class MemberController {
 	@RequestMapping(value = "/memberLeave", method = RequestMethod.GET)
 	public String memberLeave() {
 		return "member/memberLeave";
+	}
+	
+	//회원 탈퇴하기
+	@RequestMapping(value = "/memberLeaveAction", method = RequestMethod.POST)
+	public void memberLeaveAction(HttpServletResponse response) throws Exception {
+		
+		int result = memberservice.memberLeave(user_id);
+		
+		if(result != 1) {
+			response.setContentType("text/html; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('탈퇴에 실패하였습니다.');");
+			out.println("history.back()");
+			out.println("</script>");
+			System.out.println("탈퇴 실패");
+		} else {
+			response.setContentType("text/html; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('정상적으로 탈퇴 되었습니다.');");
+			out.println("location.href='home';");
+			out.println("</script>");
+			System.out.println(user_id +"탈퇴 성공");
+		}
+				
 	}
 
 	@RequestMapping(value = "/orderDelivery", method = RequestMethod.GET)

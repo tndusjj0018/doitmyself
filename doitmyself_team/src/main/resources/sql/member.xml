@@ -29,5 +29,9 @@
 		WHERE USER_ID = #{USER_ID}	
 	</update>
 
+	<delete id="memberLeave" parameterType="String">
+		delete USER_TBL
+		where USER_ID = #{id}
+	</delete>
 
 </mapper>
