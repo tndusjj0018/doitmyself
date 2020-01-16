@@ -7,6 +7,7 @@ import com.kh.dim2.DAO.memberDAO;
 import com.kh.dim2.domain.Member;
 
 @Service
+
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired

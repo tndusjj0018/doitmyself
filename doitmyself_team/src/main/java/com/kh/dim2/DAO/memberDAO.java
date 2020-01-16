@@ -16,4 +16,5 @@ public class memberDAO {
 		return sqlSession.selectOne("Member.readinfo", id);
 	}
 
+
 }
