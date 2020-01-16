@@ -79,7 +79,7 @@
 								2020-01-08
 								</td>
 								<td>
-									<img src="resources/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+									<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 								</td>
 								<td>
