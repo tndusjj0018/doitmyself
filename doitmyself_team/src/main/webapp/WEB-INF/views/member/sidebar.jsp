@@ -25,7 +25,7 @@
 <div class="sidebar" data-color="white" data-active-color="danger">     
 			<div class="logo">
         		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
-          		USER_NAME 님
+          		${USER_ID } 님
         		</a>
       		</div>
       		
