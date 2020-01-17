@@ -32,13 +32,16 @@ public class AdminController {
 	
 	//관리자 페이지로 이동
 	@GetMapping("admin")
-	public ModelAndView AdminPage(String doc, ModelAndView mv,@RequestParam(value = "num", defaultValue = "1", required = false)int num) {
+	public ModelAndView AdminPage(String doc, ModelAndView mv, HttpServletRequest request) {
 		System.out.println("view = "+ doc);
 		if(doc == null) {
 			doc = "userview";
+		}else if (doc.equals("memberInfo")) {//회원관리에서 수정버튼 눌렀을 때
+			Member member = UserInfo(Integer.parseInt(request.getParameter("USER_NO")));
+			mv.addObject("member", member);
+			
 		}
 		mv.addObject("doc",doc);
-		mv.addObject("num",num);
 		mv.setViewName("admin/admin");
 		
 		return mv;
@@ -139,12 +142,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("user_info")
-	public void UserInfo(int USER_NO, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public Member UserInfo(int USER_NO) {
 		System.out.println("AdminController의 UserInfo");
 		Member member = adminService.getMemberInfo(USER_NO);
-		request.setAttribute("member", member);
-		RequestDispatcher dis = request.getRequestDispatcher("admin?doc=memberInfo");
-		dis.forward(request, response);
+		System.out.println("userno = "+USER_NO);
+		return member;
 	}
 	
 	
