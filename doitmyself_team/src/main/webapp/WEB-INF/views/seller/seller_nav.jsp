@@ -136,7 +136,7 @@
   </style>
   <script>
   	$(function(){
-  		$('#main_cate_select').change(function(){
+  		/* $('#main_cate_select').change(function(){
   			var cate = $(this).val();
   			var output = "";
   			$('#sub_cate_select').empty();
@@ -161,7 +161,7 @@
 			default:
 				break;
 			}
-  		})//main_cate change
+  		})//main_cate change */
   		  		
   		$('#sub_cate_select').click(function(){
   			$('#cate_message').empty();
@@ -197,6 +197,7 @@
   		var doc = $('.doc').val()
   		switch (doc) {
 		case 'seller_info':
+		case 'seller_infoUpdate':
 			$('.nav').children().eq(0).addClass('active');
 			break;
 		case 'product':
@@ -289,7 +290,8 @@
   <script src="resources/yeop/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="resources/yeop/demo/demo.js"></script>
-  <script src="resources/yeop/js/seller.js"></script>
+  <script src="resources/yeop/js/seller_info.js"></script>
+  <script src="resources/yeop/js/seller_product.js"></script>
   
   
 </body>
