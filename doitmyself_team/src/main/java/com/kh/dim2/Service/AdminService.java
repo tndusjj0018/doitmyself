@@ -21,4 +21,11 @@ public interface AdminService {
 	//리뷰 리스트 가져오기
 	public List<Review> getReviewList(int page, int limit, String orderBy);
 
+	public int DeleteUser(int USER_NO);
+
+	public int ModifyUser(int USER_NO);
+
+	public Member getMemberInfo(int USER_NO);
+
+
 }
