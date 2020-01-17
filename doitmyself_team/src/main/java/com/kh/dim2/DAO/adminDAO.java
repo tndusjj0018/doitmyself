@@ -31,4 +31,17 @@ public class adminDAO {
 	public List<Review> getReviewList(Map<String, Object> map) {
 		return sqlSession.selectList("Admin.reviewList",map);
 	}
+
+	public int DeleteUser(int USER_NO) {
+		return sqlSession.delete("Admin.deleteUser", USER_NO);
+	}
+
+	public int ModifyUser(int USER_NO) {
+		return sqlSession.update("Admin.modifyUser", USER_NO);
+	}
+
+	public Member getMemberInfo(int USER_NO) {
+		System.out.println("adminDAO의 getMemberInfo");
+		return sqlSession.selectOne("Admin.userinfo",USER_NO);
+	}
 }

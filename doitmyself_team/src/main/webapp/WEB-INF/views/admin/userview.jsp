@@ -31,6 +31,7 @@
 	</style>
 <script>
 	$(document).ready(function(){
+
 		search_word = "";
 		var search = function(search_word){
 			console.log(search_word);
@@ -74,12 +75,13 @@
 								output += "<td>"+item.user_NAME+"</td>";
 								output += "<td>"+item.user_EMAIL+"</td>";
 								output += "<td>"+item.user_PHONE+"</td>";
-								output += "<td><p data-placement='top' data-toggle='tooltip' title='Edit'><button class='btn btn-primary btn-xs' data-title='Edit' data-toggle='modal' data-target=''#edit' ><span class='glyphicon glyphicon-pencil'></span></button></p></td>";
-								output += "<td><p data-placement='top' data-toggle='tooltip' title='Delete'><button class='btn btn-danger btn-xs' data-title='Delete' data-toggle='modal' data-target='#delete' ><span class='glyphicon glyphicon-trash'></span></button></p></td>";
+								output += "<td><button class='btn btn-primary btn-xs userModify'><span class='glyphicon glyphicon-pencil'></span></button></td>";
+								output += "<td><button class='btn btn-danger btn-xs userDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
 								output += "</tr>";
 							}
 
 						})
+						
 						
 						output += "</tbody>";
 						$("#mytable").append(output);
@@ -165,6 +167,31 @@
 				search(search_word);
 			}
 		});//click end
+		
+		
+		$("#mytable").on("click",".userDelete",function(){
+			var check = confirm("해당 유저를 삭제하시겠습니까?");
+			var trNum = $(this).closest('tr').prevAll().length;
+
+			if(check == true){
+				alert(trNum+"번째 버튼 선택");
+				var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
+				console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
+				location.href = "DeleteUser?USER_NO="+usernum;
+				
+			}else{
+				alert("삭제를 취소합니다.");
+			}
+		})//click end
+		
+		$("#mytable").on("click",".userModify",function(){
+			var trNum = $(this).closest('tr').prevAll().length;
+
+			console.log(trNum+"번째 버튼 선택");
+			var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
+			console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
+			location.href = "user_info?USER_NO="+usernum;
+		})//click end
 	})	
 
 				

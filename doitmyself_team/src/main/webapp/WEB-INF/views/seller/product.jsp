@@ -109,7 +109,9 @@
 	            				</select>
             				</div>
             				
-            				<img src="resources/img/cate_arrow.png" class="arrowImg">
+
+            				<img src="resources/yeop/img/cate_arrow.png" class="arrowImg">
+
             				
             				<div id="sub_cate">
             				<span>소분류</span>

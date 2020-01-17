@@ -10,7 +10,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
 	<!-- CSS File -->
-	<link href="resources/css/memberChange.css" rel="stylesheet">
+	<link href="resources/soo/css/memberChange.css" rel="stylesheet">
 
 	<!-- 우편번호 -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -240,20 +240,20 @@
 		</div>
 	</div>
 	<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.min.js"></script>
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 	
 	
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 
 </body>
 </html>

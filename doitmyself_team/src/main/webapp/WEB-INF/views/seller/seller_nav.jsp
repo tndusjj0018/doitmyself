@@ -23,6 +23,51 @@
   <!-- Seller CSS -->
   <link href="resources/yeop/css/seller.css" rel="stylesheet"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <!-- 우편검색 api -->
+  <script type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/191007/1570443254160/191007.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  <script src="resources/yeop/js/post.js"></script>
+  <script>
+  $(function(){
+		function Postcode() {
+			    new daum.Postcode({
+			        oncomplete: function(data) {
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		
+			            // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			            var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+			            var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+		
+			            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+			                extraRoadAddr += data.bname;
+			            }
+			            // 건물명이 있고, 공동주택일 경우 추가한다.
+			            if(data.buildingName !== '' && data.apartment === 'Y'){
+			               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			            }
+			            // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			            if(extraRoadAddr !== ''){
+			                extraRoadAddr = ' (' + extraRoadAddr + ')';
+			            }
+			            // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+			            if(fullRoadAddr !== ''){
+			                fullRoadAddr += extraRoadAddr;
+			            }
+		
+			            
+			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			             $('#seller_postcode').val(data.zonecode); //5자리 새우편번호 사용
+			            $('#seller_address').val(fullRoadAddr);          
+			        }
+			    }).open();
+			}
+	})
+  </script>
+
   <style>
   	input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
   	.p_th{width:150px; height:39px; background:#4f97c3d4; text-align:center; font-weight:bold; color:white; font-size:10pt;}
@@ -180,13 +225,10 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-small">
-            <img src="resources/img/logo-small.png">
-          </div>
-        </a>
+
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          		id판매자 님
+          		Do It MySelf
+
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -251,6 +293,9 @@
   <script src="resources/yeop/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="resources/yeop/demo/demo.js"></script>
+  <script src="resources/yeop/js/seller.js"></script>
+  
+ 
 </body>
 
 </html>

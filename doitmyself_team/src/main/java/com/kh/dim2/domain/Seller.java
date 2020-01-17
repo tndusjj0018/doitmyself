@@ -7,6 +7,14 @@ public class Seller {
 	private String SELLER_ID;
 	private String SELLER_ADDRESS;
 	private String SELLER_POSTCODE;
+	private String SELLER_B_NUM;
+	
+	public String getSELLER_B_NUM() {
+		return SELLER_B_NUM;
+	}
+	public void setSELLER_B_NUM(String sELLER_B_NUM) {
+		SELLER_B_NUM = sELLER_B_NUM;
+	}
 	public int getSELLER_NO() {
 		return SELLER_NO;
 	}

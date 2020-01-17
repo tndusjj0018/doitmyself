@@ -8,11 +8,13 @@
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+	
+	<script src="resources/soo/js/core/jquery.min.js"></script>
   
 	<!-- CSS Files -->
-	<link href="resources/css/bootstrap-soo.css" rel="stylesheet">
-	<link href="resources/demo/demo.css" rel="stylesheet">
-	<link href="resources/css/paper-dashboard.css" rel="stylesheet">
+	<link href="resources/soo/css/bootstrap-soo.css" rel="stylesheet">
+	<link href="resources/soo/demo/demo.css" rel="stylesheet">
+	<link href="resources/soo/css/paper-dashboard.css" rel="stylesheet">
 	<style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
 
@@ -25,7 +27,7 @@
 <div class="sidebar" data-color="white" data-active-color="danger">     
 			<div class="logo">
         		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
-          		USER_NAME 님
+          		${USER_ID } 님
         		</a>
       		</div>
       		

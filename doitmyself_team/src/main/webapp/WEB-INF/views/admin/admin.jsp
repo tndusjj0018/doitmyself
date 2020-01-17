@@ -58,6 +58,59 @@
 			width: 1200px
 		}
 	</style>
+	
+	<script>
+		$(document).ready(function(){
+			var num =  <%=request.getParameter("num")%>;
+			var reset = function (){
+				$.ajax({
+					type:"post",
+					url:"resetstaticvalue",
+					success:function(){
+						console.log("변수 초기화 성공");
+						//url 뒤 파라미터 값 가져오기
+						//var sch = location.search;
+						//console.log("파라미터 값 = "+dim);
+						
+						// URLSearchParams 객체로 변환
+						//var params = new URLSearchParams(sch);
+						
+						//var sch_keyword = params.get('num');
+						//console.log("parameter num 초기화 전 = "+ sch_keyword);
+						
+						//params.delete("num");
+						//params.append('num', 1);
+						
+					},
+					error:function(){
+						console.log("변수 초기화 실패");
+					}
+				})//ajax end
+			}//function reset end 
+			
+			
+			console.log("현재 페이지는  = "+num);
+			
+			
+			if(num == null){
+				reset();
+			}
+			
+			
+			// 다른 메뉴를 누르면 static 변수 초기화
+			$(".admin_sidebar a").click(function(){
+				reset();
+			})// click end
+			
+			$(document).on("keydown",function(){
+				if(window.event.keyCode == 116){
+					reset();
+				}
+				
+			})
+			
+		})
+	</script>
   </head>
   <body class="goto-here">
 	<header><jsp:include page="../main/header.jsp"></jsp:include></header>

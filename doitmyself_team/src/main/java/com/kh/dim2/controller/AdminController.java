@@ -1,8 +1,14 @@
 package com.kh.dim2.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,11 +49,20 @@ public class AdminController {
 	@PostMapping("userList")
 	public Object userList(@RequestParam(value = "num", defaultValue = "1", required = false)int num, 
 							@RequestParam(value = "search_word", defaultValue = "", required = false)String search_word,
+
 							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col){
 		if(!search_word.equals("")) {
 			word = search_word;
 		}
 		
+							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col,
+							HttpServletRequest request){
+		if(!search_word.equals("")) {
+			word = search_word;
+			//검색을 했을 때 처음 띄워줄 페이지는 1페이지
+			num = 1;
+		}
+
 		System.out.println("여기는 AdminController userList()");
 		System.out.println("search_col = "+search_col+", search_word = "+word);
 		int limit =10;//한 페이지에 출력할 레코드 갯수
@@ -72,7 +87,6 @@ public class AdminController {
 			memberlist = adminService.getMemberList(num, limit, word, search_col);
 		}
 		
-		//System.out.println("adminService getMemberList()갔다옴" + memberlist.get(1));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("num", num);
@@ -93,6 +107,55 @@ public class AdminController {
 	public String CategoryView() {
 		return "category/shop";
 	}
+	
+	
+	@GetMapping("DeleteUser")
+	public void DeleteUser(HttpServletResponse response, int USER_NO)throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		System.out.println("왔다 유저번호 들고 " + USER_NO);
+		PrintWriter out=  response.getWriter();
+		int result = adminService.DeleteUser(USER_NO);
+		out.println("<script>");
+		if(result == 1) {
+			out.println("alert('해당 사용자 삭제가 완료되었습니다.');");
+			out.println("location.href ='admin?doc=userview'");
+		}else {
+			out.println("alert('해당 사용자 삭제에 실패하였습니다.');");
+			out.println("history.back();");
+		}
+		out.println("</script>");
+		out.close();
+	}
+	
+	@GetMapping("ModifyUser")
+	public void ModifyUser(HttpServletResponse response, int USER_NO)throws Exception {
+		System.out.println("AdminController의 ModifyUser");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=  response.getWriter();
+		int result = adminService.ModifyUser(USER_NO);
+		out.println("<script>");
+		if(result == 1) {
+			out.println("alert('유저 정보 수정이 완료되었습니다.');");
+			out.println("location.href ='admin?doc=userview'");
+		}else {
+			out.println("alert('유저 정보 수정에 실패했습니다.');");
+			out.println("history.back();");
+		}
+		out.println("</script>");
+		out.close();
+	}
+	
+	@GetMapping("user_info")
+	public void UserInfo(int USER_NO, HttpServletRequest request, HttpServletResponse response)throws Exception {
+		System.out.println("AdminController의 UserInfo");
+		Member member = adminService.getMemberInfo(USER_NO);
+		request.setAttribute("member", member);
+		RequestDispatcher dis = request.getRequestDispatcher("admin?doc=memberInfo");
+		dis.forward(request, response);
+	}
+	
+	
+	
 	
 	@ResponseBody
 	@PostMapping("reviewlist")
@@ -115,4 +178,13 @@ public class AdminController {
 		
 		return map;
 	}
+	
+	@PostMapping("resetstaticvalue")
+	public void ResetStaticValue() {
+		word = "";
+	}
+	
+	
+	
+	
 }

@@ -60,5 +60,21 @@ public class AdminServiceImpl implements AdminService{
 		map.put("orderBy", orderBy);
 		return adminDAO.getReviewList(map);
 	}
+  
+	@Override
+	public int DeleteUser(int USER_NO) {
+		return adminDAO.DeleteUser(USER_NO);
+	}
+
+	@Override
+	public Member getMemberInfo(int USER_NO) {
+		System.out.println("AdminServiceImpl의 getMemberInfo");
+		return adminDAO.getMemberInfo(USER_NO);
+	}
+	
+	@Override
+	public int ModifyUser(int USER_NO) {
+		return 0;
+	}
 
 }
