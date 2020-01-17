@@ -10,6 +10,11 @@
 		</layout>
 	</appender>
 	
+	<logger name="com.kh.dim2">
+		<level value="Admin" />
+	</logger>
+	
+	
 	<!-- Application Loggers -->
 	<logger name="com.kh.dim2">
 		<level value="info" />
