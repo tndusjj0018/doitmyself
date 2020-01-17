@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.memberDAO;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Seller;
 
 @Service
 
@@ -50,6 +51,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int memberLeave(String user_id) {
 		return dao.memberLeave(user_id);
+	}
+
+	@Override
+	public int sellerChange(Seller seller) {
+		return dao.sellerChange(seller);
+	}
+
+	@Override
+	public int isSeller(String user_id) {
+		return dao.isSeller(user_id);
 	}
 
 }

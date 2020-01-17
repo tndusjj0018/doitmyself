@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +41,9 @@
             			</a>
             			<div class="collapse" id="toggleDemo1" style="height: 0px;">
 							<ul class="nav nav-list">
-								<li class="mar20"><a href="memberInfo">회원 정보 변경</a></li>
-								<li class="mar20"><a href="sellerChange">판매자 전환</a></li>
-								<li class="mar20"><a href="memberLeave">회원 탈퇴</a></li>
+								<li class="mar20"><a href="memberInfo?USER_ID=${USER_ID }">회원 정보 변경</a></li>
+								<li class="mar20"><a href="sellerChange?USER_ID=${USER_ID }">판매자 전환</a></li>
+								<li class="mar20"><a href="memberLeave?USER_ID=${USER_ID }">회원 탈퇴</a></li>
 							</ul>
 						</div>
           			</li>

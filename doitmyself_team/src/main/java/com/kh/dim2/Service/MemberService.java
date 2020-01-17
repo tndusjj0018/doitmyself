@@ -3,6 +3,7 @@ package com.kh.dim2.Service;
 import org.springframework.stereotype.Service;
 
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Seller;
 
 @Service
 public interface MemberService {
@@ -21,5 +22,11 @@ public interface MemberService {
 
 	//회원 탈퇴하기
 	public int memberLeave(String user_id);
+
+	//판매자 전환하기
+	public int sellerChange(Seller seller);
+	
+	//판매자인지 확인
+	public int isSeller(String user_id);
 
 }

@@ -52,3 +52,19 @@
 .memberReset_btn:hover{
 	background: #96918b !important;
 }
+
+.leaveInfo {
+	border: 1px solid lightgray;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.leaveImg {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
+.leaveInfo > ul > li {
+	padding-top: 7px;
+}
