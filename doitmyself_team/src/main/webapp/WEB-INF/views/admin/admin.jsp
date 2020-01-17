@@ -68,19 +68,6 @@
 					url:"resetstaticvalue",
 					success:function(){
 						console.log("변수 초기화 성공");
-						//url 뒤 파라미터 값 가져오기
-						//var sch = location.search;
-						//console.log("파라미터 값 = "+dim);
-						
-						// URLSearchParams 객체로 변환
-						//var params = new URLSearchParams(sch);
-						
-						//var sch_keyword = params.get('num');
-						//console.log("parameter num 초기화 전 = "+ sch_keyword);
-						
-						//params.delete("num");
-						//params.append('num', 1);
-						
 					},
 					error:function(){
 						console.log("변수 초기화 실패");
@@ -91,10 +78,6 @@
 			
 			console.log("현재 페이지는  = "+num);
 			
-			
-			if(num == null){
-				reset();
-			}
 			
 			
 			// 다른 메뉴를 누르면 static 변수 초기화

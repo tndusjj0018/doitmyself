@@ -10,10 +10,15 @@
 		</layout>
 	</appender>
 	
-	<logger name="Member">
+	<logger name="Admin">
 		<level value="trace" />
 	</logger>
 	
+  <logger name="Member">
+		<level value="trace" />
+	</logger>
+	
+
 	<!-- Application Loggers -->
 	<logger name="com.kh.dim2">
 		<level value="info" />

@@ -32,13 +32,16 @@ public class AdminController {
 	
 	//관리자 페이지로 이동
 	@GetMapping("admin")
-	public ModelAndView AdminPage(String doc, ModelAndView mv,@RequestParam(value = "num", defaultValue = "1", required = false)int num) {
+	public ModelAndView AdminPage(String doc, ModelAndView mv, HttpServletRequest request) {
 		System.out.println("view = "+ doc);
 		if(doc == null) {
 			doc = "userview";
+		}else if (doc.equals("memberInfo")) {//회원관리에서 수정버튼 눌렀을 때
+			Member member = UserInfo(Integer.parseInt(request.getParameter("USER_NO")));
+			mv.addObject("member", member);
+			
 		}
 		mv.addObject("doc",doc);
-		mv.addObject("num",num);
 		mv.setViewName("admin/admin");
 		
 		return mv;
@@ -49,12 +52,6 @@ public class AdminController {
 	@PostMapping("userList")
 	public Object userList(@RequestParam(value = "num", defaultValue = "1", required = false)int num, 
 							@RequestParam(value = "search_word", defaultValue = "", required = false)String search_word,
-
-							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col){
-		if(!search_word.equals("")) {
-			word = search_word;
-		}
-		
 							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col,
 							HttpServletRequest request){
 		if(!search_word.equals("")) {
@@ -62,7 +59,6 @@ public class AdminController {
 			//검색을 했을 때 처음 띄워줄 페이지는 1페이지
 			num = 1;
 		}
-
 		System.out.println("여기는 AdminController userList()");
 		System.out.println("search_col = "+search_col+", search_word = "+word);
 		int limit =10;//한 페이지에 출력할 레코드 갯수
@@ -146,12 +142,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("user_info")
-	public void UserInfo(int USER_NO, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public Member UserInfo(int USER_NO) {
 		System.out.println("AdminController의 UserInfo");
 		Member member = adminService.getMemberInfo(USER_NO);
-		request.setAttribute("member", member);
-		RequestDispatcher dis = request.getRequestDispatcher("admin?doc=memberInfo");
-		dis.forward(request, response);
+		System.out.println("userno = "+USER_NO);
+		return member;
 	}
 	
 	
@@ -184,7 +179,5 @@ public class AdminController {
 		word = "";
 	}
 	
-	
-	
-	
 }
+

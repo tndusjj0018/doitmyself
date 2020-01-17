@@ -54,8 +54,30 @@
 		$(document).ready(function(){
 			$("#change_password").click(function(){
 				var popup= window.open("change_password","","width=500,height=500,left=550,top=300");
-			});
-		});
+			});//click end
+			
+			
+			$("modifybtn").click(function(){
+				var data = $(".updateform").serialize();
+				$.ajax({
+					type:"post",
+					dataType:"json",
+					data : data,
+					url:"ModifyUser",
+					success:function(rdata){
+						//member 갖고 왔는지 확인
+						
+					},//success end
+					error: function(){
+						
+					}//error end
+				})//ajax end
+			})//click end
+			
+			
+			
+			
+		});// ready end
 	</script>
 </head>
 
@@ -87,8 +109,6 @@
 					<div class="collapse navbar-collapse justify-content-end" id="navigation">
 						<ul class="navbar-nav">
 							<li class="nav-item btn-rotate dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-								   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="nc-icon nc-bell-55"></i>
 									<p>
 										<span class="d-lg-none d-md-block">Some Actions</span>
@@ -114,7 +134,7 @@
 								<h5 class="card-title">회원 정보 변경</h5>
 							</div>
 							<div class="card-body">
-								<form>
+								<form class="updateform">
 									<div class="row">
 										<div class="col-md-5 pr-1">
 											<div class="form-group">
@@ -194,7 +214,7 @@
 								
 									<div class="row">
 										<div class="update ml-auto mr-auto">
-											<button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+											<button type="button" class="btn btn-primary btn-round modifybtn">Update Profile</button>
 										</div>
 									</div>
 								</form>
@@ -218,16 +238,12 @@
 	<script src="resources/js/core/popper.min.js"></script>
 	<script src="resources/js/core/bootstrap.min.js"></script>
 	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
 	<script src="resources/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
 	<script src="resources/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
 	
 </body>
 </html>

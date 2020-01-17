@@ -31,10 +31,12 @@
 	</style>
 <script>
 	$(document).ready(function(){
-
+		
 		search_word = "";
 		var search = function(search_word){
 			console.log(search_word);
+			//url 파라미터 삭제 	
+			//history.replaceState({}, null, location.pathname);
 			$.ajax({
 				type:"POST",
 				data:{num:"${num}", search_word:search_word, search_col:$(".search_col").val()},
@@ -86,64 +88,7 @@
 						output += "</tbody>";
 						$("#mytable").append(output);
 						
-						
-						
-						//페이징 처리 start
-						var maxpage = rdata.maxpage;
-						var startpage = rdata.startpage;
-						var num = rdata.num;
-						
-						output ="";
-						output += "<div class='clearfix'>";
-						output += "		<ul class='pagination pull-right'>";
-						if(maxpage == startpage){//페이지수가 1개 밖에 존재하지 않을 때
-							output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
-							output += "<li class='active'><a href='#'>1</a></li>";
-							output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
-						}else{
-							//이전 버튼 처리
-							if((num - startpage) <= 0){//이전페이지가 존재하지 않을 때
-								output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
-							}else{//이전페이지가 존재할 때
-								//이전 페이지 버튼 : 1개씩 이동
-								output += "<li><a href='admin?doc=userview&num="+(num-1)+"'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
-								
-								//현재페이지보다 작은 페이지 버튼
-								if(num <3){//현재 페이지 num 이 3 미만인 경우
-									output += "<li><a href='admin?doc=userview&num="+(num-1)+"'>"+(num-1)+"</a></li>"  
-								}else{//현재페이지 num 이 3 이상인 경우
-									output += "<li><a href='admin?doc=userview&num="+(num-2)+"'>"+(num-2)+"</a></li>"
-									output += "<li><a href='admin?doc=userview&num="+(num-1)+"'>"+(num-1)+"</a></li>"
-								}
-							}
-							
-							//현재 페이지 버튼	
-							output += "<li><a href='#'>"+num+"</a></li>";
-							
-							
-							
-							//다음 버튼 처리
-							if((maxpage - num) > 0){//다음페이지가 존재할 때
-								//다음 페이지 버튼 : 1개씩 이동
-								
-								//현재페이지보다 큰 페이지 버튼
-								if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
-									output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
-								}else{//다음페이지가 두개 이상 존재할 때
-									output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
-									output += "<li><a href='admin?doc=userview&num="+(num+2)+"'>"+(num+2)+"</a></li>";
-								}
-								output += "<li><a href='admin?doc=userview&num="+(num+1)+"'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
-								
-							}else{//다음페이지가 존재하지 않을 때
-								output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
-							}
-							
-						}
-						output += "		</ul>";
-						output += "</div>";
-						$(".admin_content").append(output);
-						//페이징 처리 end
+						pagination(rdata);
 						
 					}	
 				},
@@ -155,6 +100,69 @@
 		
 		//처음 로드 했을 때 실행 
 		search(search_word);
+		
+		var pagination = function(rdata){
+			//페이징 처리 start
+			var maxpage = rdata.maxpage;
+			var startpage = rdata.startpage;
+			var num = rdata.num;
+			
+			output ="";
+			output += "<div class='clearfix'>";
+			output += "		<ul class='pagination pull-right'>";
+			if(maxpage == startpage){//페이지수가 1개 밖에 존재하지 않을 때
+				output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+				output += "<li class='active'><a href='#'>1</a></li>";
+				output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+			}else{
+				//이전 버튼 처리
+				if((num - startpage) <= 0){//이전페이지가 존재하지 않을 때
+					output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+				}else{//이전페이지가 존재할 때
+					//이전 페이지 버튼 : 1개씩 이동
+					output += "<li><a href='admin?doc=userview&num="+(num-1)+"'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+					
+					//현재페이지보다 작은 페이지 버튼
+					if(num <3){//현재 페이지 num 이 3 미만인 경우
+						output += "<li><a href='admin?doc=userview&num="+(num-1)+"'>"+(num-1)+"</a></li>"  
+					}else{//현재페이지 num 이 3 이상인 경우
+						output += "<li><a href='admin?doc=userview&num="+(num-2)+"'>"+(num-2)+"</a></li>"
+						output += "<li><a href='admin?doc=userview&num="+(num-1)+"'>"+(num-1)+"</a></li>"
+					}
+				}
+				
+				//현재 페이지 버튼	
+				output += "<li><a href='#'>"+num+"</a></li>";
+				
+				
+				
+				//다음 버튼 처리
+				if((maxpage - num) > 0){//다음페이지가 존재할 때
+					//다음 페이지 버튼 : 1개씩 이동
+					
+					//현재페이지보다 큰 페이지 버튼
+					if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
+						output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
+					}else{//다음페이지가 두개 이상 존재할 때
+						output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
+						output += "<li><a href='admin?doc=userview&num="+(num+2)+"'>"+(num+2)+"</a></li>";
+					}
+					output += "<li><a href='admin?doc=userview&num="+(num+1)+"'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+					
+				}else{//다음페이지가 존재하지 않을 때
+					output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+				}
+				
+			}
+			output += "		</ul>";
+			output += "</div>";
+			$(".admin_content").append(output);
+			//페이징 처리 end
+			
+		}
+		
+		
+		
 		
 		
 		$(".user_searchbtn").click(function(){
@@ -190,8 +198,9 @@
 			console.log(trNum+"번째 버튼 선택");
 			var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
 			console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
-			location.href = "user_info?USER_NO="+usernum;
+			location.href = "admin?doc=memberInfo&USER_NO="+usernum;
 		})//click end
+		
 	})	
 
 				
@@ -216,7 +225,6 @@
 	</div>
 	<table id="mytable" class="table table-bordred table-striped">
                   
-				        
 	</table>
 	
 </body>
