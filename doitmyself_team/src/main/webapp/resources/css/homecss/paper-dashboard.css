@@ -5030,7 +5030,7 @@ License - nucleoapp.com/license/
 }
 
 .main-panel>.content {
-  padding: 0px 30px 30px 475px;
+  padding: 0px 30px 30px 24%;
   min-height: calc(100vh - 123px);
   margin-top: 93px;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -10,7 +11,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
 	<!-- CSS File -->
-	<link href="resources/css/memberChange.css" rel="stylesheet">
+	<link href="resources/soo/css/memberChange.css" rel="stylesheet">
 
 	<!-- 우편번호 -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -46,11 +47,31 @@
 
 	            
 	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	             $('#seller_postcode').val(data.zonecode); //5자리 새우편번호 사용
-	            $('#seller_address').val(fullRoadAddr);          
+	             $('#SELLER_POSTCODE').val(data.zonecode); //5자리 새우편번호 사용
+	            $('#SELLER_ADDRESS').val(fullRoadAddr);          
 	        }
 	    }).open();
 	}
+	</script>
+	<script src="resources/js/core/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		
+			$('#sellerChange_form').submit(function(){
+				
+				if($('#process_agree_chk').is(':checked') == false) {
+					alert('판매 이용약관에 동의하세요');
+					return false;
+				}
+				
+				if($('#personal_info_agree').is(':checked') == false) {
+					alert('개인정보 수집에 동의하세요');
+					return false;
+				}
+			
+			});
+					
+		});	
 	</script>
 </head>
 
@@ -110,6 +131,8 @@
 			          <h5 class="card-title">판매자 전환</h5>
 			        </div>
 			        <div class="card-body">
+			        	<!-- 판매자 아닐 경우 -->
+			        	<c:if test="${isSeller == 0 }">
 			        	<!-- 절차 -->
 		        		<table class="chgApply_process1">
 		        			<tr>
@@ -179,7 +202,10 @@
 						<!-- 판매 이용약관 끝 -->
 						
 						<!-- 추가 정보 입력 -->
-						<form action="memberLeave">
+						<form action="sellerChangeAction" id="sellerChange_form" method="post">
+						
+						<input type="hidden" name="SELLER_ID" value="${USER_ID }" >
+					
 						<table>
 							<tr>
 								<th style="padding: 50px 0px 10px 50px;">추가 정보 입력</th>
@@ -189,7 +215,7 @@
 							<tr>
 								<td>스토어명</td>
 								<td>
-									<input type="text" id="seller_name" name="seller_name" placeholder="스토어 명" class="form-control placeholder_font" required>
+									<input type="text" id="SELLER_NAME" name="SELLER_NAME" placeholder="스토어 명" class="form-control placeholder_font" required>
 								</td>
 							</tr>
 							
@@ -197,16 +223,16 @@
 								<td>출고/반품 주소</td>
 								<td>
 									<div style="font-size:8px; margin-bottom:8px;">판매상품을 보내고 반품 받을 기본주소입니다.</div>
-									<input type="text" class="form-control col-md-3 placeholder_font" id="seller_postcode" name="seller_postcode" placeholder="우편 번호" style="display: inline-block;" required>
+									<input type="text" class="form-control col-md-3 placeholder_font" id="SELLER_POSTCODE" name="SELLER_POSTCODE" placeholder="우편 번호" style="display: inline-block;" required>
 									<button type="button" class="btn btn-primary" id="postsearch" onclick="Postcode()" style="height:32px; line-height:2px !important">우편 번호 찾기</button>
 									
-									<input type="text" class="form-control placeholder_font" id="seller_address" name="seller_address" placeholder="사업지 주소" style="margin-top: 5px;" required>
+									<input type="text" class="form-control placeholder_font" id="SELLER_ADDRESS" name="SELLER_ADDRESS" placeholder="사업지 주소" style="margin-top: 5px;" required>
 								</td>
 							</tr>
 						</table>
 						
 						<div style="margin: 5px 0 0 50px">
-							<input type="checkbox" style="margin-right: 5px;" ><span class="agree_bold" style="position:relative; top:-2px;">개인정보 수집/이용 동의</span>
+							<input type="checkbox" style="margin-right: 5px;" id="personal_info_agree" ><span class="agree_bold" style="position:relative; top:-2px;">개인정보 수집/이용 동의</span>
 							<div style="font-size:11px; margin-bottom:10px;">
 							- 고객님께서는 동의를 거부하실 수 있으며, 동의 거부 시 출고지/반품/교환지주소 등록이 불가합니다.
 							</div>
@@ -226,7 +252,23 @@
 						</div>
 						</form>
 						<!-- 추가 정보 입력 끝 -->
-			        </div>
+						</c:if>
+						
+						<!-- 이미 판매자인 경우 -->
+			        	<c:if test="${isSeller == 1 }">
+			        		<div class="container">
+			    				<div class="leaveInfo">
+			    					<img src="resources/soo/img/check.png" class="leaveImg">			     	        		
+			        				<span>판매자 전환 안내</span>
+		        					<ul>
+					        			<li>이미 판매자로 등록되어 있는 회원입니다.</li>
+		        					</ul>
+			        			</div>
+			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="판매자 페이지로 이동" 
+			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('판매자 페이지로 이동하는 버튼');">
+			        		</div>
+			        	</c:if>
+			        </div>       
 			      </div>
 			    </div>
 			  </div>
@@ -240,20 +282,20 @@
 		</div>
 	</div>
 	<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.min.js"></script>
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 	
 	
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 
 </body>
 </html>

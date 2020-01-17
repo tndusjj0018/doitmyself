@@ -10781,6 +10781,10 @@ ul {
   .auth.theme-one .footer-text {
     color: rgba(255, 255, 255, 0.4); }
 
+  .naver_login:hover{
+  	cursor : pointer;
+  	opacity : 0.8;
+  }
 /* Error */
 .error-page {
   min-height: 100vh; }
