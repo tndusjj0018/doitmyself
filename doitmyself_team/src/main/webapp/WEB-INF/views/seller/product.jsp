@@ -81,7 +81,7 @@
                 <hr>
               </div>
               
-              <form id="p-form">
+              <form id="p-form" action="" enctype="multipart/form-data">
               <div class="card-body" style="height:900px">
               	<!-- product table 1 -->
               	<h5 class="product-h5">* 상품명/카테고리 선택</h5>
@@ -103,15 +103,11 @@
             				<div id="main_cate">
             				<span>대분류</span>
 	            				<select size="3" id="main_cate_select">
-	            					<option value="furniture">가구</option>
-	            					<option value="food">음식</option>
-	            					<option value="hobby">취미</option>
+	            				
 	            				</select>
             				</div>
             				
-
             				<img src="resources/yeop/img/cate_arrow.png" class="arrowImg">
-
             				
             				<div id="sub_cate">
             				<span>소분류</span>
@@ -150,7 +146,8 @@
             		<tr>
             			<th class="p_th">메인사진</th>
             			<td class="p_td">
-            				<button>사진선택</button>
+            				<input type="file" name="uploadfile"
+								accept="image/gif, image/jpeg, image/png">
             			</td>            			
             		</tr> 		
             		<tr>
@@ -177,3 +174,4 @@
       </div>
      
     </div>
+
