@@ -125,10 +125,10 @@
                               <div class="col-md-5 pr-1 genderbox">
 							<div class="btn-group" data-toggle="buttons">
 							  <label class="btn btn-primary">
-							    <input type="radio" name="options" id="option1" class="radio_none left_radio" autocomplete="off"> 남
+							    <input type="radio" name="USER_GENDER" id="option1" class="radio_none left_radio" autocomplete="off"> 남
 							  </label>
 							  <label class="btn btn-primary">
-							    <input type="radio" name="options" id="option2" class="radio_none right_radio" autocomplete="off"> 여
+							    <input type="radio" name="USER_GENDER" id="option2" class="radio_none right_radio" autocomplete="off"> 여
 							  </label>
 							</div>
 							</div>

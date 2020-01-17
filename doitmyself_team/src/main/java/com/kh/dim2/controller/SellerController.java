@@ -1,5 +1,14 @@
 package com.kh.dim2.controller;
 
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller  
+public class SellerController {
+	
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +36,7 @@ public class SellerController {
 		mv.setViewName("seller/seller_nav");
 		return mv;
 	}
+
 	
 	// ## 판매자 정보 보기 ##
 	@ResponseBody
@@ -36,4 +46,5 @@ public class SellerController {
 		
 		return list;
 	}
+
 }

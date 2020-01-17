@@ -84,40 +84,52 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>사업지 이름</label>
+
                         <input type="text" class="form-control" id="seller_name" placeholder="seller_name" name="SELLER_NAME">
+
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>판매자 아이디</label>
+
                         <input type="text" class="form-control" id="seller_id" placeholder="seller_id" name="SELLER_ID" readonly>
+
                       </div>
                     </div>
                     <div class="col-md-9">
                       <div class="form-group">
                         <label for="exampleInputEmail1">사업지 우편번호</label>
+
                         <input type="text" id="seller_postcode" class="form-control" placeholder="seller_postcode" name="SELLER_POSTCODE" readonly>       
                       </div>                      
                     </div>                    
                     <button type="button" id="post1" class="btn btn-primary btn-round" onclick="Postcode()">우편검색</button>
+
                         
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>사업지 주소</label>
+
                         <input type="text" class="form-control" placeholder="seller_address" id="seller_address" name="SELLER_ADDRESS">
+
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">사업자번호</label>
+
                         <input type="text" class="form-control" placeholder="seller_b_num" id="seller_b_num" name="SELLER_B_NUM">
+
                       </div>
                     </div>
                   </div>
                  
                   <div class="row">
                     <div class="update ml-auto mr-auto">
+
                       <button type="submit" class="btn btn-primary btn-round">사업지 정보수정</button>
+
                     </div>
                   </div>
                 </form>

@@ -38,5 +38,6 @@ input::placeholder{color:#dddddd!important;}
 .orderList{text-align:right; margin-bottom:17px;}
 .orderList select{width:113px; height:26px;}
 .form-control[readonly]{background:#f3f3f3;}
+
 #new_cancel:hover,#new_p:hover{opacity:0.7; cursor:pointer; transition:.3s;}
 .logo a{text-align:center;}

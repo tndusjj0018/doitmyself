@@ -49,6 +49,12 @@ public class AdminController {
 	@PostMapping("userList")
 	public Object userList(@RequestParam(value = "num", defaultValue = "1", required = false)int num, 
 							@RequestParam(value = "search_word", defaultValue = "", required = false)String search_word,
+
+							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col){
+		if(!search_word.equals("")) {
+			word = search_word;
+		}
+		
 							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col,
 							HttpServletRequest request){
 		if(!search_word.equals("")) {
@@ -56,6 +62,7 @@ public class AdminController {
 			//검색을 했을 때 처음 띄워줄 페이지는 1페이지
 			num = 1;
 		}
+
 		System.out.println("여기는 AdminController userList()");
 		System.out.println("search_col = "+search_col+", search_word = "+word);
 		int limit =10;//한 페이지에 출력할 레코드 갯수

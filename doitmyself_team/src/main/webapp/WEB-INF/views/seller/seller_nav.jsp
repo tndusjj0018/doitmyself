@@ -23,6 +23,7 @@
   <!-- Seller CSS -->
   <link href="resources/yeop/css/seller.css" rel="stylesheet"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   <!-- 우편검색 api -->
   <script type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/191007/1570443254160/191007.js"></script>
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -66,6 +67,7 @@
 			}
 	})
   </script>
+
   <style>
   	input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
   	.p_th{width:150px; height:39px; background:#4f97c3d4; text-align:center; font-weight:bold; color:white; font-size:10pt;}
@@ -223,8 +225,10 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
+
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
           		Do It MySelf
+
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -291,7 +295,7 @@
   <script src="resources/yeop/demo/demo.js"></script>
   <script src="resources/yeop/js/seller.js"></script>
   
-  
+ 
 </body>
 
 </html>
