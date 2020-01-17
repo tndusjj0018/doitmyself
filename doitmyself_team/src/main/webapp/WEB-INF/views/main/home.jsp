@@ -25,10 +25,11 @@
     <link rel="stylesheet" href="resources/css/homecss/home.css">
     <jsp:include page="header.jsp"/>
   </head>
+  
   <body class="goto-here">
     <section id="home-section" class="hero">
     	<div id="floatMenu">
-			<span><a href="/login.jsp" style="color:white;">로그인</a></span>
+			<span><a href="login" style="color:white;">로그인</a></span>
 			<br>
 			<br>
 			방금 본 DIM
