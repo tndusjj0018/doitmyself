@@ -13,12 +13,6 @@
 	<link href="resources/soo/css/memberLeave.css" rel="stylesheet">
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
-	<script>
-	function memberLeave(){
-		//window.open();
-		alert('비밀번호 확인 창 떠야함');
-	}
-	</script>
 </head>
 
 <body class="">
@@ -80,7 +74,7 @@
 			        	<div class="container">
 			        		<p>회원 탈퇴 전 다음 사항을 꼭 숙지하시기 바랍니다.</p>
 			    			<div class="leaveInfo">
-			        		<img src="resources/img/mark.PNG" class="leaveImg">			        		
+			        		<img src="resources/soo/img/mark.PNG" class="leaveImg">			        		
 			        		<span>회원 탈퇴 안내</span>
 			        		<ul>
 			        			<li>회원 탈퇴 시 회원님께서 보유하셨던 회원정보, 거래정보 등은 모두 삭제 됩니다.</li>
