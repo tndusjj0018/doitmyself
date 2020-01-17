@@ -34,7 +34,7 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if($(':radio[name="options"]:checked').length < 1){
+		if($(':radio[name="USER_GENDER"]:checked').length < 1){
 		    alert('성별을 선택해주세요.');
 		    return false;
 		}
