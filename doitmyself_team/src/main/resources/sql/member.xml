@@ -50,4 +50,25 @@
 		from SELLER_TBL
 		where SELLER_ID = #{SELLER_ID}
 	</select>
+	
+	<select id="sellerNameCheck" resultType="seller" parameterType="String">
+		select *
+		from SELLER_TBL
+		where SELLER_NAME = #{SELLER_NAME}
+	</select>
+	
+	
+	<!-- 찜 개수 -->
+	<select id="wishcount" resultType="int" parameterType="String">
+		select count(*)
+		from DIBS_TBL
+		where D_USER_ID = #{USER_ID}
+	</select>
+	
+	<select id="wishlist" resultType="product" parameterType="String">
+		select *
+		from PRODUCT_TBL, DIBS_TBL
+		WHERE P_NO = D_P_NO
+		AND D_USER_ID = #{user_id}
+	</select>
 </mapper>

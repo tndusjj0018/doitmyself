@@ -73,9 +73,9 @@
 						</div>
 		          	</li>
 		          	<li>
-            			<a href="wishList" class="collapsed">
+            			<a href="wishList?D_USER_ID=${USER_ID }" class="collapsed">
 	              			<i class="nc-icon nc-favourite-28"></i>
-	              			<p>나의 관심 목록 <span class="badge pull-right" style="float: right!important; position:relative; top:6px">8</span></p>
+	              			<p>내가 찜한 상품</p>
 	              			
 						</a>
           			</li>

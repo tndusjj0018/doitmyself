@@ -68,3 +68,9 @@
 .leaveInfo > ul > li {
 	padding-top: 7px;
 }
+
+#SELLER_NAME {
+	width: 200px;
+	display: inline-block;
+	margin-right: 10px;
+}
