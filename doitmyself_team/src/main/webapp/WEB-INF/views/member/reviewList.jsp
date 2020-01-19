@@ -102,7 +102,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-8">
+			    <div class="col-md-9">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">나의 상품 리뷰</h5>

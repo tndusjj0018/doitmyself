@@ -1,6 +1,7 @@
 package com.kh.dim2.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.Service.MemberService;
 
@@ -22,14 +24,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	String user_id = "sooyeon";
+	String user_id = "sooyeon3";
 
 	// 회원 정보 가지고 옴
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
-	public ModelAndView member_info(
-
-			ModelAndView mv, HttpSession session) {
-
+	public ModelAndView member_info(ModelAndView mv,
+									HttpSession session) {
 		
 		Member m = memberservice.memberInfo(user_id);
 		session.setAttribute("USER_ID", user_id);
@@ -97,7 +97,8 @@ public class MemberController {
 		
 	}
 	
-
+	
+	//판매자인지 아닌지 확인 후 페이지 불러옴
 	@RequestMapping(value = "/sellerChange", method = RequestMethod.GET)
 	public ModelAndView sellerChange(ModelAndView mv) {
 		
@@ -121,7 +122,7 @@ public class MemberController {
 		
 		if(result == 1) { //판매자 등록 된 경우
 			out.println("alert('판매자 등록이 완료 되었습니다.');");
-			out.println("location.href='memberInfo';");
+			out.println("location.href='sellerChange';");
 		} else {
 			out.println("alert('판매자 등록에 실패 하였습니다.')");
 			out.println("history.back();");
@@ -130,8 +131,20 @@ public class MemberController {
 		out.println("</script>");
 		out.close();
 	}
-
 	
+	
+	//가게명 있는지 확인
+	@RequestMapping(value="/sellerNameCheck", method=RequestMethod.GET)
+	public void idcheck(@RequestParam("SELLER_NAME") String seller_name,
+						HttpServletResponse response) throws Exception {
+		int result = memberservice.sellerNameCheck(seller_name);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
+
+	//회원 탈퇴 페이지로 이동
 	@RequestMapping(value = "/memberLeave", method = RequestMethod.GET)
 	public String memberLeave() {
 		return "member/memberLeave";
@@ -200,8 +213,15 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/wishList", method = RequestMethod.GET)
-	public String wishList() {
-		return "member/wishList";
+	public ModelAndView wishList(ModelAndView mv,
+								 @RequestParam("D_USER_ID") String D_USER_ID) {
+		int wishcount = memberservice.wishcount(user_id);
+		
+		List<Product> productList = memberservice.wishlist(D_USER_ID);
+		mv.addObject("wishcount", wishcount);
+		mv.addObject("wishlist", productList);
+		mv.setViewName("member/wishList");
+		return mv;
 	}
 
 	@RequestMapping(value = "/change_password", method = RequestMethod.GET)

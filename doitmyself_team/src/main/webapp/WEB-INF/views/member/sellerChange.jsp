@@ -56,6 +56,8 @@
 	<script src="resources/js/core/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			
+			var checkid = false;
 		
 			$('#sellerChange_form').submit(function(){
 				
@@ -70,8 +72,30 @@
 				}
 			
 			});
-					
-		});	
+			
+			
+						
+			$('#SELLER_NAME').on('keyup', function(){
+				
+				$('#namecheckmsg').empty();
+				
+				var seller_name = $('#SELLER_NAME').val();
+	
+				$.ajax({
+					url:"sellerNameCheck",
+					data:{"SELLER_NAME" : seller_name },
+					success: function(resp) {
+						if(resp == -1) {
+							$('#namecheckmsg').css('color', 'green').html("사용 가능한 스토어 명 입니다.");					
+							checkid = true;
+						} else {
+							$('#namecheckmsg').css('color', 'red').html("사용중인 스토어 명 입니다.");
+							checkid = false;
+						}
+					}
+				});
+			});
+		});			
 	</script>
 </head>
 
@@ -125,7 +149,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-8">
+			    <div class="col-md-9">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">판매자 전환</h5>
@@ -213,9 +237,10 @@
 						</table>
 						<table class="table table-bordered" style="margin-left: 50px; width: 80%">
 							<tr>
-								<td>스토어명</td>
+								<td width="160px">스토어명</td>
 								<td>
 									<input type="text" id="SELLER_NAME" name="SELLER_NAME" placeholder="스토어 명" class="form-control placeholder_font" required>
+									<span id="namecheckmsg" style="width: 40px;"></span>
 								</td>
 							</tr>
 							
