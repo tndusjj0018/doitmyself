@@ -65,10 +65,38 @@
 		where D_USER_ID = #{USER_ID}
 	</select>
 	
+	<!-- 찜 목록 -->
 	<select id="wishlist" resultType="product" parameterType="String">
 		select *
 		from PRODUCT_TBL, DIBS_TBL
 		WHERE P_NO = D_P_NO
 		AND D_USER_ID = #{user_id}
+		order by D_NO DESC
+	</select>
+	
+	<!-- 찜 삭제시 수행되는 sql문 두 개 -->
+	<delete id="wishdelete" parameterType="map">
+		delete
+		from DIBS_TBL
+		where D_P_NO = #{P_NO} AND D_USER_ID = #{USER_ID}
+	</delete>
+	<update id="p_dibsupdate" parameterType="int">
+		update PRODUCT_TBL
+		set P_DIBS = P_DIBS - 1
+		where P_NO = #{P_NO}
+	</update>
+	
+	<!-- QNA 리스트 -->
+	<select id="qnalist" resultType="qna" parameterType="String">
+		select *
+		from QNA_TBL
+		WHERE QNA_WRITER = #{USER_ID}
+	</select>
+	
+	<!-- QNA 개수 -->
+	<select id="qnacount" resultType="int" parameterType="String">
+		select count(*)
+		from QNA_TBL
+		where QNA_WRITER = #{USER_ID}
 	</select>
 </mapper>

@@ -11,7 +11,12 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
 	<!-- CSS Files -->
-	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
+	<link href="resources/soo/css/wishList.css" rel="stylesheet">
+	
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script>
+		
+	</script>
 </head>
 
 <body class="">
@@ -94,7 +99,7 @@
 									${wl.p_PRICE }원
 								</td>
 								<td>
-									<button type="button" class="btn" id="btn-return"><img src=""></button>
+									<button type="button" class="btn" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니끼?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
 								</td>
 							</tr>
 							</c:forEach>
@@ -103,7 +108,14 @@
 						
 						<!-- 찜 목록 없는 경우 -->
 						<c:if test="${wishcount == 0}">
-						찜한 상품 없습니다.
+							<div class="container">
+			    				<div class="leaveInfo">
+			    					<i class="nc-icon nc-favourite-28"></i>			     	        		
+			        				<span>찜한 상품이 없습니다.</span>
+			        			</div>
+			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        		</div>
 						</c:if>
 						</div>
 			        </div>
@@ -122,7 +134,7 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/soo/js/core/jquery.min.js"></script>
+	
 	<script src="resources/soo/js/core/popper.min.js"></script>
 	<script src="resources/soo/js/core/bootstrap.min.js"></script>
 	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>

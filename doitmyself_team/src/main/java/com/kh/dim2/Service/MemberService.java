@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 
 @Service
@@ -32,9 +33,20 @@ public interface MemberService {
 	//판매자인지 확인
 	public int isSeller(String user_id);
 
+	//스토어 명 중복 체크
 	public int sellerNameCheck(String seller_name);
 
+	//찜 목록 개수
 	public int wishcount(String user_id);
 	
 	public List<Product> wishlist(String user_id);
+	
+	public int wishdelete(int p_no, String user_id);
+	
+	public int p_dibsupdate(int p_no);
+	
+	public List<Qna> qnalist(String user_id);
+	
+	//qna 목록 개수
+	public int qnacount(String user_id);
 }

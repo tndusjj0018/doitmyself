@@ -10,6 +10,7 @@
 		<typeAlias alias="seller" type="com.kh.dim2.domain.Seller"/>
 		<typeAlias alias="review" type="com.kh.dim2.domain.Review"/>
 		<typeAlias alias="order" type="com.kh.dim2.domain.Order"/>
+		<typeAlias alias="qna" type="com.kh.dim2.domain.Qna" />
 	</typeAliases>
 	
 	<mappers>
