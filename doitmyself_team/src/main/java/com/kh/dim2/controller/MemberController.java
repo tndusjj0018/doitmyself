@@ -24,7 +24,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	String user_id = "sooyeon3";
+	String user_id = "ccorcle";
 
 	// 회원 정보 가지고 옴
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)

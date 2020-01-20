@@ -32,18 +32,37 @@
 			position: relative;
 			top: 1px;
 		}
+		.is_adminfont{
+			font-size: 25px
+		}
+		#mytable td, #mytable th{
+			height: 25px;
+			line-height: 25px
+		}
 		
 	</style>
 	<script>
 		$(function(){
 			search_word = "";
+			//조회 옵션 선택
+			selected_option = "";
 			var search = function(search_word){
+				console.log("admin_privilege_management.jsp 현재 페이지는 = ${num}");
 				$.ajax({
 					type:"POST",
 					dataType:"json",
-					data:{num:"${num}", search_word:search_word, search_col:$(".search_col").val()},
+					data:{num:"${num}", search_word:search_word, search_col:$(".search_col").val(), option:selected_option},
 					url:"userList",
 					success:function(rdata){
+						var option = rdata.option; 
+						console.log("option = "+option);
+						if(option != ""){
+							// privilege select 가져가기
+							var p ='.privilege option[value='+rdata.option+']';
+							console.log(p);
+							$(p).prop("selected", true);
+						}
+						
 						search_word = rdata.search_word;
 						console.log(rdata);
 						console.log("검색 기준 = "+rdata.search_col+", 검색어= "+rdata.search_word);
@@ -60,6 +79,7 @@
 							output += "  <th>이름</th>";
 							output += "  <th>이메일</th>";
 							output += "  <th>휴대전화</th>";
+							output += "	 <th>관리자 여부</th>"
 							output += "  <th>권한 부여</th>";
 							output += "  <th>권한 철회</th>";
 							output += "</thead>";
@@ -69,7 +89,7 @@
 							var startcnt = endcnt -9; 
 							console.log("startcnt="+startcnt + ", endcnt = "+endcnt);
 							$(rdata.userlist).each(function(index, item){
-								
+								console.log("startcnt = "+startcnt);
 								if(startcnt<=index && endcnt>=index){
 									output += "<tr>";
 									output += "	<td><input type='checkbox' class='checkthis' /></td>";
@@ -78,6 +98,12 @@
 									output += "<td>"+item.user_NAME+"</td>";
 									output += "<td>"+item.user_EMAIL+"</td>";
 									output += "<td>"+item.user_PHONE+"</td>";
+									if(item.user_IS_ADMIN == 0){
+										output += "<td class='is_adminfont'></td>";
+									}else{
+										output += "<td class='is_adminfont'>○</td>";
+									}
+									
 									output += "<td><button class='btn btn-primary btn-xs ok'><span class='glyphicon glyphicon-ok-circle'></span></button></td>";
 									output += "<td><button class='btn btn-danger btn-xs cancel'><span class='glyphicon glyphicon-remove'></span></button></td>";
 									output += "</tr>";
@@ -171,17 +197,62 @@
 				}
 			});//click end
 			
+			var privilege = function(user_no, is_admin){
+				$.ajax({
+					type:"POST",
+					data:{USER_NO:user_no, USER_IS_ADMIN:is_admin},
+					url:"admin_privilege_change",
+					success:function(rdata){
+						console.log(rdata);
+						//페이지 리로드
+						location.reload(true);
+					},
+					error:function(){
+						console.log("실패");
+					}
+					
+				})
+			}
+			
+			
 			//권한 부여 클릭 했을 때
 			$("#mytable").on("click",".ok",function(){
+				//해당 유저가 관리자인지 일반회원인지 판별 
+				var trNum = $(this).closest('tr').prevAll().length;
+				var is_admin = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(6)").text();//USER_IS_ADMIN 칼럼 확인
+				var user_no = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(1)").text();//USER_NO 
+				if(is_admin == "○"){//관리자 회원에게 권한 부여를 시도
+					alert("이미 관리자 회원입니다.");
+				}else{//일반회원 일 때
+					privilege(user_no, 1);
+				}
+				
 				
 			})
 			
 			//권한 철회 클릭했을 때
 			$("#mytable").on("click",".cancel",function(){
+				//해당 유저가 관리자인지 일반회원인지 판별 
+				var trNum = $(this).closest('tr').prevAll().length;
+				var is_admin = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(6)").text();//USER_IS_ADMIN 칼럼 확인
+				var user_no = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(1)").text();//USER_NO 
+				
 				var check = confirm("권한을 취소하시겠습니까?");
 				if(check == true){
-						
+					if(is_admin != "○"){//일반 회원 인데 권한 취소를 눌렀을 때
+						alert("선택한 회원은 일반 회원입니다.");
+					}else{//관리자 일때 권한 취소
+						privilege(user_no, 0);
+					}	
 				}
+			})
+			
+			$(".search").on("change", ".privilege", function(){
+				console.log("privilege 선택 옵션 바뀜 ="+$(this).val());
+				selected_option = $(this).val();
+				search(search_word);
+				$(".clearfix").remove();
+				
 			})
 			
 			
@@ -192,8 +263,9 @@
 	<font id = "admin_viewtitle">관리자 권한 관리</font><br>
 	<div class="search">
 		<select class = "privilege">
-			<option>관리자 조회</option>
-			<option>일반 사용자 조회</option>
+			<option value="">전체</option>
+			<option value="1">관리자 조회</option>
+			<option value="0">일반 사용자 조회</option>
 		</select>
 		<select class = "search_col">
 			<option value="USER_ID">아이디</option>

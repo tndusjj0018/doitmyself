@@ -32,13 +32,8 @@
 <script>
 	$(document).ready(function(){
 		
-		var go = function(page){
-			search(page);
-		}
 		search_word = "";
-		
-		
-		function search(page,search_word){
+		var search = function(search_word){
 			console.log(search_word);
 			//url 파라미터 삭제 	
 			//history.replaceState({}, null, location.pathname);
@@ -106,10 +101,6 @@
 		//처음 로드 했을 때 실행 
 		search(search_word);
 		
-		
-		
-		
-		
 		var pagination = function(rdata){
 			//페이징 처리 start
 			var maxpage = rdata.maxpage;
@@ -129,14 +120,14 @@
 					output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
 				}else{//이전페이지가 존재할 때
 					//이전 페이지 버튼 : 1개씩 이동
-					output += "<li><a href='javascript:go("+(num-1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+					output += "<li><a href='admin?doc=userview&num="+(num-1)+"'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
 					
 					//현재페이지보다 작은 페이지 버튼
 					if(num <3){//현재 페이지 num 이 3 미만인 경우
-						output += "<li><a href='javascript:go("+(num-1)+")'>"+(num-1)+"</a></li>"  
+						output += "<li><a href='admin?doc=userview&num="+(num-1)+"'>"+(num-1)+"</a></li>"  
 					}else{//현재페이지 num 이 3 이상인 경우
-						output += "<li><a href='javascript:go("+(num-2)+")'>"+(num-2)+"</a></li>"
-						output += "<li><a href='javascript:go("+(num-1)+")'>"+(num-1)+"</a></li>"
+						output += "<li><a href='admin?doc=userview&num="+(num-2)+"'>"+(num-2)+"</a></li>"
+						output += "<li><a href='admin?doc=userview&num="+(num-1)+"'>"+(num-1)+"</a></li>"
 					}
 				}
 				
@@ -151,12 +142,12 @@
 					
 					//현재페이지보다 큰 페이지 버튼
 					if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
-						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
+						output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
 					}else{//다음페이지가 두개 이상 존재할 때
-						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
-						output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
+						output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
+						output += "<li><a href='admin?doc=userview&num="+(num+2)+"'>"+(num+2)+"</a></li>";
 					}
-					output += "<li><a href='javascript:go("+(num+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+					output += "<li><a href='admin?doc=userview&num="+(num+1)+"'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
 					
 				}else{//다음페이지가 존재하지 않을 때
 					output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
