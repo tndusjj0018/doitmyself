@@ -55,6 +55,10 @@
 			$("#change_password").click(function(){
 				var popup= window.open("change_password","","width=500,height=500,left=550,top=300");
 			});
+			
+			
+			var email = $('#USER_EMAIL').val();
+			
 		});
 	</script>
 </head>

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+div.card-body > div > table{
+	text-align: center;	
+}
+
+.product_img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+
+#btn-wishdelete {
+	background: white !important;
+}
+
+.leaveInfo {
+	border: 1px solid lightgray;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+div.card-body > div > div > div > i {
+	color: red;
+    position: relative;
+    top: 2px;
+    margin-right :5px;
+}

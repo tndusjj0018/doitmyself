@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 
 @Repository
@@ -56,5 +57,20 @@ public class memberDAO {
 	public List<Product> wishlist(String user_id) {
 		return sqlSession.selectList("Member.wishlist", user_id);
 	}
+	
+	public int wishdelete(Map<String, Object> map) {
+		return sqlSession.delete("Member.wishdelete", map);
+	}
+	
+	public int p_dibsupdate(int p_no) {
+		return sqlSession.update("Member.p_dibsupdate", p_no);
+	}
 
+	public List<Qna> qnalist(String user_id) {
+		return sqlSession.selectList("Member.qnalist", user_id);
+	}
+	
+	public int qnacount(String user_id) {
+		return sqlSession.selectOne("Member.qnacount", user_id);
+	}
 }

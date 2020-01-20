@@ -120,7 +120,7 @@
 							</ul>
 
 							<div class="tab-content">
-								<div id="home" class="tab-pane fade in active">
+								<div id="home" class="tab-pane in active">
 									<table class="table">
 										<tr>
 											<td>주문 일자</td> <td>주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>상태</td>
