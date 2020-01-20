@@ -52,10 +52,12 @@ public class Member {
 		USER_POSTCODE = uSER_POSTCODE;
 	}
 	public String getUSER_PHONE() {
+		/*
 		String fir = USER_PHONE.substring(0, 3);
 		String sec = USER_PHONE.substring(3, 7);
 		String thi = USER_PHONE.substring(7, 11);
-		return fir+"-"+sec+"-"+thi;
+		*/
+		return USER_PHONE;
 	}
 	public void setUSER_PHONE(String uSER_PHONE) {
 		USER_PHONE = uSER_PHONE;

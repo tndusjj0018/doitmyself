@@ -2,18 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Admin">
-	<select id="memberListCount" resultType="int">
+	<select id="memberListCount" resultType="int" parameterType="map">
 		select count(*) from user_tbl
+		<if test="search_col!= null and search_word !=null">
+			<where>
+				<choose>
+					<when test="search_col == 'USER_ID'">USER_ID</when>
+					<when test="search_col == 'USER_NAME'">USER_NAME</when>
+					<when test="search_col == 'USER_BIRTH'">USER_BIRTH</when>
+					<when test="search_col == 'USER_PHONE'">USER_PHONE</when>
+					<when test="search_col == 'USER_EMAIL'">USER_EMAIL</when>
+				</choose>
+				like '%'||#{search_word}||'%'
+			</where>
+		</if>
 	</select>
+	
 	<select id="memberList" resultType="member" parameterType="map">
 		select * from user_tbl
-		<where>
-			
-		</where>
+		<if test="search_col!= null and search_word !=null">
+			<where>
+				<choose>
+					<when test="search_col == 'USER_ID'">USER_ID</when>
+					<when test="search_col == 'USER_NAME'">USER_NAME</when>
+					<when test="search_col == 'USER_BIRTH'">USER_BIRTH</when>
+					<when test="search_col == 'USER_PHONE'">USER_PHONE</when>
+					<when test="search_col == 'USER_EMAIL'">USER_EMAIL</when>
+				</choose>
+				like '%'||#{search_word}||'%'
+			</where>
+		</if>
 	</select>
+	
 	<select id="reviewCount" resultType="int">
 		select count(*) from review_tbl
 	</select>
+	
 	<select id="reviewList" resultType="review" parameterType="map">
 		select * from review_tbl
 		<where>
@@ -21,4 +45,17 @@
 		</where>
 		order by #{orderBy} 
 	</select>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from user_tbl where user_no = #{USER_NO}
+	</delete>
+	
+	<select id="userinfo" parameterType="int" resultType="member">
+		select * from user_tbl where user_no = #{USER_NO}
+	</select>
+	
+	<update id="modifyUser">
+
+	</update>
+	
 </mapper>

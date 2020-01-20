@@ -58,6 +58,42 @@
 			width: 1200px
 		}
 	</style>
+	
+	<script>
+		$(document).ready(function(){
+			var num =  <%=request.getParameter("num")%>;
+			var reset = function (){
+				$.ajax({
+					type:"post",
+					url:"resetstaticvalue",
+					success:function(){
+						console.log("변수 초기화 성공");
+					},
+					error:function(){
+						console.log("변수 초기화 실패");
+					}
+				})//ajax end
+			}//function reset end 
+			
+			
+			console.log("현재 페이지는  = "+num);
+			
+			
+			
+			// 다른 메뉴를 누르면 static 변수 초기화
+			$(".admin_sidebar a").click(function(){
+				reset();
+			})// click end
+			
+			$(document).on("keydown",function(){
+				if(window.event.keyCode == 116){
+					reset();
+				}
+				
+			})
+			
+		})
+	</script>
   </head>
   <body class="goto-here">
 	<header><jsp:include page="../main/header.jsp"></jsp:include></header>
