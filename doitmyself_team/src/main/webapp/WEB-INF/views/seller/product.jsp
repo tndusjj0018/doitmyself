@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<script type="text/javascript" src="resources/yeop/ckeditor/ckeditor.js"></script>
 <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -81,7 +82,7 @@
                 <hr>
               </div>
               
-              <form id="p-form" action="" enctype="multipart/form-data">
+              <form id="p-form" action="ProductAddAction" enctype="multipart/form-data">
               <div class="card-body" style="height:900px">
               	<!-- product table 1 -->
               	<h5 class="product-h5">* 상품명/카테고리 선택</h5>
@@ -130,17 +131,18 @@
             		<tr>
             			<th class="p_th">재고 수량</th>
             			<td class="p_td">
-            				<input type="text" id="p_qa"> 개
+            				<input type="text" id="p_qa" maxlength="7"> 개
             			</td>            			
             			<th class="p_th">가격</th>
             			<td class="p_td">
-            				<input type="text" id="p_price"> 원
+            				<input type="text" id="p_price" maxlength="13"> 원
             			</td>
             		</tr>            		
             	</table>
             	
             	<!-- product table 3 -->
             	<h5 class="product-h5">* 메인사진/상품설명</h5>
+            	<h5 class="product-h5-1">* 상품설명 이미지 첨부방법 : 이미지 > 업로드 > 파일선택 > 서버로 전송</h5>
             	<hr class="product_hr">        
             	<table class="product_tb">           
             		<tr>
@@ -151,17 +153,27 @@
             			</td>            			
             		</tr> 		
             		<tr>
-            			<th class="p_th p_ex" colspan="1">상품 설명</th>
-            			<td class="p_td" colspan="3">
-            				<textarea rows="20" cols="90"></textarea>
+            			<th class="p_ex" colspan="1">상품 설명</th>
+            			<td class="p_td ck_td" colspan="3">
+            				<textarea id="p_content"></textarea>
+            				<script type="text/javascript">
+							 CKEDITOR.replace('p_content'
+							                , {height: 500                                                  
+							                 });
+							 //이미지 업로드를 할 경우
+							 //CKEDITOR.replace("description",{
+							 //CKEDITOR.replace와 id("description")를 잘 적어주면 그 태그가 smart editor 스타일로 바뀌게 된다. 
+							 //filebrowserUploadUrl : "${path}/insertImage.do"});
+							 //파일을 업로드 해야하기 때문에 filebrowserUploadUrl을 사용하고, 서버쪽에 코드를 완성해주어야 한다.
+							</script>
             			</td>
             		</tr>
             	</table>
             	
-            	<button id="new_cancel">
+            	<button type="reset" id="new_cancel">
             		취소
             	</button>
-            	<button id="new_p">
+            	<button type="submit" id="new_p">
 					신규상품등록            		
             	</button>
               </div>
