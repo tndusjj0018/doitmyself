@@ -59,4 +59,3 @@ $('#main_cate_select').change(function(){
 		}
 	})//ajax		
 })//#main_cate_select change
-

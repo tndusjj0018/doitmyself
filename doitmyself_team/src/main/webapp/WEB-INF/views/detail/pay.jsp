@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="resources/css/pay.css">
+<link rel="stylesheet" href="resources/css/baha_css/pay.css">
 
 <meta charset="utf-8">
 <title>Insert title here</title>

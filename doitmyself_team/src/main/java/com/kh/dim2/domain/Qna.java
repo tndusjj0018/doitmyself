@@ -75,7 +75,5 @@ public class Qna {
 	public void setQNA_ISRESPONSE(int qNA_ISRESPONSE) {
 		QNA_ISRESPONSE = qNA_ISRESPONSE;
 	}
-	
-	
 
 }
