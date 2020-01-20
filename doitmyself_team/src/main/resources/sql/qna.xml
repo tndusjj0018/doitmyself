@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="qna">
+<insert id="insert" parameterType="qna">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="QNA_NO">
+			select nvl(max(QNA_NO),0)+1 from qna_tbl
+		</selectKey>
+		insert into qna_tbl(QNA_NO, QNA_P_NO, QNA_SUBJECT, QNA_CONTENT,
+		QNA_WRITER, QNA_DATE, QNA_CATEGORY, QNA_S_ID, QNA_SECRET)
+		values(#{QNA_NO}, '0', #{QNA_SUBJECT}, #{QNA_CONTENT}, #{QNA_WRITER}, SYSDATE, #{QNA_CATEGORY}, '0', #{QNA_SECRET})
+	</insert>
+	
+</mapper>
+
+
