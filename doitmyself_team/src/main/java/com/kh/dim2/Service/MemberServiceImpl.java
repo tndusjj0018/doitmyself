@@ -1,6 +1,7 @@
 package com.kh.dim2.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.memberDAO;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 
 @Service
@@ -62,5 +64,23 @@ public class MemberServiceImpl implements MemberService {
 	public int isSeller(String user_id) {
 		return dao.isSeller(user_id);
 	}
+
+	@Override
+	public int sellerNameCheck(String seller_name) {
+		Seller seller = dao.sellerNameCheck(seller_name);
+		return (seller == null) ? -1 : 1;
+	}
+
+	@Override
+	public int wishcount(String user_id) {
+		return dao.wishcount(user_id);
+	}
+
+	@Override
+	public List<Product> wishlist(String user_id) {
+		return dao.wishlist(user_id);
+	}
+	
+	
 
 }
