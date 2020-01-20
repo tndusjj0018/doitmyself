@@ -60,7 +60,7 @@ public class AdminServiceImpl implements AdminService{
 		map.put("orderBy", orderBy);
 		return adminDAO.getReviewList(map);
 	}
-
+  
 	@Override
 	public int DeleteUser(int USER_NO) {
 		return adminDAO.DeleteUser(USER_NO);
@@ -76,6 +76,5 @@ public class AdminServiceImpl implements AdminService{
 	public int ModifyUser(int USER_NO) {
 		return 0;
 	}
-
 
 }

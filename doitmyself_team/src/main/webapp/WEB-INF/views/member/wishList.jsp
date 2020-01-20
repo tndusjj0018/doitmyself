@@ -10,7 +10,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
 	<!-- CSS Files -->
-	<link href="resources/css/orderDelivery.css" rel="stylesheet">
+	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -72,30 +72,22 @@
 			        	<div class="container">
 			        	<table class="table">
 							<tr>
-								<td>주문 일자</td> <td>주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>주문상태</td> <td>취소 / 리뷰</td>
+								<td>상품 번호</td> <td>주문 상품 정보</td> <td>상품 금액</td> <td>삭제</td>
 							</tr>
 							<tr>
 								<td>
-								2020-01-08
+								D_P_NO
 								</td>
 								<td>
-									<img src="resources/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+									<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 								</td>
 								<td>
-									1000원<br>
-									(1개)
+									1000원
 								</td>
 								<td>
-									<span class="order_status">배송완료</span><br>
-									<button type="button" class="btn" id="btn-order">배송조회</button>
+									<button type="button" class="btn" id="btn-return"><img src=""></button>
 								</td>
-								
-								<td>
-									<button type="button" class="btn" id="btn-return">반품 신청</button>
-								</td>
-								
-								
 							</tr>
 						</table>
 						</div>
@@ -115,20 +107,19 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.min.js"></script>
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 	
 </body>
 </html>
