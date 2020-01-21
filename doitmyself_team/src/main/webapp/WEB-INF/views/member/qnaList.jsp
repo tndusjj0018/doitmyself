@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -70,26 +71,69 @@
 			        </div>
 			        <div class="card-body">
 			        	<div class="container">
+			        	
+			        	<!-- qna 목록 있는 경우 -->
+			        	<c:if test="${qnacount > 0}">
 			        	<table class="table">
 							<tr>
-								<td>상품 번호</td> <td>주문 상품 정보</td> <td>상품 금액</td> <td>삭제</td>
+								<td>문의 번호</td> <td>상품 정보</td> <td>스토어 명</td> <td>문의 분류</td> <td>문의 내용</td> <td>작성일</td> <td>답변 상태</td>
 							</tr>
+							<c:forEach var="ql" items="${qnalist}">
 							<tr>
 								<td>
-								D_P_NO
+								${ql.QNA_NO }
 								</td>
 								<td>
 									<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 								</td>
 								<td>
-									1000원
+									${ql.QNA_S_ID }
 								</td>
 								<td>
-									<button type="button" class="btn" id="btn-return"><img src=""></button>
+									<c:if test="${ql.QNA_CATEGORY == 0}">
+										배송문의
+									</c:if>
+									<c:if test="${ql.QNA_CATEGORY == 1}">
+										상품문의
+									</c:if>
+									<c:if test="${ql.QNA_CATEGORY == 2}">
+										취소/환불 문의
+									</c:if>
+									<c:if test="${ql.QNA_CATEGORY == 3}">
+										기타문의
+									</c:if>
+								</td>
+								<td>
+									${ql.QNA_SUBJECT }
+								</td>
+								<td>
+									${ql.QNA_DATE }
+								</td>
+								<td>
+									<c:if test="${ql.QNA_ISRESPONSE == 0}">
+										답변예정
+									</c:if>
+									<c:if test="${ql.QNA_ISRESPONSE == 1}">
+										답변완료
+									</c:if>
 								</td>
 							</tr>
+							</c:forEach>
 						</table>
+						</c:if>
+						
+						<!-- qna 목록 없는 경우 -->
+						<c:if test="${qnacount == 0}">
+							<div class="container">
+			    				<div class="leaveInfo">
+			    					<i class="nc-icon nc-favourite-28"></i>			     	        		
+			        				<span>문의한 상품이 없습니다.</span>
+			        			</div>
+			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        		</div>
+						</c:if>
 						</div>
 			        </div>
 			      </div>

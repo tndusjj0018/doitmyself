@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.memberDAO;
+import com.kh.dim2.domain.DIBS;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 
 @Service
@@ -81,6 +83,27 @@ public class MemberServiceImpl implements MemberService {
 		return dao.wishlist(user_id);
 	}
 	
-	
+	public int wishdelete(int p_no, String user_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("P_NO", p_no);
+		map.put("USER_ID", user_id);
+		
+		return dao.wishdelete(map);
+	}
+
+	@Override
+	public int p_dibsupdate(int p_no) {
+		return dao.p_dibsupdate(p_no);
+	}
+
+	@Override
+	public List<Qna> qnalist(String user_id) {
+		return dao.qnalist(user_id);
+	}
+
+	@Override
+	public int qnacount(String user_id) {
+		return dao.qnacount(user_id);
+	}
 
 }

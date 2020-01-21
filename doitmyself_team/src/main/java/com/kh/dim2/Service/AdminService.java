@@ -35,4 +35,5 @@ public interface AdminService {
 	public int updateAdminPrivilege(int USER_NO, int USER_IS_ADMIN);
 
 
+	
 }

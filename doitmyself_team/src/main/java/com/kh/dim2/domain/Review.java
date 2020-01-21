@@ -8,6 +8,8 @@ public class Review {
 	private String REVIEW_WRITER;
 	private int REVIEW_P_NO;
 	private String REVIEW_IMG;
+	
+	
 	public int getREVIEW_NO() {
 		return REVIEW_NO;
 	}

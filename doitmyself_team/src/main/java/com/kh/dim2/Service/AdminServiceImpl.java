@@ -93,4 +93,5 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.updateAdminPrivilege(map);
 	}
 
+	
 }

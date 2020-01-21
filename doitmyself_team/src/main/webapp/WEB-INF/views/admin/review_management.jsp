@@ -24,6 +24,7 @@
 			}
 			
 			
+			
 			//review 목록 가져오기
 			var reviewList = function(){
 				$.ajax({

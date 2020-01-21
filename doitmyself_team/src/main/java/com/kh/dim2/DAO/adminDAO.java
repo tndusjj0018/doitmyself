@@ -50,4 +50,5 @@ public class adminDAO {
 	public int updateAdminPrivilege(Map<String, Object> map) {
 		return sqlSession.update("Admin.updatePrivilege", map);
 	}
+	
 }

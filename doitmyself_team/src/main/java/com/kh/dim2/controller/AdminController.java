@@ -128,6 +128,7 @@ public class AdminController {
 		out.close();
 	}
 	
+	
 	@PostMapping("ModifyUser")
 	public void ModifyUser(HttpServletResponse response, HttpServletRequest request, Member member)throws Exception {
 		int USER_NO = Integer.parseInt(request.getParameter("USER_NO")); 

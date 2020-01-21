@@ -22,6 +22,7 @@
 		#mytable{
 			margin-top: 40px;
 		}
+		
 		.search_col{
 			height: 40px;
 			position: relative;

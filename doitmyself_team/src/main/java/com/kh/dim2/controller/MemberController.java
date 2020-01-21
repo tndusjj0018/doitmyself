@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.dim2.Service.MemberService;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
-import com.kh.dim2.Service.MemberService;
 
 @Controller
 public class MemberController {
@@ -26,6 +27,7 @@ public class MemberController {
 	
 	String user_id = "sooyeon3";
 
+	
 	// 회원 정보 가지고 옴
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
 	public ModelAndView member_info(ModelAndView mv,
@@ -208,8 +210,15 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
-	public String qnaList() {
-		return "member/qnaList";
+	public ModelAndView qnaList(ModelAndView mv) {
+		
+		int qnacount = memberservice.qnacount(user_id);
+		
+		List<Qna> qnalist = memberservice.qnalist(user_id);
+		mv.addObject("qnacount", qnacount);
+		mv.addObject("qnalist", qnalist);
+		mv.setViewName("member/qnaList");
+		return mv;
 	}
 
 	@RequestMapping(value = "/wishList", method = RequestMethod.GET)
@@ -222,6 +231,29 @@ public class MemberController {
 		mv.addObject("wishlist", productList);
 		mv.setViewName("member/wishList");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/wishdelete", method = RequestMethod.GET)
+	public void wishdelete(@RequestParam("P_NO") int p_no,
+						   HttpServletResponse response) throws Exception {
+		
+		int wishdelete = memberservice.wishdelete(p_no, user_id);
+		System.out.println(wishdelete);
+		response.setContentType("text/html; charset=utf-8"); 
+		PrintWriter out = response.getWriter();
+		
+		if(wishdelete == 1) {
+			memberservice.p_dibsupdate(p_no);
+			System.out.println("상품번호 " + p_no +" 찜 삭제 완료");
+			out.println("<script>");
+			out.println("alert('성공적으로 삭제 되었습니다.');");
+			out.println("location.href='wishList?D_USER_ID=" + user_id + "';");
+			out.println("</script>");
+		} else {
+			System.out.println("찜 삭제 중 오류");
+		}
+		
+		
 	}
 
 	@RequestMapping(value = "/change_password", method = RequestMethod.GET)

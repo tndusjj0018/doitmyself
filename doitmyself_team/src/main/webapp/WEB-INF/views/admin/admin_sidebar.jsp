@@ -37,6 +37,7 @@
 			<li><a href="admin?doc=calendar_share">캘린더 공유</a></li>
 			<li><a href="admin?doc=myschedule">내 일정</a></li>
 		</ul>
+		
 		<ul class = "sidebar_category">
 			<li class = "first_category"><a href="admin?doc=statics">통계</a></li>
 		</ul>
