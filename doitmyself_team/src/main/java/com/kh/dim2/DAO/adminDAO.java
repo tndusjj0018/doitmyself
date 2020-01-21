@@ -36,12 +36,17 @@ public class adminDAO {
 		return sqlSession.delete("Admin.deleteUser", USER_NO);
 	}
 
-	public int ModifyUser(int USER_NO) {
-		return sqlSession.update("Admin.modifyUser", USER_NO);
+	public int ModifyUser(Member member) {
+		System.out.println("여기는 adminDAO ModifyUser()"+member);
+		return sqlSession.update("Admin.modifyUser", member);
 	}
 
 	public Member getMemberInfo(int USER_NO) {
 		System.out.println("adminDAO의 getMemberInfo");
 		return sqlSession.selectOne("Admin.userinfo",USER_NO);
+	}
+	
+	public int updateAdminPrivilege(Map<String, Object> map) {
+		return sqlSession.update("Admin.updatePrivilege", map);
 	}
 }
