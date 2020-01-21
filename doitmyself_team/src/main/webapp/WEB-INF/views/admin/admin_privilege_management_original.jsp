@@ -227,7 +227,7 @@
 				var is_admin = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(6)").text();//USER_IS_ADMIN 칼럼 확인
 				var user_no = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(1)").text();//USER_NO 
 				if(is_admin == "○"){//관리자 회원에게 권한 부여를 시도
-					alert("이미 관리자 회원입니다.");
+					console.log("이미 관리자 회원입니다.");
 				}else{//일반회원 일 때
 					privilege(user_no, 1);
 				}
@@ -241,15 +241,15 @@
 				var trNum = $(this).closest('tr').prevAll().length;
 				var is_admin = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(6)").text();//USER_IS_ADMIN 칼럼 확인
 				var user_no = $("#mytable tr:eq("+(trNum + 1) + ") td:eq(1)").text();//USER_NO 
-				
-				var check = confirm("권한을 취소하시겠습니까?");
-				if(check == true){
-					if(is_admin != "○"){//일반 회원 인데 권한 취소를 눌렀을 때
-						alert("선택한 회원은 일반 회원입니다.");
-					}else{//관리자 일때 권한 취소
+				if(is_admin == "○"){//관리자의 권한 취소를 눌렀을 때
+					var check = confirm("권한을 취소하시겠습니까?");
+					if(check == true){
 						privilege(user_no, 0);
-					}	
+					}
+				}else{
+					console.log("일반 회원입니다.");
 				}
+				
 			})
 			
 			$(".search").on("change", ".privilege", function(){
