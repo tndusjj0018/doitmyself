@@ -73,7 +73,7 @@
 	              </li>
           	</c:if>
           	<c:if test="${!empty USER_ID && adminNumber != 1}">
-	             <a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">${USER_ID}</a>
+	             <a class="navbar-brand" href="memberInfo?USER_ID=${USER_ID }" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">${USER_ID}</a>
 	             
 	             <c:if test="${SELLER_RESULT == 1}">
 	             	 <a class="navbar-brand" href="#" style="font-size:9pt; margin-left: -13px; margin-top: 1px;">$</a>

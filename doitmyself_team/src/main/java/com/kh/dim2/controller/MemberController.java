@@ -27,24 +27,26 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	String user_id = "sooyeon3";
+	//String user_id = "sooyeon3";
 
 	// 회원 정보 가지고 옴
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
 	public ModelAndView member_info(ModelAndView mv,
-									HttpSession session) {
+									@RequestParam("USER_ID") String user_id) {
 		
 		Member m = memberservice.memberInfo(user_id);
-		session.setAttribute("USER_ID", user_id);
+		//session.setAttribute("USER_ID", user_id);
 		mv.setViewName("member/memberInfo");
 		mv.addObject("memberinfo", m);
 
 		return mv;
 	}
+	
 
 	// 회원 정보 수정
 	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
-	public void updateProcess(Member member, HttpServletResponse response) throws Exception {
+	public void updateProcess(Member member, HttpServletResponse response,
+							  @RequestParam("USER_ID") String user_id) throws Exception {
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -54,7 +56,7 @@ public class MemberController {
 		// 수정 된 경우
 		if (result == 1) {
 			out.println("alert('회원 정보가 변경 되었습니다.');");
-			out.println("location.href='memberInfo';");
+			out.println("location.href='memberInfo?USER_ID=" + user_id + "';");
 		} else {
 			out.println("alert('회원 정보 변경에 실패 하였습니다.');");
 			out.println("history.back()");
@@ -71,7 +73,8 @@ public class MemberController {
 						   Member member,
 						   HttpServletResponse response,
 						   @RequestParam("user_password") String user_password,
-						   @RequestParam("change_password") String change_password) throws Exception {
+						   @RequestParam("change_password") String change_password,
+						   @RequestParam("USER_ID") String user_id) throws Exception {
 		
 		//현재 비밀번호 확인
 		int result = memberservice.passCheck(user_id, user_password);
@@ -103,7 +106,8 @@ public class MemberController {
 	
 	//판매자인지 아닌지 확인 후 페이지 불러옴
 	@RequestMapping(value = "/sellerChange", method = RequestMethod.GET)
-	public ModelAndView sellerChange(ModelAndView mv) {
+	public ModelAndView sellerChange(ModelAndView mv,
+									 @RequestParam("USER_ID") String user_id) {
 		
 		int isSeller = memberservice.isSeller(user_id);
 		mv.addObject("isSeller", isSeller);		
@@ -158,7 +162,8 @@ public class MemberController {
 	//회원 탈퇴하기
 	@RequestMapping(value = "/memberLeaveAction", method = RequestMethod.POST)
 	public void memberLeaveAction(HttpServletResponse response,
-								  @RequestParam("user_pass") String user_password) throws Exception {
+								  @RequestParam("user_pass") String user_password,
+								  @RequestParam("USER_ID") String user_id) throws Exception {
 		
 		//현재 비밀번호 확인
 		int result = memberservice.passCheck(user_id, user_password);
@@ -198,7 +203,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/orderDelivery", method = RequestMethod.GET)
-	public ModelAndView orderDelivery(ModelAndView mv) {
+	public ModelAndView orderDelivery(ModelAndView mv,
+									  @RequestParam("USER_ID") String user_id) {
 		
 		int ordercount = memberservice.ordercount(user_id);
 		
@@ -220,7 +226,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
-	public ModelAndView qnaList(ModelAndView mv) {
+	public ModelAndView qnaList(ModelAndView mv,
+								@RequestParam("USER_ID") String user_id) {
 		
 		int qnacount = memberservice.qnacount(user_id);
 		
@@ -235,7 +242,7 @@ public class MemberController {
 	@RequestMapping(value = "/wishList", method = RequestMethod.GET)
 	public ModelAndView wishList(ModelAndView mv,
 								 @RequestParam("D_USER_ID") String D_USER_ID) {
-		int wishcount = memberservice.wishcount(user_id);
+		int wishcount = memberservice.wishcount(D_USER_ID);
 		
 		List<Product> wishlist = memberservice.wishlist(D_USER_ID);
 		mv.addObject("wishcount", wishcount);
@@ -246,7 +253,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "/wishdelete", method = RequestMethod.GET)
 	public void wishdelete(@RequestParam("P_NO") int p_no,
-						   HttpServletResponse response) throws Exception {
+						   HttpServletResponse response,
+						   @RequestParam("USER_ID") String user_id) throws Exception {
 		
 		int wishdelete = memberservice.wishdelete(p_no, user_id);
 		System.out.println(wishdelete);
@@ -271,5 +279,5 @@ public class MemberController {
 	public String change_password() {
 		return "member/change_password";
 	}
-
+	
 }
