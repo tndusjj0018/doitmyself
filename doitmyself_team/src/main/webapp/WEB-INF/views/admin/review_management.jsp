@@ -21,8 +21,7 @@
             //주소의 parameter 값 받아와서 select 설정
             $(".review_orderselect option[value = ${reviewOrder}]").prop("selected", true);
          }
-         
-         
+               
          
          //review 목록 가져오기
          var reviewList = function(){
