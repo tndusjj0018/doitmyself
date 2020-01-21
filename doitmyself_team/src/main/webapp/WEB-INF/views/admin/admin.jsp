@@ -61,7 +61,6 @@
 	
 	<script>
 		$(document).ready(function(){
-			var num =  <%=request.getParameter("num")%>;
 			var reset = function (){
 				$.ajax({
 					type:"post",
