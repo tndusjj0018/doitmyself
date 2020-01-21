@@ -52,7 +52,7 @@
 
 <div class="sidebar" data-color="white" data-active-color="danger">     
 			<div class="logo">
-        		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
+        		<a href="memberInfo?USER_ID=${USER_ID }" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
           		${USER_ID } 님
         		</a>
       		</div>
@@ -79,8 +79,8 @@
             			</a>
             			<div class="collapse" id="toggleDemo2" style="height: 0px;">
 							<ul class="nav nav-list">
-								<li class="mar20"><a href="orderDelivery">주문 / 배송 조회</a></li>
-								<li class="mar20"><a href="cancelProcess">취소 / 반품 / 교환 현황</a></li>
+								<li class="mar20"><a href="orderDelivery?USER_ID=${USER_ID }">주문 / 배송 조회</a></li>
+								<li class="mar20"><a href="cancelProcess?USER_ID=${USER_ID }">취소 / 반품 / 교환 현황</a></li>
 							</ul>
 						</div>
           			</li>
@@ -92,8 +92,8 @@
 		            	</a>
 		            	<div class="collapse" id="toggleDemo3" style="height: 0px;">
 							<ul class="nav nav-list">
-								<li class="mar20"><a href="reviewList">나의 상품 리뷰</a></li>
-								<li class="mar20"><a href="qnaList">나의 QnA</a></li>
+								<li class="mar20"><a href="reviewList?USER_ID=${USER_ID }">나의 상품 리뷰</a></li>
+								<li class="mar20"><a href="qnaList?USER_ID=${USER_ID }">나의 QnA</a></li>
 							</ul>
 						</div>
 		          	</li>
