@@ -15,7 +15,12 @@
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
 	<script>
-		
+		$(document).ready(function(){
+			
+			$('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
+		});
 	</script>
 </head>
 
@@ -81,7 +86,7 @@
 			        	<c:if test="${wishcount > 0}">
 			        	<table class="table">
 							<tr>
-								<td>상품 번호</td> <td>주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
+								<td>상품 번호</td> <td colspan="2">주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
 							</tr>
 							<c:forEach var="wl" items="${wishlist}">
 							<tr>
@@ -90,7 +95,9 @@
 								</td>
 								<td>
 									<img src="${wl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-									<span onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
+								</td>
+								<td>
+									<span style="cursor: pointer" onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
 								</td>
 								<td>
 									${wl.p_SELLER }
@@ -113,8 +120,8 @@
 			    					<i class="nc-icon nc-favourite-28"></i>			     	        		
 			        				<span>찜한 상품이 없습니다.</span>
 			        			</div>
-			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        			<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;">
 			        		</div>
 						</c:if>
 						</div>
