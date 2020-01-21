@@ -11,6 +11,7 @@ import com.kh.dim2.DAO.memberDAO;
 import com.kh.dim2.domain.DIBS;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Q_Product;
 import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 
@@ -97,13 +98,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Qna> qnalist(String user_id) {
+	public List<Q_Product> qnalist(String user_id) {
 		return dao.qnalist(user_id);
 	}
+
 
 	@Override
 	public int qnacount(String user_id) {
 		return dao.qnacount(user_id);
 	}
 
+	
 }

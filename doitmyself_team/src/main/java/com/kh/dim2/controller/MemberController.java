@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.dim2.Service.MemberService;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Q_Product;
 import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 
@@ -114,7 +115,8 @@ public class MemberController {
 	//판매자로 변환 (판매자 테이블에 insert)
 	@RequestMapping(value = "/sellerChangeAction", method = RequestMethod.POST)
 	public void sellerChangeAction(Seller seller,
-								   HttpServletResponse response) throws Exception {
+								   HttpServletResponse response,
+								   HttpSession session) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
@@ -122,6 +124,7 @@ public class MemberController {
 		out.println("<script>");
 		
 		if(result == 1) { //판매자 등록 된 경우
+			session.setAttribute("SELLER_RESULT", result);
 			out.println("alert('판매자 등록이 완료 되었습니다.');");
 			out.println("location.href='sellerChange';");
 		} else {
@@ -213,7 +216,8 @@ public class MemberController {
 		
 		int qnacount = memberservice.qnacount(user_id);
 		
-		List<Qna> qnalist = memberservice.qnalist(user_id);
+		List<Q_Product> qnalist = memberservice.qnalist(user_id);
+
 		mv.addObject("qnacount", qnacount);
 		mv.addObject("qnalist", qnalist);
 		mv.setViewName("member/qnaList");
@@ -225,9 +229,9 @@ public class MemberController {
 								 @RequestParam("D_USER_ID") String D_USER_ID) {
 		int wishcount = memberservice.wishcount(user_id);
 		
-		List<Product> productList = memberservice.wishlist(D_USER_ID);
+		List<Product> wishlist = memberservice.wishlist(D_USER_ID);
 		mv.addObject("wishcount", wishcount);
-		mv.addObject("wishlist", productList);
+		mv.addObject("wishlist", wishlist);
 		mv.setViewName("member/wishList");
 		return mv;
 	}

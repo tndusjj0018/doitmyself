@@ -76,19 +76,22 @@
 			        	<c:if test="${qnacount > 0}">
 			        	<table class="table">
 							<tr>
-								<td>문의 번호</td> <td>상품 정보</td> <td>스토어 명</td> <td>문의 분류</td> <td>문의 내용</td> <td>작성일</td> <td>답변 상태</td>
+								<td>문의 번호</td><td colspan="2">상품 정보</td> <td>스토어 명</td> <td>문의 분류</td> <td width="25%">문의 제목</td> <td>작성일</td> <td>답변 상태</td>
 							</tr>
 							<c:forEach var="ql" items="${qnalist}">
+							<%-- <c:forEach var="ql2" items="${qnalist2}"> --%>
 							<tr>
 								<td>
 								${ql.QNA_NO }
 								</td>
 								<td>
-									<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
+									<img src="${ql.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 								</td>
 								<td>
-									${ql.QNA_S_ID }
+									<span style="cursor: pointer" onclick="alert('제품 상세 페이지로 넘어감')">${ql.p_NAME }</span>
+								</td>
+								<td>
+									${ql.p_SELLER }
 								</td>
 								<td>
 									<c:if test="${ql.QNA_CATEGORY == 0}">
@@ -112,13 +115,14 @@
 								</td>
 								<td>
 									<c:if test="${ql.QNA_ISRESPONSE == 0}">
-										답변예정
+										<span style="color: #9d9da5">답변예정</span>
 									</c:if>
 									<c:if test="${ql.QNA_ISRESPONSE == 1}">
 										답변완료
 									</c:if>
 								</td>
 							</tr>
+							<%-- </c:forEach> --%>
 							</c:forEach>
 						</table>
 						</c:if>

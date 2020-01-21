@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%-- <header><jsp:include page="../main/header.jsp"></jsp:include></header> --%>
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -25,6 +26,7 @@
 	</style>
 </head>
 <body>
+
 <div class="sidebar" data-color="white" data-active-color="danger">     
 			<div class="logo">
         		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center; font-size:17px;">

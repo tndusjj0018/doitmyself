@@ -86,7 +86,7 @@
 			        	<c:if test="${wishcount > 0}">
 			        	<table class="table">
 							<tr>
-								<td>상품 번호</td> <td>주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
+								<td>상품 번호</td> <td colspan="2">주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
 							</tr>
 							<c:forEach var="wl" items="${wishlist}">
 							<tr>
@@ -95,7 +95,9 @@
 								</td>
 								<td>
 									<img src="${wl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-									<span onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
+								</td>
+								<td>
+									<span style="cursor: pointer" onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
 								</td>
 								<td>
 									${wl.p_SELLER }
