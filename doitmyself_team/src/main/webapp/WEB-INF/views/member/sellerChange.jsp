@@ -235,7 +235,7 @@
 						<form action="sellerChangeAction" id="sellerChange_form" method="post">
 						
 						<input type="hidden" name="SELLER_ID" value="${USER_ID }" >
-					
+						<input type="hidden" name="USER_ID" value="${USER_ID }" >
 						<table>
 							<tr>
 								<th style="padding: 50px 0px 10px 50px;">추가 정보 입력</th>

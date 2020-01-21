@@ -121,7 +121,8 @@ public class MemberController {
 	@RequestMapping(value = "/sellerChangeAction", method = RequestMethod.POST)
 	public void sellerChangeAction(Seller seller,
 								   HttpServletResponse response,
-								   HttpSession session) throws Exception {
+								   HttpSession session,
+								   @RequestParam("USER_ID") String user_id) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
@@ -131,7 +132,7 @@ public class MemberController {
 		if(result == 1) { //판매자 등록 된 경우
 			session.setAttribute("SELLER_RESULT", result);
 			out.println("alert('판매자 등록이 완료 되었습니다.');");
-			out.println("location.href='sellerChange';");
+			out.println("location.href='sellerChange?USER_ID=" + user_id + "';");
 		} else {
 			out.println("alert('판매자 등록에 실패 하였습니다.')");
 			out.println("history.back();");
