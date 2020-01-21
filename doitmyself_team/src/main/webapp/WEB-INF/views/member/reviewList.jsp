@@ -123,7 +123,7 @@
 								<div id="home" class="tab-pane in active">
 									<table class="table">
 										<tr>
-											<td>주문 일자</td> <td>주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>상태</td>
+											<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>상태</td>
 										</tr>
 										<tr>
 											<td>
@@ -131,6 +131,8 @@
 											</td>
 											<td>
 												<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+											</td>
+											<td>
 												<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 											</td>
 											<td>
@@ -201,7 +203,7 @@
 									
 									<table class="table">
 										<tr>
-											<td>작성 일자</td> <td>주문 상품 정보</td> <td>판매자</td> <td>별점</td> <td>상태</td>
+											<td>작성 일자</td> <td colspan="2">주문 상품 정보</td> <td>판매자</td> <td>별점</td> <td>상태</td>
 										</tr>
 										<tr>
 											<td>
@@ -209,6 +211,8 @@
 											</td>
 											<td>
 												<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+											</td>
+											<td>
 												<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 											</td>
 											<td>
