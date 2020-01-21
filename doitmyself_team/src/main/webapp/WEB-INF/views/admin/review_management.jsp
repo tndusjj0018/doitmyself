@@ -12,7 +12,6 @@
 	</style>
 	<script>
 		$(document).ready(function(){
-			
 			//선택된 정렬 방법 그대로 가져가기
 			if("${reviewOrder}" == ""){//정렬 기준을 정하지 않았을 때 => 기본적으로 최신순이 선택되어 있음
 				console.log("기본적으로 선택된 정렬 방법이 없습니다.최신순으로 정렬합니다.");
