@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	// 검색을 했을 때 유저 목록 보기
 	@Override
-	public List<Member> getMemberList(int page, int limit,String search_word, String search_col) {
+	public List<Member> getMemberList(int page, int limit,String search_word, String search_col, String option) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", page);
 		map.put("limit", limit);
@@ -34,14 +34,20 @@ public class AdminServiceImpl implements AdminService{
 			map.put("search_word", search_word);
 			map.put("search_col", search_col);
 		}
+		if(!option.equals("")) {
+			map.put("option", Integer.parseInt(option));
+		}
 		return adminDAO.getMemberList(map);
 	}
 	//검색어를 입력하지 않았을 때 유저 목록 전체 보여주기
 	@Override
-	public List<Member> getMemberList(int page, int limit) {
+	public List<Member> getMemberList(int page, int limit, String option) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", page);
 		map.put("limit", limit);
+		if(!option.equals("")) {
+			map.put("option", Integer.parseInt(option));
+		}
 		return adminDAO.getMemberList(map);
 	}
 	
@@ -73,8 +79,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int ModifyUser(int USER_NO) {
-		return 0;
+	public int ModifyUser(Member member) {
+		System.out.println("AdminServiceImpl의 ModifyUser");
+		return adminDAO.ModifyUser(member);
+	}
+	
+	@Override
+	public int updateAdminPrivilege(int USER_NO, int USER_IS_ADMIN) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("USER_NO", USER_NO);
+		map.put("USER_IS_ADMIN", USER_IS_ADMIN);
+		return adminDAO.updateAdminPrivilege(map);
 	}
 
 }
