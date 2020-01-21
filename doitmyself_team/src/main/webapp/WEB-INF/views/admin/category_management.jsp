@@ -15,6 +15,7 @@
 			border: 1px solid black;
 			display: inline-block;
 			float: left;
+			padding: 46px;
 		}
 		.category_list ul{
 			list-style-type: none;
@@ -71,7 +72,7 @@
 					}else{
 						console.log(rdata);
 						$(rdata.major).each(function(index, item){
-							output += "<li>"+item.c_NAME +"<input type='hidden' value ='"+item.c_NO+"'></li>";
+							output += "<li class = 'majorlist'>"+item.c_NAME +"<input type='hidden' name='"+item.c_NAME+"' value ='"+item.c_NO+"'></li>";
 						})
 						
 						$(".major_categorylist").append(output);
@@ -79,17 +80,30 @@
 						
 						
 						$(rdata.sub).each(function(index, item){
-							output += "<li>"+item.sc_NAME +"<input name = 'sc_NO' type='hidden' value ='"+item.sc_NO+"'><input type='hidden' name = 'sc_NO_REF' value ='"+item.sc_NO_REF+"'></li>";
+							output += "<li class='sublist'>"+item.sc_NAME +"<input name = 'sc_NO' type='hidden' value ='"+item.sc_NO+"'><input type='hidden' name = 'sc_NO_REF' value ='"+item.sc_NO_REF+"'></li>";
 						})
 						
 						$(".sub_categorylist").append(output);
 						
 					}
+					
+					
+					//대분류 클릭 시 처리 => 폼에 데이터 끌고 올것임 
+					$(".majorlist").click(function(){
+						console.log($(this).text() + "/" + $(this).children().val());
+					})
+					//소분류 클릭시 처리 
+					$(".sublist").click(function(){
+						console.log($(this).text() + "/" + $(this).children().val() + "/" +$(this).children().next().val());
+					})
+					
 				},//success end
 				error:function(){
 					console.log("에러");
 				}//error end
 			})//ajax end
+			
+			
 		})//ready end
 		
 	</script>
