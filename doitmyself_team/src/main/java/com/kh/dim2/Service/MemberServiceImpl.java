@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.dim2.DAO.memberDAO;
 import com.kh.dim2.domain.DIBS;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
 import com.kh.dim2.domain.Qna;
@@ -106,6 +107,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int qnacount(String user_id) {
 		return dao.qnacount(user_id);
+	}
+
+	@Override
+	public int ordercount(String user_id) {
+		return dao.ordercount(user_id);
+	}
+
+	@Override
+	public List<Order> orderlist(String user_id) {
+		return dao.orderlist(user_id);
 	}
 
 	

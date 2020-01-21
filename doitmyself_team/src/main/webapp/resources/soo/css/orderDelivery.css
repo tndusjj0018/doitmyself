@@ -16,13 +16,18 @@ div.card-body > div > table{
 	margin-top: 10px !important;
 }
 
-#btn-return {
+#btn-return, #btn-cancel {
 	background: #f4f3ef !important;
     color: #252422 !important;
     margin: 5px 0 5px 0 !important;
 }
 
-#btn_return:hover {
+#btn-return:hover {
+	background: #f9bba8 !important;
+	color: #252422 !important;
+}
+
+#btn-cancel:hover {
 	background: #fde7a4 !important;
 	color: #252422 !important;
 }

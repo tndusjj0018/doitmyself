@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
 import com.kh.dim2.domain.Qna;
@@ -70,9 +71,15 @@ public class memberDAO {
 	public List<Q_Product> qnalist(String user_id){
 		return sqlSession.selectList("Member.qnalist", user_id);
 	}
-	
-	
+		
 	public int qnacount(String user_id) {
 		return sqlSession.selectOne("Member.qnacount", user_id);
+	}
+	public List<Order> orderlist(String user_id){
+		return sqlSession.selectList("Member.orderlist", user_id);
+	}
+	
+	public int ordercount(String user_id) {
+		return sqlSession.selectOne("Member.ordercount", user_id);
 	}
 }

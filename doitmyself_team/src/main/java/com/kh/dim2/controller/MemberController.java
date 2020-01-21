@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MemberService;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
 import com.kh.dim2.domain.Qna;
@@ -197,8 +198,15 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/orderDelivery", method = RequestMethod.GET)
-	public String orderDelivery() {
-		return "member/orderDelivery";
+	public ModelAndView orderDelivery(ModelAndView mv) {
+		
+		int ordercount = memberservice.ordercount(user_id);
+		
+		List<Order> orderlist = memberservice.orderlist(user_id);
+		mv.addObject("orderlist", orderlist);
+		mv.addObject("ordercount", ordercount);
+		mv.setViewName("member/orderDelivery");
+		return mv;
 	}
 
 	@RequestMapping(value = "/cancelProcess", method = RequestMethod.GET)
