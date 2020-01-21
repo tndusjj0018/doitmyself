@@ -26,3 +26,16 @@ div.card-body > div > table{
 	background: #fde7a4 !important;
 	color: #252422 !important;
 }
+
+.leaveInfo {
+	border: 1px solid lightgray;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+div.card-body > div > div > div > i {
+	color: red;
+    position: relative;
+    top: 2px;
+    margin-right :5px;
+}
