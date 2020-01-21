@@ -19,6 +19,27 @@ public class MainServiceImpl implements MainService{
 
 	@Override
 	public int isId(String uSER_ID) {
-		return dao.idcheck(uSER_ID);
+		Member mb = dao.idcheck(uSER_ID);
+		return (mb == null) ? -1 : 1;
+	}
+
+	@Override
+	public int isEmail(String uSER_EMAIL) {
+		Member mb = dao.emailcheck(uSER_EMAIL);
+		return (mb == null) ? -1 : 1;
+	}
+
+	@Override
+	public int isId(String uSER_ID, String uSER_PASSWORD) {
+		Member mb = dao.login(uSER_ID , uSER_PASSWORD);
+		int result = -1;
+		if(mb != null) {
+			if(mb.getUSER_PASSWORD().equals(uSER_PASSWORD)) {
+				result = 1;
+			} else {
+				result = 0;
+			}
+		}
+		return result;
 	}
 }

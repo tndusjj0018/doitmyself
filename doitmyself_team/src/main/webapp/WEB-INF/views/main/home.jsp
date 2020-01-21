@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -29,8 +30,14 @@
   <body class="goto-here">
     <section id="home-section" class="hero">
     	<div id="floatMenu">
-			<span><a href="login" style="color:white;">로그인</a></span>
-			<br>
+    		<c:if test="${empty USER_ID}">
+          	 <a class="navbar-brand float_login" href="login" style="font-size:13pt; color:white;">Log-in</a>
+          	 <br>
+          	</c:if>
+          	<c:if test="${!empty USER_ID}">
+          	 <a class="navbar-brand float_login" href="login" style="font-size:13pt; color:white;">${USER_ID}</a>
+          	 <br>님 안녕하세요
+          	</c:if>
 			<br>
 			방금 본 DIM
 			<br>

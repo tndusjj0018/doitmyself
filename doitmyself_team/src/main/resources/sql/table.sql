@@ -11,7 +11,7 @@ CREATE TABLE USER_TBL(
 	USER_POSTCODE		VARCHAR2(20)							NOT NULL,
 	USER_PHONE			VARCHAR2(12)							NOT NULL,
 	USER_EMAIL			VARCHAR2(30)		UNIQUE 				NOT NULL,
-	USER_BIRTH			DATE									NOT NULL,
+	USER_BIRTH			VARCHAR2(8)								NOT NULL,
 	USER_GENDER	 		VARCHAR2(1)			NOT NULL  			CHECK(USER_GENDER IN('F', 'M')),
 	USER_REGISTRATION_DATE 	DATE			DEFAULT SYSDATE		NOT NULL,
 	USER_IS_ADMIN		NUMBER(1)			DEFAULT 0 			NOT NULL
@@ -132,3 +132,18 @@ CREATE TABLE REFUND_TBL(
 	REFUND_P_NO		NUMBER					REFERENCES ORDER_TBL(ORDER_NO)		NOT NULL,
 	REFUND_STATUS	NUMBER(1)				DEFAULT 0							NOT NULL
 );
+
+drop sequence user_seq;
+drop table cart_tbl;
+drop table category_tbl;
+drop table dibs_tbl;
+drop table img_tbl;
+drop table order_tbl;
+drop table product_tbl;
+drop table qna_tbl;
+drop table recent_view_tbl;
+drop table refund_tbl;
+drop table review_tbl;
+drop table security_no_tbl;
+drop table seller_tbl;
+drop table user_tbl;
