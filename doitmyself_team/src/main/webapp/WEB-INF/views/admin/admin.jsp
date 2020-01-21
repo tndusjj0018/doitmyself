@@ -76,7 +76,7 @@
 			}//function reset end 
 			
 			
-			console.log("현재 페이지는  = "+num);
+			console.log("admin.jsp 현재 페이지는  = "+num);
 			
 			
 			
