@@ -54,10 +54,10 @@ public class AdminController {
 	public Object userList(@RequestParam(value = "num", defaultValue = "1", required = false) int num, 
 							@RequestParam(value = "search_word", defaultValue = "", required = false)String search_word,
 							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col,
-							@RequestParam(value="option", required= false) String option,
+							@RequestParam(value="option", required= false, defaultValue = "") String option,
 							HttpServletRequest request){
 		
-		
+		System.out.println("num = " + num);
 		System.out.println("search_word는  = " + search_word);
 		if(!search_word.equals("")) {
 			word = search_word;

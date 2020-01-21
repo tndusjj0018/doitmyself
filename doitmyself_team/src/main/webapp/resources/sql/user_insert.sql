@@ -49,4 +49,6 @@ insert into USER_TBL values(user_seq.nextval, 'ccodr234cle2', '1234', '냥d냥4�
 insert into USER_TBL values(user_seq.nextval, 'jadv23fa', '1234', '2오로d라2', '서울시 영등포구', '165-25', '01078901357','dfdhdhofs4o@naver.com',
 							'19981226', 'M', sysdate, 0);
 insert into USER_TBL values(user_seq.nextval, 'adm23d4in2', '1234', '3관d리자', '서울시 중구', '154-67', '01055147864','admfdfin@naver.com',
-							'19900424', 'F', sysdate, 1);														
+							'19900424', 'F', sysdate, 1);			
+							
+	
