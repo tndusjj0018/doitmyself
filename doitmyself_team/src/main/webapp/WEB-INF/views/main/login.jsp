@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,11 +23,11 @@
           <div class="row w-100">
             <div class="col-lg-4 mx-auto" style="min-width:600px;">
               <div class="auto-form-wrapper">
-                <form action="#">
+                <form action="loginProcess" method="post">
                   <div class="form-group">
                     <label class="label">아이디</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="ID">
+                      <input type="text" name="USER_ID" class="form-control" placeholder="ID">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -37,7 +38,7 @@
                   <div class="form-group">
                     <label class="label">비밀번호</label>
                     <div class="input-group">
-                      <input type="password" class="form-control" placeholder="PASSWORD">
+                      <input type="password" name="USER_PASSWORD" class="form-control" placeholder="PASSWORD">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -48,6 +49,7 @@
                   <div class="form-group">
                     <button class="btn btn-primary submit-btn btn-block">로그인</button>
                   </div>
+                  </form>
                   <div class="form-group d-flex justify-content-between">
                     <div class="form-check form-check-flat mt-0">
                     </div>
@@ -60,7 +62,6 @@
                    </div>
                   <div class="text-block text-center my-3">
                   </div>
-                </form>
               </div>
               <ul class="auth-footer">
               </ul>
