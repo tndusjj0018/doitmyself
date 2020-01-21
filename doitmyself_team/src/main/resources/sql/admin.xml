@@ -14,20 +14,19 @@
 					<when test="search_col == 'USER_EMAIL'">USER_EMAIL</when>
 				</choose>
 				like '%'||#{search_word}||'%'
+				
+				<if test="option == 0 or option == 1">
+					and 
+					USER_IS_ADMIN = #{option} 
+				</if>
 			</where>
 		</if>
 	</select>
 	
 	<select id="memberList" resultType="member" parameterType="map">
 		select * from user_tbl
-		<if test="search_col!= null and search_word !=null">
 			<where>
-				<if test="option == 0 or option == 1">
-					USER_IS_ADMIN = #{option} 
-				</if>
-				<if test="option != null and search_word != null">
-					and 
-				</if>
+			<if test="search_col!= null and search_word !=null">
 				<choose>
 					<when test="search_col == 'USER_ID'">USER_ID</when>
 					<when test="search_col == 'USER_NAME'">USER_NAME</when>
@@ -36,9 +35,14 @@
 					<when test="search_col == 'USER_EMAIL'">USER_EMAIL</when>
 				</choose>
 				like '%'||#{search_word}||'%'
+			</if>
+
+			<if test="option == 0 or option == 1">
+				and 
+				USER_IS_ADMIN = #{option} 
+			</if>
 				
 			</where>
-		</if>
 	</select>
 	
 	<select id="reviewCount" resultType="int">
@@ -83,6 +87,13 @@
 		where USER_NO = #{USER_NO}
 	</update>
 	
+	<select id="MajorCategoryList" resultType="category">
+		select * from CATEGORY_TBL
+	</select>
+	
+	<select id="SubCategoryList" resultType="sub">
+		select * from SUB_CATEGORY_TBL
+	</select>
 
 	
 </mapper>

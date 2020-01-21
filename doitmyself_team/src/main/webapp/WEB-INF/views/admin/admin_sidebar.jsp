@@ -29,6 +29,7 @@
 		<ul class = "sidebar_category">
 			<li class = "first_category">상품관리</li>
 			<li><a href="admin?doc=category_management">카테고리 관리</a></li>
+			<li><a href="admin?doc=add_category">카테고리 추가</a></li>
 			<li><a href="admin?doc=product_delete_request">상품 삭제 요청</a></li>
 			<li><a href="admin?doc=product_modify_request">상품 내용 수정 요청</a></li>			
 		</ul>

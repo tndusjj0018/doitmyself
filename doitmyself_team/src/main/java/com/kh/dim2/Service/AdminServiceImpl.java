@@ -8,21 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.adminDAO;
+import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.SubCategory;
 @Service
 public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private adminDAO adminDAO;
 	
 	@Override
-	public int getListCount(String search_word, String search_col) {
+	public int getListCount(String search_word, String search_col, String option) {
 		System.out.println("여기는 AdminServiceImpl getListCount");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search_word", search_word);
 		map.put("search_col", search_col);
+		if(!option.equals("") && option != null) {
+			map.put("option", option);
+		}
 		return adminDAO.getListCount(map);
 	}
+	
 	
 	// 검색을 했을 때 유저 목록 보기
 	@Override
@@ -93,6 +99,18 @@ public class AdminServiceImpl implements AdminService{
 		map.put("USER_NO", USER_NO);
 		map.put("USER_IS_ADMIN", USER_IS_ADMIN);
 		return adminDAO.updateAdminPrivilege(map);
+	}
+
+
+	@Override
+	public List<Category> getMajorCategoryList() {
+		return adminDAO.getMajorCategoryList();
+	}
+
+
+	@Override
+	public List<SubCategory> getSubCategoryList() {
+		return adminDAO.getSubCategoryList();
 	}
 
 }

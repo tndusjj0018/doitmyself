@@ -3,12 +3,14 @@ package com.kh.dim2.Service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.SubCategory;
 
 public interface AdminService {
 	//유저 수 구하기
-	public int getListCount(String search_word, String search_col);
+	public int getListCount(String search_word, String search_col, String option);
 	
 	//유저 목록 보기 - 검색어 입력 했을 때
 	public List<Member> getMemberList(int page, int limit, String search_word, String search_col, String option);
@@ -34,6 +36,10 @@ public interface AdminService {
 
 
 	public int updateAdminPrivilege(int USER_NO, int USER_IS_ADMIN);
+
+	public List<Category> getMajorCategoryList();
+
+	public List<SubCategory> getSubCategoryList();
 
 
 }

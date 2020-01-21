@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.SubCategory;
 
 @Repository
 public class adminDAO {
@@ -51,5 +53,13 @@ public class adminDAO {
 
 	public int updateAdminPrivilege(Map<String, Object> map) {
 		return sqlSession.update("Admin.updatePrivilege", map);
+	}
+
+	public List<Category> getMajorCategoryList() {
+		return sqlSession.selectList("Admin.MajorCategoryList");
+	}
+
+	public List<SubCategory> getSubCategoryList() {
+		return sqlSession.selectList("Admin.SubCategoryList");
 	}
 }

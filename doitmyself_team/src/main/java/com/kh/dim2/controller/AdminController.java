@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.AdminService;
+import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.SubCategory;
 
 
 
@@ -67,7 +69,7 @@ public class AdminController {
 		System.out.println("여기는 AdminController userList()");
 		System.out.println("search_col = "+search_col+", search_word = "+word);
 		int limit =10;//한 페이지에 출력할 레코드 갯수
-		int listcount = adminService.getListCount(word, search_col);
+		int listcount = adminService.getListCount(word, search_col, option);
 		System.out.println("adminService getListCount()갔다옴");
 		
 		//총 페이지 수 
@@ -193,6 +195,19 @@ public class AdminController {
 		}
 		response.getWriter().print(message);
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("CategoryList")
+	public Object getCategoryList() {
+		System.out.println("여기는 adminDAO의 getCategoryList");
+		List<Category> major = adminService.getMajorCategoryList();
+		List<SubCategory> sub = adminService.getSubCategoryList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("major", major);
+		map.put("sub", sub);
+		return map;
 	}
 }
 
