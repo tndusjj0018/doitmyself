@@ -13,10 +13,18 @@ public class mainDAO {
 	public SqlSessionTemplate sqlSession;
 
 	public int insert(Member member) {
-		return sqlSession.insert("Member.insert" , member);
+		return sqlSession.insert("Main.insert" , member);
 	}
 
-	public int idcheck(String uSER_ID) {
-		return sqlSession.selectOne("Memeber.idcheck" , uSER_ID);
+	public Member idcheck(String uSER_ID) {
+		return sqlSession.selectOne("Main.idcheck" , uSER_ID);
+	}
+
+	public Member emailcheck(String uSER_EMAIL) {
+		return sqlSession.selectOne("Main.emailcheck" , uSER_EMAIL);
+	}
+
+	public Member login(String uSER_ID, String uSER_PASSWORD) {
+		return sqlSession.selectOne("Main.login" , uSER_ID);
 	}
 }

@@ -1,27 +1,37 @@
 $(document).ready(function(){
 	
 	var checkid = false;
+	var checkpass = false;
 	var checkemail = false;
+	var checkbirth = false;
+	var checkphone = false;
 		
 	$('form').submit(function(){
 		
 		//아이디 체크
 		if(!checkid) {
-			alert ('사용 가능한 id를 입력하세요.');
+			alert ('사용 가능한 아이디를 입력하세요.');
 			$('input:eq(0)').val('').focus();
 			$('#message').text('');
 			return false;
 		}
+
+		if(!checkpass) {
+			alert ('사용 가능한 비밀번호를 입력하세요.');
+			$('input:eq(2)').val('').focus();
+			$('input:eq(2)').text('');
+			return false;
+		}
 		
-		//나이 숫자 체크
-		if(!$.isNumeric($("input[name=USER_PHONE]").val())) {  //패턴 사용해도 됨
+		//폰 넘버 체크
+		if(!$.isNumeric($("input[name=USER_PHONE]").val())) {
 			alert('핸드폰 번호는 숫자만 입력하세요.');
-			$("input[name='age']").val('');
-			$("input[name='age']").focus();
+			$("input[name='USER_PHONE']").val('');
+			$("input[name='USER_PHONE']").focus();
 			return false;
 		}
 
-		if(!$.isNumeric($("input[name=USER_BIRTH]").val())) {  //패턴 사용해도 됨
+		if(!checkbirth) {  //패턴 사용해도 됨
 			alert('생일은 숫자만 입력하세요.');
 			$("input[name='age']").val('');
 			$("input[name='age']").focus();
@@ -30,7 +40,7 @@ $(document).ready(function(){
 		
 		if(!checkemail) {
 			alert('이메일 형식을 확인하세요.');
-			$('input:eq(6)').val('').focus();
+			$('input:eq(7)').val('').focus();
 			return false;
 		}
 		
@@ -48,11 +58,15 @@ $(document).ready(function(){
 		
 		// \w => [A-Za-z0-9_]
 		var pattern = /^\w{5,15}$/;
-		var id = $('input:eq(0)').val();
+		var USER_ID = $('input:eq(0)').val();
 		
-		if(!pattern.test(id)) {
+		if(!pattern.test(USER_ID)) {
 			$('#message').css('color', 'red');
-			$('#message').html("영문자 숫자 _로 5~12자 가능합니다.");
+			$('#message').html(" ! 5~15자 사이로 입력하세요.");
+			$('i:eq(0)').css('opacity', '0');
+			if(('i:eq(0).val()') == ''){
+				$('#message').html("");
+			}
 			return;
 		}
 		
@@ -61,7 +75,7 @@ $(document).ready(function(){
 			data:{"USER_ID" : USER_ID},
 			success: function(resp) {
 				if(resp == -1) {
-					$('i:eq(0)').css('opacity', '0.95');					
+					$('i:eq(0)').css('opacity', '0.95');			
 					checkid = true;
 				} else {
 					$('i:eq(0)').css('opacity', '0');
@@ -76,20 +90,103 @@ $(document).ready(function(){
 		$('#email_message').empty();
 		
 		var pattern = /^\w+@\w+[.]\w{3}$/;  //+의 의미는 무조건 글자 한개 이상 필요
-		var email = $("input:eq(7)").val();
+		var USER_EMAIL = $("input:eq(7)").val();
 		
 		$.ajax({
 			url:"emailcheck",
 			data:{"USER_EMAIL" : USER_EMAIL},
 			success: function(resp) {
 				if(resp == -1) {
-					$('#email_message').css('color', 'red').html("사용 가능한 이메일 입니다.");				
-					checkemail = false;
+					if(pattern.test(USER_EMAIL)){
+						$('.email_checkbar').css('opacity', '0.95');				
+						checkemail = true;
+					} else {
+						$('.email_checkbar').css('opacity', '0');
+					}
 				} else {
-					$('#email_message').css('color', 'green').html("사용 가능한 이메일 입니다.");
-					checkemail = true;
+					$('.email_checkbar').css('opacity', '0');
+					checkemail = false;
 				}
 			}
 		});
 	});
+	
+	$('input:eq(1)').on('keyup' , function(){
+		
+		if($('input:eq(1)').val() != ''){
+			$('.name_checkbar').css('opacity' , '0.95');
+		}
+		if($('input:eq(1)').val() == ''){
+			$('.name_checkbar').css('opacity' , '0');
+		} 
+	})
+
+	$('input:eq(2)').on('keyup', function(){
+		
+		var pattern = /^\w{4,15}$/;
+		var USER_PASS = $("input:eq(2)").val();
+		
+		if(pattern.test(USER_PASS)){
+			$('.pass_checkbar').css('opacity' , '0.95');
+			checkpass = true;
+		} else {
+			$('.pass_checkbar').css('opacity' , '0');
+			checkpass = false;
+		}
+	});
+	
+	$('input:eq(3)').on('keyup' , function(){
+		
+		var pattern = /^[0-9]{8}$/;
+		var USER_BIRTH = $('input:eq(3)').val();
+		
+		if(pattern.test(USER_BIRTH)){
+			$('.birth_checkbar').css('opacity' , '0.95');
+			checkbirth = true;
+		} else {
+			$('.birth_checkbar').css('opacity' , '0');
+			checkbirth = false;
+		}
+	});
+	
+	$('input:eq(4)').on('keyup' , function(){
+		
+		var pattern = /^[0-9]{10,11}$/;
+		var USER_PHONE = $('input:eq(4)').val();
+		
+		if(pattern.test(USER_PHONE)){
+			$('.phone_checkbar').css('opacity' , '0.95');
+			checkphone = true;
+		} else {
+			$('.phone_checkbar').css('opacity' , '0');
+			checkphone = false;
+		}
+	});
+	
+	$('input:eq(8)').on('keyup' , function(){
+		
+		var pattern = /^(19|20)[0-9]{2}(0[1-9]|1[1-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+		var USER_POST = $('input:eq(8)').val();
+		
+		if(pattern.test(USER_POST)){
+			$('.post_checkbar').css('opacity' , '0.95');
+		} else {
+			$('.post_checkbar').css('opacity' , '0');
+		}
+		
+	})
+	
+	$('input:eq(9)').on('keyup' , function(){
+		
+		var pattern = /^w+$/;
+		var USER_ADDR = $('input:eq(9)').val();
+		
+		if(pattern.test(USER_ADDR)){
+			$('.addr_checkbar').css('opacity' , '0.95');
+		} else {
+			$('.addr_checkbar').css('opacity' , '0');
+		}
+		
+		
+	})
 });
