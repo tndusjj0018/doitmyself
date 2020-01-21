@@ -27,4 +27,12 @@ public class mainDAO {
 	public Member login(String uSER_ID, String uSER_PASSWORD) {
 		return sqlSession.selectOne("Main.login" , uSER_ID);
 	}
+
+	public int sellercheck(String uSER_ID) {
+		return sqlSession.selectOne("Main.sellercheck" , uSER_ID);
+	}
+
+	public Member admin_check(String uSER_ID) {
+		return sqlSession.selectOne("Main.admin_check" , uSER_ID);
+	}
 }

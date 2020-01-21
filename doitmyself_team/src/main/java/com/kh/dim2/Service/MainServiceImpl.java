@@ -42,4 +42,14 @@ public class MainServiceImpl implements MainService{
 		}
 		return result;
 	}
+
+	@Override
+	public int isSeller(String uSER_ID) {
+		return dao.sellercheck(uSER_ID);
+	}
+
+	@Override
+	public Member isAdmin(String uSER_ID) {
+		return dao.admin_check(uSER_ID);
+	}
 }

@@ -23,6 +23,7 @@ select * from user_tbl
 CREATE TABLE CATEGORY_TBL(
 	C_NO		NUMBER(4)					PRIMARY KEY,
 	C_NAME		VARCHAR2(20)				NOT NULL
+	SET DEFINE OFF
 );
 
 --판매자 정보 테이블 생성
@@ -34,6 +35,10 @@ CREATE TABLE SELLER_TBL(
 	SELLER_ADDRESS		VARCHAR2(100)										NOT NULL,
 	SELLER_POSTCODE		VARCHAR2(30)										NOT NULL
 );
+
+select * from SELLER_TBL
+
+insert into SELLER_TBL values(5555 , 'qweqrqqr' , 0 , 'sun112' , 'qwwqqrqqrqr' , 'qwe111')
 
 --상품 테이블 생성
 CREATE TABLE PRODUCT_TBL(

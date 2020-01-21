@@ -1,6 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="false" %>
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
   <head>
@@ -30,24 +29,12 @@
   <body class="goto-here">
     <section id="home-section" class="hero">
     	<div id="floatMenu">
-    		<c:if test="${empty USER_ID}">
-          	 <a class="navbar-brand float_login" href="login" style="font-size:13pt; color:white;">Log-in</a>
-          	 <br>
-          	</c:if>
-          	<c:if test="${!empty USER_ID}">
-          	 <a class="navbar-brand float_login" href="login" style="font-size:13pt; color:white;">${USER_ID}</a>
-          	 <br>님 안녕하세요
-          	</c:if>
-			<br>
+    		
 			방금 본 DIM
 			<br>
 			<img src="resources/img/product-1.jpg" style="width:100px; height:100px; border-radius:40px;">
 			<br>
-			방금 본 DIM
-			<br>
 			<img src="resources/img/product-2.jpg" style="width:100px; height:100px; border-radius:40px;">
-			<br>
-			방금 본 DIM
 			<br>
 			<img src="resources/img/product-3.jpg" style="width:100px; height:100px; border-radius:40px;">
 			<br>
@@ -67,7 +54,6 @@
 	          </div>
 	        </div>
 	      </div>
-
 	      <div class="slider-item" style="background-image: url(resources/img/img_w_banner_legacy.jpg);">
 	      	<div class="overlay"></div>
 	        <div class="container">
@@ -84,13 +70,18 @@
 	      </div>
 	    </div>
     </section>
-		<form action="#" autocomplete="off">
+		<form action="#" autocomplete="off" name="selectbox_form" id= "selectbox_form">
 		    	<fieldset class="url">
-					<select name = "search" class="submit px-3 borderx cursor">
-			 			<option class="cursor" value="all" selected="selected">전체</option>
-						 <option class="cursor" value="furniture">가구</option>
-						 <option class="cursor" value="food">음식</option>
-						 <option class="cursor" value="hobby">취미</option>
+					<select name=first onchange="firstChange()" size=1>
+						<option value=''>선택</option>
+						<option value=''>가구</option>
+						<option value=''>음식</option>
+						<option value=''>취미</option>
+					</select>
+						
+					<select name=second onchange="secondChange()" size=1>
+						<option value=''>선택</option>
+					</select>
 		      		<input id="url" type="text" name="url" required>
 		      <div class="after"></div>
 		    </fieldset>
