@@ -56,8 +56,9 @@
 			padding-left:50px;
 			width: 1200px
 		}
+		
 	</style>
-	
+	<!-- .goto-here {background: #f4f3ef;} -->
 	<script>
 		$(document).ready(function(){
 			var num =  <%=request.getParameter("num")%>;
