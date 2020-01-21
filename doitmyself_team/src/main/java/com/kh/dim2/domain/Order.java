@@ -14,6 +14,7 @@ public class Order {
 	private String ORDER_R_DATE;
 	private String ORDER_SELLER; 
 	private String ORDER_TRNO;
+	private int ORDER_AMOUNT;
 	public int getORDER_NO() {
 		return ORDER_NO;
 	}
@@ -91,6 +92,12 @@ public class Order {
 	}
 	public void setORDER_TRNO(String oRDER_TRNO) {
 		ORDER_TRNO = oRDER_TRNO;
+	}
+	public int getORDER_AMOUNT() {
+		return ORDER_AMOUNT;
+	}
+	public void setORDER_AMOUNT(int oRDER_AMOUNT) {
+		ORDER_AMOUNT = oRDER_AMOUNT;
 	}
 	
 	
