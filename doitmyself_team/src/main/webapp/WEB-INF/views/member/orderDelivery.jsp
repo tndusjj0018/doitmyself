@@ -87,7 +87,7 @@
 									<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 								</td>
 								<td>
-									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
+									<span onclick="alert('제품 상세 페이지로 넘어감')">데이터 불러와야돼~ 수정!</span>
 								</td>
 								<td>
 									[계산식]원<br>
