@@ -19,6 +19,7 @@ public interface AdminService {
 	//리뷰 수 구하기
 	public int getReviewCount();
 	
+	
 	//리뷰 리스트 가져오기
 	public List<Review> getReviewList(int page, int limit, String orderBy);
 

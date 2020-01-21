@@ -45,6 +45,7 @@
 		var go = function(page){
 			search(page);
 		}
+		
 		search_word = "";
 		//조회 옵션 선택
 		selected_option = "";

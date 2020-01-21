@@ -27,6 +27,7 @@
 			position: relative;
     		top: 1px;
 		}
+		
 		.privilege{
 			height: 40px;
 			position: relative;

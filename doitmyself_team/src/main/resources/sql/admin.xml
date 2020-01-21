@@ -82,6 +82,7 @@
 		set USER_IS_ADMIN = #{USER_IS_ADMIN}
 		where USER_NO = #{USER_NO}
 	</update>
+	
 
 	
 </mapper>

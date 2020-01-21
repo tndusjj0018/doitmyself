@@ -50,6 +50,7 @@ public class AdminServiceImpl implements AdminService{
 			map.put("option", option);
 		}
 		return adminDAO.getMemberList(map);
+		
 	}
 	
 	@Override

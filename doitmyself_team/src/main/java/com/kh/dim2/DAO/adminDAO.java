@@ -29,6 +29,7 @@ public class adminDAO {
 		return sqlSession.selectOne("Admin.reviewCount");
 	}
 
+	
 	public List<Review> getReviewList(Map<String, Object> map) {
 		return sqlSession.selectList("Admin.reviewList",map);
 	}
