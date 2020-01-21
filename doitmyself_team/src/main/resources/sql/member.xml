@@ -87,10 +87,12 @@
 	</update>
 	
 	<!-- QNA 리스트 -->
-	<select id="qnalist" resultType="qna" parameterType="String">
+	<select id="qnalist" resultType="q_product" parameterType="String">
 		select *
-		from QNA_TBL
-		WHERE QNA_WRITER = #{USER_ID}
+		from QNA_TBL, PRODUCT_TBL
+		WHERE QNA_P_NO = P_NO
+		AND QNA_WRITER = #{USER_ID}
+		ORDER BY QNA_NO DESC
 	</select>
 	
 	<!-- QNA 개수 -->
@@ -98,5 +100,20 @@
 		select count(*)
 		from QNA_TBL
 		where QNA_WRITER = #{USER_ID}
+	</select>
+	
+	
+	<!-- 주문내역 불러오기 -->
+	<select id="orderlist" resultType="order" parameterType="String">
+		select *
+		from ORDER_TBL
+		WHERE ORDER_ID = #{USER_ID}
+	</select>
+	
+	<!-- 주문내역 수 -->
+	<select id="ordercount" resultType="int" parameterType="String">
+		select count(*)
+		from ORDER_TBL
+		where ORDER_ID = #{USER_ID}
 	</select>
 </mapper>
