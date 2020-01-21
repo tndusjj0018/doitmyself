@@ -31,7 +31,7 @@ public class AdminController {
 	
 	//관리자 페이지로 이동
 	@GetMapping("admin")
-	public ModelAndView AdminPage(String doc,// @RequestParam(value = "num", defaultValue = "1", required = false) int num, 
+	public ModelAndView AdminPage(String doc, @RequestParam(value = "num", defaultValue = "1", required = false) int num, 
 									ModelAndView mv, HttpServletRequest request) {
 		System.out.println("view = "+ doc);
 		if(doc == null) {
@@ -41,7 +41,7 @@ public class AdminController {
 			mv.addObject("member", member);
 			
 		}
-//		mv.addObject("num",num);
+		mv.addObject("num",num);
 		mv.addObject("doc",doc);
 		mv.setViewName("admin/admin");
 		
@@ -56,7 +56,7 @@ public class AdminController {
 							@RequestParam(value = "search_col",  defaultValue = "USER_ID",required = false) String search_col,
 							@RequestParam(value="option", required= false, defaultValue = "") String option,
 							HttpServletRequest request){
-		
+		System.out.println("option = " + option);
 		System.out.println("num = " + num);
 		System.out.println("search_word는  = " + search_word);
 		if(!search_word.equals("")) {

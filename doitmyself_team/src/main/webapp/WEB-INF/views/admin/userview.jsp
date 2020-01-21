@@ -102,8 +102,8 @@ function search(page){
 }//function end
 
 //처음 로드 했을 때 실행 
-search(search_word);
-
+page =1;
+search(page);
 
 
 
@@ -181,7 +181,7 @@ var pagination = function(rdata){
 				alert("검색어를 입력하세요");
 			}else{
 				$(".clearfix").remove();
-				search(search_word);
+				go(1);
 			}
 		});//click end
 		
@@ -211,7 +211,7 @@ var pagination = function(rdata){
 		})//click end
 		
 	})	
-
+	
 				
 	
 	

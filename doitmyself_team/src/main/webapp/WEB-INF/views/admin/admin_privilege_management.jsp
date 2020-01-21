@@ -53,7 +53,7 @@
 			$.ajax({
 				type:"POST",
 				dataType:"json",
-				data:{num:page, search_word:search_word, search_col:$(".search_col").val(), option:selected_option},
+				data:{num:page, search_word:search_word, search_col:$(".search_col").val(), option:$(".privilege").val()},
 				url:"userList",
 				success:function(rdata){
 					var option = rdata.option; 
@@ -126,8 +126,9 @@
 			})//ajax end	
 
 		}
-		//처음에 로드되면 실행 
-		search(search_word);
+		//처음에 로드되면 실행
+		page =1;
+		search(page);
 		var pagination = function(rdata){
 			$(".clearfix").remove();
 			//페이징 처리 start
@@ -201,7 +202,7 @@
 					alert("검색어를 입력하세요");
 				}else{
 					$(".clearfix").remove();
-					search(search_word);
+					go(1);
 				}
 			});//click end
 			
@@ -259,7 +260,7 @@
 			$(".search").on("change", ".privilege", function(){
 				console.log("privilege 선택 옵션 바뀜 ="+$(this).val());
 				selected_option = $(this).val();
-				search(search_word);
+				go(1);
 				$(".clearfix").remove();
 				
 			})

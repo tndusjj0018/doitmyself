@@ -34,19 +34,20 @@ public class AdminServiceImpl implements AdminService{
 			map.put("search_word", search_word);
 			map.put("search_col", search_col);
 		}
-		if(!option.equals("")) {
-			map.put("option", Integer.parseInt(option));
+		if(!option.equals("") && option != null) {
+			map.put("option", option);
 		}
 		return adminDAO.getMemberList(map);
 	}
 	//검색어를 입력하지 않았을 때 유저 목록 전체 보여주기
 	@Override
 	public List<Member> getMemberList(int page, int limit, String option) {
+		System.out.println("검색어를 입력하지 않았을 때의 memberList 가져오기 option = "+option);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", page);
 		map.put("limit", limit);
-		if(!option.equals("")) {
-			map.put("option", Integer.parseInt(option));
+		if(!option.equals("") && option != null) {
+			map.put("option", option);
 		}
 		return adminDAO.getMemberList(map);
 	}

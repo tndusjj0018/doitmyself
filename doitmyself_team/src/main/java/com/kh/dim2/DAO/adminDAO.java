@@ -21,6 +21,7 @@ public class adminDAO {
 	}
 
 	public List<Member> getMemberList(Map<String, Object> map) {
+		System.out.println("여기는 adminDAO의 getMemberList" + map.toString());
 		return sqlSession.selectList("Admin.memberList",map);
 	}
 
