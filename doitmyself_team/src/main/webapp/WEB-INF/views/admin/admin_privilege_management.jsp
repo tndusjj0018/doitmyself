@@ -50,7 +50,7 @@
 		//조회 옵션 선택
 		selected_option = "";
 		var search = function(page){
-			console.log("admin_privilege_management.jsp 현재 페이지는 = ${num}");
+			console.log("selected_option="+selected_option);
 			$.ajax({
 				type:"POST",
 				dataType:"json",
