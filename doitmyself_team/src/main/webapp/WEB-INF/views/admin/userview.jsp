@@ -32,8 +32,13 @@
 <script>
 	$(document).ready(function(){
 		
+		var go = function(page){
+			search(page);
+		}
 		search_word = "";
-		var search = function(search_word){
+		
+		
+		function search(page,search_word){
 			console.log(search_word);
 			//url 파라미터 삭제 	
 			//history.replaceState({}, null, location.pathname);
@@ -142,12 +147,12 @@
 					
 					//현재페이지보다 큰 페이지 버튼
 					if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
-						output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
+						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
 					}else{//다음페이지가 두개 이상 존재할 때
-						output += "<li><a href='admin?doc=userview&num="+(num+1)+"'>"+(num+1)+"</a></li>";
-						output += "<li><a href='admin?doc=userview&num="+(num+2)+"'>"+(num+2)+"</a></li>";
+						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
+						output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
 					}
-					output += "<li><a href='admin?doc=userview&num="+(num+1)+"'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+					output += "<li><a href='javascript:go("+(num+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
 					
 				}else{//다음페이지가 존재하지 않을 때
 					output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";

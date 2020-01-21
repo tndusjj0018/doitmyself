@@ -95,6 +95,12 @@
 					}
 				});
 			});
+			
+			/*
+			$('#sellerPageGo').click(function(){
+				location.href = 'seller?doc=seller_info';
+			});
+			*/
 		});			
 	</script>
 </head>
@@ -290,7 +296,7 @@
 		        					</ul>
 			        			</div>
 			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="판매자 페이지로 이동" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('판매자 페이지로 이동하는 버튼');">
+			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('판매자 페이지로 이동');">
 			        		</div>
 			        	</c:if>
 			        </div>       

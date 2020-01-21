@@ -15,7 +15,12 @@
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
 	<script>
-		
+		$(document).ready(function(){
+			
+			$('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
+		});
 	</script>
 </head>
 
@@ -113,8 +118,8 @@
 			    					<i class="nc-icon nc-favourite-28"></i>			     	        		
 			        				<span>찜한 상품이 없습니다.</span>
 			        			</div>
-			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        			<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;">
 			        		</div>
 						</c:if>
 						</div>
