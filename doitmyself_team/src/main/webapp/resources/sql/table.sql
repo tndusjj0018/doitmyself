@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!--유저 시퀀스 생성-->
 
 CREATE SEQUENCE USER_SEQ;
