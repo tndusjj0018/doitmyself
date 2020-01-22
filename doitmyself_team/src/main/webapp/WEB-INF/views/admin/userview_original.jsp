@@ -81,6 +81,7 @@
 								output += "<td><button class='btn btn-danger btn-xs userDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
 								output += "</tr>";
 							}
+
 						})
 						
 						
@@ -179,6 +180,7 @@
 		$("#mytable").on("click",".userDelete",function(){
 			var check = confirm("해당 유저를 삭제하시겠습니까?");
 			var trNum = $(this).closest('tr').prevAll().length;
+
 			if(check == true){
 				alert(trNum+"번째 버튼 선택");
 				var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
@@ -192,6 +194,7 @@
 		
 		$("#mytable").on("click",".userModify",function(){
 			var trNum = $(this).closest('tr').prevAll().length;
+
 			console.log(trNum+"번째 버튼 선택");
 			var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
 			console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
@@ -199,10 +202,8 @@
 		})//click end
 		
 	})	
-				
-	
-	
-	
+
+
 	
 </script>
 </head>
@@ -225,3 +226,4 @@
 
 </body>
 </html>
+

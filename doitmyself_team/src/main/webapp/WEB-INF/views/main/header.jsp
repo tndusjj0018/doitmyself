@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix ="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,11 @@
          
          <div class="collapse navbar-collapse" id="ftco-nav">
            <ul class="navbar-nav ml-auto">
+           <c:if test="${SELLER_RESULT == 1}">
+           		<li class="nav-item">
+                	<a class="nav-link" href="#" id="dropdown04">판매자페이지</a>
+	            </li>
+           </c:if>
              <li class="nav-item">
                  <a class="nav-link" href="product?category=all" id="dropdown04">모든 상품 보기</a>
               </li>
@@ -52,21 +57,34 @@
                 <a class="dropdown-item" href="#">악세서리</a>
               </div>
             </li>
-            <c:if test="${USER_ID != 'admin'}">
+
+            <c:if test="${adminNumber != 1}">
              	<li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link" style="background: #3a8aa2; color: white;"><span class="icon-shopping_cart"></span>[0]</a></li>
             </c:if>
           	<c:if test="${empty USER_ID}">
           	 	<a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">Log-in</a>
           	</c:if>
-          	<c:if test="${USER_ID=='admin'}">
+
+          	<c:if test="${adminNumber == 1}">
 	          	 <a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">관리자</a>
 	          	 <li class="nav-item">
-	                 <a class="nav-link" href="product?category=all" id="dropdown04">관리자페이지</a>
+	                 <a class="nav-link" href="#" id="dropdown04">관리자페이지</a>
+	              </li>
+	          	 <li class="nav-item">
+	                 <a class="nav-link" href="logout" id="dropdown04" style="background: #3a8aa2; color: white;">관리자모드 종료</a>
 	              </li>
           	</c:if>
-          	<c:if test="${!empty USER_ID && USER_ID!='admin'}">
-	             <a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">${USER_ID}</a>
-	             <a class="navbar-brand" href="logout" style="font-size:10pt; margin-left: 10px; margin-top: 4.8px;">로그아웃</a>
+          	<c:if test="${!empty USER_ID && adminNumber != 1}">
+	             <a class="navbar-brand" href="memberInfo?USER_ID=${USER_ID }" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">${USER_ID}</a>
+	             
+	             <c:if test="${SELLER_RESULT == 1}">
+	             	 <a class="navbar-brand" href="#" style="font-size:9pt; margin-left: -13px; margin-top: 1px;">$</a>
+	             </c:if>
+	             <c:if test="${SELLER_RESULT != 1}">
+					<a class="navbar-brand" href="#" style="font-size:9pt; margin-left: -13px; margin-top: 1px;"></a>
+	             </c:if>
+	             
+	             <a class="navbar-brand" href="logout" style="font-size:10pt; margin-left: 10px; margin-top: 9.5px;">로그아웃</a>
             </c:if>
            </ul>
          </div>

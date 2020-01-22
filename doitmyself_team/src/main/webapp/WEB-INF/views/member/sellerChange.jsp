@@ -95,6 +95,12 @@
 					}
 				});
 			});
+			
+			/*
+			$('#sellerPageGo').click(function(){
+				location.href = 'seller?doc=seller_info';
+			});
+			*/
 		});			
 	</script>
 </head>
@@ -229,7 +235,7 @@
 						<form action="sellerChangeAction" id="sellerChange_form" method="post">
 						
 						<input type="hidden" name="SELLER_ID" value="${USER_ID }" >
-					
+						<input type="hidden" name="USER_ID" value="${USER_ID }" >
 						<table>
 							<tr>
 								<th style="padding: 50px 0px 10px 50px;">추가 정보 입력</th>
@@ -290,7 +296,7 @@
 		        					</ul>
 			        			</div>
 			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="판매자 페이지로 이동" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('판매자 페이지로 이동하는 버튼');">
+			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('판매자 페이지로 이동');">
 			        		</div>
 			        	</c:if>
 			        </div>       

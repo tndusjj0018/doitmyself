@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.SubCategory;
 
 @Repository
 public class adminDAO {
@@ -21,6 +23,7 @@ public class adminDAO {
 	}
 
 	public List<Member> getMemberList(Map<String, Object> map) {
+		System.out.println("여기는 adminDAO의 getMemberList" + map.toString());
 		return sqlSession.selectList("Admin.memberList",map);
 	}
 
@@ -28,6 +31,7 @@ public class adminDAO {
 		return sqlSession.selectOne("Admin.reviewCount");
 	}
 
+	
 	public List<Review> getReviewList(Map<String, Object> map) {
 		return sqlSession.selectList("Admin.reviewList",map);
 	}
@@ -45,8 +49,17 @@ public class adminDAO {
 		System.out.println("adminDAO의 getMemberInfo");
 		return sqlSession.selectOne("Admin.userinfo",USER_NO);
 	}
-	
+
 	public int updateAdminPrivilege(Map<String, Object> map) {
 		return sqlSession.update("Admin.updatePrivilege", map);
 	}
+
+	public List<Category> getMajorCategoryList() {
+		return sqlSession.selectList("Admin.MajorCategoryList");
+	}
+
+	public List<SubCategory> getSubCategoryList() {
+		return sqlSession.selectList("Admin.SubCategoryList");
+	}
+
 }

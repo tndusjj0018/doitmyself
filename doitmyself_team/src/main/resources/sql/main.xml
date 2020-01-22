@@ -4,7 +4,27 @@
 <mapper namespace="Main">
 	
 	<select id="idcheck" parameterType="String" resultType="member">
-		SELECT * FROM USER_TBL WHERE USER_ID=#{USER_ID}
+		SELECT * FROM 
+		USER_TBL 
+		WHERE USER_ID=#{USER_ID}
+	</select>
+	
+	<select id="login" parameterType="String" resultType="member">
+		SELECT * FROM 
+		USER_TBL 
+		WHERE USER_ID=#{USER_ID}
+	</select>
+	
+	<select id="emailcheck" parameterType="String" resultType="member">
+		SELECT * FROM 
+		USER_TBL 
+		WHERE USER_EMAIL=#{USER_EMAIL}
+	</select>
+
+	<select id="sellercheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)	FROM 
+		SELLER_TBL	
+		WHERE SELLER_ID = #{SELLER_ID}
 	</select>
 	
 	<select id="login" parameterType="String" resultType="member">
@@ -16,10 +36,18 @@
 	</select>
 	
 	<insert id="insert" parameterType="member">
-		insert into USER_TBL		
-		values(
+		INSERT INTO 
+		USER_TBL		
+		VALUES(
 			USER_SEQ.NEXTVAL, #{USER_ID}, #{USER_PASSWORD}, #{USER_NAME}, #{USER_ADDRESS},
 			#{USER_POSTCODE}, #{USER_PHONE}, #{USER_EMAIL}, #{USER_BIRTH}, #{USER_GENDER}, SYSDATE , 0
 		)
 	</insert>
+
+	<select id="admin_check" resultType="member" parameterType="String">
+		SELECT *
+		FROM USER_TBL
+		WHERE USER_ID = #{USER_ID}
+	</select>
+	
 </mapper>

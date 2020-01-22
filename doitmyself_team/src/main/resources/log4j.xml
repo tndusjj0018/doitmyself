@@ -10,6 +10,12 @@
 		</layout>
 	</appender>
 	
+
+	<!-- Application Loggers -->
+	<logger name="com.kh.dim2">
+		<level value="info" />
+	</logger>
+	
 	<logger name="Admin">
 		<level value="trace" />
 	</logger>
@@ -17,13 +23,6 @@
   	<logger name="Member">
 		<level value="trace" />
 	</logger>
-	
-
-	<!-- Application Loggers -->
-	<logger name="com.kh.dim2">
-		<level value="info" />
-	</logger>
-	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

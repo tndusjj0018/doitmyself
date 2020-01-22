@@ -73,11 +73,12 @@ public class MainController {
 		PrintWriter out = response.getWriter();
 		int result = mainService.insert(member);
 		out.println("<script>");
-		if(result == 1) {//»ğÀÔ ¼º°ø½Ã
-			out.println("alert('È¸¿ø°¡ÀÔ¿¡ ÃàÇÏµå¸³´Ï´Ù.');");
+
+		if(result == 1) {//ì‚½ì… ì„±ê³µì‹œ
+			out.println("alert('íšŒì›ê°€ì…ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.');");
 			out.println("location.href='login';");
 		} else if(result == -1) {
-			out.println("alert('È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.');");
+			out.println("alert('íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
@@ -85,17 +86,30 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/loginProcess" , method = RequestMethod.POST)
-	public String loginProcess(@RequestParam("USER_ID") String USER_ID , @RequestParam("USER_PASSWORD") String USER_PASSWORD ,
-							HttpServletRequest request , HttpServletResponse response , HttpSession session) throws Exception{
+	public ModelAndView loginProcess(@RequestParam("USER_ID") String USER_ID , @RequestParam("USER_PASSWORD") String USER_PASSWORD ,
+							HttpServletRequest request , HttpServletResponse response , HttpSession session , ModelAndView mv) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		
 		int result = mainService.isId(USER_ID , USER_PASSWORD);
+		int seller_result = mainService.isSeller(USER_ID);
+		Member admin_check = mainService.isAdmin(USER_ID);
+		
+		int adminNumber = admin_check.getUSER_IS_ADMIN();
+		
+		System.out.println(seller_result);
 		
 		if(result == 1) {
+			
 			session.setAttribute("USER_ID", USER_ID);
-			return "redirect:home";
+			session.setAttribute("SELLER_RESULT" , seller_result);
+			mv.addObject("adminNumber" , adminNumber);
+			mv.setViewName("main/home");
+			
+			return mv;
+			
 		} else {
-			String message = "¾ÆÀÌµğ³ª ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+			String message = "ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+
 			response.setContentType("text/html;charset=utf-8");
 	         PrintWriter out = response.getWriter();
 	         out.println("<script>");
@@ -106,9 +120,10 @@ public class MainController {
 	         return null;
 		}
 	}
+  
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:login";		 
-	 }
+		return "redirect:home";		 
+	}
 }

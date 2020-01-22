@@ -1,4 +1,4 @@
- AOS.init({
+AOS.init({
  	duration: 800,
  	easing: 'slide'
  });
@@ -338,7 +338,4 @@
 
 setInterval(function() { makeTimer(); }, 1000);
 
-
-
 })(jQuery);
-

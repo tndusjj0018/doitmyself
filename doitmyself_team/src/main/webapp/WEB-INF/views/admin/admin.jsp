@@ -24,7 +24,6 @@
 
     <link rel="stylesheet" href="resources/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="resources/css/jquery.timepicker.css">
-
     
     <link rel="stylesheet" href="resources/css/flaticon.css">
     <link rel="stylesheet" href="resources/css/icomoon.css">
@@ -57,8 +56,9 @@
 			padding-left:50px;
 			width: 1200px
 		}
+		
 	</style>
-	
+	<!-- .goto-here {background: #f4f3ef;} -->
 	<script>
 		$(document).ready(function(){
 			var num =  <%=request.getParameter("num")%>;
@@ -91,6 +91,7 @@
 				}
 				
 			})
+
 			
 		})
 	</script>

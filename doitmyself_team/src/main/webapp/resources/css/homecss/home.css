@@ -2,15 +2,14 @@
 
 #floatMenu {
 	position: absolute;
-    width: 120px;
-    height: 452px;
+    width: 100px;
+    height: 340px;
     right: 40px;
     bottom: 200px;
-    background-color: #6cbcd4;
-    z-index: 3;
-    border-radius: 7px;
+    background-color: white;
+    z-index: -1;
     text-align: center;
-    color: white;
+    color: #3a8aa2;
     padding-top: 10px;
     opacity: 0.85;
 }
