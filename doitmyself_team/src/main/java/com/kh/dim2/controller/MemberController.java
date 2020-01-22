@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MemberService;
 import com.kh.dim2.domain.Member;
-import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
-import com.kh.dim2.domain.Qna;
+import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
 @Controller
@@ -164,7 +164,8 @@ public class MemberController {
 	@RequestMapping(value = "/memberLeaveAction", method = RequestMethod.POST)
 	public void memberLeaveAction(HttpServletResponse response,
 								  @RequestParam("user_pass") String user_password,
-								  @RequestParam("USER_ID") String user_id) throws Exception {
+								  @RequestParam("USER_ID") String user_id,
+								  HttpSession session) throws Exception {
 		
 		//현재 비밀번호 확인
 		int result = memberservice.passCheck(user_id, user_password);
@@ -184,6 +185,7 @@ public class MemberController {
 			} else {
 				response.setContentType("text/html; charset=utf-8"); 
 				PrintWriter out = response.getWriter();
+				session.invalidate();
 				out.println("<script>");
 				out.println("alert('정상적으로 탈퇴 되었습니다.');");
 				out.println("location.href='home';");
@@ -209,7 +211,7 @@ public class MemberController {
 		
 		int ordercount = memberservice.ordercount(user_id);
 		
-		List<Order> orderlist = memberservice.orderlist(user_id);
+		List<O_Product> orderlist = memberservice.orderlist(user_id);
 		mv.addObject("orderlist", orderlist);
 		mv.addObject("ordercount", ordercount);
 		mv.setViewName("member/orderDelivery");
@@ -222,9 +224,37 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
-	public String reviewList() {
-		return "member/reviewList";
+	public ModelAndView reviewList(ModelAndView mv,
+								   @RequestParam("USER_ID") String user_id) {
+		
+		int reviewablecount = memberservice.reviewablecount(user_id);		
+		List<O_Product> reviewablelist = memberservice.reviewablelist(user_id);
+		
+		int reviewwritecount = memberservice.reviewwritecount(user_id);
+		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id);
+		
+		
+		mv.addObject("reviewablecount", reviewablecount);
+		mv.addObject("reviewablelist", reviewablelist);
+		mv.addObject("reviewwritecount", reviewwritecount);
+		mv.addObject("reviewwritelist", reviewwritelist);
+		
+		mv.setViewName("member/reviewList");
+		return mv;
 	}
+	
+	@RequestMapping(value = "/reviewUpdate", method = RequestMethod.GET)
+	public ModelAndView reviewUpdate(ModelAndView mv,
+									 @RequestParam("P_NO") int p_no) {
+		
+		O_Product r = memberservice.reviewDetail(p_no);
+		mv.addObject("reviewdetail", r);
+		mv.setViewName("member/reviewUpdate");
+		
+		return mv;
+	}
+	
+	
 
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
 	public ModelAndView qnaList(ModelAndView mv,

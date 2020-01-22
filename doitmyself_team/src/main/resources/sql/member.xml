@@ -103,11 +103,12 @@
 	</select>
 	
 	
-	<!-- 주문내역 불러오기 -->
-	<select id="orderlist" resultType="order" parameterType="String">
+	<!-- 주문내역 불러오기 -->	
+	<select id="orderlist" resultType="o_product" parameterType="String">
 		select *
-		from ORDER_TBL
-		WHERE ORDER_ID = #{USER_ID}
+		from ORDER_TBL, PRODUCT_TBL
+		WHERE ORDER_P_NO = P_NO
+		AND ORDER_ID = #{USER_ID}
 	</select>
 	
 	<!-- 주문내역 수 -->
@@ -115,5 +116,46 @@
 		select count(*)
 		from ORDER_TBL
 		where ORDER_ID = #{USER_ID}
+	</select>
+	
+	<!-- 리뷰 작성 가능 리스트 -->
+	<select id="reviewablelist" resultType="o_product" parameterType="String">
+		select *
+		from ORDER_TBL, PRODUCT_TBL
+		WHERE ORDER_P_NO = P_NO
+		AND ORDER_ID = #{USER_ID}
+		AND ORDER_DELIVERY = 4
+	</select>
+	
+	<!-- 리뷰 작성 가능 개수 -->
+	<select id="reviewablecount" resultType="int" parameterType="String">
+		select count(*)
+		from ORDER_TBL, PRODUCT_TBL
+		WHERE ORDER_P_NO = P_NO
+		AND ORDER_ID = #{USER_ID}
+		AND ORDER_DELIVERY = 4
+	</select>
+	
+	<!-- 작성한 리뷰 리스트 -->
+	<select id="reviewwritelist" resultType="o_product" parameterType="String">
+		select *
+		FROM REVIEW_TBL, PRODUCT_TBL
+		WHERE REVIEW_P_NO = P_NO
+		AND REVIEW_WRITER = #{USER_ID}
+	</select>
+	
+	<!-- 작성한 리뷰 개수 -->
+	<select id="reviewwritecount" resultType="int" parameterType="String">
+		select count(*)
+		FROM REVIEW_TBL, PRODUCT_TBL
+		WHERE REVIEW_P_NO = P_NO
+		AND REVIEW_WRITER = #{USER_ID}
+	</select>
+	
+	<select id="reviewDetail" resultType="o_product" parameterType="int">
+		select *
+		from REVIEW_TBL, PRODUCT_TBL
+		WHERE REVIEW_P_NO = P_NO
+		AND REVIEW_P_NO = #{P_NO}
 	</select>
 </mapper>

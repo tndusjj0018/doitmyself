@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Member;
-import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
+import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
 @Repository
@@ -74,11 +75,32 @@ public class memberDAO {
 	public int qnacount(String user_id) {
 		return sqlSession.selectOne("Member.qnacount", user_id);
 	}
-	public List<Order> orderlist(String user_id){
+	
+	public List<O_Product> orderlist(String user_id){
 		return sqlSession.selectList("Member.orderlist", user_id);
 	}
 	
 	public int ordercount(String user_id) {
 		return sqlSession.selectOne("Member.ordercount", user_id);
+	}
+	
+	public List<O_Product> reviewablelist(String user_id){
+		return sqlSession.selectList("Member.reviewablelist", user_id);
+	}
+	
+	public int reviewablecount(String user_id) {
+		return sqlSession.selectOne("Member.reviewablecount", user_id);
+	}
+	
+	public List<O_Product> reviewwritelist(String user_id){
+		return sqlSession.selectList("Member.reviewwritelist", user_id);
+	}
+	
+	public int reviewwritecount(String user_id) {
+		return sqlSession.selectOne("Member.reviewwritecount", user_id);
+	}
+	
+	public O_Product reviewDetail(int p_no) {
+		return sqlSession.selectOne("Member.reviewDetail", p_no);
 	}
 }
