@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>
- 	주문 / 배송 조회
+ 	내가 찜한 상품
 	</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
 	<!-- CSS Files -->
-	<link href="resources/css/orderDelivery.css" rel="stylesheet">
+	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -30,7 +31,7 @@
               				</button>
             			</div>
             			
-						<a class="navbar-brand" href="#pablo">나의 관심 목록</a>
+						<a class="navbar-brand" href="#pablo">내가 찜한 상품</a>
           			</div>
           			
           			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,41 +64,47 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-8">
+			    <div class="col-md-9">
 			      <div class="card card-user">
 			        <div class="card-header">
-			          <h5 class="card-title">내가 찜한 상품</h5>
+			          <h5 class="card-title">WISH LIST<span class="badge" style="margin-left: 15px; position: relative; top: -4px;">${wishcount }</span></h5>
 			        </div>
 			        <div class="card-body">
 			        	<div class="container">
+			        	
+			        	<!-- 찜 목록 있는 경우 -->
+			        	<c:if test="${wishcount > 0}">
 			        	<table class="table">
 							<tr>
-								<td>주문 일자</td> <td>주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>주문상태</td> <td>취소 / 리뷰</td>
+								<td>상품 번호</td> <td>주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
 							</tr>
+							<c:forEach var="wl" items="${wishlist}">
 							<tr>
 								<td>
-								2020-01-08
+									${wl.p_NO}
 								</td>
 								<td>
-									<img src="resources/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-									<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
+									<img src="${wl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+									<span onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
 								</td>
 								<td>
-									1000원<br>
-									(1개)
+									${wl.p_SELLER }
 								</td>
 								<td>
-									<span class="order_status">배송완료</span><br>
-									<button type="button" class="btn" id="btn-order">배송조회</button>
+									${wl.p_PRICE }원
 								</td>
-								
 								<td>
-									<button type="button" class="btn" id="btn-return">반품 신청</button>
+									<button type="button" class="btn" id="btn-return"><img src=""></button>
 								</td>
-								
-								
 							</tr>
+							</c:forEach>
 						</table>
+						</c:if>
+						
+						<!-- 찜 목록 없는 경우 -->
+						<c:if test="${wishcount == 0}">
+						찜한 상품 없습니다.
+						</c:if>
 						</div>
 			        </div>
 			      </div>
@@ -115,20 +122,19 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.min.js"></script>
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 	
 </body>
 </html>

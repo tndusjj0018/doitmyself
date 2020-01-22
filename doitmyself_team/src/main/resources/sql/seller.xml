@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Seller">
-
-
+	<select id="SellerInfo" parameterType="Map" resultType="seller">
+		select * from seller_tbl
+		where seller_id = #{id}
+	</select>
+	
+	<!-- 판매자 정보수정 -->
+	<update id="SellerInfoUpdate" parameterType="seller">
+		update seller_tbl
+		set seller_name = #{SELLER_NAME}, seller_address = #{SELLER_ADDRESS}, 
+			seller_postcode = #{SELLER_POSTCODE}, seller_b_num = #{SELLER_B_NUM}
+		where seller_id = #{SELLER_ID} 
+	</update>
+	
+	<!-- 카테고리 가져오기 -->
+	<select id="ProductCategory" resultType="category">
+		select * from category_tbl		
+	</select>
+	
+	<select id="ProductSubCategory" parameterType="Map" resultType="sub">
+		select * from sub_category_tbl
+		where sc_no_ref = #{c_no}
+	</select>
 </mapper>

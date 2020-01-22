@@ -10,7 +10,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
   
 	<!-- CSS Files -->	
-	<link href="resources/css/reviewList.css" rel="stylesheet">
+	<link href="resources/soo/css/reviewList.css" rel="stylesheet">
 	<style>
 		.navbar {
 			padding-bottom: 1px !important;
@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  	<script src="resources/soo/js/core/jquery.min.js"></script>
   	
   	<script>
 		$(document).ready(function(){
@@ -101,7 +102,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-8">
+			    <div class="col-md-9">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">나의 상품 리뷰</h5>
@@ -129,7 +130,7 @@
 												2020-01-08
 											</td>
 											<td>
-												<img src="resources/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+												<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 												<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 											</td>
 											<td>
@@ -156,7 +157,7 @@
 													<table style="width:90%; margin:0 auto">
 														<tr>
 															<td>구매 상품</td>
-															<td><img src="resources/img/product.PNG" class="product_img">[샤오미] 스마트 미밴드 4</td>
+															<td><img src="resources/soo/img/product.PNG" class="product_img">[샤오미] 스마트 미밴드 4</td>
 														</tr>
 														<tr>
 															<td>상품 평가</td>
@@ -178,7 +179,7 @@
 													</table>
 													
 													<div style="margin: 5px 5px 0 25px;">
-														<img src="resources/img/caution.gif">
+														<img src="resources/soo/img/caution.gif">
 														<span>작성 시 주의사항</span>
 														<ul>
 															<li>등록된 내용은 메인페이지, 검색페이지, 상품페이지 등에 노출될 수 있습니다.</li>
@@ -207,7 +208,7 @@
 												2020-01-10
 											</td>
 											<td>
-												<img src="resources/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+												<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 												<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
 											</td>
 											<td>
@@ -236,7 +237,7 @@
 													<table style="width:90%; margin:0 auto">
 														<tr>
 															<td>구매 상품</td>
-															<td><img src="resources/img/product.PNG" class="product_img">[샤오미] 스마트 미밴드 4</td>
+															<td><img src="resources/soo/img/product.PNG" class="product_img">[샤오미] 스마트 미밴드 4</td>
 														</tr>
 														<tr>
 															<td>상품 평가</td>
@@ -258,7 +259,7 @@
 													</table>
 													
 													<div style="margin: 5px 5px 0 25px;">
-														<img src="resources/img/caution.gif">
+														<img src="resources/soo/img/caution.gif">
 														<span>작성 시 주의사항</span>
 														<ul>
 															<li>등록된 내용은 메인페이지, 검색페이지, 상품페이지 등에 노출될 수 있습니다.</li>
@@ -295,20 +296,19 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-  
-	<script src="resources/js/core/jquery.min.js"></script>
-	<script src="resources/js/core/popper.min.js"></script>
-	<script src="resources/js/core/bootstrap.min.js"></script>
-	<script src="resources/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	
+	<script src="resources/soo/js/core/popper.min.js"></script>
+	<script src="resources/soo/js/core/bootstrap.min.js"></script>
+	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 	
 	<!-- Chart JS -->
-	<script src="resources/js/plugins/chartjs.min.js"></script>
+	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
-	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/soo/js/plugins/bootstrap-notify.js"></script>
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
+	<script src="resources/soo/js/paper-dashboard.min.js" type="text/javascript"></script>
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="resources/demo/demo.js"></script>
+	<script src="resources/soo/demo/demo.js"></script>
 	
 </body>
 </html>

@@ -8,6 +8,67 @@
 		from USER_TBL
 		where user_id = #{id}
 	</select>
+	
+	<update id="updateinfo" parameterType="member">
+		update USER_TBL
+		set USER_NAME = #{USER_NAME}, USER_PHONE = #{USER_PHONE}, USER_EMAIL = #{USER_EMAIL}, USER_POSTCODE = #{USER_POSTCODE}, USER_ADDRESS = #{USER_ADDRESS}
+		WHERE USER_ID = #{USER_ID}		
+	</update>
+	
+	<!-- 현재 비밀번호 체크 -->
+	<select id="passcheck" resultType="String" parameterType="String">
+		select USER_PASSWORD
+		from USER_TBL
+		WHERE USER_ID = #{USER_ID}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="passchange" parameterType="Map">
+		update USER_TBL
+		set USER_PASSWORD = #{change_password}
+		WHERE USER_ID = #{USER_ID}	
+	</update>
 
+	<!-- 회원 탈퇴 -->
+	<delete id="memberLeave" parameterType="String">
+		delete USER_TBL
+		where USER_ID = #{id}
+	</delete>
 
+	
+	<!-- 판매자 테이블에 INSERT -->
+	<insert id="sellerChange" parameterType="seller">
+		insert into SELLER_TBL
+		values(SELLER_SEQ.nextval, #{SELLER_NAME}, 0, #{SELLER_ID}, #{SELLER_ADDRESS}, #{SELLER_POSTCODE}, 
+			(select trunc(dbms_random.value(100000, 999999)) as random_num from dual)
+		)
+	</insert>
+	
+	<!-- 판매자인지 확인 -->
+	<select id="isSeller" resultType="int" parameterType="String">
+		select count(*)
+		from SELLER_TBL
+		where SELLER_ID = #{SELLER_ID}
+	</select>
+	
+	<select id="sellerNameCheck" resultType="seller" parameterType="String">
+		select *
+		from SELLER_TBL
+		where SELLER_NAME = #{SELLER_NAME}
+	</select>
+	
+	
+	<!-- 찜 개수 -->
+	<select id="wishcount" resultType="int" parameterType="String">
+		select count(*)
+		from DIBS_TBL
+		where D_USER_ID = #{USER_ID}
+	</select>
+	
+	<select id="wishlist" resultType="product" parameterType="String">
+		select *
+		from PRODUCT_TBL, DIBS_TBL
+		WHERE P_NO = D_P_NO
+		AND D_USER_ID = #{user_id}
+	</select>
 </mapper>
