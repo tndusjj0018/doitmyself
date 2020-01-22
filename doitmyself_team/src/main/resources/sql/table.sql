@@ -25,6 +25,8 @@ CREATE TABLE CATEGORY_TBL(
 	C_NAME		VARCHAR2(20)				NOT NULL
 );
 
+--insert into CATEGORY_TBL values(101 , 'test') 
+
 --판매자 정보 테이블 생성
 CREATE TABLE SELLER_TBL(
 	SELLER_NO 			NUMBER				PRIMARY KEY,
@@ -34,6 +36,8 @@ CREATE TABLE SELLER_TBL(
 	SELLER_ADDRESS		VARCHAR2(100)										NOT NULL,
 	SELLER_POSTCODE		VARCHAR2(30)										NOT NULL
 );
+
+--select * from SELLER_TBL
 
 --상품 테이블 생성
 CREATE TABLE PRODUCT_TBL(
@@ -49,6 +53,13 @@ CREATE TABLE PRODUCT_TBL(
 	P_DIBS			NUMBER(10)				DEFAULT 0								NOT NULL,
 	P_REGDATE		DATE					DEFAULT SYSDATE							NOT NULL
 );
+--insert into product_tbl values(7 , 'test7' , 'qweqrqqr' , 101 , 110000 , '11' , 1100 , 'test중7' , 499 , 5515 , sysdate);
+--insert into product_tbl values(8 , 'test8' , 'qweqrqqr' , 101 , 340000 , '11' , 5500 , 'test중다8' , 21500 ,15 , sysdate);
+--insert into product_tbl values(9 , 'test9' , 'qweqrqqr' , 101 , 4330000 , '11' , 6400 , 'test중9' , 120 , 552 , sysdate);
+--insert into product_tbl values(10 , 'test10' , 'qweqrqqr' , 101 , 2000000 , '11' , 220 , 'test중입니네다10' , 20 , 125 , sysdate);
+--insert into product_tbl values(5 , 'test6' , 'qweqrqqr' , 101 , 6000 , '11' , 130 , 'test중입니다ddd5' , 50 , 333 , sysdate);
+insert into product_tbl values(11 , 'test11' , 'qweqrqqr' , 101 , 24000 , '11' , 1220 , 'test중입니네다11' , 221 , 1225 , sysdate);
+insert into product_tbl values(12 , 'test12' , 'qweqrqqr' , 101 , 60200 , '11' , 1430 , 'test중입니다12' , 545 , 38 , sysdate);
 
 --상품 추가 사진 테이블
 CREATE TABLE IMG_TBL(
@@ -113,12 +124,22 @@ CREATE TABLE RECENT_VIEW_TBL(
 	RV_NO		NUMBER															NOT NULL	
 );	
 
+	SELECT PT.P_IMG , RVT.RV_NO FROM
+		RECENT_VIEW_TBL RVT JOIN PRODUCT_TBL PT
+		ON RV_P_NO = P_NO
+		WHERE RV_ID = 'qweqrqqr'
+		ORDER BY RV_NO DESC;
+
 --장바구니 테이블
 CREATE TABLE CART_TBL(
 	CART_NO 	NUMBER															PRIMARY KEY,
 	CART_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
 	CART_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL
 );
+
+--insert into cart_tbl values(1111,'sun112',1);
+--insert into cart_tbl values(11112,'sun112',1);
+--insert into cart_tbl values(11113,'sun112',1);
 
 --보안 인증 번호 테이블
 CREATE TABLE SECURITY_NO_TBL(
@@ -133,19 +154,19 @@ CREATE TABLE REFUND_TBL(
 	REFUND_STATUS	NUMBER(1)				DEFAULT 0							NOT NULL
 );
 
-
-drop sequence user_seq;
-drop table cart_tbl;
-drop table category_tbl;
-drop table dibs_tbl;
-drop table img_tbl;
-drop table order_tbl;
-drop table product_tbl;
-drop table qna_tbl;
-drop table recent_view_tbl;
-drop table refund_tbl;
-drop table review_tbl;
-drop table security_no_tbl;
-drop table seller_tbl;
-drop table user_tbl;
-
+--
+--drop sequence user_seq;
+--drop table cart_tbl;
+--drop table category_tbl;
+--drop table dibs_tbl;
+--drop table img_tbl;
+--drop table order_tbl;
+--drop table product_tbl;
+--drop table qna_tbl;
+--drop table recent_view_tbl;
+--drop table refund_tbl;
+--drop table review_tbl;
+--drop table security_no_tbl;
+--drop table seller_tbl;
+--drop table user_tbl;
+--

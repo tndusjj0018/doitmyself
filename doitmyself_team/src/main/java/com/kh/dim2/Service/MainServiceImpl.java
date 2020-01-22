@@ -1,10 +1,14 @@
 package com.kh.dim2.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.mainDAO;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Recent_View;
 
 @Service
 public class MainServiceImpl implements MainService{
@@ -51,5 +55,30 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public Member isAdmin(String uSER_ID) {
 		return dao.admin_check(uSER_ID);
+	}
+
+	@Override
+	public List<Product> getBestProduct_List() {
+		return dao.getBestProduct_List();
+	}
+
+	@Override
+	public List<Product> getNewProduct_List() {
+		return dao.getNewProduct_List();
+	}
+
+	@Override
+	public int cartCount(String id) {
+		return dao.getCart_count(id);
+	}
+ 
+	@Override
+	public int recentViewCount(String uSER_ID) {
+		return dao.recentView_Count(uSER_ID);
+	}
+
+	@Override
+	public List<Recent_View> getRecent_View_List(String uSER_ID) {
+		return dao.getRecent_View_List(uSER_ID);
 	}
 }

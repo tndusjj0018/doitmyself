@@ -42,4 +42,36 @@
 		WHERE USER_ID = #{USER_ID}
 	</select>
 	
+	<select id="getBestProduct_List" resultType="product">
+		SELECT * FROM
+		PRODUCT_TBL
+		ORDER BY P_READCOUNT DESC
+	</select>
+	
+	<select id="getNewProduct_List" resultType="product">
+		SELECT * FROM
+		PRODUCT_TBL
+		ORDER BY P_NO DESC
+	</select>
+
+	<select id="getRecent_View_List" resultType="recent_view" parameterType="String">
+		SELECT PT.P_IMG , RVT.RV_NO FROM
+		RECENT_VIEW_TBL RVT JOIN PRODUCT_TBL PT
+		ON RV_P_NO = P_NO
+		WHERE RV_ID = #{USER_ID}
+		ORDER BY RV_NO DESC
+	</select>
+	
+	<select id="getCart_count" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM
+		CART_TBL
+		WHERE CART_ID=#{id}
+	</select>
+	
+	<select id="recentView_Count" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM
+		RECENT_VIEW_TBL
+		WHERE RV_ID=#{id}
+	</select>
+	
 </mapper>
