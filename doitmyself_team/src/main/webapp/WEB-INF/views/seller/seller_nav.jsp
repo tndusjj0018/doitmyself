@@ -160,6 +160,7 @@
   <script src="resources/yeop/demo/demo.js"></script>
   <script src="resources/yeop/js/seller_info.js"></script>
   <script src="resources/yeop/js/seller_product.js"></script>
+  <script src="resources/yeop/js/seller_order.js"></script>
   
   
 </body>

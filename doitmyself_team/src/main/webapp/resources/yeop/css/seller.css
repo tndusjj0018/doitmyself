@@ -82,7 +82,7 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 	}
 .col-md-9{flex:0 0 83%; max-width:83%;}
 .card-1{box-shadow:none;}
-.card-order{width:1130px!important;}
+.card-order{width:1206px!important;}
 .orderSearch-tb{width:97%; margin:0 auto;}
 .orderSearch-tb th,.orderSearch-tb td{border:1px solid silver;}
 .orderSearch-tb th{width:150px; height:39px; background:#4f97c3d4; color:white; padding-left:10px;}
@@ -95,10 +95,10 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 .order-btn button:nth-child(1){width:80px; height:30px; background:#4f97c3d4; color:white; border:none;}
 .order-btn button:nth-child(2){width:80px; height:30px; background:white; color:#4f97c3d4; border:1px solid #4f97c3d4;}
 .orderList-tb td{border:1px solid silver; text-align:center; padding:0 13px;}
-.orderList-tb tr:nth-child(1){background:#6da9cd6b;}
+.orderList-tb thead>tr{background:#6da9cd6b;}
 .orderList-tb tr>td{height:30px;}
 .orderList-tb{width:97%; margin:0 auto;}
-.orderList{text-align:right; margin-bottom:17px;}
+.orderList{text-align:right; margin-bottom:17px; margin-right:19px;}
 .orderList select{width:113px; height:26px;}
 .form-control[readonly]{background:#f3f3f3;}
 #new_cancel:hover,#new_p:hover{opacity:0.7; cursor:pointer; transition:.3s;}
@@ -106,3 +106,19 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 input[type=file]{text-indent:0; border:none;}
 #upLoadFileImg{display:inline-block; width:120px;height:90px; border:1px solid #dedede;}
 #uploadfile{width:290px; color:gray;}
+.orderList-tb tbody>tr>td{height:53px; color:#717171;}
+.orderDate{width:105px;}
+.orderNo{width:115px;}
+.orderId{width:115px;}
+
+
+.order-btn img{margin-left:-5px; width:17px; opacity:0.5;}
+.orderProgress{font-size:9.5pt; color:#7b7b7b; margin:0 0 13px 17px;}
+.orderProgress>b{font-size:16pt; opacity:0.9;}
+.orderProgress>b:nth-child(1){color:#ca1b1b;}
+.orderProgress>b:nth-child(2){color:#e6811a;}
+.orderProgress>b:nth-child(3){color:#428bca;}
+.orderProgress>b:nth-child(4){color:#5bb65b;}
+.orderStatus{background:#ca1b1b; border:none; width:89px; height:35px; color:white;}
+.orderStatus:hover{opacity:0.7; transition:.3s; cursor:pointer;}
+.orderImg img{width:96px; margin-top:3px; display:block;}
