@@ -3,6 +3,7 @@ package com.kh.dim2.Service;
 import java.util.List;
 
 import com.kh.dim2.domain.Category;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -22,5 +23,8 @@ public interface SellerService {
 	
 	//상품등록
 	void insertProduct(Product product);
+	
+	//주문관리 주문리스트
+	List<Order> getOrderList(String USER_ID);
 
 }

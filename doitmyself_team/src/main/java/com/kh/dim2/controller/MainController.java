@@ -1,6 +1,7 @@
 package com.kh.dim2.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MainService;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Recent_View;
 
 @Controller
 public class MainController {
@@ -24,8 +27,17 @@ public class MainController {
 	public MainService mainService;
 	
 	@RequestMapping(value="/home")
-	public String home() {
-		return "main/home";
+	public ModelAndView home(
+				ModelAndView mv , Product product , HttpServletResponse response) {
+		
+		List<Product> BestproductList = mainService.getBestProduct_List();
+		List<Product> NewproductList = mainService.getNewProduct_List();
+		
+		mv.addObject("newDim" , NewproductList);
+		mv.addObject("bestDim" , BestproductList);
+		
+		mv.setViewName("main/home");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -86,22 +98,30 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/loginProcess" , method = RequestMethod.POST)
-	public ModelAndView loginProcess(@RequestParam("USER_ID") String USER_ID , @RequestParam("USER_PASSWORD") String USER_PASSWORD ,
+	public ModelAndView loginProcess(@RequestParam("USER_ID") String USER_ID , @RequestParam("USER_PASSWORD") String USER_PASSWORD , Recent_View recent_view ,
 							HttpServletRequest request , HttpServletResponse response , HttpSession session , ModelAndView mv) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		
 		int result = mainService.isId(USER_ID , USER_PASSWORD);
 		int seller_result = mainService.isSeller(USER_ID);
+		
 		Member admin_check = mainService.isAdmin(USER_ID);
-		
-		int adminNumber = admin_check.getUSER_IS_ADMIN();
-		
-		System.out.println(seller_result);
 		
 		if(result == 1) {
 			
+			int recentView_Count = mainService.recentViewCount(USER_ID);
+			int adminNumber = admin_check.getUSER_IS_ADMIN();//관리자인지 아닌지 확인
+			List<Product> BestproductList = mainService.getBestProduct_List();//Best Dim 구하기
+			List<Product> NewproductList = mainService.getNewProduct_List();//New Dim 구하기
 			session.setAttribute("USER_ID", USER_ID);
 			session.setAttribute("SELLER_RESULT" , seller_result);
+			
+			if(recentView_Count > 0) {
+				List<Recent_View> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
+				mv.addObject("recentView", recentViewList);
+			}
+			mv.addObject("newDim" , NewproductList);
+			mv.addObject("bestDim" , BestproductList);
 			mv.addObject("adminNumber" , adminNumber);
 			mv.setViewName("main/home");
 			
@@ -124,6 +144,14 @@ public class MainController {
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:home";		 
+		return "redirect:home";
+	}
+
+	@RequestMapping(value="/cart_count", method=RequestMethod.POST)
+	public void cart_count(String id, HttpServletResponse response) throws Exception {
+		int result = mainService.cartCount(id);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 }

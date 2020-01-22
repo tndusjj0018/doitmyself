@@ -1,10 +1,14 @@
 package com.kh.dim2.DAO;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Recent_View;
 
 @Repository
 public class mainDAO {
@@ -34,5 +38,25 @@ public class mainDAO {
 
 	public Member admin_check(String uSER_ID) {
 		return sqlSession.selectOne("Main.admin_check" , uSER_ID);
+	}
+
+	public List<Product> getBestProduct_List() {
+		return sqlSession.selectList("Main.getBestProduct_List");
+	}
+
+	public List<Product> getNewProduct_List() {
+		return sqlSession.selectList("Main.getNewProduct_List");
+	}
+
+	public int getCart_count(String id) {
+		return sqlSession.selectOne("Main.getCart_count" , id);
+	}
+
+	public int recentView_Count(String uSER_ID) {
+		return sqlSession.selectOne("Main.recentView_Count" , uSER_ID);
+	}
+
+	public List<Recent_View> getRecent_View_List(String uSER_ID) {
+		return sqlSession.selectList("Main.getRecent_View_List" , uSER_ID);
 	}
 }

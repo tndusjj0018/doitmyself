@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.SellerService;
 import com.kh.dim2.domain.Category;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -184,6 +185,13 @@ public class SellerController {
 		out.close();
 	}
 	
+	// ## 주문관리 주문리스트 ##
+	@ResponseBody
+	@PostMapping(value="OrderList")
+	public List<Order> OrderList(@RequestParam("USER_ID")String USER_ID){
+		List<Order> list = sellerService.getOrderList(USER_ID);
+		return list;
+	}
 }
 	
 

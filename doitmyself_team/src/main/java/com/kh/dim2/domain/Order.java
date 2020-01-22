@@ -1,6 +1,8 @@
 package com.kh.dim2.domain;
 
 public class Order {
+	private String P_IMG;
+	private String P_NAME;	
 	private int ORDER_NO;
 	private int ORDER_P_NO;
 	private int ORDER_DELIVERY;
@@ -15,6 +17,19 @@ public class Order {
 	private String ORDER_SELLER; 
 	private String ORDER_TRNO;
 	private int ORDER_AMOUNT;
+	
+	public String getP_IMG() {
+		return P_IMG;
+	}
+	public void setP_IMG(String p_IMG) {
+		P_IMG = p_IMG;
+	}
+	public String getP_NAME() {
+		return P_NAME;
+	}
+	public void setP_NAME(String p_NAME) {
+		P_NAME = p_NAME;
+	}
 	public int getORDER_NO() {
 		return ORDER_NO;
 	}
