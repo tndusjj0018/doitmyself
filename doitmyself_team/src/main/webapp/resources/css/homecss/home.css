@@ -47,7 +47,7 @@ fieldset {
 }
 
 .enter{
-  margin-top : 105px;
+  margin-top : 59px;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -160,7 +160,7 @@ button:focus,
 button:hover {
   outline: none;
   background-position: 0 0;
-  background : dimgray;
+  opacity :0.85;
   color: white;
 }
 .float_login{
