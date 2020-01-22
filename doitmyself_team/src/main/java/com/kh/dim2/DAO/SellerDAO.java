@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Category;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
@@ -31,6 +32,10 @@ public class SellerDAO {
 
 	public List<SubCategory> getProductSubCategory(HashMap<String, Integer> map) {
 		return sqlSession.selectList("Seller.ProductSubCategory", map);
+	}
+
+	public void insertProduct(Product product) {
+		sqlSession.insert("Seller.ProductInsert", product);
 	}
 
 }

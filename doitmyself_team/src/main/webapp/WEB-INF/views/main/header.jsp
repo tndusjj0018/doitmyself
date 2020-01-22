@@ -57,12 +57,14 @@
                 <a class="dropdown-item" href="#">악세서리</a>
               </div>
             </li>
+
             <c:if test="${adminNumber != 1}">
              	<li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link" style="background: #3a8aa2; color: white;"><span class="icon-shopping_cart"></span>[0]</a></li>
             </c:if>
           	<c:if test="${empty USER_ID}">
           	 	<a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">Log-in</a>
           	</c:if>
+
           	<c:if test="${adminNumber == 1}">
 	          	 <a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">관리자</a>
 	          	 <li class="nav-item">

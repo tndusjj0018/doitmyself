@@ -6,7 +6,7 @@ li{list-style:none;}
 .product_hr{background:#3c8cbc; margin:0; opacity:0.7;}
 .order-h5{font-size:9.5pt; color:gray; margin-bottom:3px; margin-left:17px;}
 .order_hr{width:97%; background:#3c8cbc; margin:0 auto; opacity:0.7;}
-.product_tb{width:803px; margin-bottom:23px;}
+.product_tb{width:892px; margin-bottom:36px;}
 .p_ex{width:150px; height:610px; background:#4f97c3d4; text-align:center; font-weight:bold; color:white; font-size:10pt; line-height:610px;}
 input::placeholder{color:#dddddd!important;}
 input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
@@ -21,16 +21,16 @@ input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
  	.active p{color:#3c8dbc!important}
  	.title{color:#3c8dbc}
  	#p_qa,#p_price{margin-left:10px;}
- 	.card{width:833px;}
+ 	.card{width:922px;}
  	#sub_cate_select{width:170px; text-align:center;}
- 	#main_cate_select{width:130px; text-align:center;}
+ 	#main_cate_select{width:150px; text-align:center;}
  	input:focus,select:focus{outline:none;}
  	input{font-size:10.5pt; text-indent:7px;}
  	#sub_cate{width:150px; display:inline-block;}
- 	#main_cate{width:160px; display:inline-block; margin:10px 25px 10px 5px;}
+ 	#main_cate{width:190px; display:inline-block; margin:10px 25px 10px 5px;}
  	#main_cate span,#sub_cate span{margin-left:10px; background:#d3e5f0; display:inline-block;
     text-align: center; border: 1px solid #a0a0a0; border-bottom:none; font-size:10pt; color:gray; height:24px; line-height:24px; font-weight:bold;}
-#main_cate span{width:130px;}
+#main_cate span{width:150px;}
 #sub_cate span{width:170px;}
 #cate_result span:nth-child(1){
     width: 160px;
@@ -49,7 +49,7 @@ input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
 }
 #cate_result span:nth-child(2){
 	display: inline-block;
-    width: 453px;
+    width: 553px;
     border-bottom: 1px solid #dddddd;
     border-top: 1px solid #dddddd;
     height: 30px;
@@ -66,7 +66,7 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 .arrowImg{
     opacity: 0.3;
     height: 37px;
-    left: 163px;
+    left: 190px;
     top: 47px;
     position: absolute;
     width: 31px;
@@ -104,4 +104,5 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 #new_cancel:hover,#new_p:hover{opacity:0.7; cursor:pointer; transition:.3s;}
 .logo a{text-align:center;}
 input[type=file]{text-indent:0; border:none;}
-
+#upLoadFileImg{display:inline-block; width:120px;height:90px; border:1px solid #dedede;}
+#uploadfile{width:290px; color:gray;}

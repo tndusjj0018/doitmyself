@@ -207,6 +207,7 @@
 				}
 			});//click end
 			
+
 			//권한이 수정되었을 때 리로드해서 바로 반영
 			var privilege = function(user_no, is_admin){
 				$.ajax({
@@ -225,7 +226,6 @@
 				})
 			}
 			
-			
 			//권한 부여 클릭 했을 때
 			$("#mytable").on("click",".ok",function(){
 				//해당 유저가 관리자인지 일반회원인지 판별 
@@ -237,8 +237,6 @@
 				}else{//일반회원 일 때
 					privilege(user_no, 1);
 				}
-				
-				
 			})
 			
 			//권한 철회 클릭했을 때
@@ -261,6 +259,7 @@
 			$(".search").on("change", ".privilege", function(){
 				console.log("privilege 선택 옵션 바뀜 ="+$(this).val());
 				selected_option = $(this).val();
+
 				go(1);
 				$(".clearfix").remove();
 				

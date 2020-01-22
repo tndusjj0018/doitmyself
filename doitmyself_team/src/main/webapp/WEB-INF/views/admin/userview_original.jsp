@@ -28,7 +28,6 @@
     		top: 1px;
 		}
 		
-		
 	</style>
 <script>
 	$(document).ready(function(){
@@ -204,10 +203,7 @@
 		
 	})	
 
-				
-	
-	
-	
+
 	
 </script>
 </head>
@@ -225,8 +221,9 @@
 		<input type="button" value = "검색" class="user_searchbtn">
 	</div>
 	<table id="mytable" class="table table-bordred table-striped">
-                  
+
 	</table>
-	
+
 </body>
 </html>
+

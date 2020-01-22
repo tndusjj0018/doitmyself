@@ -1,17 +1,27 @@
 package com.kh.dim2.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Product {
-	private int P_NO;
-	private String P_NAME;
-	private String P_SELLER;
-	private int P_CATEGORY_NO;
-	private int P_PRICE;
-	private String P_IMG;
-	private int P_QUANTITY;
-	private String P_DESCRIPTION;
-	private int P_READCOUNT;
-	private int P_DIBS;
-	private String P_REGDATE;
+	private int P_NO; //상품 번호
+	private String P_NAME; //상품 이름
+	private String P_SELLER; //가게 이름
+	private int P_CATEGORY_NO; //카테고리 넘버
+	private int P_PRICE; //가격
+	private String P_IMG; //메인 사진 이름
+	private MultipartFile uploadfile;
+	private int P_QUANTITY; //재고수량
+	private String P_DESCRIPTION; //상품 설명
+	private int P_READCOUNT; // 상품 조회수
+	private int P_DIBS; //상품 찜 수
+	private String P_REGDATE; //상품 추가 날짜
+	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	public int getP_NO() {
 		return P_NO;
 	}

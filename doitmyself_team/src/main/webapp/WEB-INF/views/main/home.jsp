@@ -29,7 +29,6 @@
   <body class="goto-here">
     <section id="home-section" class="hero">
     	<div id="floatMenu">
-    		
 			방금 본 DIM
 			<br>
 			<img src="resources/img/product-1.jpg" style="width:100px; height:100px; border-radius:40px;">

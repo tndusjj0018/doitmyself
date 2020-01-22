@@ -82,7 +82,7 @@
                 <hr>
               </div>
               
-              <form id="p-form" action="ProductAddAction" enctype="multipart/form-data">
+              <form id="p-form" action="ProductAddAction" enctype="multipart/form-data" method="post">
               <div class="card-body" style="height:900px">
               	<!-- product table 1 -->
               	<h5 class="product-h5">* 상품명/카테고리 선택</h5>
@@ -90,12 +90,12 @@
             	<table class="product_tb">
             		<tr>
             			<th class="p_th">상품명</th>
-            			<td class="p_td"><input type="text" id="test_dname"></td>            			
+            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME"></td>            			
             		</tr>
             		<tr>
             			<th class="p_th">가게 명</th>
             			<td class="p_td">
-            				<input type="text" id="test_name">
+            				<input type="text" id="test_name" name="P_SELLER">
             			</td>
             		</tr>
             		<tr>
@@ -119,6 +119,8 @@
             				<div id="cate_result">
             					<span>* 카테고리 선택결과</span>
             					<span id="cate_message"></span>
+            					<!-- 카테고리 넘버 저장용 input -->
+            					<input type="hidden" id="cateGory" name="P_CATEGORY_NO">
             				</div>
             			</td>
             		</tr>
@@ -131,11 +133,13 @@
             		<tr>
             			<th class="p_th">재고 수량</th>
             			<td class="p_td">
-            				<input type="text" id="p_qa" maxlength="7"> 개
+            				<input type="text" id="p_qa" maxlength="5"> 개
             			</td>            			
             			<th class="p_th">가격</th>
             			<td class="p_td">
             				<input type="text" id="p_price" maxlength="13"> 원
+            				<!-- 콤마뺀가격 저장 -->
+            				<input type="hidden" id="p_price_removeComma" name="P_PRICE" maxlength="13">
             			</td>
             		</tr>            		
             	</table>
@@ -148,13 +152,16 @@
             		<tr>
             			<th class="p_th">메인사진</th>
             			<td class="p_td">
-            				<input type="file" name="uploadfile"
+            				<input type="file" name="uploadfile" onchange="readURL(this);" id="uploadfile"
 								accept="image/gif, image/jpeg, image/png">
+							<img id="upLoadFileImg" src="resources/img/noimage.gif">
             			</td>            			
             		</tr> 		
             		<tr>
             			<th class="p_ex" colspan="1">상품 설명</th>
             			<td class="p_td ck_td" colspan="3">
+            			<!-- 상품설명 저장 input -->
+            			<input type="hidden" id="editorData" name="P_DESCRIPTION">
             				<textarea id="p_content"></textarea>
             				<script type="text/javascript">
 							 CKEDITOR.replace('p_content'

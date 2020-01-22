@@ -132,3 +132,20 @@ CREATE TABLE REFUND_TBL(
 	REFUND_P_NO		NUMBER					REFERENCES ORDER_TBL(ORDER_NO)		NOT NULL,
 	REFUND_STATUS	NUMBER(1)				DEFAULT 0							NOT NULL
 );
+
+
+drop sequence user_seq;
+drop table cart_tbl;
+drop table category_tbl;
+drop table dibs_tbl;
+drop table img_tbl;
+drop table order_tbl;
+drop table product_tbl;
+drop table qna_tbl;
+drop table recent_view_tbl;
+drop table refund_tbl;
+drop table review_tbl;
+drop table security_no_tbl;
+drop table seller_tbl;
+drop table user_tbl;
+

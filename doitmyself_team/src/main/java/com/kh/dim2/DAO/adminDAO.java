@@ -50,7 +50,6 @@ public class adminDAO {
 		return sqlSession.selectOne("Admin.userinfo",USER_NO);
 	}
 
-
 	public int updateAdminPrivilege(Map<String, Object> map) {
 		return sqlSession.update("Admin.updatePrivilege", map);
 	}
@@ -62,4 +61,5 @@ public class adminDAO {
 	public List<SubCategory> getSubCategoryList() {
 		return sqlSession.selectList("Admin.SubCategoryList");
 	}
+
 }

@@ -24,4 +24,15 @@
 		select * from sub_category_tbl
 		where sc_no_ref = #{c_no}
 	</select>
+	
+	<insert id="ProductInsert" parameterType="product">
+		<selectKey resultType="int" order="BEFORE" keyProperty="P_NO">
+			select nvl(max(P_NO),0)+1 from product_tbl
+		</selectKey>
+		insert into product_tbl
+		(P_NO, P_NAME, P_SELLER, P_CATEGORY_NO, P_PRICE, P_IMG,
+		 P_QUANTITY, P_DESCRIPTION, P_REGDATE)
+		values(#{P_NO}, #{P_NAME}, #{P_SELLER}, #{P_CATEGORY_NO},
+				#{P_PRICE}, #{P_IMG}, #{P_QUANTITY}, #{P_DESCRIPTION}, SYSDATE)
+	</insert>
 </mapper>

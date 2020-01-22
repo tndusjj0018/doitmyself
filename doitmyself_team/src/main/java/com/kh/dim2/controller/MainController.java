@@ -73,6 +73,7 @@ public class MainController {
 		PrintWriter out = response.getWriter();
 		int result = mainService.insert(member);
 		out.println("<script>");
+
 		if(result == 1) {//삽입 성공시
 			out.println("alert('회원가입에 성공했습니다.');");
 			out.println("location.href='login';");
@@ -108,6 +109,7 @@ public class MainController {
 			
 		} else {
 			String message = "아이디나 비밀번호가 일치하지 않습니다.";
+
 			response.setContentType("text/html;charset=utf-8");
 	         PrintWriter out = response.getWriter();
 	         out.println("<script>");
@@ -118,6 +120,7 @@ public class MainController {
 	         return null;
 		}
 	}
+  
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();

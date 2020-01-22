@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.SellerService;
 import com.kh.dim2.domain.Category;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
@@ -109,11 +111,18 @@ public class SellerController {
         //파일을 바이트 배열로 변환
         byte[] bytes=upload.getBytes();
  
+        //파일 이름 변경
+        // 난수를 구합니다.(랜덤)
+		Random r = new Random();
+		int random = r.nextInt(100000000);
+		String refileName = random + fileName;
+		System.out.println("refileName = " + refileName);
+        
         //이미지를 업로드할 디렉토리(배포 디렉토리로 설정)
         String uploadPath=
         	"C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\upload\\";
         	//"D:\\workspace-sts\\Spring6_MVC_ATTATCH2\\src\\main\\webapp\\resources\\upload\\";
-        OutputStream out = new FileOutputStream(new File(uploadPath+fileName));
+        OutputStream out = new FileOutputStream(new File(uploadPath + refileName));
  
         //서버로 업로드
         out.write(bytes);
@@ -121,20 +130,60 @@ public class SellerController {
         String callback=request.getParameter("CKEditorFuncNum");
  
         //서버=>클라이언트로 텍스트 전송(자바스크립트 실행)
-        PrintWriter printWriter = response.getWriter();
- 
-        String fileUrl=
-                    request.getContextPath() + "/resources/upload/" + fileName;
- 
+        PrintWriter printWriter = response.getWriter();   
+        
+        String fileUrl= "resources/upload/" + refileName;
+        
         printWriter.println(
-        		"<script>window.parent.CKEDITOR.tools.callFunction("
-        		+ callback + ",'" + fileUrl + "','이미지가 업로드되었습니다.')"
+        		"<script>setTimeout(function(){window.parent.CKEDITOR.tools.callFunction("
+        		+ callback + ",'" + fileUrl + "','이미지가 업로드되었습니다.')},2300);"
         		+"</script>");
         printWriter.flush();
     }
  
+	// ## 상품등록 ##
+	@RequestMapping(value="/ProductAddAction", method=RequestMethod.POST)
+	public void productAddAction(Product product, HttpServletRequest request, HttpServletResponse response)
+							throws Exception{
+		//set에 저장된 uploadfile을 가져옴
+		MultipartFile uploadfile = product.getUploadfile();
+		String fileName = uploadfile.getOriginalFilename();
+		
+//		if(!uploadfile.isEmpty()) {
+//			String fileName = uploadfile.getOriginalFilename();//원래 파일명
+//			product.setP_IMG(fileName);//원래 파일명 저장
+//		}
+		
+		String saveFolder = "C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\upload\\";
+		
+		// 난수를 구합니다.(랜덤)
+		Random r = new Random();
+		int random = r.nextInt(100000000);
+		
+		//새로운 파일명
+		String refileName = random + fileName;
+		
+		//오라클 디비에 저장될 파일 명
+		// transferTo(file path) : 업로드한 파일을 매개변수의 경로에 지정합니다.
+		uploadfile.transferTo(new File(saveFolder + refileName));
+		
+		//바뀐 파일명으로 저장
+		product.setP_IMG(refileName);
+		System.out.println("refileName = " + refileName);
+		
+		sellerService.insertProduct(product);
+		System.out.println(product.getP_DESCRIPTION());
+		
+		response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('상품등록 완료')");
+		out.println("location.href='seller?doc=product'");
+		out.println("</script>");
+		out.close();
+	}
+	
 }
 	
-	// ## 상품등록 ##
-
 

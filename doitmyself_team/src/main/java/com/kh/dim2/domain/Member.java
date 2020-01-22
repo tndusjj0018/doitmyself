@@ -69,7 +69,7 @@ public class Member {
 		USER_EMAIL = uSER_EMAIL;
 	}
 	public String getUSER_BIRTH() {
-		return USER_BIRTH.substring(0, 10);
+		return USER_BIRTH;
 	}
 	public void setUSER_BIRTH(String uSER_BIRTH) {
 		USER_BIRTH = uSER_BIRTH;

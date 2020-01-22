@@ -41,7 +41,6 @@
 				and 
 				USER_IS_ADMIN = #{option} 
 			</if>
-				
 			</where>
 	</select>
 	
@@ -97,3 +96,4 @@
 
 	
 </mapper>
+

@@ -17,7 +17,7 @@ public interface AdminService {
 	
 	//검색어를 입력 하지 않았을 때 유저 목록 보여주기 
 	public List<Member> getMemberList(int num, int limit, String option);
-	
+
 	//리뷰 수 구하기
 	public int getReviewCount();
 	
@@ -30,11 +30,10 @@ public interface AdminService {
 	
 	//유저 정보 수정 
 	public int ModifyUser(Member member);
-	
+
 	//수정 폼에 유저 정보 가져오기 
 	public Member getMemberInfo(int USER_NO);
-
-
+	
 	public int updateAdminPrivilege(int USER_NO, int USER_IS_ADMIN);
 
 	public List<Category> getMajorCategoryList();

@@ -35,6 +35,7 @@ public class AdminController {
 	@GetMapping("admin")
 	public ModelAndView AdminPage(String doc, @RequestParam(value = "num", defaultValue = "1", required = false) int num, 
 									ModelAndView mv, HttpServletRequest request) {
+
 		System.out.println("view = "+ doc);
 		if(doc == null) {
 			doc = "userview";
@@ -137,10 +138,12 @@ public class AdminController {
 		System.out.println("member의 번호는" + USER_NO);
 		System.out.println("member의 name은" + member.getUSER_NAME());
 		response.setContentType("text/html;charset=utf-8");
+
 		member.setUSER_NO(USER_NO);
 		int result = adminService.ModifyUser(member);
 		String message = "정보 수정에 실패하였습니다.";
 		System.out.println("result = " + result);
+
 		if(result == 1) {
 			message = "정보 수정 성공";
 		}
@@ -193,8 +196,7 @@ public class AdminController {
 		if(result == 1) {
 			message = "권한 수정 성공";
 		}
-		response.getWriter().print(message);
-		
+		response.getWriter().print(message);		
 	}
 	
 	@ResponseBody
