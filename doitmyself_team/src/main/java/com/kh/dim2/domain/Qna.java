@@ -1,7 +1,5 @@
 package com.kh.dim2.domain;
 
-import java.sql.Date;
-
 public class Qna {
 	
 	private int QNA_NO;
@@ -9,12 +7,26 @@ public class Qna {
 	private String QNA_SUBJECT;
 	private String QNA_CONTENT;
 	private String QNA_WRITER;
-	private Date QNA_DATE;
+	private String QNA_DATE;	
 	private int QNA_CATEGORY;
 	private String QNA_S_ID;
 	private int QNA_SECRET;
 	private int QNA_ISRESPONSE;
+	private int QNA_RE_REF;
 	
+	public String getQNA_DATE() {
+		return QNA_DATE;
+	}
+	public void setQNA_DATE(String qNA_DATE) {
+		QNA_DATE = qNA_DATE.substring(0,16);
+	}
+	
+	public int getQNA_RE_REF() {
+		return QNA_RE_REF;
+	}
+	public void setQNA_RE_REF(int qNA_RE_REF) {
+		QNA_RE_REF = qNA_RE_REF;
+	}
 	public int getQNA_NO() {
 		return QNA_NO;
 	}
@@ -45,12 +57,7 @@ public class Qna {
 	public void setQNA_WRITER(String qNA_WRITER) {
 		QNA_WRITER = qNA_WRITER;
 	}
-	public Date getQNA_DATE() {
-		return QNA_DATE;
-	}
-	public void setQNA_DATE(Date qNA_DATE) {
-		QNA_DATE = qNA_DATE;
-	}
+
 	public int getQNA_CATEGORY() {
 		return QNA_CATEGORY;
 	}

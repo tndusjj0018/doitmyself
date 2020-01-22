@@ -54,6 +54,8 @@ create table delete_File(
 select * from delete_file;
 
 
+alter table
+
 select * from qna_tbl;
 
 select * from user_sys_privs;
@@ -77,3 +79,7 @@ CREATE TABLE QNA_TBL(
 );
 
 CREATE SEQUENCE QNA_NO;
+
+alter table qna_tbl drop column qna_re_ref;
+
+alter table qna_tbl add QNA_RE_REF NUMBER(4) DEFAULT 0;
