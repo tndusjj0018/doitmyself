@@ -16,6 +16,7 @@
 </head>
 
 <body class="">
+<header><jsp:include page="../main/header.jsp"></jsp:include></header>
 	<div class="wrapper ">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		
@@ -97,7 +98,7 @@
 		
 						<!-- Modal body -->
 						<div class="modal-body">
-							<form name="memberLeaveForm" action="memberLeaveAction" method="post">
+							<form name="memberLeaveForm" action="memberLeaveAction?USER_ID=${USER_ID }" method="post">
 								<input type="hidden" name="num" value="${param.num }">
 		
 								<div class="form-group">

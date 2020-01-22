@@ -2811,9 +2811,9 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 
 .navbar {
   padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+/*   padding-bottom: 0.625rem; */
   min-height: 53px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .navbar a {
@@ -2821,7 +2821,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .navbar a:not(.btn):not(.dropdown-item) {
-  color: #FFFFFF;
+ /*  color: #FFFFFF; */
 }
 
 .navbar a.dropdown-item {

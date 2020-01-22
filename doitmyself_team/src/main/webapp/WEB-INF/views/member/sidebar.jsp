@@ -50,8 +50,8 @@
 </head>
 <body>
 
-<div class="sidebar" data-color="white" data-active-color="danger">     
-			<div class="logo">
+<div class="sidebar" data-color="white" data-active-color="danger" style="position: absolute;">     
+			<div class="logo" style="background: #f4f3ef">
         		<a href="memberInfo?USER_ID=${USER_ID }" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
           		${USER_ID } 님
         		</a>

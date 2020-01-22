@@ -12,9 +12,20 @@
 	
 	<!-- CSS Files -->
 	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
+	
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			$('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
+		});
+	</script>
 </head>
 
 <body class="">
+<header><jsp:include page="../main/header.jsp"></jsp:include></header>
 	<div class="wrapper ">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		
@@ -131,11 +142,11 @@
 						<c:if test="${qnacount == 0}">
 							<div class="container">
 			    				<div class="leaveInfo">
-			    					<i class="nc-icon nc-favourite-28"></i>			     	        		
+			    					<i class="nc-icon nc-chat-33"></i>			     	        		
 			        				<span>문의한 상품이 없습니다.</span>
 			        			</div>
-			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        			<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;">
 			        		</div>
 						</c:if>
 						</div>
@@ -155,7 +166,7 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/soo/js/core/jquery.min.js"></script>
+	
 	<script src="resources/soo/js/core/popper.min.js"></script>
 	<script src="resources/soo/js/core/bootstrap.min.js"></script>
 	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
