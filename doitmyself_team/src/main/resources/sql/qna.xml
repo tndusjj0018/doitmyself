@@ -15,6 +15,19 @@
 		values(#{QNA_NO}, '0', #{QNA_SUBJECT}, #{QNA_CONTENT}, #{QNA_WRITER}, SYSDATE, #{QNA_CATEGORY}, '0', #{QNA_SECRET})
 	</insert>
 	
+	<select id="list" parameterType="java.util.Map" resultType="qna">
+	 select * from
+		(select rownum rnum, QNA_CATEGORY, QNA_ISRESPONSE, QNA_SUBJECT, 
+		QNA_WRITER, QNA_CONTENT, QNA_DATE
+		from
+		(select * from qna_tbl order by QNA_NO desc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from qna_tbl
+	</select>
+	
 </mapper>
 
 

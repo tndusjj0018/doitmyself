@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/baha_js/detail.js"></script>
+<script src="resources/js/baha_js/qnalist.js"></script>
 <script>
-	$(function(){
-		
+	$(function() {
+
 	})
 </script>
 
@@ -51,10 +53,12 @@
 <link rel="stylesheet" href="resources/css/icomoon.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <style>
-
 </style>
 </head>
 <body class="goto-here">
+
+	<input type="hidden" id="loginid" value="${USER_ID}" name="loginid">
+
 	<div class="py-1 bg-primary">
 		<div class="container">
 			<div
@@ -227,14 +231,14 @@
 				<div class="service">
 					<table class="product_service">
 						<tr>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="detail"
-								value="상세정보"></td>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="review"
-								value="리뷰"></td>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="qna"
-								value="문의"></td>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="return"
-								value="교환/반품 정보"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="detail" value="상세정보"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="review" value="리뷰"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="qna" value="문의"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="return" value="교환/반품 정보"></td>
 						</tr>
 					</table>
 				</div>
@@ -244,11 +248,7 @@
 						<table border="1" class="product_detail">
 							<tr>
 
-								<td>상세정보란<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+								<td>상세정보란</td>
 
 							</tr>
 						</table>
@@ -284,34 +284,136 @@
 							<option value="track">배송</option>
 							<option value="return">반품/취소</option>
 							<option value="swap">교환/변경</option>
+							<option value="swap">기타</option>
 					</select></span>
 					<table class="qna_subjects">
 						<colgroup width="10%">
-						<colgroup width="60%">
+						<colgroup width="8%">
+						<colgroup width="52%">
 						<colgroup width="10%">
 						<colgroup width="20%">
 						<tr>
 							<td>문의유형</td>
+							<td></td>
 							<td>문의/답변</td>
 							<td>작성자</td>
 							<td>작성일</td>
 						</tr>
-						<tr>
-							<td>문의 작성 공간</td>
-						</tr>
+
+						<c:if test="${listcount > 0 }">
+							<c:set var="num" value="${listcount-(page-1)*10}" />
+							<c:forEach var="qna" items="${qnalist}">
+								<tr>
+									<c:choose>
+										<c:when test="${qna.QNA_CATEGORY eq 0 }">
+											<td>상품</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 1 }">
+											<td>배송</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 2 }">
+											<td>반품/취소</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 3 }">
+											<td>교환/변경</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 4 }">
+											<td>기타</td>
+										</c:when>
+									</c:choose>
+									<c:choose>
+										<c:when test="${qna.QNA_ISRESPONSE eq 0 }">
+											<td>답변대기</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 1 }">
+											<td>답변완료</td>
+										</c:when>
+										</c:choose>
+										<td class="clickable">${qna.QNA_SUBJECT}</td>
+										<td>${qna.QNA_WRITER}</td>
+										<td>${qna.QNA_DATE}</td>
+								</tr>
+
+								<tr class='qna_content'>
+									<td></td>
+									<td></td>
+									<td colspan=>${qna.QNA_CONTENT}<br> <c:if
+											test="${USER_ID eq qna.QNA_WRITER}">
+											<a href='#' id='qnaUpdate'>수정</a>
+											&emsp;
+											<a href='#' id='qnaDelete'>삭제</a>
+										</c:if></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${listcount == 0 }">
+							<td id="message" colspan="5">등록된 글이 없습니다.</td>
+						</c:if>
+
+
+
 
 					</table>
+					<c:if test="${listcount > 0 }">
+						<div class="center-block">
+						
+							<div class="row">
+								<div class="col">
+									<ul class="pagination">
+										<c:if test="${page <= 1 }">
+											<li class="page-item"><a class="page-link" href="#">이전&nbsp;</a>
+											</li>
+										</c:if>
+										<c:if test="${page > 1 }">
+											<li class="page-item"><a href="detail?page=${page-1 }"
+												class="page-link">이전</a>&nbsp;</li>
+										</c:if>
+
+										<c:forEach var="a" begin="${startpage }" end="${endpage }">
+											<c:if test="${a == page }">
+												<li class="page-item"><a class="page-link" href="#">${a }</a>
+												</li>
+											</c:if>
+											<c:if test="${a != page }">
+												<li class="page-item"><a href="detail?page=${a }"
+													class="page-link">${a }</a></li>
+											</c:if>
+										</c:forEach>
+
+										<c:if test="${page >= maxpage }">
+											<li class="page-item"><a class="page-link" href="#">&nbsp;다음</a>
+											</li>
+										</c:if>
+										<c:if test="${page < maxpage }">
+											<li class="page-item"><a href="detail?page=${page+1 }"
+												class="page-link">&nbsp;다음</a></li>
+										</c:if>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</c:if>
+
 					<span class="qnaWrite">
-						<button onclick="window.open('qnaWrite','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');">상품 문의하기</button>
+						<button
+							onclick="window.open('qnaWrite','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');">상품
+							문의하기</button>
 					</span>
+
 				</div>
+
+
 				<div class="ReturnWrap">
 					<div class="seller">
 						<p>반품/교환 정보</p>
 					</div>
 					<table class="seller_info">
 						<colgroup width="15%">
-						<colgroup width="85%">
+
+							<colgroup width="85%">
+						
 						<tr>
 							<td>고객문의 대표번호</td>
 							<td>&emsp;070-5133-4629</td>
@@ -349,11 +451,9 @@
 
 			</div>
 			<!-- class="ServiceWrap" 끝 -->
+		<div class="SelectedWrap">
 
-
-			<div class="SelectedWrap">
-
-				<div class="selected">
+								<div class="selected">
 					<table class="product_selected">
 						<tr>
 							<td></td>
@@ -396,7 +496,9 @@
 						"SelectedWrap" 끝 -->
 
 
-		</div>
+
+		
+						</div>
 		<!-- class="WRAP" 끝 -->
 	</section>
 
