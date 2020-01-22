@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Category;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -36,6 +37,10 @@ public class SellerDAO {
 
 	public void insertProduct(Product product) {
 		sqlSession.insert("Seller.ProductInsert", product);
+	}
+
+	public List<Order> getOrderList(String USER_ID) {
+		return sqlSession.selectList("Seller.OrderList", USER_ID);
 	}
 
 }

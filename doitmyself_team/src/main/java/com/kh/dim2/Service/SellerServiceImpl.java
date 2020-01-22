@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.SellerDAO;
 import com.kh.dim2.domain.Category;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -45,6 +46,11 @@ public class SellerServiceImpl implements SellerService{
 	@Override
 	public void insertProduct(Product product) {
 		sellerDAO.insertProduct(product);
+	}
+
+	@Override
+	public List<Order> getOrderList(String USER_ID) {
+		return sellerDAO.getOrderList(USER_ID);
 	}
 
 }
