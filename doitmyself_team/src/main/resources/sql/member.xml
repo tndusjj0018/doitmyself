@@ -125,6 +125,7 @@
 		WHERE ORDER_P_NO = P_NO
 		AND ORDER_ID = #{USER_ID}
 		AND ORDER_DELIVERY = 4
+		ORDER BY ORDER_DATE DESC
 	</select>
 	
 	<!-- 리뷰 작성 가능 개수 -->
@@ -158,4 +159,16 @@
 		WHERE REVIEW_P_NO = P_NO
 		AND REVIEW_P_NO = #{P_NO}
 	</select>
+	
+	
+	<select id="productDetail" resultType="product" parameterType="int">
+		select *
+		from PRODUCT_TBL
+		where P_NO = #{P_NO}
+	</select>
+	
+	<insert id="reviewWrite" parameterType="review">
+		insert into REVIEW_TBL
+		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG})
+	</insert>
 </mapper>

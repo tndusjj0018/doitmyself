@@ -68,4 +68,9 @@ public interface MemberService {
 	public int reviewwritecount(String user_id);
 	
 	public O_Product reviewDetail(int p_no);
+	
+	public Product productDetail(int p_no);
+	
+	//리뷰 작성
+	public int reviewWrite(Review review);
 }

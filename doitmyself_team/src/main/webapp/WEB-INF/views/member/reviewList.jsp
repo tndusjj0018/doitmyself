@@ -109,7 +109,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-9">
+			    <div class="col-md-10">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">나의 상품 리뷰</h5>
@@ -133,7 +133,7 @@
 			        				<c:if test="${reviewablecount > 0}">
 									<table class="table">
 										<tr>
-											<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>상태</td>
+											<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>스토어 명</td> <td>상태</td>
 										</tr>
 										<c:forEach var="ral" items="${reviewablelist}">
 										<tr>
@@ -151,7 +151,11 @@
 												(${ral.ORDER_AMOUNT}개)
 											</td>
 											<td>
-												<button type="button" class="btn" data-toggle="modal" data-target="#myModal">리뷰 작성</button>
+												${ral.p_SELLER }
+											</td>
+											<td>
+												<!-- <button type="button" class="btn" data-toggle="modal" data-target="#myModal">리뷰 작성</button> -->
+												<button type="button" class="btn" onclick="location.href='reviewWrite?P_NO=${ral.p_NO}';">리뷰 작성</button>
 											</td>
 										</tr>
 										</c:forEach>

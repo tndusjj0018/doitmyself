@@ -75,7 +75,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-9">
+			    <div class="col-md-10">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">나의 QNA</h5>
@@ -85,7 +85,7 @@
 			        	
 			        	<!-- qna 목록 있는 경우 -->
 			        	<c:if test="${qnacount > 0}">
-			        	<table class="table">
+			        	<table class="table" style="display: contents">
 							<tr>
 								<td>문의 번호</td><td colspan="2">상품 정보</td> <td>스토어 명</td> <td>문의 분류</td> <td width="25%">문의 제목</td> <td>작성일</td> <td>답변 상태</td>
 							</tr>
