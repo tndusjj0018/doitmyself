@@ -75,7 +75,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-9">
+			    <div class="col-md-10">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">WISH LIST<span class="badge" style="margin-left: 15px; position: relative; top: -4px;">${wishcount }</span></h5>
@@ -107,7 +107,7 @@
 									${wl.p_PRICE }원
 								</td>
 								<td>
-									<button type="button" class="btn" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니끼?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
+									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니끼?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
 								</td>
 							</tr>
 							</c:forEach>

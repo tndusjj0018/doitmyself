@@ -1,8 +1,11 @@
 package com.kh.dim2.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MemberService;
@@ -242,6 +246,65 @@ public class MemberController {
 		mv.setViewName("member/reviewList");
 		return mv;
 	}
+		
+	@RequestMapping(value = "/reviewWrite", method = RequestMethod.GET)
+	public ModelAndView reviewWrite(ModelAndView mv,
+									@RequestParam("P_NO") int p_no) {
+		
+		Product p = memberservice.productDetail(p_no);
+		mv.addObject("productdetail", p);
+		mv.setViewName("member/reviewWrite");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/reviewWriteAction", method = RequestMethod.POST)
+	public void reviewWriteAction(HttpServletResponse response,
+								  Review review,
+								  HttpServletRequest request,
+								  @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		MultipartFile uploadfile = review.getUploadfile();
+		
+		//if(!uploadfile.isEmpty()) {
+			String fileName = uploadfile.getOriginalFilename(); //원래 파일명
+			review.setREVIEW_IMG(fileName); //원래 파일명 저장
+			
+			String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload";
+			
+			// 난수를 구합니다.(랜덤)
+			Random r = new Random();
+			int random = r.nextInt(100000000);
+			
+			//새로운 파일명
+			String refileName = random + fileName;
+			
+			//오라클 디비에 저장될 파일 명
+			// transferTo(file path) : 업로드한 파일을 매개변수의 경로에 지정합니다.
+			uploadfile.transferTo(new File(saveFolder + refileName));
+			
+			//바뀐 파일명으로 저장
+			review.setREVIEW_IMG(refileName);
+			System.out.println("refileName = " + refileName);
+			
+			memberservice.reviewWrite(review);
+			
+			response.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('리뷰가 등록 되었습니다.')");
+			out.println("location.href='reviewList?USER_ID=" +user_id + "';");
+			out.println("</script>");
+			out.close();
+			
+			
+		//}
+		
+	}
+	
+
 	
 	@RequestMapping(value = "/reviewUpdate", method = RequestMethod.GET)
 	public ModelAndView reviewUpdate(ModelAndView mv,

@@ -145,5 +145,15 @@ public class MemberServiceImpl implements MemberService {
 	public O_Product reviewDetail(int p_no) {
 		return dao.reviewDetail(p_no);
 	}
+
+	@Override
+	public Product productDetail(int p_no) {
+		return dao.productDetail(p_no);
+	}
+
+	@Override
+	public int reviewWrite(Review review) {
+		return dao.reviewWrite(review);
+	}
 	
 }

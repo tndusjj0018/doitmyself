@@ -103,4 +103,12 @@ public class memberDAO {
 	public O_Product reviewDetail(int p_no) {
 		return sqlSession.selectOne("Member.reviewDetail", p_no);
 	}
+	
+	public Product productDetail(int p_no) {
+		return sqlSession.selectOne("Member.productDetail", p_no);
+	}
+	
+	public int reviewWrite(Review review) {
+		return sqlSession.insert("Member.reviewWrite", review);
+	}
 }
