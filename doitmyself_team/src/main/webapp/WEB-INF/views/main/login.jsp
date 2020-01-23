@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +19,17 @@
     </script>
   </head>
   <body>
+	 <%
+		    String clientId = "iOLTY0IrYPUE_O2gwkSU";//애플리케이션 클라이언트 아이디값";
+		    String redirectURI = URLEncoder.encode("home", "UTF-8");
+		    SecureRandom random = new SecureRandom();
+		    String state = new BigInteger(130, random).toString();
+		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+		    apiURL += "&client_id=" + clientId;
+		    apiURL += "&redirect_uri=" + redirectURI;
+		    apiURL += "&state=" + state;
+		    session.setAttribute("state", state);
+	 %>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
@@ -57,7 +70,7 @@
                   </div>
                   <hr>
                   <div class="form-group">
-                      <span><img src="resources/img/naver_login.PNG" class="naver_login" style="width:43%; height:40px; margin-left:2%"></span>
+                      <a href="<%=apiURL%>"><img height="50" src="resources/img/naver_login.PNG"  style="width:43%; height:40px; margin-left:2%"/></a>
                        <button class="btn btn-primary join" style="width:43%; height:40px; margin-left:9.42%">회원가입</button>
                    </div>
                   <div class="text-block text-center my-3">
