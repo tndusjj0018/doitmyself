@@ -31,14 +31,12 @@ $(function(){
 			$('html, body').animate({scrollTop:offset.top-70},0);
 		});
 
-	
-//문의글의  제목은 보이고 내용은 숨김		
-$('.qna_content').hide();
 
 //문의글 제목 클릭시 내용이 나옴.
-$('.clickable').click(function(){
-	$(this).next('.qna_content').toggle();	
+$(document).on('click','.clickable',function(){
+	$(this).parent().next().toggle();	
 })
+
 
 		
 		

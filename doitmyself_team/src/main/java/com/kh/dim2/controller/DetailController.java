@@ -1,8 +1,6 @@
 package com.kh.dim2.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,22 +25,10 @@ import com.kh.dim2.domain.Qna;
  */
 
 @Controller
-public class QnaController {
+public class DetailController {
     @Autowired
 	private qnaService qnasvc;
 	
-	@GetMapping(value="/temp")
-	public String temp() throws Exception {
-		return "detail/temp";
-	}
-//	@GetMapping(value="/detail")
-//	public String detail() throws Exception {	
-//		return "detail/detail";
-//	}
-	@GetMapping(value="/pay")
-	public String pay() throws Exception {
-		return "detail/pay";
-	}
 	@GetMapping(value="/qnaWrite")
 	public String qnaWrite() throws Exception {
 		return "detail/qnaWrite";

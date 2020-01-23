@@ -9,7 +9,8 @@
 <script src="resources/js/baha_js/qnalist.js"></script>
 <script>
 	$(function() {
-
+		//문의글의 제목만 내용은 숨김. 제목을 클릭시 나오게 할 것.
+		
 	})
 </script>
 
@@ -18,6 +19,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <head>
+<jsp:include page ="../main/header.jsp"/>
 <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -58,71 +60,9 @@
 <body class="goto-here">
 
 	<input type="hidden" id="loginid" value="${USER_ID}" name="loginid">
+	<input type="hidden" id="prd_no" value="${P_NO}" name="prd_no">
 
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">+ 1235 2355 98</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">youremail@email.com</span>
-						</div>
-						<div
-							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-							<span class="text">3-5 Business days delivery &amp; Free
-								Returns</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Vegefoods</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item active dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">Shop</a> <a
-								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
-						</div></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
-				</ul>
-			</div>
-		</div>
-	</nav>
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -337,7 +277,7 @@
 								<tr class='qna_content'>
 									<td></td>
 									<td></td>
-									<td colspan=>${qna.QNA_CONTENT}<br> <c:if
+									<td>${qna.QNA_CONTENT}<br> <c:if
 											test="${USER_ID eq qna.QNA_WRITER}">
 											<a href='#' id='qnaUpdate'>수정</a>
 											&emsp;
@@ -482,18 +422,20 @@
 								<div class="total_price">
 									<span class="total">총</span><span class="price"> 5,000원</span>
 								</div>
+ 								<form action="/dim2/pay">  <%--?USER_ID=${USER_ID } --%>
 								<div class="checkout">
-									<button class="checkoutGo" onclick="location.href='#'">결제하기</button>
+                                    <input type="hidden" name="USER_ID" value="${USER_ID }">
+									<input type="submit" class="checkoutGo"  value="결제하기">
 									<button class="cartGo" onclick="location.href='#'">장바구니</button>
 								</div>
+								</form>
 							</td>
 						</tr>
 
 					</table>
 				</div>
 			</div>
-			<!-- class=
-						"SelectedWrap" 끝 -->
+			<!-- class="SelectedWrap" 끝 -->
 
 
 
@@ -527,12 +469,7 @@
 	<footer class="ftco-footer ftco-section" style="clear: both">
 		<div class="container">
 			<div class="row">
-				<div class="mouse">
-					<a href="#" class="mouse-icon">
-						<div class="mouse-wheel">
-							<span class="ion-ios-arrow-up"></span>
-						</div>
-					</a>
+				
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -654,7 +591,7 @@
 
 			var quantitiy = 0;
 			$('.quantity-right-plus').click(function(e) {
-
+				
 				// Stop acting like a button
 				e.preventDefault();
 				// Get the field name
