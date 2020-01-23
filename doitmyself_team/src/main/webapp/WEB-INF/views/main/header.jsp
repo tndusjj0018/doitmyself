@@ -63,8 +63,8 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">가구</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="#">침실</a>
-                 <a class="dropdown-item" href="#">주방</a>
+                <a class="dropdown-item" href="#">침실</a>
+                <a class="dropdown-item" href="#">주방</a>
                 <a class="dropdown-item" href="#">수납</a>
                 <a class="dropdown-item" href="#">거실</a>
                 <a class="dropdown-item" href="#">욕실</a>
@@ -73,8 +73,8 @@
                <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">음식</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="#">한실</a>
-                 <a class="dropdown-item" href="#">일식</a>
+                <a class="dropdown-item" href="#">한실</a>
+                <a class="dropdown-item" href="#">일식</a>
                 <a class="dropdown-item" href="#">양식</a>
                 <a class="dropdown-item" href="#">중식</a>
                 <a class="dropdown-item" href="#">베이킹</a>
@@ -83,8 +83,8 @@
                <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">취미</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="#">드로잉</a>
-                 <a class="dropdown-item" href="#">미니어쳐</a>
+                <a class="dropdown-item" href="#">드로잉</a>
+                <a class="dropdown-item" href="#">미니어쳐</a>
                 <a class="dropdown-item" href="#">캔들&향수</a>
                 <a class="dropdown-item" href="#">슬라임</a>
                 <a class="dropdown-item" href="#">악세서리</a>

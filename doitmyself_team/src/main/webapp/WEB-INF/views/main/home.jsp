@@ -33,7 +33,7 @@
     			추천 DIM
     			<br>
     			<c:forEach var="recommend" items="${bestDim }" begin="0" end="3" step="1">
-					<a href="#"><img src="resources/upload/${recommend.p_IMG}" style="width:100px; height:100px; border-radius:10px; padding:2px;"></a>
+					<img src="resources/upload/${recommend.p_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
 				<br>
 				</c:forEach>
     		</c:if>
@@ -41,7 +41,7 @@
     			방금 본 DIM
     			<br>
     			<c:forEach var="rv" items="${recentView }" begin="0" end="3" step="1">
-					<a href="#"><img src="resources/upload/${rv.RV_IMG}" style="width:100px; height:100px; border-radius:10px; padding:2px;"></a>
+					<img src="resources/upload/${rv.RV_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
 				<br>
     			</c:forEach>
     		</c:if>
@@ -82,15 +82,14 @@
 		<form action="#" autocomplete="off" name="selectbox_form" id= "selectbox_form">
 		    	<fieldset class="url">
 					<select name=first onchange="firstChange()" size=1>
-						<option value=''>선택</option>
-						<option value=''>가구</option>
-						<option value=''>음식</option>
-						<option value=''>취미</option>
+						<option value='all'>전체</option>
+						<option value='101'>가구</option>
+						<option value='201'>음식</option>
+						<option value='301'>취미</option>
 					</select>
-						
-					<select name=second onchange="secondChange()" size=1>
-						<option value=''>선택</option>
-					</select>
+					
+					<c:if test=""></c:if>
+					
 		      		<input id="url" type="text" name="url" required>
 		      <div class="after"></div>
 		    </fieldset>
@@ -307,6 +306,33 @@
 	    		'complete' : function() {
 	    		}
 	    	});
+	    	
+	    	$("#first").on("click" , function(){
+	    		
+	    		var select = $('#first option:selected').val();
+	    		
+	    		function getCart_count(){
+	     			$.ajax({
+	     				type : "get",
+	     	 			url : "category",
+	     				data : {"selectValue" : "select"},
+	     				success : function(rdata){
+	     					
+	     					$('#cart_count').empty();
+	     					var output = "";
+	     					output += "<span class='icon-shopping_cart'></span>[" + rdata + "]";
+	     					$('#cart_count').append(output);
+	    					},
+	    				error : function(){
+	    					$('#cart_count').empty();
+	     					var output = "";
+	     					output += "<span class='icon-shopping_cart'></span>[0]";
+	     					$('#cart_count').append(output);
+	    				}
+	     			})
+	     		}
+	     		getCart_count();
+	    	})
 	    })
     </script>
   </body>
