@@ -45,15 +45,15 @@ table {
    height: 260px;
 }
 
-#info_name {
+.info_name {
 	width:80px;
 }
 
-#info_loc1 {
+.info_loc1 {
 	width:80px;
 }
 
-#info_loc2 {
+.info_loc2 {
 	width:500px;
 }
 
@@ -61,8 +61,12 @@ table {
 	width:60px;
 }
 
-#info_request {
+.info_request {
 	width:500px;
+}
+
+.put {
+	display:none;
 }
 
 .table_InfoCheck tr:nth-child(n+2) td:nth-child(1) {
