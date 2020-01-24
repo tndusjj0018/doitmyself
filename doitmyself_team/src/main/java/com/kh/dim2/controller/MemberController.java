@@ -267,26 +267,27 @@ public class MemberController {
 		
 		MultipartFile uploadfile = review.getUploadfile();
 		
-		//if(!uploadfile.isEmpty()) {
-			String fileName = uploadfile.getOriginalFilename(); //원래 파일명
-			review.setREVIEW_IMG(fileName); //원래 파일명 저장
-			
-			String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload";
-			
-			// 난수를 구합니다.(랜덤)
-			Random r = new Random();
-			int random = r.nextInt(100000000);
-			
-			//새로운 파일명
-			String refileName = random + fileName;
-			
-			//오라클 디비에 저장될 파일 명
-			// transferTo(file path) : 업로드한 파일을 매개변수의 경로에 지정합니다.
-			uploadfile.transferTo(new File(saveFolder + refileName));
-			
-			//바뀐 파일명으로 저장
-			review.setREVIEW_IMG(refileName);
-			System.out.println("refileName = " + refileName);
+			if(!uploadfile.isEmpty()) {
+				String fileName = uploadfile.getOriginalFilename(); //원래 파일명
+				review.setREVIEW_IMG(fileName); //원래 파일명 저장
+				
+				String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
+				
+				// 난수를 구합니다.(랜덤)
+				Random r = new Random();
+				int random = r.nextInt(100000000);
+				
+				//새로운 파일명
+				String refileName = random + fileName;
+				
+				//오라클 디비에 저장될 파일 명
+				// transferTo(file path) : 업로드한 파일을 매개변수의 경로에 지정합니다.
+				uploadfile.transferTo(new File(saveFolder + refileName));
+				
+				//바뀐 파일명으로 저장
+				review.setREVIEW_IMG(refileName);
+				System.out.println("refileName = " + refileName);
+			}
 			
 			memberservice.reviewWrite(review);
 			
@@ -299,8 +300,6 @@ public class MemberController {
 			out.println("</script>");
 			out.close();
 			
-			
-		//}
 		
 	}
 	

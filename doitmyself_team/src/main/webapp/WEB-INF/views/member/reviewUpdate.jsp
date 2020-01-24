@@ -13,8 +13,12 @@
 	<!-- CSS Files -->	
 	<link href="resources/soo/css/reviewList.css" rel="stylesheet">
 	<link href="resources/soo/css/reviewUpdate.css" rel="stylesheet">
+	<style>
+		#upfile {display:none}
+	</style>
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script src="resources/soo/js/reviewWrite.js"></script>
 	<script>
 		$(document).ready(function(){		
 			$('.star').click(function(){
@@ -148,10 +152,17 @@
                    						</td>
 									</tr>
 									<tr>
-										<td>첨부 사진</td>
 										<td>
-											<input type="file" name="REVIEW_IMG" id="REVIEW_IMG">
+											첨부 사진
 										</td>
+										<td>
+											<label for="upfile">
+												<img src="resources/soo/img/attach.png" alt="파일 첨부" width="20px">
+											</label>
+											<input type="file" id="upfile" name="uploadfile">
+											<span id="filevalue">${reviewdetail.REVIEW_IMG }</span>
+											<img src="resources/soo/img/remove.png" alt="파일삭제" width="10px" class="remove">
+										</td>	
 									</tr>
 									<tr>
 										<td colspan="2">

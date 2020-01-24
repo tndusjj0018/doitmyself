@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var check = 0;
 
 	show();
 	function show() {
@@ -13,6 +14,7 @@ $(document).ready(function() {
 	$("#upfile").change(function() {
 		check++;
 		var inputfile = $(this).val().split("\\");
+		console.log(inputfile);
 		$('#filevalue').text(inputfile[inputfile.length - 1]);
 		show();
 	});
