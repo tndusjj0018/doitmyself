@@ -32,7 +32,7 @@ public class O_Product {
 	private String REVIEW_DATE;
 	private int REVIEW_RATE;
 	private String REVIEW_CONTENT;
-	
+	private String REVIEW_IMG;
 	
 	public int getP_NO() {
 		return P_NO;
@@ -161,6 +161,12 @@ public class O_Product {
 	}
 	public void setREVIEW_CONTENT(String rEVIEW_CONTENT) {
 		REVIEW_CONTENT = rEVIEW_CONTENT;
+	}
+	public String getREVIEW_IMG() {
+		return REVIEW_IMG;
+	}
+	public void setREVIEW_IMG(String rEVIEW_IMG) {
+		REVIEW_IMG = rEVIEW_IMG;
 	}
 	
 	

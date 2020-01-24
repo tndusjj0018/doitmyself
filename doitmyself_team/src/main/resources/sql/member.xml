@@ -120,12 +120,14 @@
 	
 	<!-- 리뷰 작성 가능 리스트 -->
 	<select id="reviewablelist" resultType="o_product" parameterType="String">
-		select *
-		from ORDER_TBL, PRODUCT_TBL
-		WHERE ORDER_P_NO = P_NO
-		AND ORDER_ID = #{USER_ID}
+		SELECT *
+		FROM ORDER_TBL INNER JOIN PRODUCT_TBL
+		ON ORDER_P_NO = P_NO
+		WHERE ORDER_ID = #{USER_ID}
 		AND ORDER_DELIVERY = 4
-		ORDER BY ORDER_DATE DESC
+		AND ORDER_P_NO not in ( SELECT REVIEW_P_NO
+							FROM REVIEW_TBL 
+							WHERE REVIEW_WRITER= #{USER_ID})
 	</select>
 	
 	<!-- 리뷰 작성 가능 개수 -->
@@ -169,6 +171,6 @@
 	
 	<insert id="reviewWrite" parameterType="review">
 		insert into REVIEW_TBL
-		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG})
+		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG, jdbcType=VARCHAR})
 	</insert>
 </mapper>
