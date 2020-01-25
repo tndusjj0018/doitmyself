@@ -8,26 +8,26 @@
 			width:1000px;
 			height:700px;
 			margin-top: 50px;
-			border: 1px solid black;
 		}
 		.category_list{
 			width:299px;
-			border: 1px solid black;
 			display: inline-block;
 			float: left;
 			padding: 46px;
+			height: 534px;
+			overflow-y: auto;
 		}
 		.category_list ul{
 			list-style-type: none;
 		}
 		.category_viewtbl{
 			width: 699px;
-			border: 1px solid black;
 			display: inline-block;
 			float: left;
 			padding-left: 74px;
 			padding-top: 124px;
     		padding-bottom: 124px;
+    		height: 534px;
 		}
 		.input{
 			width: 400px;
@@ -53,6 +53,11 @@
 			font-weight: 600;
     		color: gray;
     		text-align: right;
+		}
+		.major_sub_font{
+		    font-size: large;
+    		display: inline-block;
+    		margin-bottom: 10px;
 		}
 			
 	</style>
@@ -91,10 +96,15 @@
 					//대분류 클릭 시 처리 => 폼에 데이터 끌고 올것임 
 					$(".majorlist").click(function(){
 						console.log($(this).text() + "/" + $(this).children().val());
+						$("input[name=category_name]").val($(this).text());
+						$("input[name=major_category]").val($(this).children().val());
 					})
 					//소분류 클릭시 처리 
 					$(".sublist").click(function(){
 						console.log($(this).text() + "/" + $(this).children().val() + "/" +$(this).children().next().val());
+						$("input[name=category_name]").val($(this).text());
+						$("input[name=major_category]").val($(this).children().val());
+						$("input[name=sub_category]").val($(this).children().next().val());
 					})
 					
 				},//success end
@@ -102,6 +112,15 @@
 					console.log("에러");
 				}//error end
 			})//ajax end
+			
+			$(".updatebtn").click(function(){
+				if($("input[name=category_name]").val() == ""){
+					alert("카테고리명을 입력하세요");
+				}else if($("input[name=category_name]").val() == ""){
+					alert("카테고리명을 입력하세요");
+				}
+				
+			})
 			
 			
 		})//ready end
@@ -113,11 +132,11 @@
 	
 	<form action="" method="post" class="category_updateform">
 		<div class="category_list">
-			<font>대분류</font>
+			<font class= "major_sub_font">대분류</font>
 			<ul class = "major_categorylist">
-			
+				
 			</ul>	
-			<font>소분류</font>
+			<font class= "major_sub_font">소분류</font>
 			<ul class = "sub_categorylist">
 
 			</ul>
@@ -129,11 +148,11 @@
 			</tr>
 			<tr>
 				<td class = "column">대분류</td>
-				<td><input type="text" name="major_category" class="input"></td>
+				<td><input type="text" name="major_category" class="input" readOnly></td>
 			</tr>
 			<tr>
 				<td class = "column">소분류</td>
-				<td><input type="text" name="sub_category" class="input"></td>
+				<td><input type="text" name="sub_category" class="input" readOnly></td>
 			</tr>
 			<tr>
 				<td colspan="2" id="btntd"><button type="button" class="updatebtn">카테고리 수정</button></td>

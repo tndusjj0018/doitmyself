@@ -39,6 +39,9 @@
 			height: 25px;
 			line-height: 25px
 		}
+		.disabled_btn:disabled{
+			
+		}
 		
 	</style>
 	<script>
@@ -120,12 +123,21 @@
 						pagination(rdata);
 						
 					}	
+					//button disabled 처리
+					$(".is_adminfont").each(function(index, item){
+						var adminornot = $(this).text();
+						if(adminornot == "○"){
+							$(this).next().children().prop("disabled",true);
+						}else{
+							$(this).next().next().children().prop("disabled",true);
+						}
+					})
+					
 				},
 				error:function(){
 					console.log("실패");
 				}//error end
 			})//ajax end	
-
 		}
 		//처음에 로드되면 실행
 		page =1;
