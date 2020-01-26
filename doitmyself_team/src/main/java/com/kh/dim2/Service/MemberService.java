@@ -73,4 +73,6 @@ public interface MemberService {
 	
 	//리뷰 작성
 	public int reviewWrite(Review review);
+	
+	public int reviewUpdate(Review review);
 }

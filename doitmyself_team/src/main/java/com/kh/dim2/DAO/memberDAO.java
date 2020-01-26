@@ -111,4 +111,8 @@ public class memberDAO {
 	public int reviewWrite(Review review) {
 		return sqlSession.insert("Member.reviewWrite", review);
 	}
+	
+	public int reviewUpdate(Review review) {
+		return sqlSession.update("Member.reviewUpdate", review);
+	}
 }

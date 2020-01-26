@@ -29,6 +29,7 @@ public class O_Product {
 	private String ORDER_TRNO;
 	private int ORDER_AMOUNT;
 	
+	private int REVIEW_NO;
 	private String REVIEW_DATE;
 	private int REVIEW_RATE;
 	private String REVIEW_CONTENT;
@@ -144,6 +145,12 @@ public class O_Product {
 	}
 	
 	
+	public int getREVIEW_NO() {
+		return REVIEW_NO;
+	}
+	public void setREVIEW_NO(int rEVIEW_NO) {
+		REVIEW_NO = rEVIEW_NO;
+	}
 	public String getREVIEW_DATE() {
 		return REVIEW_DATE;
 	}
