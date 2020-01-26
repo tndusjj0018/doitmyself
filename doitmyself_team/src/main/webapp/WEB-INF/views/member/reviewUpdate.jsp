@@ -26,9 +26,16 @@
 			      $(this).parent().children('span').removeClass('checked');
 			      $(this).parent().children('span').empty();
 			      $(this).addClass('checked').prevAll('span').addClass('checked');
-			      $(this).append("<input type='hidden' name='star' value="+$(this).attr('id')+">");
+			      $(this).append("<input type='hidden' name='REVIEW_RATE' value="+$(this).attr('id')+">");
 			      return false;
 			   })
+			   
+			$('form').submit(function(){
+				
+				$(this).append("<input type='hidden' name='REVIEW_RATE' value="+${reviewdetail.REVIEW_RATE}+">");
+				
+			});
+			   
 		});
 	</script>
 </head>
@@ -90,7 +97,10 @@
 			          <h5 class="card-title">리뷰 수정하기</h5>
 			        </div>
 			        <div class="card-body">
-			        	<form>
+			        	<form action="reviewUpdateAction?USER_ID=${USER_ID }" method="post" enctype="multipart/form-data" name="reviewUpdateForm">
+			        		<input type="hidden" name="REVIEW_NO" value="${reviewdetail.REVIEW_NO }">
+							<input type="hidden" name="REVIEW_IMG" value="${reviewdetail.REVIEW_IMG }">
+							
 			        		<div class="modal-header" style="position: relative; top: -45px;">
 							</div>
 							<div class="modal-body">
@@ -103,6 +113,15 @@
 									<tr>
 										<td>상품 평가</td>
 										<td>
+											<c:if test="${reviewdetail.REVIEW_RATE == 0}">
+												<div class="star_style">
+													<span class="fa fa-star star" id="1"></span>
+													<span class="fa fa-star star" id="2"></span>
+													<span class="fa fa-star star" id="3"></span>
+													<span class="fa fa-star star" id="4"></span>
+													<span class="fa fa-star star" id="5"></span>
+                    							</div>
+											</c:if>
 											<c:if test="${reviewdetail.REVIEW_RATE == 1}">
 												<div class="star_style">
 													<span class="fa fa-star star checked" id="1"></span>
@@ -166,7 +185,7 @@
 									</tr>
 									<tr>
 										<td colspan="2">
-											<textarea name="review_update" class="review_content" placeholder="후기를 입력하세요." required>${reviewdetail.REVIEW_CONTENT }</textarea>
+											<textarea name="REVIEW_CONTENT" class="review_content" placeholder="후기를 입력하세요." required>${reviewdetail.REVIEW_CONTENT }</textarea>
 										</td>
 									</tr>
 								</table>

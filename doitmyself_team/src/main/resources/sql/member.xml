@@ -173,4 +173,10 @@
 		insert into REVIEW_TBL
 		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG, jdbcType=VARCHAR})
 	</insert>
+	
+	<update id="reviewUpdate" parameterType="review">
+		update REVIEW_TBL
+		set REVIEW_RATE = #{REVIEW_RATE}, REVIEW_CONTENT = #{REVIEW_CONTENT}, REVIEW_IMG = #{REVIEW_IMG, jdbcType=VARCHAR}
+		where REVIEW_NO = #{REVIEW_NO}
+	</update>
 </mapper>

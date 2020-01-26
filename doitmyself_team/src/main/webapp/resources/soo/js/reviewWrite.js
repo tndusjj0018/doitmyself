@@ -22,8 +22,7 @@ $(document).ready(function() {
 	$(".remove").click(function() {
 		$("#filevalue").text("");
 		$(this).css("display", "none");
-		$("input[name=BOARD_ORIGINAL]").val('');
-		$("input[name=BOARD_FILE]").val('');
+		$("input[name=REVIEW_IMG]").val('');
 	});
 
 });

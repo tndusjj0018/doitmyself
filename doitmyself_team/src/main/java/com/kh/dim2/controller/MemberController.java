@@ -317,6 +317,61 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "/reviewUpdateAction", method = RequestMethod.POST)
+	public void reviewUpdateAction(Review review, 
+			  							   ModelAndView mv,
+			  							   HttpServletRequest request,
+			  							   HttpServletResponse response,
+			  							   @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		System.out.println(review.getREVIEW_IMG());
+
+		MultipartFile uploadfile = review.getUploadfile();
+		String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/reviewupload/";
+
+		if(uploadfile != null && !uploadfile.isEmpty()) {
+			System.out.println("파일 변경한 경우");
+			String fileName = uploadfile.getOriginalFilename();
+			review.setREVIEW_IMG(fileName);
+			
+			// 난수를 구합니다.(랜덤)
+			Random r = new Random();
+			int random = r.nextInt(100000000);
+
+			String fileDBName = random + fileName;
+
+			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+
+			//바뀐 파일명으로 저장
+			review.setREVIEW_IMG(fileDBName);
+		}
+
+		
+		//DAO에서 수정 메서드 호출하여 수정합니다.
+		int result = memberservice.reviewUpdate(review);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+
+		//수정에 실패한 경우
+		if(result == 0) {
+			out.println("alert('리뷰 수정하는 도중 에러가 발생하였습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			
+		} else { //수정 성공한 경우
+			System.out.println("리뷰 수정 완료");			
+			out.println("alert('리뷰가 정상적으로 수정 되었습니다.');");
+			out.println("location.href='reviewList?USER_ID=" +user_id + "';");
+			out.println("</script>");
+		}
+
+		out.close();
+
+	}
+
 
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
 	public ModelAndView qnaList(ModelAndView mv,
