@@ -115,4 +115,8 @@ public class memberDAO {
 	public int reviewUpdate(Review review) {
 		return sqlSession.update("Member.reviewUpdate", review);
 	}
+	
+	public int reviewDelete(int review_no) {
+		return sqlSession.delete("Member.reviewDelete", review_no);
+	}
 }

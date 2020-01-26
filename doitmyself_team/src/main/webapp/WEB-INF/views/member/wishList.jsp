@@ -107,7 +107,7 @@
 									${wl.p_PRICE }원
 								</td>
 								<td>
-									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니끼?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
+									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니까?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
 								</td>
 							</tr>
 							</c:forEach>

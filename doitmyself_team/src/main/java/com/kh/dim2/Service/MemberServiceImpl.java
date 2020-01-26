@@ -160,5 +160,10 @@ public class MemberServiceImpl implements MemberService {
 	public int reviewUpdate(Review review) {
 		return dao.reviewUpdate(review);
 	}
+
+	@Override
+	public int reviewDelete(int review_no) {
+		return dao.reviewDelete(review_no);
+	}
 	
 }
