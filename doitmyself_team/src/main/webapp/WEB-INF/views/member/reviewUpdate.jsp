@@ -100,6 +100,7 @@
 			        	<form action="reviewUpdateAction?USER_ID=${USER_ID }" method="post" enctype="multipart/form-data" name="reviewUpdateForm">
 			        		<input type="hidden" name="REVIEW_NO" value="${reviewdetail.REVIEW_NO }">
 							<input type="hidden" name="REVIEW_IMG" value="${reviewdetail.REVIEW_IMG }">
+							<input type="hidden" name="USER_ID" value="${USER_ID }">
 							
 			        		<div class="modal-header" style="position: relative; top: -45px;">
 							</div>
@@ -202,7 +203,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-primary">수정하기</button>
-								<button type="button" class="btn btn-danger" style="position:relative;">삭제하기</button>
+								<button type="button" class="btn btn-danger" style="position:relative;" onclick="if(confirm('리뷰를 삭제하시겠습니까?') == true)location.href='reviewDeleteAction?USER_ID=${USER_ID }&REVIEW_NO=${reviewdetail.REVIEW_NO}';">삭제하기</button>
 								<button type="button" class="btn btn-default" onclick="history.go(-1);">뒤로가기</button>
 							</div>
 						</form>

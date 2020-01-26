@@ -75,4 +75,6 @@ public interface MemberService {
 	public int reviewWrite(Review review);
 	
 	public int reviewUpdate(Review review);
+	
+	public int reviewDelete(int review_no);
 }

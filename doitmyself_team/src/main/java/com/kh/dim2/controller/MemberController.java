@@ -209,6 +209,8 @@ public class MemberController {
 						
 	}
 
+	
+	//주문 정보 가지고 옴
 	@RequestMapping(value = "/orderDelivery", method = RequestMethod.GET)
 	public ModelAndView orderDelivery(ModelAndView mv,
 									  @RequestParam("USER_ID") String user_id) {
@@ -227,6 +229,8 @@ public class MemberController {
 		return "member/cancelProcess";
 	}
 
+	
+	//리뷰 작성 가능한 리스트 가져옴
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public ModelAndView reviewList(ModelAndView mv,
 								   @RequestParam("USER_ID") String user_id) {
@@ -247,6 +251,7 @@ public class MemberController {
 		return mv;
 	}
 		
+	//리뷰 적는 폼으로 이동
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.GET)
 	public ModelAndView reviewWrite(ModelAndView mv,
 									@RequestParam("P_NO") int p_no) {
@@ -258,7 +263,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+	//리뷰 적는 메소드
 	@RequestMapping(value = "/reviewWriteAction", method = RequestMethod.POST)
 	public void reviewWriteAction(HttpServletResponse response,
 								  Review review,
@@ -304,7 +309,7 @@ public class MemberController {
 	}
 	
 
-	
+	//리뷰 수정/삭제 폼으로 이동
 	@RequestMapping(value = "/reviewUpdate", method = RequestMethod.GET)
 	public ModelAndView reviewUpdate(ModelAndView mv,
 									 @RequestParam("P_NO") int p_no) {
@@ -316,7 +321,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+	//리뷰 수정 메소드
 	@RequestMapping(value = "/reviewUpdateAction", method = RequestMethod.POST)
 	public void reviewUpdateAction(Review review, 
 			  							   ModelAndView mv,
@@ -370,6 +375,36 @@ public class MemberController {
 
 		out.close();
 
+	}
+	
+	
+	//리뷰 삭제 메소드
+	@RequestMapping(value= "/reviewDeleteAction", method = RequestMethod.GET)
+	public void reviewDeleteAction(HttpServletResponse response,
+								   @RequestParam("REVIEW_NO") int review_no,
+								   @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+	
+		
+		int result = memberservice.reviewDelete(review_no);
+		
+		if(result == 1) { //리뷰 삭제 성공
+			System.out.println(review_no + " 리뷰 삭제 성공");
+			out.println("<script>");
+			out.println("alert('리뷰가 정상적으로 삭제 되었습니다.');");
+			out.println("location.href='reviewList?USER_ID=" +user_id + "';");
+			out.println("</script>");
+			out.close();
+		} else {
+			System.out.println("리뷰 삭제 실패");
+			out.println("<script>");
+			out.println("alert('리뷰가 삭제 중 오류가 발생하였습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
 	}
 
 

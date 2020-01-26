@@ -179,4 +179,10 @@
 		set REVIEW_RATE = #{REVIEW_RATE}, REVIEW_CONTENT = #{REVIEW_CONTENT}, REVIEW_IMG = #{REVIEW_IMG, jdbcType=VARCHAR}
 		where REVIEW_NO = #{REVIEW_NO}
 	</update>
+	
+	<delete id="reviewDelete" parameterType="int">
+		delete
+		from REVIEW_TBL
+		where REVIEW_NO = #{REVIEW_NO}
+	</delete>
 </mapper>
