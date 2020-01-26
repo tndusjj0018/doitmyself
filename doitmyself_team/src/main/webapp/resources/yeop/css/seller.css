@@ -6,7 +6,7 @@ li{list-style:none;}
 .product_hr{background:#3c8cbc; margin:0; opacity:0.7;}
 .order-h5{font-size:9.5pt; color:gray; margin-bottom:3px; margin-left:17px;}
 .order_hr{width:97%; background:#3c8cbc; margin:0 auto; opacity:0.7;}
-.product_tb{width:803px; margin-bottom:23px;}
+.product_tb{width:892px; margin-bottom:36px;}
 .p_ex{width:150px; height:610px; background:#4f97c3d4; text-align:center; font-weight:bold; color:white; font-size:10pt; line-height:610px;}
 input::placeholder{color:#dddddd!important;}
 input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
@@ -21,16 +21,16 @@ input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
  	.active p{color:#3c8dbc!important}
  	.title{color:#3c8dbc}
  	#p_qa,#p_price{margin-left:10px;}
- 	.card{width:833px;}
+ 	.card{width:922px;}
  	#sub_cate_select{width:170px; text-align:center;}
- 	#main_cate_select{width:130px; text-align:center;}
+ 	#main_cate_select{width:150px; text-align:center;}
  	input:focus,select:focus{outline:none;}
  	input{font-size:10.5pt; text-indent:7px;}
  	#sub_cate{width:150px; display:inline-block;}
- 	#main_cate{width:160px; display:inline-block; margin:10px 25px 10px 5px;}
+ 	#main_cate{width:190px; display:inline-block; margin:10px 25px 10px 5px;}
  	#main_cate span,#sub_cate span{margin-left:10px; background:#d3e5f0; display:inline-block;
     text-align: center; border: 1px solid #a0a0a0; border-bottom:none; font-size:10pt; color:gray; height:24px; line-height:24px; font-weight:bold;}
-#main_cate span{width:130px;}
+#main_cate span{width:150px;}
 #sub_cate span{width:170px;}
 #cate_result span:nth-child(1){
     width: 160px;
@@ -49,7 +49,7 @@ input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
 }
 #cate_result span:nth-child(2){
 	display: inline-block;
-    width: 453px;
+    width: 553px;
     border-bottom: 1px solid #dddddd;
     border-top: 1px solid #dddddd;
     height: 30px;
@@ -66,7 +66,7 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 .arrowImg{
     opacity: 0.3;
     height: 37px;
-    left: 163px;
+    left: 190px;
     top: 47px;
     position: absolute;
     width: 31px;
@@ -82,7 +82,7 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 	}
 .col-md-9{flex:0 0 83%; max-width:83%;}
 .card-1{box-shadow:none;}
-.card-order{width:1130px!important;}
+.card-order{width:1206px!important;}
 .orderSearch-tb{width:97%; margin:0 auto;}
 .orderSearch-tb th,.orderSearch-tb td{border:1px solid silver;}
 .orderSearch-tb th{width:150px; height:39px; background:#4f97c3d4; color:white; padding-left:10px;}
@@ -95,13 +95,30 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 .order-btn button:nth-child(1){width:80px; height:30px; background:#4f97c3d4; color:white; border:none;}
 .order-btn button:nth-child(2){width:80px; height:30px; background:white; color:#4f97c3d4; border:1px solid #4f97c3d4;}
 .orderList-tb td{border:1px solid silver; text-align:center; padding:0 13px;}
-.orderList-tb tr:nth-child(1){background:#6da9cd6b;}
+.orderList-tb thead>tr{background:#6da9cd6b;}
 .orderList-tb tr>td{height:30px;}
 .orderList-tb{width:97%; margin:0 auto;}
-.orderList{text-align:right; margin-bottom:17px;}
+.orderList{text-align:right; margin-bottom:17px; margin-right:19px;}
 .orderList select{width:113px; height:26px;}
 .form-control[readonly]{background:#f3f3f3;}
 #new_cancel:hover,#new_p:hover{opacity:0.7; cursor:pointer; transition:.3s;}
 .logo a{text-align:center;}
 input[type=file]{text-indent:0; border:none;}
+#upLoadFileImg{display:inline-block; width:120px;height:90px; border:1px solid #dedede;}
+#uploadfile{width:290px; color:gray;}
+.orderList-tb tbody>tr>td{height:53px; color:#717171;}
+.orderDate{width:105px;}
+.orderNo{width:115px;}
+.orderId{width:115px;}
 
+
+.order-btn img{margin-left:-5px; width:17px; opacity:0.5;}
+.orderProgress{font-size:9.5pt; color:#7b7b7b; margin:0 0 13px 17px;}
+.orderProgress>b{font-size:16pt; opacity:0.9;}
+.orderProgress>b:nth-child(1){color:#ca1b1b;}
+.orderProgress>b:nth-child(2){color:#e6811a;}
+.orderProgress>b:nth-child(3){color:#428bca;}
+.orderProgress>b:nth-child(4){color:#5bb65b;}
+.orderStatus{background:#ca1b1b; border:none; width:89px; height:35px; color:white;}
+.orderStatus:hover{opacity:0.7; transition:.3s; cursor:pointer;}
+.orderImg img{width:96px; margin-top:3px; display:block;}

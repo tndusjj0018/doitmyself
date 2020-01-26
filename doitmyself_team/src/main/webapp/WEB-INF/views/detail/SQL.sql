@@ -1,60 +1,8 @@
-drop table member CASCADE CONSTRAINTS;
-
-create table member(
-id varchar2(15),
-password varchar2(10),
-name varchar2(15),
-age Number,
-gender varchar2(5),
-email varchar2(30),
-primary key(id)
-);
-
-select * from member;
-
-drop table board CASCADE CONSTRAINTS;
-
-create table board(
-  BOARD_NUM NUMBER,
-  BOARD_NAME VARCHAR2(30),
-  BOARD_PASS VARCHAR2(30),
-  BOARD_SUBJECT VARCHAR2(300),
-  BOARD_CONTENT VARCHAR2(4000),
-  BOARD_FILE VARCHAR2(50),
-  BOARD_ORIGINAL VARCHAR2(50),
-  BOARD_RE_REF NUMBER,
-  BOARD_RE_LEV NUMBER,
-  BOARD_RE_SEQ NUMBER,
-  BOARD_READCOUNT NUMBER,
-  BOARD_DATE DATE,
-  PRIMARY KEY(BOARD_NUM)
-);
-
-select * from board;
-
-drop table comments;
-
-create table comments(
-  num number primary key,
-  id varchar2(30) references member(id),
-  content varchar2(200),
-  reg_date date,
-  board_re_ref number references board(board_num) on delete cascade
-);
-
-select * from comments;
-
-DROP SEQUENCE com_seq;
-
-create sequence com_seq;
-
-create table delete_File(
- BOARD_FILE VARCHAR2(50) primary key
-);
-select * from delete_file;
-
+alter table
 
 select * from qna_tbl;
+
+select * from user_tbl;
 
 select * from user_sys_privs;
 
@@ -77,3 +25,7 @@ CREATE TABLE QNA_TBL(
 );
 
 CREATE SEQUENCE QNA_NO;
+
+alter table qna_tbl drop column qna_re_ref;
+
+alter table qna_tbl add QNA_RE_REF NUMBER(4) DEFAULT 0;

@@ -92,7 +92,7 @@
 								<h5 class="card-title">비밀번호 변경</h5>
 							</div>
 							<div class="card-body">
-								<form action="passChange.net" method="post">									
+								<form action="passChange.net?USER_ID=${USER_ID }" method="post">									
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">

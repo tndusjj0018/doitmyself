@@ -1,7 +1,9 @@
 package com.kh.dim2.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MainService;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Recent_View;
 
 @Controller
 public class MainController {
@@ -22,8 +27,17 @@ public class MainController {
 	public MainService mainService;
 	
 	@RequestMapping(value="/home")
-	public String home() {
-		return "main/home";
+	public ModelAndView home(
+				ModelAndView mv , Product product , HttpServletResponse response) {
+		
+		List<Product> BestproductList = mainService.getBestProduct_List();
+		List<Product> NewproductList = mainService.getNewProduct_List();
+		
+		mv.addObject("newDim" , NewproductList);
+		mv.addObject("bestDim" , BestproductList);
+		
+		mv.setViewName("main/home");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -37,15 +51,26 @@ public class MainController {
 	public String join(
 			ModelAndView mv,
 			HttpSession session) {
-		
 		return "main/join";
 	}
 	
 	@RequestMapping(value="/idcheck" , method=RequestMethod.GET)
-	public void idcheck(@RequestParam("USER_ID") String USER_ID ,
-			HttpServletResponse response) throws Exception {
+	@ResponseBody
+	public void idcheck(@RequestParam("USER_ID") String USER_ID,
+						HttpServletResponse response) throws Exception {
 		
 		int result = mainService.isId(USER_ID);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+
+	@RequestMapping(value="/emailcheck" , method=RequestMethod.GET)
+	@ResponseBody
+	public void emailcheck(@RequestParam("USER_EMAIL") String USER_EMAIL,
+			HttpServletResponse response) throws Exception {
+		
+		int result = mainService.isEmail(USER_EMAIL);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
@@ -53,20 +78,80 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/joinProcess" , method = RequestMethod.POST)
-	public void joinProcess(Member member , 
+	@ResponseBody
+	public void joinProcess(Member member, 
 							HttpServletResponse response) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int result = mainService.insert(member);
 		out.println("<script>");
-		if(result == 1) {//»ğÀÔ ¼º°ø½Ã
-			out.println("alert('È¸¿ø°¡ÀÔ¿¡ ÃàÇÏµå¸³´Ï´Ù.');");
-			out.println("location.href='/login';");
+
+		if(result == 1) {//ì‚½ì… ì„±ê³µì‹œ
+			out.println("alert('íšŒì›ê°€ì…ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.');");
+			out.println("location.href='login';");
 		} else if(result == -1) {
-			out.println("alert('È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.');");
+			out.println("alert('íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
 		out.close();
+	}
+	
+	@RequestMapping(value="/loginProcess" , method = RequestMethod.POST)
+	public ModelAndView loginProcess(@RequestParam("USER_ID") String USER_ID , @RequestParam("USER_PASSWORD") String USER_PASSWORD , Recent_View recent_view ,
+							HttpServletRequest request , HttpServletResponse response , HttpSession session , ModelAndView mv) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		
+		int result = mainService.isId(USER_ID , USER_PASSWORD);
+		int seller_result = mainService.isSeller(USER_ID);
+		
+		Member admin_check = mainService.isAdmin(USER_ID);
+		
+		if(result == 1) {
+			
+			int recentView_Count = mainService.recentViewCount(USER_ID);
+			int adminNumber = admin_check.getUSER_IS_ADMIN();//ê´€ë¦¬ìì¸ì§€ ì•„ë‹Œì§€ í™•ì¸
+			List<Product> BestproductList = mainService.getBestProduct_List();//Best Dim êµ¬í•˜ê¸°
+			List<Product> NewproductList = mainService.getNewProduct_List();//New Dim êµ¬í•˜ê¸°
+			session.setAttribute("USER_ID", USER_ID);
+			session.setAttribute("SELLER_RESULT" , seller_result);
+			
+			if(recentView_Count > 0) {
+				List<Recent_View> recentViewList = mainService.getRecent_View_List(USER_ID); //ìµœê·¼ ë³¸ DIM
+				mv.addObject("recentView", recentViewList);
+			}
+			mv.addObject("newDim" , NewproductList);
+			mv.addObject("bestDim" , BestproductList);
+			mv.addObject("adminNumber" , adminNumber);
+			mv.setViewName("main/home");
+			
+			return mv;
+			
+		} else {
+			String message = "ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+
+			response.setContentType("text/html;charset=utf-8");
+	         PrintWriter out = response.getWriter();
+	         out.println("<script>");
+	         out.println("alert('" + message + "');");
+	         out.println("location.href='login';");
+	         out.println("</script>");
+	         out.close();
+	         return null;
+		}
+	}
+  
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:home";
+	}
+
+	@RequestMapping(value="/cart_count", method=RequestMethod.POST)
+	public void cart_count(String id, HttpServletResponse response) throws Exception {
+		int result = mainService.cartCount(id);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 }

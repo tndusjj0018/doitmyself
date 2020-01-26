@@ -20,8 +20,32 @@
 		select * from category_tbl		
 	</select>
 	
+	<!-- 서브카테고리 가져오기 -->
 	<select id="ProductSubCategory" parameterType="Map" resultType="sub">
 		select * from sub_category_tbl
 		where sc_no_ref = #{c_no}
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="ProductInsert" parameterType="product">
+		<selectKey resultType="int" order="BEFORE" keyProperty="P_NO">
+			select nvl(max(P_NO),0)+1 from product_tbl
+		</selectKey>
+		insert into product_tbl
+		(P_NO, P_NAME, P_SELLER, P_CATEGORY_NO, P_PRICE, P_IMG,
+		 P_QUANTITY, P_DESCRIPTION, P_REGDATE)
+		values(#{P_NO}, #{P_NAME}, #{P_SELLER}, #{P_CATEGORY_NO},
+				#{P_PRICE}, #{P_IMG}, #{P_QUANTITY}, #{P_DESCRIPTION}, SYSDATE)
+	</insert>
+	
+	<!-- 주문관리 리스트 -->
+	<select id="OrderList" parameterType="String" resultType="order">
+		select ORDER_P_NO, ORDER_DELIVERY, ORDER_STATUS, ORDER_ID,
+				ORDER_PRICE, ORDER_PAYMENT, ORDER_ADDRESS, ORDER_DATE,
+				ORDER_AMOUNT, P.P_IMG, P.P_NAME
+		from ORDER_TBL O join PRODUCT_TBL P
+		on P.P_NO in (select ORDER_P_NO 
+					from ORDER_TBL O join USER_TBL U
+					on O.ORDER_ID = #{USER_ID})
 	</select>
 </mapper>

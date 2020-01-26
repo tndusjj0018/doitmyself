@@ -15,11 +15,17 @@
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
 	<script>
-		
+		$(document).ready(function(){
+			
+			$('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
+		});
 	</script>
 </head>
 
 <body class="">
+<header><jsp:include page="../main/header.jsp"></jsp:include></header>
 	<div class="wrapper ">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		
@@ -69,7 +75,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-9">
+			    <div class="col-md-10">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">WISH LIST<span class="badge" style="margin-left: 15px; position: relative; top: -4px;">${wishcount }</span></h5>
@@ -81,7 +87,7 @@
 			        	<c:if test="${wishcount > 0}">
 			        	<table class="table">
 							<tr>
-								<td>상품 번호</td> <td>주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
+								<td>상품 번호</td> <td colspan="2">주문 상품 정보</td> <td>스토어 명</td> <td>상품 금액</td> <td>삭제</td>
 							</tr>
 							<c:forEach var="wl" items="${wishlist}">
 							<tr>
@@ -90,7 +96,9 @@
 								</td>
 								<td>
 									<img src="${wl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-									<span onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
+								</td>
+								<td>
+									<span style="cursor: pointer" onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
 								</td>
 								<td>
 									${wl.p_SELLER }
@@ -99,7 +107,7 @@
 									${wl.p_PRICE }원
 								</td>
 								<td>
-									<button type="button" class="btn" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니끼?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
+									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니끼?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
 								</td>
 							</tr>
 							</c:forEach>
@@ -113,8 +121,8 @@
 			    					<i class="nc-icon nc-favourite-28"></i>			     	        		
 			        				<span>찜한 상품이 없습니다.</span>
 			        			</div>
-			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        			<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;">
 			        		</div>
 						</c:if>
 						</div>

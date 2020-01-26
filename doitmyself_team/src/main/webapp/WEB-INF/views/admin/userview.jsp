@@ -31,10 +31,62 @@
 		
 	</style>
 <script>
-var go = function(page){
-	search(page);
-}
-search_word = "";
+	$(document).ready(function(){
+		
+		var go = function(page){
+			search(page);
+		}
+		search_word = "";
+		
+		
+		function search(page,search_word){
+			console.log(search_word);
+			//url 파라미터 삭제 	
+			//history.replaceState({}, null, location.pathname);
+			$.ajax({
+				type:"POST",
+				data:{num:"${num}", search_word:search_word, search_col:$(".search_col").val()},
+				dataType:"json",
+				url:"userList",
+				success:function(rdata){
+					search_word = rdata.search_word;
+					console.log(rdata);
+					console.log("검색 기준 = "+rdata.search_col+", 검색어= "+rdata.search_word);
+					$("#mytable").empty();
+					if(rdata.userlist.length == 0){
+						output = "<tr><td>조회된 데이터가 없습니다.</td></tr>";
+						$("#mytable").append(output);
+					}else{
+						output = "";
+						output +="<thead>";
+						output += "	 <th><input type='checkbox' id='checkall' /></th>";
+						output += "  <th>유저 번호</th>";
+						output += "  <th>아이디</th>";
+						output += "  <th>이름</th>";
+						output += "  <th>이메일</th>";
+						output += "  <th>휴대전화</th>";
+						output += "  <th>수정</th>";
+						output += "  <th>삭제</th>";
+						output += "</thead>";
+						output += "<tbody>";
+						
+						var endcnt = (rdata.num*10)-1;
+						var startcnt = endcnt -9; 
+						console.log("startcnt="+startcnt + ", endcnt = "+endcnt);
+						$(rdata.userlist).each(function(index, item){
+							
+							if(startcnt<=index && endcnt>=index){
+								output += "<tr>";
+								output += "	<td><input type='checkbox' class='checkthis' /></td>";
+								output += "<td>"+item.user_NO+"</td>";
+								output += "<td>"+item.user_ID+"</td>";
+								output += "<td>"+item.user_NAME+"</td>";
+								output += "<td>"+item.user_EMAIL+"</td>";
+								output += "<td>"+item.user_PHONE+"</td>";
+								output += "<td><button class='btn btn-primary btn-xs userModify'><span class='glyphicon glyphicon-pencil'></span></button></td>";
+								output += "<td><button class='btn btn-danger btn-xs userDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
+								output += "</tr>";
+							}
 
 
 function search(page){
@@ -92,7 +144,25 @@ function search(page){
 				output += "</tbody>";
 				$("#mytable").append(output);
 				
+				//다음 버튼 처리
+				if((maxpage - num) > 0){//다음페이지가 존재할 때
+					//다음 페이지 버튼 : 1개씩 이동
+					
+					//현재페이지보다 큰 페이지 버튼
+					if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
+						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
+					}else{//다음페이지가 두개 이상 존재할 때
+						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
+						output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
+					}
+					output += "<li><a href='javascript:go("+(num+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+					
+				}else{//다음페이지가 존재하지 않을 때
+					output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
+				}
+
 				pagination(rdata);
+
 				
 			}	
 		},

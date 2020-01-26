@@ -61,7 +61,7 @@
 			$(".modifybtn").click(function(){
 				var data = $(".updateform").serialize();
 				$.ajax({
-					type:"post",					
+					type:"post",
 					data : data,
 					//dataType 은 받는 데이터 타입
 					url:'ModifyUser?USER_NO=<%=request.getParameter("USER_NO")%>',

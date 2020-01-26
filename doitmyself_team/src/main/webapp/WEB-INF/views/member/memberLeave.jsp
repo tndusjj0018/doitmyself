@@ -16,6 +16,7 @@
 </head>
 
 <body class="">
+<header><jsp:include page="../main/header.jsp"></jsp:include></header>
 	<div class="wrapper ">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		
@@ -65,7 +66,7 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-9">
+			    <div class="col-md-10">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">회원 탈퇴</h5>
@@ -97,7 +98,7 @@
 		
 						<!-- Modal body -->
 						<div class="modal-body">
-							<form name="memberLeaveForm" action="memberLeaveAction" method="post">
+							<form name="memberLeaveForm" action="memberLeaveAction?USER_ID=${USER_ID }" method="post">
 								<input type="hidden" name="num" value="${param.num }">
 		
 								<div class="form-group">

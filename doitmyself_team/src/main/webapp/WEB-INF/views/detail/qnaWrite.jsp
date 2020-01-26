@@ -24,7 +24,7 @@
 			<tr>
 			<td>작성자</td>
 			<td><input name="QNA_WRITER" id="writer"
-			 type="text" size="10" maxlength="30" class="form-control" ></td>
+			 type="text" size="10" maxlength="30" class="form-control" value="${USER_ID}" readonly></td>
 			<tr>
 			 <td>제목</td>
 			 <td><input  name="QNA_SUBJECT"  id="subject" type="text" size="10"   

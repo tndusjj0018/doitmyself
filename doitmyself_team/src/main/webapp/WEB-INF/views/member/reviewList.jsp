@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -40,19 +41,25 @@
 		    });
 		}); */
 		
-		$('.star').click(function(){
-		      console.log($(this).attr('id'));
-		      $(this).parent().children('span').removeClass('checked');
-		      $(this).parent().children('span').empty();
-		      $(this).addClass('checked').prevAll('span').addClass('checked');
-		      $(this).append("<input type='hidden' name='star' value="+$(this).attr('id')+">");
-		      return false;
-		   })
+			$('.star').click(function(){
+			      console.log($(this).attr('id'));
+			      $(this).parent().children('span').removeClass('checked');
+			      $(this).parent().children('span').empty();
+			      $(this).addClass('checked').prevAll('span').addClass('checked');
+			      $(this).append("<input type='hidden' name='star' value="+$(this).attr('id')+">");
+			      return false;
+			   })
+		   
+		
+		   $('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
 		});
 	</script>
 </head>
 
 <body class="">
+<header><jsp:include page="../main/header.jsp"></jsp:include></header>
 	<div class="wrapper ">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		
@@ -102,13 +109,14 @@
      
 			<div class="content">
 			  <div class="row">
-			    <div class="col-md-9">
+			    <div class="col-md-10">
 			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">나의 상품 리뷰</h5>
 			        </div>
 			        <div class="card-body">
 			        	<div class="container">
+			        	
 							<ul>
 								<li>고객님께서 작성하신 상품 리뷰를 조회하고 수정할 수 있습니다.</li>
 								<li>컨텐츠 운영 정책에 맞지 않는 리뷰는 삭제 될 수 있습니다.</li>
@@ -121,27 +129,52 @@
 
 							<div class="tab-content">
 								<div id="home" class="tab-pane in active">
+									<!-- 리뷰 쓸 목록 있는 경우 -->
+			        				<c:if test="${reviewablecount > 0}">
 									<table class="table">
 										<tr>
-											<td>주문 일자</td> <td>주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>상태</td>
+											<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>스토어 명</td> <td>상태</td>
 										</tr>
+										<c:forEach var="ral" items="${reviewablelist}">
 										<tr>
 											<td>
-												2020-01-08
+												${ral.ORDER_DATE }
 											</td>
 											<td>
-												<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-												<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
+												<img src="${ral.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 											</td>
 											<td>
-												1000원<br>
-												(1개)
+												<span onclick="alert('제품 상세 페이지로 넘어감')">${ral.p_NAME }</span>
 											</td>
 											<td>
-												<button type="button" class="btn" data-toggle="modal" data-target="#myModal">리뷰 작성</button>
+												${ral.ORDER_PRICE }<br>
+												(${ral.ORDER_AMOUNT}개)
+											</td>
+											<td>
+												${ral.p_SELLER }
+											</td>
+											<td>
+												<!-- <button type="button" class="btn" data-toggle="modal" data-target="#myModal">리뷰 작성</button> -->
+												<button type="button" class="btn" onclick="location.href='reviewWrite?P_NO=${ral.p_NO}';">리뷰 작성</button>
 											</td>
 										</tr>
+										</c:forEach>
 									</table>
+									</c:if>
+									
+									<!-- 리뷰 쓸 목록 없는 경우 -->
+			        				<c:if test="${reviewablecount == 0}">
+			        					<div class="container">
+			    							<div class="leaveInfo">
+			    								<i class="nc-icon nc-ruler-pencil"></i>			     	        		
+			        							<span>현재 리뷰 작성 가능한 상품이 존재하지 않습니다.</span>
+			        						</div>
+			        						<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   					style="margin-left:38%; margin-right:15px;">
+			        					</div>
+			        				</c:if>
+									
+									
 									  <!-- Modal -->
 									<div class="modal fade" id="myModal" role="dialog">
 										<div class="modal-dialog">
@@ -154,10 +187,10 @@
 												</div>
 												<div class="modal-body">
 													
-													<table style="width:90%; margin:0 auto">
+													<table id="reviewWriteTable">
 														<tr>
 															<td>구매 상품</td>
-															<td><img src="resources/soo/img/product.PNG" class="product_img">[샤오미] 스마트 미밴드 4</td>
+															<td><img src="resources/soo/img/product.PNG" class="review_img">[샤오미] 스마트 미밴드 4</td>
 														</tr>
 														<tr>
 															<td>상품 평가</td>
@@ -170,6 +203,12 @@
 																	<span class="fa fa-star star" id="5"></span>
                         										</div>
                         									</td>
+														</tr>
+														<tr>
+															<td>첨부 사진</td>
+															<td>
+																<input type="file" name="REVIEW_IMG" id="REVIEW_IMG">
+															</td>
 														</tr>
 														<tr>
 															<td colspan="2">
@@ -197,33 +236,56 @@
 										</div>
 									</div>
 								</div>
+								
 								<div id="menu1" class="tab-pane fade">
 									
+									<!-- 작성한 리뷰 있는 경우 -->
+			        				<c:if test="${reviewwritecount > 0}">
 									<table class="table">
 										<tr>
-											<td>작성 일자</td> <td>주문 상품 정보</td> <td>판매자</td> <td>별점</td> <td>상태</td>
+											<td>작성 일자</td> <td colspan="2">주문 상품 정보</td> <td>스토어 명</td> <td>별점</td> <td>상태</td>
 										</tr>
+										<c:forEach var="rwl" items="${reviewwritelist}">
 										<tr>
 											<td>
-												2020-01-10
+												${rwl.REVIEW_DATE }
 											</td>
 											<td>
-												<img src="resources/soo/img/product.PNG" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-												<span onclick="alert('제품 상세 페이지로 넘어감')">[샤오미] 스마트 미밴드 4</span>
+												<img src="${rwl.p_IMG}" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
 											</td>
 											<td>
-												p_seller
+												<span onclick="alert('제품 상세 페이지로 넘어감')">${rwl.p_NAME}</span>
 											</td>
 											<td>
-												5.0
+												${rwl.p_SELLER }
 											</td>
 											<td>
-												<button type="button" class="btn" data-toggle="modal" data-target="#myModal_update">수정 / 삭제</button>
+												${rwl.REVIEW_RATE }
+											</td>
+											<td>
+												<%-- <button type="button" class="btn" data-toggle="modal" data-target="#myModal_update${rwl.p_NO }">수정 / 삭제</button> --%>
+												<button type="button" class="btn" onclick="location.href='reviewUpdate?P_NO=${rwl.p_NO}';">수정 / 삭제</button>
 											</td>
 										</tr>
+										</c:forEach>
 									</table>
+									</c:if>
+									
+									<!-- 작성한 리뷰 없는 경우 -->
+			        				<c:if test="${reviewwritecount == 0}">
+			        					<div class="container">
+			    							<div class="leaveInfo">
+			    								<i class="nc-icon nc-paper"></i>			     	        		
+			        							<span>작성한 리뷰가 없습니다.</span>
+			        						</div>
+			        						<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   					style="margin-left:38%; margin-right:15px;">
+			        					</div>
+			        				</c:if>
+			        				
+									
 									  <!-- Modal -->
-									<div class="modal fade" id="myModal_update" role="dialog">
+									<div class="modal fade" id="myModal_update${reviewdetail.REVIEW_P_NO }" role="dialog">
 										<div class="modal-dialog">
 									  
 											<!-- Modal content-->
@@ -234,26 +296,71 @@
 												</div>
 												<div class="modal-body">
 													
-													<table style="width:90%; margin:0 auto">
+													<table id="reviewUpdateTable">
 														<tr>
 															<td>구매 상품</td>
-															<td><img src="resources/soo/img/product.PNG" class="product_img">[샤오미] 스마트 미밴드 4</td>
+															<td><img src="resources/soo/img/product.PNG" class="review_img">[샤오미] 스마트 미밴드 4</td>
 														</tr>
 														<tr>
 															<td>상품 평가</td>
 															<td>
-																<div class="star_style">
-																	<span class="fa fa-star star" id="1"></span>
-																	<span class="fa fa-star star" id="2"></span>
-																	<span class="fa fa-star star" id="3"></span>
-																	<span class="fa fa-star star" id="4"></span>
-																	<span class="fa fa-star star" id="5"></span>
-                        										</div>
+																<c:if test="${reviewdetail.REVIEW_RATE == 1}">
+																	<div class="star_style">
+																		<span class="fa fa-star star checked" id="1"></span>
+																		<span class="fa fa-star star" id="2"></span>
+																		<span class="fa fa-star star" id="3"></span>
+																		<span class="fa fa-star star" id="4"></span>
+																		<span class="fa fa-star star" id="5"></span>
+	                        										</div>
+																</c:if>
+																<c:if test="${reviewdetail.REVIEW_RATE == 2}">
+																	<div class="star_style">
+																		<span class="fa fa-star star checked" id="1"></span>
+																		<span class="fa fa-star star checked" id="2"></span>
+																		<span class="fa fa-star star" id="3"></span>
+																		<span class="fa fa-star star" id="4"></span>
+																		<span class="fa fa-star star" id="5"></span>
+	                        										</div>
+																</c:if>
+																<c:if test="${reviewdetail.REVIEW_RATE == 3}">
+																	<div class="star_style">
+																		<span class="fa fa-star star checked" id="1"></span>
+																		<span class="fa fa-star star checked" id="2"></span>
+																		<span class="fa fa-star star checked" id="3"></span>
+																		<span class="fa fa-star star" id="4"></span>
+																		<span class="fa fa-star star" id="5"></span>
+	                        										</div>
+	                        									</c:if>
+                        										<c:if test="${reviewdetail.REVIEW_RATE == 4}">
+																	<div class="star_style">
+																		<span class="fa fa-star star checked" id="1"></span>
+																		<span class="fa fa-star star checked" id="2"></span>
+																		<span class="fa fa-star star checked" id="3"></span>
+																		<span class="fa fa-star star checked" id="4"></span>
+																		<span class="fa fa-star star" id="5"></span>
+	                        										</div>
+	                        									</c:if>
+                        										<c:if test="${reviewdetail.REVIEW_RATE == 5}">
+																	<div class="star_style">
+																		<span class="fa fa-star star checked" id="1"></span>
+																		<span class="fa fa-star star checked" id="2"></span>
+																		<span class="fa fa-star star checked" id="3"></span>
+																		<span class="fa fa-star star checked" id="4"></span>
+																		<span class="fa fa-star star checked" id="5"></span>
+	                        										</div>
+																</c:if>
+															
                         									</td>
 														</tr>
 														<tr>
+															<td>첨부 사진</td>
+															<td>
+																<input type="file" name="REVIEW_IMG" id="REVIEW_IMG">
+															</td>
+														</tr>
+														<tr>
 															<td colspan="2">
-																<textarea name="review_update" class="review_content" placeholder="후기를 입력하세요." required></textarea>
+																<textarea name="review_update" class="review_content" placeholder="후기를 입력하세요." required>${reviewdetail.REVIEW_CONTENT }</textarea>
 															</td>
 														</tr>
 													</table>
@@ -278,7 +385,7 @@
 										</div>
 									</div>
 								</div>
-    						</div>
+    						</div>    					
     					</div>
 			        </div>
 			      </div>
