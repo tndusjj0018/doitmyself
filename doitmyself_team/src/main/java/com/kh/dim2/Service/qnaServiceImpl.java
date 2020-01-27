@@ -16,8 +16,9 @@ public class qnaServiceImpl implements qnaService {
 	private qnaDAO dao;
 	
 	@Override
-	public void insertQna(Qna qna) {
-		dao.insertQna(qna);		
+	public int insertQna(Qna qna) {
+		return dao.insertQna(qna);
+				
 	}
 
 	@Override
@@ -33,6 +34,16 @@ public class qnaServiceImpl implements qnaService {
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getQnaList(map);
+	}
+
+	@Override
+	public int qnaUpdate(Qna qna) {
+		return dao.qnaUpdate(qna);
+	}
+
+	@Override
+	public Qna getDetail(int num) {
+		return dao.getDetail(num);
 	}
 	
 }

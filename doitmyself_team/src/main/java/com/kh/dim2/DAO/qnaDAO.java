@@ -15,9 +15,13 @@ public class qnaDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	public int qnaUpdate(Qna qna) {
+		return sqlSession.update("qna.update",qna);
+	}
+	
 
-	public void insertQna(Qna qna) {
-		sqlSession.insert("qna.insert", qna);		
+	public int insertQna(Qna qna) {
+		return sqlSession.insert("qna.insert", qna);		
 	}
 
 
@@ -28,6 +32,11 @@ public class qnaDAO {
 
 	public int getListCount() {
 		return sqlSession.selectOne("qna.count");
+	}
+
+
+	public Qna getDetail(int num) {
+		return sqlSession.selectOne("qna.detail", num);
 	}
 
 }

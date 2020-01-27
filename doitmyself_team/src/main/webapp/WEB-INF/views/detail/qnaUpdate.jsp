@@ -10,12 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action ="qnaGo" method="post"  name="qnaForm">
+	<form action ="qnaUpdate" method="post"  name="qnaForm">
 	<input type="hidden" id="category" name="QNA_CATEGORY">
+	 <input type="hidden" name="num" value="${qnaData.QNA_NO}">
 		<table border="1">
 			<tr>
 				<td>문의유형</td>
-				<td><input type="radio" name="categories" value="0" selected>상품</td>&emsp;
+				<td><input type="radio" name="categories" value="0" checked>상품</td>&emsp;
 				<td><input type="radio" name="categories" value="1">배송</td>&emsp;
 				<td><input type="radio" name="categories" value="2">반품/취소</td>&emsp;
 				<td><input type="radio" name="categories" value="3">교환/변경</td>&emsp;
@@ -24,15 +25,15 @@
 			<tr>
 			<td>작성자</td>
 			<td><input name="QNA_WRITER" id="writer"
-			 type="text" size="10" maxlength="30" class="form-control" value="${USER_ID}" readonly></td>
+			 type="text" size="10" maxlength="30" class="form-control" value="${qnaData.QNA_WRITER}" readonly></td>
 			<tr>
 			 <td>제목</td>
 			 <td><input  name="QNA_SUBJECT"  id="subject" type="text" size="10"   
-			 maxlength="100" class="form-control" placeholder="제목 입력"></td>
+			 maxlength="100" class="form-control" placeholder="제목 입력" value="${qnaData.QNA_SUBJECT }"></td>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="QNA_CONTENT" id="content"></textarea>
-				<td><input type="checkbox" name="QNA_SECRET" id="secretCHK" value="0">비밀글로
+				<td><textarea name="QNA_CONTENT" id="content" >${qnaData.QNA_CONTENT }</textarea>
+				<td><input type="checkbox" name="QNA_SECRET" id="secretCHK" value="0" >비밀글로
 					문의하기</td>
 			</tr>
 		</table>

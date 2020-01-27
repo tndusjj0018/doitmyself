@@ -10,7 +10,7 @@
 <script>
 	$(function() {
 		//문의글의 제목만 내용은 숨김. 제목을 클릭시 나오게 할 것.
-		
+
 	})
 </script>
 
@@ -61,6 +61,7 @@
 
 	<input type="hidden" id="loginid" value="${USER_ID}" name="loginid">
 	<input type="hidden" id="prd_no" value="${P_NO}" name="prd_no">
+
 
 
 	<!-- END nav -->
@@ -272,6 +273,7 @@
 										<td class="clickable">${qna.QNA_SUBJECT}</td>
 										<td>${qna.QNA_WRITER}</td>
 										<td>${qna.QNA_DATE}</td>
+										
 								</tr>
 
 								<tr class='qna_content'>
@@ -279,13 +281,18 @@
 									<td></td>
 									<td>${qna.QNA_CONTENT}<br> <c:if
 											test="${USER_ID eq qna.QNA_WRITER}">
-											<a href='#' id='qnaUpdate'>수정</a>
+										<a
+										onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');" id='qnaUpdate'>
+											수정
+											</a>
 											&emsp;
 											<a href='#' id='qnaDelete'>삭제</a>
+										
 										</c:if></td>
 									<td></td>
 									<td></td>
 								</tr>
+								<input type="hidden" value="${qna.QNA_NO}">
 							</c:forEach>
 						</c:if>
 						<c:if test="${listcount == 0 }">
@@ -591,7 +598,7 @@
 
 			var quantitiy = 0;
 			$('.quantity-right-plus').click(function(e) {
-				
+
 				// Stop acting like a button
 				e.preventDefault();
 				// Get the field name

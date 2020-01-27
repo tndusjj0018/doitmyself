@@ -10,13 +10,19 @@ import com.kh.dim2.domain.Qna;
 public interface qnaService {
 	
 	//문의글 작성
-	public void insertQna(Qna qna);
+	public int insertQna(Qna qna);
 
 	//문의글 갯수 구하기
 	public int getListCount();
 
 	//문의글 목록 보기
 	public List<Qna> getQnaList(int page, int limit);
+
+	//문의글 수정
+	public int qnaUpdate(Qna qna);
+
+	//문의글 수정을 위해 불러올 원문글  번호
+	public Qna getDetail(int num);
 
 
 
