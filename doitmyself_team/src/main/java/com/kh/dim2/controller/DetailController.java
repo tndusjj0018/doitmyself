@@ -1,8 +1,10 @@
 package com.kh.dim2.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +36,72 @@ public class DetailController {
 		return "detail/qnaWrite";
 	}
 	
+	//문의글 작성
 	@PostMapping(value="qnaGo")
-	public String qnaGo(Qna qna, HttpServletRequest request) throws Exception {
-		qnasvc.insertQna(qna);
-		return "detail/detail";
+	public void qnaGo(Qna qna, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		int result = qnasvc.insertQna(qna);
+		out.println("<script>");
+
+		// 등록 된 경우
+		if (result == 1) {
+			
+			out.println("alert('문의글이 작성되었습니다.');");
+			out.println("window.close();");
+		} else {
+			out.println("alert('문의글 작성에 실패했습니다.');");
+			out.println("window.close()");
+		}
+
+		out.println("</script>");
+		out.close();
+
+	}
+	
+	//문의글 수정 클릭시 원문 정보 가져옴
+		@GetMapping(value = "/qnaUpdateView")
+		public ModelAndView qnaUpdateView(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
+			Qna qna = qnasvc.getDetail(num);
+			//글 내용 불러오기 실패시
+			if(qna==null) {
+				System.out.println("문의글 수정을 위한 원문글 불러오기 실패!");
+				mv.setViewName("detail/error");
+				mv.addObject("url",request.getRequestURL());
+				mv.addObject("message", "문의글 수정을 위한 원문글 불러오기 실패!");
+				return mv;
+			}
+			System.out.println("문의글 수정을 위한 원문글 불러오기 성공~");
+			// 수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 boarddata 객체를
+			// ModelAndView객체에 저장합니다.
+			mv.addObject("qnaData",qna);
+			
+			//글 수정 폼 페이지로 이동하기 위해 경로를 설정합니다.
+			mv.setViewName("detail/qnaUpdate");
+						
+			return mv;
+			
+		}
+	
+	//문의글 수정
+	@RequestMapping(value = "/qnaUpdate", method = RequestMethod.POST)
+	public void qnaUpdate(Qna qna, HttpServletResponse response) throws Exception {
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		int result = qnasvc.qnaUpdate(qna);
+		out.println("<script>");
+
+		// 수정 된 경우
+		if (result == 1) {
+			out.println("문의글이 수정되었습니다.');");
+		} else {
+			out.println("alert('문의글 수정에 실패했습니다!');");
+			out.println("window.close()");
+		}
+
+		out.println("</script>");
+		out.close();
 	}
 	
 	
