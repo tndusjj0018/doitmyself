@@ -211,5 +211,17 @@ public class AdminController {
 		map.put("sub", sub);
 		return map;
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("mainCategoryList")
+	public Object getMainCategoryList() {
+		System.out.println("여기는 getMainCategoryList");
+		List<Category> major = adminService.getMajorCategoryList();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("major", major);
+		return map;
+	}
 }
+
 
