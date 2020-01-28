@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%-- <header><jsp:include page="../main/header.jsp"></jsp:include></header> --%>
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -23,19 +24,43 @@
 	<style>
 		.mar20 {margin-left:20px}
 	</style>
+	<script>
+	/* $(document).ready(function(){
+  		var doc = $('.doc').val()
+  		switch (doc) {
+		case 'seller_info':
+		case 'seller_infoUpdate':
+			$('.nav').children().eq(0).addClass('active');
+			break;
+		case 'product':
+			$('.nav').children().eq(1).addClass('active');
+			break;
+		case 'seller_order':
+			$('.nav').children().eq(2).addClass('active');
+			break;
+		case 'seller_sale':
+			$('.nav').children().eq(4).addClass('active');
+			break;
+		default:
+			break;
+		}
+  		
+  	}) */
+	</script>
 </head>
 <body>
-<div class="sidebar" data-color="white" data-active-color="danger">     
-			<div class="logo">
-        		<a href="memberInfo" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
+
+<div class="sidebar" data-color="white" data-active-color="danger" style="position: absolute;">     
+			<div class="logo" style="background: #f4f3ef">
+        		<a href="memberInfo?USER_ID=${USER_ID }" class="simple-text logo-normal" style="text-align:center; font-size:17px;">
           		${USER_ID } 님
         		</a>
       		</div>
       		
       		<div class="sidebar-wrapper ps-container ps-theme-default" data-ps-id="430cdca9-89f6-13a3-3bfb-213675c1e7ec">
         		<ul class="nav" id="sidenav01">
-          			<li>
-						<a href="memberInfo" data-toggle="collapse" data-target="#toggleDemo1" data-parent="#sidenav01" class="collapsed">
+          			<li class="active">
+						<a href="memberInfo" data-toggle="collapse" data-target="#toggleDemo1" data-parent="#sidenav01" class="collapsed ">
               				<i class="nc-icon nc-single-02"></i>
               				<p>회원 정보</p>
             			</a>
@@ -54,8 +79,8 @@
             			</a>
             			<div class="collapse" id="toggleDemo2" style="height: 0px;">
 							<ul class="nav nav-list">
-								<li class="mar20"><a href="orderDelivery">주문 / 배송 조회</a></li>
-								<li class="mar20"><a href="cancelProcess">취소 / 반품 / 교환 현황</a></li>
+								<li class="mar20"><a href="orderDelivery?USER_ID=${USER_ID }">주문 / 배송 조회</a></li>
+								<li class="mar20"><a href="cancelProcess?USER_ID=${USER_ID }">취소 / 반품 / 교환 현황</a></li>
 							</ul>
 						</div>
           			</li>
@@ -67,8 +92,8 @@
 		            	</a>
 		            	<div class="collapse" id="toggleDemo3" style="height: 0px;">
 							<ul class="nav nav-list">
-								<li class="mar20"><a href="reviewList">나의 상품 리뷰</a></li>
-								<li class="mar20"><a href="qnaList">나의 QnA</a></li>
+								<li class="mar20"><a href="reviewList?USER_ID=${USER_ID }">나의 상품 리뷰</a></li>
+								<li class="mar20"><a href="qnaList?USER_ID=${USER_ID }">나의 QnA</a></li>
 							</ul>
 						</div>
 		          	</li>

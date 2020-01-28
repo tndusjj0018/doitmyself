@@ -1,8 +1,11 @@
 package com.kh.dim2.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,12 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MemberService;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
-import com.kh.dim2.domain.Qna;
+import com.kh.dim2.domain.Q_Product;
+import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
 @Controller
@@ -25,25 +31,26 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	String user_id = "sooyeon3";
+	//String user_id = "sooyeon3";
 
-	
 	// 회원 정보 가지고 옴
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
 	public ModelAndView member_info(ModelAndView mv,
-									HttpSession session) {
+									@RequestParam("USER_ID") String user_id) {
 		
 		Member m = memberservice.memberInfo(user_id);
-		session.setAttribute("USER_ID", user_id);
+		//session.setAttribute("USER_ID", user_id);
 		mv.setViewName("member/memberInfo");
 		mv.addObject("memberinfo", m);
 
 		return mv;
 	}
+	
 
 	// 회원 정보 수정
 	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
-	public void updateProcess(Member member, HttpServletResponse response) throws Exception {
+	public void updateProcess(Member member, HttpServletResponse response,
+							  @RequestParam("USER_ID") String user_id) throws Exception {
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -53,7 +60,7 @@ public class MemberController {
 		// 수정 된 경우
 		if (result == 1) {
 			out.println("alert('회원 정보가 변경 되었습니다.');");
-			out.println("location.href='memberInfo';");
+			out.println("location.href='memberInfo?USER_ID=" + user_id + "';");
 		} else {
 			out.println("alert('회원 정보 변경에 실패 하였습니다.');");
 			out.println("history.back()");
@@ -70,7 +77,8 @@ public class MemberController {
 						   Member member,
 						   HttpServletResponse response,
 						   @RequestParam("user_password") String user_password,
-						   @RequestParam("change_password") String change_password) throws Exception {
+						   @RequestParam("change_password") String change_password,
+						   @RequestParam("USER_ID") String user_id) throws Exception {
 		
 		//현재 비밀번호 확인
 		int result = memberservice.passCheck(user_id, user_password);
@@ -102,7 +110,8 @@ public class MemberController {
 	
 	//판매자인지 아닌지 확인 후 페이지 불러옴
 	@RequestMapping(value = "/sellerChange", method = RequestMethod.GET)
-	public ModelAndView sellerChange(ModelAndView mv) {
+	public ModelAndView sellerChange(ModelAndView mv,
+									 @RequestParam("USER_ID") String user_id) {
 		
 		int isSeller = memberservice.isSeller(user_id);
 		mv.addObject("isSeller", isSeller);		
@@ -115,7 +124,9 @@ public class MemberController {
 	//판매자로 변환 (판매자 테이블에 insert)
 	@RequestMapping(value = "/sellerChangeAction", method = RequestMethod.POST)
 	public void sellerChangeAction(Seller seller,
-								   HttpServletResponse response) throws Exception {
+								   HttpServletResponse response,
+								   HttpSession session,
+								   @RequestParam("USER_ID") String user_id) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
@@ -123,8 +134,9 @@ public class MemberController {
 		out.println("<script>");
 		
 		if(result == 1) { //판매자 등록 된 경우
+			session.setAttribute("SELLER_RESULT", result);
 			out.println("alert('판매자 등록이 완료 되었습니다.');");
-			out.println("location.href='sellerChange';");
+			out.println("location.href='sellerChange?USER_ID=" + user_id + "';");
 		} else {
 			out.println("alert('판매자 등록에 실패 하였습니다.')");
 			out.println("history.back();");
@@ -155,7 +167,9 @@ public class MemberController {
 	//회원 탈퇴하기
 	@RequestMapping(value = "/memberLeaveAction", method = RequestMethod.POST)
 	public void memberLeaveAction(HttpServletResponse response,
-								  @RequestParam("user_pass") String user_password) throws Exception {
+								  @RequestParam("user_pass") String user_password,
+								  @RequestParam("USER_ID") String user_id,
+								  HttpSession session) throws Exception {
 		
 		//현재 비밀번호 확인
 		int result = memberservice.passCheck(user_id, user_password);
@@ -175,6 +189,7 @@ public class MemberController {
 			} else {
 				response.setContentType("text/html; charset=utf-8"); 
 				PrintWriter out = response.getWriter();
+				session.invalidate();
 				out.println("<script>");
 				out.println("alert('정상적으로 탈퇴 되었습니다.');");
 				out.println("location.href='home';");
@@ -194,9 +209,19 @@ public class MemberController {
 						
 	}
 
+	
+	//주문 정보 가지고 옴
 	@RequestMapping(value = "/orderDelivery", method = RequestMethod.GET)
-	public String orderDelivery() {
-		return "member/orderDelivery";
+	public ModelAndView orderDelivery(ModelAndView mv,
+									  @RequestParam("USER_ID") String user_id) {
+		
+		int ordercount = memberservice.ordercount(user_id);
+		
+		List<O_Product> orderlist = memberservice.orderlist(user_id);
+		mv.addObject("orderlist", orderlist);
+		mv.addObject("ordercount", ordercount);
+		mv.setViewName("member/orderDelivery");
+		return mv;
 	}
 
 	@RequestMapping(value = "/cancelProcess", method = RequestMethod.GET)
@@ -204,17 +229,193 @@ public class MemberController {
 		return "member/cancelProcess";
 	}
 
+	
+	//리뷰 작성 가능한 리스트 가져옴
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
-	public String reviewList() {
-		return "member/reviewList";
+	public ModelAndView reviewList(ModelAndView mv,
+								   @RequestParam("USER_ID") String user_id) {
+		
+		int reviewablecount = memberservice.reviewablecount(user_id);		
+		List<O_Product> reviewablelist = memberservice.reviewablelist(user_id);
+		
+		int reviewwritecount = memberservice.reviewwritecount(user_id);
+		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id);
+		
+		
+		mv.addObject("reviewablecount", reviewablecount);
+		mv.addObject("reviewablelist", reviewablelist);
+		mv.addObject("reviewwritecount", reviewwritecount);
+		mv.addObject("reviewwritelist", reviewwritelist);
+		
+		mv.setViewName("member/reviewList");
+		return mv;
+	}
+		
+	//리뷰 적는 폼으로 이동
+	@RequestMapping(value = "/reviewWrite", method = RequestMethod.GET)
+	public ModelAndView reviewWrite(ModelAndView mv,
+									@RequestParam("P_NO") int p_no) {
+		
+		Product p = memberservice.productDetail(p_no);
+		mv.addObject("productdetail", p);
+		mv.setViewName("member/reviewWrite");
+		
+		return mv;
+	}
+	
+	//리뷰 적는 메소드
+	@RequestMapping(value = "/reviewWriteAction", method = RequestMethod.POST)
+	public void reviewWriteAction(HttpServletResponse response,
+								  Review review,
+								  HttpServletRequest request,
+								  @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		MultipartFile uploadfile = review.getUploadfile();
+		
+			if(!uploadfile.isEmpty()) {
+				String fileName = uploadfile.getOriginalFilename(); //원래 파일명
+				review.setREVIEW_IMG(fileName); //원래 파일명 저장
+				
+				String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
+				
+				// 난수를 구합니다.(랜덤)
+				Random r = new Random();
+				int random = r.nextInt(100000000);
+				
+				//새로운 파일명
+				String refileName = random + fileName;
+				
+				//오라클 디비에 저장될 파일 명
+				// transferTo(file path) : 업로드한 파일을 매개변수의 경로에 지정합니다.
+				uploadfile.transferTo(new File(saveFolder + refileName));
+				
+				//바뀐 파일명으로 저장
+				review.setREVIEW_IMG(refileName);
+				System.out.println("refileName = " + refileName);
+			}
+			
+			memberservice.reviewWrite(review);
+			
+			response.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('리뷰가 등록 되었습니다.')");
+			out.println("location.href='reviewList?USER_ID=" +user_id + "';");
+			out.println("</script>");
+			out.close();
+			
+		
+	}
+	
+
+	//리뷰 수정/삭제 폼으로 이동
+	@RequestMapping(value = "/reviewUpdate", method = RequestMethod.GET)
+	public ModelAndView reviewUpdate(ModelAndView mv,
+									 @RequestParam("P_NO") int p_no) {
+		
+		O_Product r = memberservice.reviewDetail(p_no);
+		mv.addObject("reviewdetail", r);
+		mv.setViewName("member/reviewUpdate");
+		
+		return mv;
+	}
+	
+	//리뷰 수정 메소드
+	@RequestMapping(value = "/reviewUpdateAction", method = RequestMethod.POST)
+	public void reviewUpdateAction(Review review, 
+			  							   ModelAndView mv,
+			  							   HttpServletRequest request,
+			  							   HttpServletResponse response,
+			  							   @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		System.out.println(review.getREVIEW_IMG());
+
+		MultipartFile uploadfile = review.getUploadfile();
+		String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/reviewupload/";
+
+		if(uploadfile != null && !uploadfile.isEmpty()) {
+			System.out.println("파일 변경한 경우");
+			String fileName = uploadfile.getOriginalFilename();
+			review.setREVIEW_IMG(fileName);
+			
+			// 난수를 구합니다.(랜덤)
+			Random r = new Random();
+			int random = r.nextInt(100000000);
+
+			String fileDBName = random + fileName;
+
+			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+
+			//바뀐 파일명으로 저장
+			review.setREVIEW_IMG(fileDBName);
+		}
+
+		
+		//DAO에서 수정 메서드 호출하여 수정합니다.
+		int result = memberservice.reviewUpdate(review);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+
+		//수정에 실패한 경우
+		if(result == 0) {
+			out.println("alert('리뷰 수정하는 도중 에러가 발생하였습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			
+		} else { //수정 성공한 경우
+			System.out.println("리뷰 수정 완료");			
+			out.println("alert('리뷰가 정상적으로 수정 되었습니다.');");
+			out.println("location.href='reviewList?USER_ID=" +user_id + "';");
+			out.println("</script>");
+		}
+
+		out.close();
+
+	}
+	
+	
+	//리뷰 삭제 메소드
+	@RequestMapping(value= "/reviewDeleteAction", method = RequestMethod.GET)
+	public void reviewDeleteAction(HttpServletResponse response,
+								   @RequestParam("REVIEW_NO") int review_no,
+								   @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+	
+		
+		int result = memberservice.reviewDelete(review_no);
+		
+		if(result == 1) { //리뷰 삭제 성공
+			System.out.println(review_no + " 리뷰 삭제 성공");
+			out.println("<script>");
+			out.println("alert('리뷰가 정상적으로 삭제 되었습니다.');");
+			out.println("location.href='reviewList?USER_ID=" +user_id + "';");
+			out.println("</script>");
+			out.close();
+		} else {
+			System.out.println("리뷰 삭제 실패");
+			out.println("<script>");
+			out.println("alert('리뷰가 삭제 중 오류가 발생하였습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
 	}
 
+
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
-	public ModelAndView qnaList(ModelAndView mv) {
+	public ModelAndView qnaList(ModelAndView mv,
+								@RequestParam("USER_ID") String user_id) {
 		
 		int qnacount = memberservice.qnacount(user_id);
 		
-		List<Qna> qnalist = memberservice.qnalist(user_id);
+		List<Q_Product> qnalist = memberservice.qnalist(user_id);
+
 		mv.addObject("qnacount", qnacount);
 		mv.addObject("qnalist", qnalist);
 		mv.setViewName("member/qnaList");
@@ -224,18 +425,19 @@ public class MemberController {
 	@RequestMapping(value = "/wishList", method = RequestMethod.GET)
 	public ModelAndView wishList(ModelAndView mv,
 								 @RequestParam("D_USER_ID") String D_USER_ID) {
-		int wishcount = memberservice.wishcount(user_id);
+		int wishcount = memberservice.wishcount(D_USER_ID);
 		
-		List<Product> productList = memberservice.wishlist(D_USER_ID);
+		List<Product> wishlist = memberservice.wishlist(D_USER_ID);
 		mv.addObject("wishcount", wishcount);
-		mv.addObject("wishlist", productList);
+		mv.addObject("wishlist", wishlist);
 		mv.setViewName("member/wishList");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/wishdelete", method = RequestMethod.GET)
 	public void wishdelete(@RequestParam("P_NO") int p_no,
-						   HttpServletResponse response) throws Exception {
+						   HttpServletResponse response,
+						   @RequestParam("USER_ID") String user_id) throws Exception {
 		
 		int wishdelete = memberservice.wishdelete(p_no, user_id);
 		System.out.println(wishdelete);
@@ -260,5 +462,5 @@ public class MemberController {
 	public String change_password() {
 		return "member/change_password";
 	}
-
+	
 }

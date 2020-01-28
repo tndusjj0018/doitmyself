@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 import com.kh.dim2.DAO.memberDAO;
 import com.kh.dim2.domain.DIBS;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.O_Product;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Q_Product;
 import com.kh.dim2.domain.Qna;
+import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
 @Service
@@ -97,13 +101,69 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Qna> qnalist(String user_id) {
+	public List<Q_Product> qnalist(String user_id) {
 		return dao.qnalist(user_id);
 	}
+
 
 	@Override
 	public int qnacount(String user_id) {
 		return dao.qnacount(user_id);
 	}
 
+	@Override
+	public int ordercount(String user_id) {
+		return dao.ordercount(user_id);
+	}
+
+	@Override
+	public List<O_Product> orderlist(String user_id) {
+		return dao.orderlist(user_id);
+	}
+
+	@Override
+	public List<O_Product> reviewablelist(String user_id) {
+		return dao.reviewablelist(user_id);
+	}
+
+	@Override
+	public int reviewablecount(String user_id) {
+		return dao.reviewablecount(user_id);
+	}
+
+	@Override
+	public List<O_Product> reviewwritelist(String user_id) {
+		return dao.reviewwritelist(user_id);
+	}
+
+	@Override
+	public int reviewwritecount(String user_id) {
+		return dao.reviewwritecount(user_id);
+	}
+
+	@Override
+	public O_Product reviewDetail(int p_no) {
+		return dao.reviewDetail(p_no);
+	}
+
+	@Override
+	public Product productDetail(int p_no) {
+		return dao.productDetail(p_no);
+	}
+
+	@Override
+	public int reviewWrite(Review review) {
+		return dao.reviewWrite(review);
+	}
+
+	@Override
+	public int reviewUpdate(Review review) {
+		return dao.reviewUpdate(review);
+	}
+
+	@Override
+	public int reviewDelete(int review_no) {
+		return dao.reviewDelete(review_no);
+	}
+	
 }

@@ -40,6 +40,7 @@ public class AdminServiceImpl implements AdminService{
 			map.put("search_word", search_word);
 			map.put("search_col", search_col);
 		}
+
 		if(!option.equals("") && option != null) {
 			map.put("option", option);
 		}
@@ -92,13 +93,13 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.ModifyUser(member);
 	}
 
-
 	@Override
 	public int updateAdminPrivilege(int USER_NO, int USER_IS_ADMIN) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("USER_NO", USER_NO);
 		map.put("USER_IS_ADMIN", USER_IS_ADMIN);
 		return adminDAO.updateAdminPrivilege(map);
+
 	}
 
 
@@ -111,6 +112,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<SubCategory> getSubCategoryList() {
 		return adminDAO.getSubCategoryList();
+
 	}
 
 

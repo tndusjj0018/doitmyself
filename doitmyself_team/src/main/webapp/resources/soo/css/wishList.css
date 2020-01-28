@@ -13,6 +13,8 @@ div.card-body > div > table{
 
 #btn-wishdelete {
 	background: white !important;
+	border: none;
+	cursor: pointer;
 }
 
 .leaveInfo {

@@ -11,6 +11,9 @@
 		<typeAlias alias="review" type="com.kh.dim2.domain.Review"/>
 		<typeAlias alias="order" type="com.kh.dim2.domain.Order"/>
 		<typeAlias alias="qna" type="com.kh.dim2.domain.Qna"/>
+		<typeAlias alias="q_product" type="com.kh.dim2.domain.Q_Product" />
+		<typeAlias alias="o_product" type="com.kh.dim2.domain.O_Product" />
+		<typeAlias alias="recent_view" type="com.kh.dim2.domain.Recent_View" />
 	</typeAliases>
 	
 	<mappers>
@@ -20,5 +23,6 @@
 		<mapper resource="sql/main.xml"/>
 		<mapper resource="sql/detail.xml"/>
 		<mapper resource="sql/qna.xml" />
+		<mapper resource="sql/pay.xml" />
 	</mappers>
 </configuration>

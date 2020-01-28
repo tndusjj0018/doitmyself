@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,17 +19,28 @@
     </script>
   </head>
   <body>
+	 <%
+		    String clientId = "iOLTY0IrYPUE_O2gwkSU";//애플리케이션 클라이언트 아이디값";
+		    String redirectURI = URLEncoder.encode("http://192.168.40.48:8088/dim2/home", "UTF-8");
+		    SecureRandom random = new SecureRandom();
+		    String state = new BigInteger(130, random).toString();
+		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+		    apiURL += "&client_id=" + clientId;
+		    apiURL += "&redirect_uri=" + redirectURI;
+		    apiURL += "&state=" + state;
+		    session.setAttribute("state", state);
+	 %>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
           <div class="row w-100">
             <div class="col-lg-4 mx-auto" style="min-width:600px;">
               <div class="auto-form-wrapper">
-                <form action="#">
+                <form action="loginProcess" method="post">
                   <div class="form-group">
                     <label class="label">아이디</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="ID">
+                      <input type="text" name="USER_ID" class="form-control" placeholder="ID">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -37,7 +51,7 @@
                   <div class="form-group">
                     <label class="label">비밀번호</label>
                     <div class="input-group">
-                      <input type="password" class="form-control" placeholder="PASSWORD">
+                      <input type="password" name="USER_PASSWORD" class="form-control" placeholder="PASSWORD">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -48,6 +62,7 @@
                   <div class="form-group">
                     <button class="btn btn-primary submit-btn btn-block">로그인</button>
                   </div>
+                  </form>
                   <div class="form-group d-flex justify-content-between">
                     <div class="form-check form-check-flat mt-0">
                     </div>
@@ -55,12 +70,11 @@
                   </div>
                   <hr>
                   <div class="form-group">
-                      <span><img src="resources/img/naver_login.PNG" class="naver_login" style="width:43%; height:40px; margin-left:2%"></span>
+                      <a href="<%=apiURL%>"><img height="50" src="resources/img/naver_login.PNG"  style="width:43%; height:40px; margin-left:2%"/></a>
                        <button class="btn btn-primary join" style="width:43%; height:40px; margin-left:9.42%">회원가입</button>
                    </div>
                   <div class="text-block text-center my-3">
                   </div>
-                </form>
               </div>
               <ul class="auth-footer">
               </ul>

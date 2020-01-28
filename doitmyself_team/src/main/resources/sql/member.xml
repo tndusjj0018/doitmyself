@@ -87,10 +87,12 @@
 	</update>
 	
 	<!-- QNA 리스트 -->
-	<select id="qnalist" resultType="qna" parameterType="String">
+	<select id="qnalist" resultType="q_product" parameterType="String">
 		select *
-		from QNA_TBL
-		WHERE QNA_WRITER = #{USER_ID}
+		from QNA_TBL, PRODUCT_TBL
+		WHERE QNA_P_NO = P_NO
+		AND QNA_WRITER = #{USER_ID}
+		ORDER BY QNA_NO DESC
 	</select>
 	
 	<!-- QNA 개수 -->
@@ -99,4 +101,88 @@
 		from QNA_TBL
 		where QNA_WRITER = #{USER_ID}
 	</select>
+	
+	
+	<!-- 주문내역 불러오기 -->	
+	<select id="orderlist" resultType="o_product" parameterType="String">
+		select *
+		from ORDER_TBL, PRODUCT_TBL
+		WHERE ORDER_P_NO = P_NO
+		AND ORDER_ID = #{USER_ID}
+	</select>
+	
+	<!-- 주문내역 수 -->
+	<select id="ordercount" resultType="int" parameterType="String">
+		select count(*)
+		from ORDER_TBL
+		where ORDER_ID = #{USER_ID}
+	</select>
+	
+	<!-- 리뷰 작성 가능 리스트 -->
+	<select id="reviewablelist" resultType="o_product" parameterType="String">
+		SELECT *
+		FROM ORDER_TBL INNER JOIN PRODUCT_TBL
+		ON ORDER_P_NO = P_NO
+		WHERE ORDER_ID = #{USER_ID}
+		AND ORDER_DELIVERY = 4
+		AND ORDER_P_NO not in ( SELECT REVIEW_P_NO
+							FROM REVIEW_TBL 
+							WHERE REVIEW_WRITER= #{USER_ID})
+	</select>
+	
+	<!-- 리뷰 작성 가능 개수 -->
+	<select id="reviewablecount" resultType="int" parameterType="String">
+		select count(*)
+		from ORDER_TBL, PRODUCT_TBL
+		WHERE ORDER_P_NO = P_NO
+		AND ORDER_ID = #{USER_ID}
+		AND ORDER_DELIVERY = 4
+	</select>
+	
+	<!-- 작성한 리뷰 리스트 -->
+	<select id="reviewwritelist" resultType="o_product" parameterType="String">
+		select *
+		FROM REVIEW_TBL, PRODUCT_TBL
+		WHERE REVIEW_P_NO = P_NO
+		AND REVIEW_WRITER = #{USER_ID}
+	</select>
+	
+	<!-- 작성한 리뷰 개수 -->
+	<select id="reviewwritecount" resultType="int" parameterType="String">
+		select count(*)
+		FROM REVIEW_TBL, PRODUCT_TBL
+		WHERE REVIEW_P_NO = P_NO
+		AND REVIEW_WRITER = #{USER_ID}
+	</select>
+	
+	<select id="reviewDetail" resultType="o_product" parameterType="int">
+		select *
+		from REVIEW_TBL, PRODUCT_TBL
+		WHERE REVIEW_P_NO = P_NO
+		AND REVIEW_P_NO = #{P_NO}
+	</select>
+	
+	
+	<select id="productDetail" resultType="product" parameterType="int">
+		select *
+		from PRODUCT_TBL
+		where P_NO = #{P_NO}
+	</select>
+	
+	<insert id="reviewWrite" parameterType="review">
+		insert into REVIEW_TBL
+		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="reviewUpdate" parameterType="review">
+		update REVIEW_TBL
+		set REVIEW_RATE = #{REVIEW_RATE}, REVIEW_CONTENT = #{REVIEW_CONTENT}, REVIEW_IMG = #{REVIEW_IMG, jdbcType=VARCHAR}
+		where REVIEW_NO = #{REVIEW_NO}
+	</update>
+	
+	<delete id="reviewDelete" parameterType="int">
+		delete
+		from REVIEW_TBL
+		where REVIEW_NO = #{REVIEW_NO}
+	</delete>
 </mapper>

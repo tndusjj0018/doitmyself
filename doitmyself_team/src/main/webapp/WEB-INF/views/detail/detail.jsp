@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/baha_js/detail.js"></script>
+<script src="resources/js/baha_js/qnalist.js"></script>
 <script>
-	$(function(){
-		
+	$(function() {
+		//문의글의 제목만 내용은 숨김. 제목을 클릭시 나오게 할 것.
+
 	})
 </script>
 
@@ -16,6 +19,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <head>
+<jsp:include page ="../main/header.jsp"/>
 <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -51,103 +55,44 @@
 <link rel="stylesheet" href="resources/css/icomoon.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <style>
-
 </style>
 </head>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">+ 1235 2355 98</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">youremail@email.com</span>
-						</div>
-						<div
-							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-							<span class="text">3-5 Business days delivery &amp; Free
-								Returns</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Vegefoods</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item active dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">Shop</a> <a
-								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
-						</div></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	<input type="hidden" id="loginid" value="${USER_ID}" name="loginid">
+	<input type="hidden" id="prd_no" value="${P_NO}" name="num">
 
-				</ul>
-			</div>
-		</div>
-	</nav>
+
+
+
 	<!-- END nav -->
 
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('resources/image/bg_1.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span
-							class="mr-2"><a href="index.html">Product</a></span> <span>Product
-							Single</span>
-					</p>
-					<h1 class="mb-0 bread">Product Single</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 	<div class="hero-wrap hero-bread" -->
+<!-- 		style="background-image: url('resources/image/bg_1.jpg');"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div -->
+<!-- 				class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!-- 				<div class="col-md-9 ftco-animate text-center"> -->
+<!-- 					<p class="breadcrumbs"> -->
+<!-- 						<span class="mr-2"><a href="index.html">Home</a></span> <span -->
+<!-- 							class="mr-2"><a href="index.html">Product</a></span> <span>Product -->
+<!-- 							Single</span> -->
+<!-- 					</p> -->
+<!-- 					<h1 class="mb-0 bread">Product Single</h1> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
-					<a href="resources/image/product-1.jpg" class="image-popup"><img
-						src="resources/image/product-1.jpg" class="img-fluid"
-						alt="Colorlib Template"></a>
+					<img src="resources/upload/${P_IMG}" class="img-fluid"
+						name="P_IMG" alt="Colorlib Template">
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>Bell Pepper</h3>
+					<h3>${prdData.P_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
 							<a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -167,14 +112,9 @@
 						</p>
 					</div>
 					<p class="price">
-						<span>$120.00</span>
+						<span>${prdData.P_PRICE}</span>
 					</p>
-					<p>A small river named Duden flows by their place and supplies
-						it with the necessary regelialia. It is a paradisematic country,
-						in which roasted parts of sentences fly into your mouth. Text
-						should turn around and return to its own, safe country. But
-						nothing the copy said could convince her and so it didn’t take
-						long until.</p>
+					<p>${prdData.P_DESCRIPTION}</p>
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
@@ -182,12 +122,7 @@
 									<div class="icon">
 										<span class="ion-ios-arrow-down"></span>
 									</div>
-									<select name="" id="" class="form-control">
-										<option value="">Small</option>
-										<option value="">Medium</option>
-										<option value="">Large</option>
-										<option value="">Extra Large</option>
-									</select>
+
 								</div>
 							</div>
 						</div>
@@ -209,7 +144,7 @@
 						</div>
 						<div class="w-100"></div>
 						<div class="col-md-12">
-							<p style="color: #000;">600 kg available</p>
+							<p style="color: #000;">현재 주문 가능</p>
 						</div>
 					</div>
 					<p>
@@ -227,14 +162,14 @@
 				<div class="service">
 					<table class="product_service">
 						<tr>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="detail"
-								value="상세정보"></td>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="review"
-								value="리뷰"></td>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="qna"
-								value="문의"></td>
-							<td><input type="button" class="svsBTN" name="serviceBTN" id="return"
-								value="교환/반품 정보"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="detail" value="상세정보"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="review" value="리뷰"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="qna" value="문의"></td>
+							<td><input type="button" class="svsBTN" name="serviceBTN"
+								id="return" value="교환/반품 정보"></td>
 						</tr>
 					</table>
 				</div>
@@ -244,11 +179,7 @@
 						<table border="1" class="product_detail">
 							<tr>
 
-								<td>상세정보란<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+								<td>상세정보란</td>
 
 							</tr>
 						</table>
@@ -284,34 +215,142 @@
 							<option value="track">배송</option>
 							<option value="return">반품/취소</option>
 							<option value="swap">교환/변경</option>
+							<option value="swap">기타</option>
 					</select></span>
 					<table class="qna_subjects">
 						<colgroup width="10%">
-						<colgroup width="60%">
+						<colgroup width="8%">
+						<colgroup width="52%">
 						<colgroup width="10%">
 						<colgroup width="20%">
 						<tr>
 							<td>문의유형</td>
+							<td></td>
 							<td>문의/답변</td>
 							<td>작성자</td>
 							<td>작성일</td>
 						</tr>
-						<tr>
-							<td>문의 작성 공간</td>
-						</tr>
+
+						<c:if test="${listcount > 0 }">
+							<c:set var="num" value="${listcount-(page-1)*10}" />
+							<c:forEach var="qna" items="${qnalist}">
+								<tr>
+									<c:choose>
+										<c:when test="${qna.QNA_CATEGORY eq 0 }">
+											<td>상품</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 1 }">
+											<td>배송</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 2 }">
+											<td>반품/취소</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 3 }">
+											<td>교환/변경</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 4 }">
+											<td>기타</td>
+										</c:when>
+									</c:choose>
+									<c:choose>
+										<c:when test="${qna.QNA_ISRESPONSE eq 0 }">
+											<td>답변대기</td>
+										</c:when>
+										<c:when test="${qna.QNA_CATEGORY eq 1 }">
+											<td>답변완료</td>
+										</c:when>
+										</c:choose>
+										<td class="clickable">${qna.QNA_SUBJECT}</td>
+										<td>${qna.QNA_WRITER}</td>
+										<td>${qna.QNA_DATE}</td>
+										
+								</tr>
+
+								<tr class='qna_content'>
+									<td></td>
+									<td></td>
+									<td>${qna.QNA_CONTENT}<br> <c:if
+											test="${USER_ID eq qna.QNA_WRITER}">
+										<a
+										onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');" id='qnaUpdate'>
+											수정
+											</a>
+											&emsp;
+											<a href='#' id='qnaDelete'>삭제</a>
+										
+										</c:if></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<input type="hidden" value="${qna.QNA_NO}">
+							</c:forEach>
+						</c:if>
+						<c:if test="${listcount == 0 }">
+							<td id="message" colspan="5">등록된 글이 없습니다.</td>
+						</c:if>
+
+
+
 
 					</table>
+					<c:if test="${listcount > 0 }">
+						<div class="center-block">
+						
+							<div class="row">
+								<div class="col">
+									<ul class="pagination">
+										<c:if test="${page <= 1 }">
+											<li class="page-item"><a class="page-link" href="#">이전&nbsp;</a>
+											</li>
+										</c:if>
+										<c:if test="${page > 1 }">
+											<li class="page-item"><a href="detail?page=${page-1 }"
+												class="page-link">이전</a>&nbsp;</li>
+										</c:if>
+
+										<c:forEach var="a" begin="${startpage }" end="${endpage }">
+											<c:if test="${a == page }">
+												<li class="page-item"><a class="page-link" href="#">${a }</a>
+												</li>
+											</c:if>
+											<c:if test="${a != page }">
+												<li class="page-item"><a href="detail?page=${a }"
+													class="page-link">${a }</a></li>
+											</c:if>
+										</c:forEach>
+
+										<c:if test="${page >= maxpage }">
+											<li class="page-item"><a class="page-link" href="#">&nbsp;다음</a>
+											</li>
+										</c:if>
+										<c:if test="${page < maxpage }">
+											<li class="page-item"><a href="detail?page=${page+1 }"
+												class="page-link">&nbsp;다음</a></li>
+										</c:if>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</c:if>
+
 					<span class="qnaWrite">
-						<button onclick="window.open('qnaWrite','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');">상품 문의하기</button>
+						<button
+							onclick="window.open('qnaWrite','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');">상품
+							문의하기</button>
 					</span>
+
 				</div>
+
+
 				<div class="ReturnWrap">
 					<div class="seller">
 						<p>반품/교환 정보</p>
 					</div>
 					<table class="seller_info">
 						<colgroup width="15%">
-						<colgroup width="85%">
+
+							<colgroup width="85%">
+						
 						<tr>
 							<td>고객문의 대표번호</td>
 							<td>&emsp;070-5133-4629</td>
@@ -349,11 +388,9 @@
 
 			</div>
 			<!-- class="ServiceWrap" 끝 -->
+		<div class="SelectedWrap">
 
-
-			<div class="SelectedWrap">
-
-				<div class="selected">
+								<div class="selected">
 					<table class="product_selected">
 						<tr>
 							<td></td>
@@ -382,21 +419,25 @@
 								<div class="total_price">
 									<span class="total">총</span><span class="price"> 5,000원</span>
 								</div>
+ 								<form action="/dim2/pay">  <%--?USER_ID=${USER_ID } --%>
 								<div class="checkout">
-									<button class="checkoutGo" onclick="location.href='#'">결제하기</button>
+                                    <input type="hidden" name="USER_ID" value="${USER_ID }">
+									<input type="submit" class="checkoutGo"  value="결제하기">
 									<button class="cartGo" onclick="location.href='#'">장바구니</button>
 								</div>
+								</form>
 							</td>
 						</tr>
 
 					</table>
 				</div>
 			</div>
-			<!-- class=
-						"SelectedWrap" 끝 -->
+			<!-- class="SelectedWrap" 끝 -->
 
 
-		</div>
+
+		
+						</div>
 		<!-- class="WRAP" 끝 -->
 	</section>
 
@@ -425,12 +466,7 @@
 	<footer class="ftco-footer ftco-section" style="clear: both">
 		<div class="container">
 			<div class="row">
-				<div class="mouse">
-					<a href="#" class="mouse-icon">
-						<div class="mouse-wheel">
-							<span class="ion-ios-arrow-up"></span>
-						</div>
-					</a>
+				
 				</div>
 			</div>
 			<div class="row mb-5">

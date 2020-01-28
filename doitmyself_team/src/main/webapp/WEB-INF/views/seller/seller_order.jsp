@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<!-- session id 저장용 -->
+<input type="hidden" id="id" name="id" value="${USER_ID}">
 <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -110,6 +112,7 @@
               			<th>주문상태</th>
               			<td>
               				<label for="order-all"><input type="checkbox" name="orderCheck" id="order-all"> 전체 </label>               				
+              				<label for="order-paymentFinish"><input type="checkbox" name="orderCheck" id="order-paymentFinish"> 결제완료 </label>     				
               				<label for="order-preparing"><input type="checkbox" name="orderCheck" id="order-preparing"> 배송 준비중 </label>     				
               				<label for="order-shipping"><input type="checkbox" name="orderCheck" id="order-shipping"> 배송중 </label>               				
               				<label for="order-complete"><input type="checkbox" name="orderCheck" id="order-complete"> 배송완료 </label>               				
@@ -117,7 +120,9 @@
               		</tr>              		
               	</table>
               	<div class="order-btn">
-	              	<button type="submit">검색</button>
+	              	<button type="submit">
+	              		<img src="resources/img/d_search.png"> 검색
+	              	</button>
 	              	<button type="reset">초기화</button>
               	</div>
               </div>        
@@ -127,7 +132,11 @@
             
             <div class="card card-order">
            	 <div class="card-body">
-              	<h5 class="order-h5">[총 주문수 : <span class="orderCount">0</span>개]</h5>
+           	 	<div class="orderProgress">* 결제완료<b>■</b> > 상품준비중<b>■</b>(송장번호입력) > 배송중<b>■</b> > 배송완료<b>■</b></div>
+              	<h5 class="order-h5">
+              	[ 총주문수 : <span class="orderCount">2</span>개&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              	총주문금액 : <span class="orderCount">130,000</span>원 ]
+              	</h5>
               	
               	<div class="orderList">
 	              	<select>
@@ -144,7 +153,7 @@
               	
             	<!-- order table2 -->
             	<table class="orderList-tb">
-	            	<tbody>
+	            	<thead>
 	            		<tr>
 	            			<td>주문 날짜</td>
 	            			<td>주문 번호</td>
@@ -154,25 +163,47 @@
 	            			<td>수량</td>
 	            			<td>총 가격</td>
 	            			<td>결제수단</td>
-	            			<td>배송상태</td>
+	            			<td>주문상태</td>
+	            		</tr>
+	            	</thead>	            	
+	            	<tbody>
+	            		<tr>
+	            			<td class="orderDate">2020-01-01</td>
+	            			<td class="orderNo">20200101-00000000</td>
+	            			<td class="orderId">admin1234</td>
+	            			<td class="orderName">
+	            				<div class="orderImg"><img src="resources/img/bg5.jpg" style="width:96px;margin-top:3px;"></div>
+	            				품명 : kh정보교욱원
+	            			</td>
+	            			<td class="orderAddress">서울 중구 남대문로 120 대일빌딩</td>
+	            			<td class="orderAmount">3</td>
+	            			<td class="orderPrice">100,000</td>
+	            			<td class="orderPayment">kakaopay</td>
+	            			<td>
+	            				<!-- 결제완료 -> 상품준비중 -> 배송중 -> 배송완료 -->
+	            				<button class="orderStatus">결제완료</button>
+	            			</td>
 	            		</tr>
 	            		<tr>
-	            			<td>2020-01-01</td>
-	            			<td>20200101-00000000</td>
-	            			<td>asdf1234</td>
-	            			<td>
-	            				<div>IMG</div> 품명 : kh정보교욱원
+	            			<td class="orderDate">2020-01-02</td>
+	            			<td class="orderNo">20200101-10000000</td>
+	            			<td class="orderId">test1234</td>
+	            			<td class="orderName">
+	            				<div class="orderImg"><img src="resources/img/product-1.jpg" style="width:96px;margin-top:3px;"></div>
+	            				품명 : d반
 	            			</td>
-	            			<td>서울시 종로구 ㅇㅇ동</td>
-	            			<td>3</td>
-	            			<td>100,000</td>
-	            			<td>무</td>
+	            			<td class="orderAddress">서울 강남구 테헤란로14길 6 남도빌딩</td>
+	            			<td class="orderAmount">1</td>
+	            			<td class="orderPrice">30,000</td>
+	            			<td class="orderPayment">kakaopay</td>
 	            			<td>
-	            				<button>배송준비중</button>
+	            				<!-- 결제완료 -> 상품준비중 -> 배송중 -> 배송완료 -->
+	            				<button class="orderStatus">결제완료</button>
 	            			</td>
-	            		</tr>
-	            	</tbody>
+	            		</tr>	            		
+	            	</tbody>	            	
             	</table>
+            	<div id="message"></div>
             	
               </div>
               <!-- card-body -->

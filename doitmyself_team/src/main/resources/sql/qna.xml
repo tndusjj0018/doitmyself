@@ -15,6 +15,27 @@
 		values(#{QNA_NO}, '0', #{QNA_SUBJECT}, #{QNA_CONTENT}, #{QNA_WRITER}, SYSDATE, #{QNA_CATEGORY}, '0', #{QNA_SECRET})
 	</insert>
 	
+	<select id="list" parameterType="java.util.Map" resultType="qna">
+	 select * from
+		(select rownum rnum, QNA_CATEGORY, QNA_ISRESPONSE, QNA_SUBJECT, 
+		QNA_WRITER, QNA_CONTENT, QNA_DATE, QNA_NO
+		from
+		(select * from qna_tbl order by QNA_NO desc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+<!--문의글 개수 구하기-->
+	<select id="count" resultType="int">
+		select count(*) from qna_tbl
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="qna">
+	  select * from qna_tbl where QNA_NO = #{num}
+	</select>
+	
+	<update id="update" parameterType="qna" >
+	 update QNA_TBL set QNA_CATEGORY= ${QNA_CATEGORY}, QNA_SUBJECT= ${QNA_SUBJECT}, QNA_CONTENT= ${QNA_CONTENT}, QNA_SECRET= ${QNA_SECRET} where QNA_NO= '${QNA_NO}'
+	</update>
+	
 </mapper>
 
 

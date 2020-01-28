@@ -1,7 +1,7 @@
---À¯Àú ½ÃÄö½º »ý¼º
+--ìœ ì € ì‹œí€€ìŠ¤ ìƒì„±
 CREATE SEQUENCE USER_SEQ;
 
---À¯Àú Å×ÀÌºí »ý¼º
+--ìœ ì € í…Œì´ë¸” ìƒì„±
 CREATE TABLE USER_TBL(
 	USER_NO				NUMBER 				PRIMARY KEY,
 	USER_ID				VARCHAR2(20)		UNIQUE 				NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE USER_TBL(
 	USER_POSTCODE		VARCHAR2(20)							NOT NULL,
 	USER_PHONE			VARCHAR2(12)							NOT NULL,
 	USER_EMAIL			VARCHAR2(30)		UNIQUE 				NOT NULL,
-	USER_BIRTH			DATE									NOT NULL,
+	USER_BIRTH			VARCHAR2(8)								NOT NULL,
 	USER_GENDER	 		VARCHAR2(1)			NOT NULL  			CHECK(USER_GENDER IN('F', 'M')),
 	USER_REGISTRATION_DATE 	DATE			DEFAULT SYSDATE		NOT NULL,
 	USER_IS_ADMIN		NUMBER(1)			DEFAULT 0 			NOT NULL
@@ -19,13 +19,15 @@ CREATE TABLE USER_TBL(
 
 select * from user_tbl
 
---Ä«Å×°í¸® Å×ÀÌºí »ý¼º
+--ì¹´í…Œê³ ë¦¬ í…Œì´ë¸” ìƒì„±
 CREATE TABLE CATEGORY_TBL(
 	C_NO		NUMBER(4)					PRIMARY KEY,
 	C_NAME		VARCHAR2(20)				NOT NULL
 );
 
---ÆÇ¸ÅÀÚ Á¤º¸ Å×ÀÌºí »ý¼º
+--insert into CATEGORY_TBL values(101 , 'test') 
+
+--íŒë§¤ìž ì •ë³´ í…Œì´ë¸” ìƒì„±
 CREATE TABLE SELLER_TBL(
 	SELLER_NO 			NUMBER				PRIMARY KEY,
 	SELLER_NAME			VARCHAR2(30)		UNIQUE 							NOT NULL,
@@ -35,7 +37,9 @@ CREATE TABLE SELLER_TBL(
 	SELLER_POSTCODE		VARCHAR2(30)										NOT NULL
 );
 
---»óÇ° Å×ÀÌºí »ý¼º
+--select * from SELLER_TBL
+
+--ìƒí’ˆ í…Œì´ë¸” ìƒì„±
 CREATE TABLE PRODUCT_TBL(
 	P_NO			NUMBER					PRIMARY KEY,	
 	P_NAME			VARCHAR2(40)													NOT NULL,
@@ -49,15 +53,22 @@ CREATE TABLE PRODUCT_TBL(
 	P_DIBS			NUMBER(10)				DEFAULT 0								NOT NULL,
 	P_REGDATE		DATE					DEFAULT SYSDATE							NOT NULL
 );
+--insert into product_tbl values(7 , 'test7' , 'qweqrqqr' , 101 , 110000 , '11' , 1100 , 'testì¤‘7' , 499 , 5515 , sysdate);
+--insert into product_tbl values(8 , 'test8' , 'qweqrqqr' , 101 , 340000 , '11' , 5500 , 'testì¤‘ë‹¤8' , 21500 ,15 , sysdate);
+--insert into product_tbl values(9 , 'test9' , 'qweqrqqr' , 101 , 4330000 , '11' , 6400 , 'testì¤‘9' , 120 , 552 , sysdate);
+--insert into product_tbl values(10 , 'test10' , 'qweqrqqr' , 101 , 2000000 , '11' , 220 , 'testì¤‘ìž…ë‹ˆë„¤ë‹¤10' , 20 , 125 , sysdate);
+--insert into product_tbl values(5 , 'test6' , 'qweqrqqr' , 101 , 6000 , '11' , 130 , 'testì¤‘ìž…ë‹ˆë‹¤ddd5' , 50 , 333 , sysdate);
+insert into product_tbl values(11 , 'test11' , 'qweqrqqr' , 101 , 24000 , '11' , 1220 , 'testì¤‘ìž…ë‹ˆë„¤ë‹¤11' , 221 , 1225 , sysdate);
+insert into product_tbl values(12 , 'test12' , 'qweqrqqr' , 101 , 60200 , '11' , 1430 , 'testì¤‘ìž…ë‹ˆë‹¤12' , 545 , 38 , sysdate);
 
---»óÇ° Ãß°¡ »çÁø Å×ÀÌºí
+--ìƒí’ˆ ì¶”ê°€ ì‚¬ì§„ í…Œì´ë¸”
 CREATE TABLE IMG_TBL(
 	IMG_NO		NUMBER														PRIMARY KEY,
 	IMG_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)	NOT NULL,
 	IMG_NAME	VARCHAR2(50)												NOT NULL
 );
 
---ÁúÀÇ ÀÀ´ä Å×ÀÌºí
+--ì§ˆì˜ ì‘ë‹µ í…Œì´ë¸”
 CREATE TABLE QNA_TBL(
 	QNA_NO 	NUMBER																	PRIMARY KEY,
 	QNA_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)			NOT NULL,
@@ -70,14 +81,14 @@ CREATE TABLE QNA_TBL(
 	QNA_SECRET	NUMBER(1)					DEFAULT 0 	CHECK(QNA_SECRET IN(0,1))	NOT NULL
 );
 
---Âò Å×ÀÌºí
+--ì°œ í…Œì´ë¸”
 CREATE TABLE DIBS_TBL(
 	D_NO		NUMBER			  												PRIMARY KEY,
 	D_P_NO		NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
 	D_USER_ID	VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL
 );
 
---ÁÖ¹®/Ãë¼Ò/¹ÝÇ°/±³È¯ ³»¿ª Å×ÀÌºí
+--ì£¼ë¬¸/ì·¨ì†Œ/ë°˜í’ˆ/êµí™˜ ë‚´ì—­ í…Œì´ë¸”
 CREATE TABLE ORDER_TBL(
 	ORDER_NO		NUMBER																	PRIMARY KEY,
 	ORDER_P_NO		NUMBER					REFERENCES PRODUCT_TBL(P_NO)					NOT NULL,
@@ -94,7 +105,7 @@ CREATE TABLE ORDER_TBL(
 	ORDER_TRNO		VARCHAR2(20)
 );
 
---¸®ºä Å×ÀÌºí
+--ë¦¬ë·° í…Œì´ë¸”
 CREATE TABLE REVIEW_TBL(
 	REVIEW_NO		NUMBER					PRIMARY KEY,
 	REVIEW_RATE		NUMBER(1)													NOT NULL,
@@ -105,7 +116,7 @@ CREATE TABLE REVIEW_TBL(
 	REVIEW_IMG		VARCHAR2(40)
 );
 
---ÃÖ±Ù º» »óÇ° Å×ÀÌºí
+--ìµœê·¼ ë³¸ ìƒí’ˆ í…Œì´ë¸”
 CREATE TABLE RECENT_VIEW_TBL(
 	RV_ID		VARCHAR2(30)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
 	RV_P_NO		NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
@@ -113,22 +124,49 @@ CREATE TABLE RECENT_VIEW_TBL(
 	RV_NO		NUMBER															NOT NULL	
 );	
 
---Àå¹Ù±¸´Ï Å×ÀÌºí
+	SELECT PT.P_IMG , RVT.RV_NO FROM
+		RECENT_VIEW_TBL RVT JOIN PRODUCT_TBL PT
+		ON RV_P_NO = P_NO
+		WHERE RV_ID = 'qweqrqqr'
+		ORDER BY RV_NO DESC;
+
+--ìž¥ë°”êµ¬ë‹ˆ í…Œì´ë¸”
 CREATE TABLE CART_TBL(
 	CART_NO 	NUMBER															PRIMARY KEY,
 	CART_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
 	CART_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL
 );
 
---º¸¾È ÀÎÁõ ¹øÈ£ Å×ÀÌºí
+--insert into cart_tbl values(1111,'sun112',1);
+--insert into cart_tbl values(11112,'sun112',1);
+--insert into cart_tbl values(11113,'sun112',1);
+
+--ë³´ì•ˆ ì¸ì¦ ë²ˆí˜¸ í…Œì´ë¸”
 CREATE TABLE SECURITY_NO_TBL(
 	SN_NO		NUMBER(6),
 	SN_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		PRIMARY KEY
 );
 
---È¯ºÒ Å×ÀÌºí
+--í™˜ë¶ˆ í…Œì´ë¸”
 CREATE TABLE REFUND_TBL(
 	REFUND_NO		NUMBER					REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
 	REFUND_P_NO		NUMBER					REFERENCES ORDER_TBL(ORDER_NO)		NOT NULL,
 	REFUND_STATUS	NUMBER(1)				DEFAULT 0							NOT NULL
 );
+
+--
+--drop sequence user_seq;
+--drop table cart_tbl;
+--drop table category_tbl;
+--drop table dibs_tbl;
+--drop table img_tbl;
+--drop table order_tbl;
+--drop table product_tbl;
+--drop table qna_tbl;
+--drop table recent_view_tbl;
+--drop table refund_tbl;
+--drop table review_tbl;
+--drop table security_no_tbl;
+--drop table seller_tbl;
+--drop table user_tbl;
+--

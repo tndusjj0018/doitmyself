@@ -1,62 +1,83 @@
-drop table member CASCADE CONSTRAINTS;
-
-create table member(
-id varchar2(15),
-password varchar2(10),
-name varchar2(15),
-age Number,
-gender varchar2(5),
-email varchar2(30),
-primary key(id)
-);
-
-select * from member;
-
-drop table board CASCADE CONSTRAINTS;
-
-create table board(
-  BOARD_NUM NUMBER,
-  BOARD_NAME VARCHAR2(30),
-  BOARD_PASS VARCHAR2(30),
-  BOARD_SUBJECT VARCHAR2(300),
-  BOARD_CONTENT VARCHAR2(4000),
-  BOARD_FILE VARCHAR2(50),
-  BOARD_ORIGINAL VARCHAR2(50),
-  BOARD_RE_REF NUMBER,
-  BOARD_RE_LEV NUMBER,
-  BOARD_RE_SEQ NUMBER,
-  BOARD_READCOUNT NUMBER,
-  BOARD_DATE DATE,
-  PRIMARY KEY(BOARD_NUM)
-);
-
-select * from board;
-
-drop table comments;
-
-create table comments(
-  num number primary key,
-  id varchar2(30) references member(id),
-  content varchar2(200),
-  reg_date date,
-  board_re_ref number references board(board_num) on delete cascade
-);
-
-select * from comments;
-
-DROP SEQUENCE com_seq;
-
-create sequence com_seq;
-
-create table delete_File(
- BOARD_FILE VARCHAR2(50) primary key
-);
-select * from delete_file;
-
+alter table
 
 select * from qna_tbl;
 
+select * from user_tbl;
+
+select * from product_tbl;
+
 select * from user_sys_privs;
+
+SET DEFINE OFF
+create table SUB_CATEGORY_TBL(
+SC_NO number(4),
+SC_NAME VARCHAR2(20),
+SC_NO_REF NUMBER(4)
+);
+
+CREATE TABLE CATEGORY_TBL(
+	C_NO		NUMBER(4)		PRIMARY KEY,
+	C_NAME	VARCHAR2(20)		NOT NULL
+);
+
+
+drop table PRODUCT_TBL cascade constraint;
+
+create table PRODUCT_TBL(
+P_NO			NUMBER									PRIMARY KEY,	
+	P_NAME		VARCHAR2(40)									NOT NULL,
+	P_SELLER		VARCHAR2(30)				NOT NULL, 	
+	P_CATEGORY_NO	NUMBER(4)			NOT NULL,
+	P_PRICE		NUMBER(10)									NOT NULL,
+	P_IMG			VARCHAR2(100)								NOT NULL,
+	P_QUANTITY		NUMBER(5)									NOT NULL,
+	P_DESCRIPTION	VARCHAR2(4000)								NOT NULL,
+	P_READCOUNT	NUMBER(10)		DEFAULT 0						NOT NULL,
+	P_DIBS			NUMBER(10)		DEFAULT 0						NOT NULL,
+	P_REGDATE		DATE			DEFAULT SYSDATE					NOT NULL
+
+);
+
+
+insert into category_tbl
+values(100, '가구');
+insert into category_tbl
+values(200, '음식');
+insert into category_tbl
+values(300, '취미');
+
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '침실','100');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '주방','100');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '수납','100');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '거실','100');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '욕실','100');
+
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '한식','200');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '일식','200');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '양식','200');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '중식','200');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '베이킹','200');
+
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '드로잉','300');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '미니어쳐','300');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '캔들&향수','300');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '슬라임','300');
+insert into sub_category_tbl
+values((select nvl(max(sc_no),0)+1 from sub_category_tbl), '악세서리','300');
 
 insert into qna_tbl(QNA_NO, QNA_P_NO, QNA_SUBJECT, QNA_CONTENT,
 		QNA_WRITER, QNA_DATE, QNA_CATEGORY, QNA_S_ID, QNA_SECRET)
@@ -77,3 +98,7 @@ CREATE TABLE QNA_TBL(
 );
 
 CREATE SEQUENCE QNA_NO;
+
+alter table qna_tbl drop column qna_re_ref;
+
+alter table qna_tbl add QNA_RE_REF NUMBER(4) DEFAULT 0;

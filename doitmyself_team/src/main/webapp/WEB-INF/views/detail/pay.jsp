@@ -1,14 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/baha_js/pay.js"></script>
+
 <head>
 <link rel="stylesheet" href="resources/css/baha_css/pay.css">
+
 
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
 <body>
+
+
+
+
 	<div id="BodyWrap" style="width: 1000px;">
 		<div class="Order_DetailCheck">
 			<div class="state1">
@@ -57,32 +68,63 @@
 				<tbody>
 					<tr>
 						<td>배송지 선택</td>
-						<td><label><input type="radio" name="loc">기본배송지</label>
-							<label><input type="radio" name="loc">직접입력</label></td>
+						<td><label><input type="radio" name="loc" id="dft"
+								checked>기본배송지</label> <label><input type="radio"
+								name="loc" id="input">직접입력</label></td>
 					</tr>
-					<tr>
+					<tr class="default">
 						<td>이름</td>
-						<td><input type="text" id="info_name"></td>
+						<td><input type="text" class="info_name" name="USER_NAME"
+							value="${locInfo.USER_NAME}"></td>
 					</tr>
-					<tr>
+					<tr class="default">
 						<td>주소</td>
-						<td><input type="text" id="info_loc1">&ensp;<input
+						<td><input type="text" class="info_loc1" name="USER_POSTCODE"
+							value="${locInfo.USER_POSTCODE}">&ensp;<input
 							type="button" value="주소 찾기"></td>
 					</tr>
-					<tr>
+					<tr class="default">
 						<td></td>
-						<td><input type="text" id="info_loc2"></td>
+						<td><input type="text" class="info_loc2" name="USER_ADDRESS"
+							value="${locInfo.USER_ADDRESS}"></td>
 					</tr>
-					<tr>
+					<tr class="default">
+						<td>연락처</td>
+						<c:set var="phone" value="${locInfo.USER_PHONE}" />
+						<td><input type="text" class="phone"
+							value="<c:out value="${fn:substring(phone,0,3)}"/>">&nbsp;-&nbsp;
+							<input type="text" class="phone" value="${fn:substring(phone,3,7)}">&nbsp;-&nbsp; <input
+							type="text" class="phone"value="${fn:substring(phone,7,11)}"></td>
+					</tr>
+					<tr class="default">
+						<td>배송시 요구사항</td>
+						<td><input type="text" class="info_request"></td>
+					</tr>
+
+					<tr class="put">
+						<td>이름</td>
+						<td><input type="text" class="info_name" name="USER_NAME"></td>
+					</tr>
+					<tr class="put">
+						<td>주소</td>
+						<td><input type="text" class="info_loc1" name="USER_POSTCODE">&ensp;<input
+							type="button" value="주소 찾기"></td>
+					</tr>
+					<tr class="put">
+						<td></td>
+						<td><input type="text" class="info_loc2" name="USER_ADDRESS"></td>
+					</tr>
+					<tr class="put">
 						<td>연락처</td>
 						<td><input type="text" class="phone">&nbsp;-&nbsp;
 							<input type="text" class="phone">&nbsp;-&nbsp; <input
 							type="text" class="phone"></td>
 					</tr>
-					<tr>
+					<tr class="put">
 						<td>배송시 요구사항</td>
-						<td><input type="text" id="info_request"></td>
+						<td><input type="text" class="info_request"></td>
 					</tr>
+
 				</tbody>
 			</table>
 		</div>
@@ -167,7 +209,7 @@
 					<tr>
 						<td><input type="submit" class="submit" value="결제하기"
 							onclick="location.href='#'"> <input type="reset"
-							class="reset" value="결제하기" onclick="location.href='#'"></td>
+							class="reset" value="취소하기" onclick="location.href='/dim2/detail'"></td>
 					</tr>
 				</tbody>
 			</table>

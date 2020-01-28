@@ -1,5 +1,7 @@
 package com.kh.dim2.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Review {
 	private int REVIEW_NO;
 	private int REVIEW_RATE;
@@ -9,6 +11,13 @@ public class Review {
 	private int REVIEW_P_NO;
 	private String REVIEW_IMG;
 	
+	private MultipartFile uploadfile;	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	
 	public int getREVIEW_NO() {
 		return REVIEW_NO;

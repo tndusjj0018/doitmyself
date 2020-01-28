@@ -30,9 +30,15 @@ $(function(){
 			var offset = $('.seller').offset();
 			$('html, body').animate({scrollTop:offset.top-70},0);
 		});
-		
-		
-	
-	
-	
+
+
+//문의글 제목 클릭시 내용이 나옴.
+$(document).on('click','.clickable',function(){
+	$(this).parent().next().toggle();	
 })
+
+
+		
+		
+	
+});
