@@ -59,11 +59,11 @@ public class MainController {
 		PrintWriter out = response.getWriter();
 		int result = mainService.insert(member);
 		out.println("<script>");
-		if(result == 1) {//»ðÀÔ ¼º°ø½Ã
-			out.println("alert('È¸¿ø°¡ÀÔ¿¡ ÃàÇÏµå¸³´Ï´Ù.');");
+		if(result == 1) {//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			out.println("alert('È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½Ïµå¸³ï¿½Ï´ï¿½.');");
 			out.println("location.href='/login';");
 		} else if(result == -1) {
-			out.println("alert('È¸¿ø°¡ÀÔ¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.');");
+			out.println("alert('È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
