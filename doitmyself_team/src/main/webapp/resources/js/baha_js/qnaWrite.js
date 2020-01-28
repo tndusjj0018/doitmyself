@@ -17,7 +17,17 @@ $(function(){
 		$('#category').val(selected);
 		
 	})
-
+	
+  //선택되거나 입력되지 않은 란이 있을 경우 
+ $('#submit').click(function(){
+	 var category = $('input:radio[name="categories"]:checked').val();
+	 var writer = $('#writer').val();
+	 if(category==null) {
+		 alert('문의유형을 선택하세요.');
+		 return false;
+	 }
+	
+ })
 		
 		
 	

@@ -16,7 +16,7 @@ public class qnaDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public int qnaUpdate(Qna qna) {
-		return sqlSession.update("qna.update",qna);
+		return sqlSession.update("qna.update", qna);
 	}
 	
 
