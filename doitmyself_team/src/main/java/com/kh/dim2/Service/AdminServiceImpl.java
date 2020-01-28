@@ -113,4 +113,42 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.getSubCategoryList();
 	}
 
+
+	@Override
+	public String getMaxMajorCategoryNo() {
+		return adminDAO.getMaxMajorCategoryNo();
+	}
+
+
+	@Override
+	public String getMaxSubCategoryNo(int SC_NO_REF) {
+		System.out.println("AdminServiceImpl SC_NO_REF = "+SC_NO_REF);
+		return adminDAO.getMaxSubCategoryNo(SC_NO_REF);
+	}
+
+
+	@Override
+	public String C_NameCheck(String C_NAME) {
+		System.out.println("여기는 AdminServiceImpl C_NameCheck" + C_NAME);
+		return adminDAO.C_NameCheck(C_NAME);
+	}
+
+
+	@Override
+	public int addSubCategory(SubCategory sub) {
+		return adminDAO.addSubCategory(sub);
+	}
+
+
+	@Override
+	public int addMajorCategory(Category major) {
+		return adminDAO.addMajorCategory(major);
+	}
+
+
+	@Override
+	public String SC_NameCheck(String SC_NAME) {
+		return adminDAO.SC_NameCheck(SC_NAME);
+	}
+
 }

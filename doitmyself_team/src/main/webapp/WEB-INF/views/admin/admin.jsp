@@ -76,9 +76,6 @@
 			}//function reset end 
 			
 			
-			console.log("admin.jsp 현재 페이지는  = "+num);
-			
-			
 			
 			// 다른 메뉴를 누르면 static 변수 초기화
 			$(".admin_sidebar a").click(function(){

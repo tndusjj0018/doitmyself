@@ -94,6 +94,37 @@
 	<select id="SubCategoryList" resultType="sub">
 		select * from SUB_CATEGORY_TBL
 	</select>
-
 	
+	<select id="getMaxMajorCategoryNo" resultType="String">
+		select max(C_NO) from CATEGORY_TBL
+	</select>
+	
+	<select id="getMaxSubCategoryNo" resultType="String" parameterType="int">
+		select max(SC_NO) from SUB_CATEGORY_TBL
+		<where>
+			SC_NO_REF = #{SC_NO_REF}
+		</where>
+	</select>
+	
+	<select id="C_NameCheck" parameterType="String" resultType="String">
+		select C_NAME 
+		from CATEGORY_TBL 
+		where C_NAME = #{C_NAME}
+	</select>
+	
+	<select id="SC_NameCheck" parameterType="String" resultType="String">
+		select SC_NAME 
+		from CATEGORY_TBL 
+		where SC_NAME = #{SC_NAME}
+	</select>
+	
+	<insert id="addMajorCategory" parameterType="category">
+		insert into CATEGORY_TBL
+		values(#{C_NO}, #{C_NAME}) 
+	</insert>
+	
+	<insert id="addSubCategory" parameterType="sub">
+		insert into SUB_CATEGORY_TBL
+		values(#{SC_NO}, #{SC_NAME}, #{SC_NO_REF}) 
+	</insert>
 </mapper>
