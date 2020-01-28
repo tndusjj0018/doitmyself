@@ -60,39 +60,39 @@
 <body class="goto-here">
 
 	<input type="hidden" id="loginid" value="${USER_ID}" name="loginid">
-	<input type="hidden" id="prd_no" value="${P_NO}" name="prd_no">
+	<input type="hidden" id="prd_no" value="${P_NO}" name="num">
+
 
 
 
 	<!-- END nav -->
 
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('resources/image/bg_1.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span
-							class="mr-2"><a href="index.html">Product</a></span> <span>Product
-							Single</span>
-					</p>
-					<h1 class="mb-0 bread">Product Single</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 	<div class="hero-wrap hero-bread" -->
+<!-- 		style="background-image: url('resources/image/bg_1.jpg');"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div -->
+<!-- 				class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!-- 				<div class="col-md-9 ftco-animate text-center"> -->
+<!-- 					<p class="breadcrumbs"> -->
+<!-- 						<span class="mr-2"><a href="index.html">Home</a></span> <span -->
+<!-- 							class="mr-2"><a href="index.html">Product</a></span> <span>Product -->
+<!-- 							Single</span> -->
+<!-- 					</p> -->
+<!-- 					<h1 class="mb-0 bread">Product Single</h1> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
-					<a href="resources/image/product-1.jpg" class="image-popup"><img
-						src="resources/image/product-1.jpg" class="img-fluid"
-						alt="Colorlib Template"></a>
+					<img src="resources/upload/${P_IMG}" class="img-fluid"
+						name="P_IMG" alt="Colorlib Template">
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>Bell Pepper</h3>
+					<h3>${prdData.P_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
 							<a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -112,14 +112,9 @@
 						</p>
 					</div>
 					<p class="price">
-						<span>$120.00</span>
+						<span>${prdData.P_PRICE}</span>
 					</p>
-					<p>A small river named Duden flows by their place and supplies
-						it with the necessary regelialia. It is a paradisematic country,
-						in which roasted parts of sentences fly into your mouth. Text
-						should turn around and return to its own, safe country. But
-						nothing the copy said could convince her and so it didn’t take
-						long until.</p>
+					<p>${prdData.P_DESCRIPTION}</p>
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
@@ -127,12 +122,7 @@
 									<div class="icon">
 										<span class="ion-ios-arrow-down"></span>
 									</div>
-									<select name="" id="" class="form-control">
-										<option value="">Small</option>
-										<option value="">Medium</option>
-										<option value="">Large</option>
-										<option value="">Extra Large</option>
-									</select>
+
 								</div>
 							</div>
 						</div>
@@ -154,7 +144,7 @@
 						</div>
 						<div class="w-100"></div>
 						<div class="col-md-12">
-							<p style="color: #000;">600 kg available</p>
+							<p style="color: #000;">현재 주문 가능</p>
 						</div>
 					</div>
 					<p>

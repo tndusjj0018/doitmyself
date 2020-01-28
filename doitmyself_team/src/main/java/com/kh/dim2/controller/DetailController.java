@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.dim2.Service.ProductService;
 import com.kh.dim2.Service.qnaService;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Qna;
 
 
@@ -30,6 +32,9 @@ import com.kh.dim2.domain.Qna;
 public class DetailController {
     @Autowired
 	private qnaService qnasvc;
+    
+    @Autowired
+	private ProductService prdsvc;
 	
 	@GetMapping(value="/qnaWrite")
 	public String qnaWrite() throws Exception {
@@ -94,14 +99,18 @@ public class DetailController {
 
 		// 수정 된 경우
 		if (result == 1) {
-			out.println("문의글이 수정되었습니다.');");
+			System.out.println("문의글 수정 성공~");
+			out.println("alert('문의글이 수정되었습니다.');");
+			out.println("window.close()");
 		} else {
+			System.out.println("문의글 수정 실패!");
 			out.println("alert('문의글 수정에 실패했습니다!');");
 			out.println("window.close()");
 		}
 
 		out.println("</script>");
 		out.close();
+	
 	}
 	
 	
@@ -121,7 +130,23 @@ public class DetailController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView QnaList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
-
+		
+         Product prd = prdsvc.getDetail(1);
+         if(prd==null) {
+				System.out.println("상품 정보 가져오기 실패!");
+				mv.setViewName("detail/error");
+			}
+			System.out.println("상품 정보 가져오기 성공~");
+			// 수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 boarddata 객체를
+			// ModelAndView객체에 저장합니다.
+			
+		
+		
+		
+		
+		
+		
+		
 		int limit = 10; // 한 화면에 출력할 레코드 갯수
 
 		int listcount = qnasvc.getListCount(); // 총 리스트 수를 받아옴
@@ -149,6 +174,8 @@ public class DetailController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("qnalist", qnalist);
 		mv.addObject("limit", limit);
+		
+		mv.addObject("prdData",prd);
 
 		return mv;
 

@@ -12,11 +12,11 @@
 <body>
 	<form action ="qnaUpdate" method="post"  name="qnaForm">
 	<input type="hidden" id="category" name="QNA_CATEGORY">
-	 <input type="hidden" name="num" value="${qnaData.QNA_NO}">
+	 <input type="hidden" name="QNA_NO" value="${qnaData.QNA_NO}">
 		<table border="1">
 			<tr>
 				<td>문의유형</td>
-				<td><input type="radio" name="categories" value="0" checked>상품</td>&emsp;
+				<td><input type="radio" name="categories" value="0">상품</td>&emsp;
 				<td><input type="radio" name="categories" value="1">배송</td>&emsp;
 				<td><input type="radio" name="categories" value="2">반품/취소</td>&emsp;
 				<td><input type="radio" name="categories" value="3">교환/변경</td>&emsp;

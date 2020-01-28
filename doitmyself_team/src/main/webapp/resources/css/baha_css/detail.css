@@ -154,9 +154,14 @@
 	text-align:center;
 }
 
-#qnaUpdate #qnaDelete:hover {
+#qnaUpdate:hover {
 	cursor:pointer;
 }
+
+#qnaDelete:hover {
+	cursor:pointer;
+}
+
 
 .center-block {
 	margin-top:10px;
