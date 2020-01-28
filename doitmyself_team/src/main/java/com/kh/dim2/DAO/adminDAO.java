@@ -50,6 +50,7 @@ public class adminDAO {
 		return sqlSession.selectOne("Admin.userinfo",USER_NO);
 	}
 
+
 	public int updateAdminPrivilege(Map<String, Object> map) {
 		return sqlSession.update("Admin.updatePrivilege", map);
 	}
@@ -62,4 +63,30 @@ public class adminDAO {
 		return sqlSession.selectList("Admin.SubCategoryList");
 	}
 
+	public String getMaxMajorCategoryNo() {
+		return sqlSession.selectOne("Admin.getMaxMajorCategoryNo");
+	}
+	
+	public String getMaxSubCategoryNo(int SC_NO_REF) {
+		System.out.println("AdminDAO SC_NO_REF = "+SC_NO_REF);
+		return sqlSession.selectOne("Admin.getMaxSubCategoryNo", SC_NO_REF);
+	}
+
+	public String C_NameCheck(String C_NAME) {
+		return sqlSession.selectOne("Admin.C_NameCheck",C_NAME);
+	}
+
+	public int addSubCategory(SubCategory sub) {
+		System.out.println("adminDAO 의  addsubCategory" + sub.getSC_NO());
+		return sqlSession.insert("Admin.addSubCategory",sub);
+	}
+
+	public int addMajorCategory(Category major) {
+		System.out.println("adminDAO 의  addMajorCategory" + major.getC_NO());
+		return sqlSession.insert("Admin.addMajorCategory",major);
+	}
+
+	public String SC_NameCheck(String SC_NAME) {
+		return sqlSession.selectOne("Admin.SC_NameCheck", SC_NAME);
+	}
 }

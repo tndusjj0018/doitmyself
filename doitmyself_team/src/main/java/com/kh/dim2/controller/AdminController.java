@@ -222,6 +222,60 @@ public class AdminController {
 		map.put("major", major);
 		return map;
 	}
+	
+	@ResponseBody
+	@PostMapping("maxMajorCategoryNo")
+	public String getMaxMajorCategoryNo() {
+		System.out.println("여기는 AdminController의 getMaxMajorCategoryNo");
+		String c_no = adminService.getMaxMajorCategoryNo();
+		return c_no;
+		
+	}
+	@ResponseBody
+	@PostMapping("maxSubCategoryNo")
+	public String getMaxSubCategoryNo(int SC_NO_REF) {
+		System.out.println("여기는 AdminController의 getMaxMajorCategoryNo="+SC_NO_REF);
+		String sc_no = adminService.getMaxSubCategoryNo(SC_NO_REF);
+		return sc_no;
+	}
+	
+	@ResponseBody
+	@PostMapping("C_NAMECheck")
+	public int C_NameCheck(String C_NAME) {
+		int result = 0;
+		String res = adminService.C_NameCheck(C_NAME);
+		if(res != null) {//중복된 카테고리 명일 때
+			result =1;
+		}
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("SC_NAMECheck")
+	public int SC_NameCheck(String SC_NAME) {
+		int result = 0;
+		String res = adminService.SC_NameCheck(SC_NAME);
+		if(res != null) {//중복된 카테고리 명일 때
+			result =1;
+		}
+		return result;
+	}
+	
+	
+	
+	
+	@ResponseBody
+	@PostMapping("CategoryAdd")
+	public int AddCategory(SubCategory sub, Category major) {
+		int result = 0;
+		if(sub.getSC_NAME() != null) {
+			System.out.println("서브로 감");
+			result = adminService.addSubCategory(sub);
+		}else {
+			System.out.println("메이저로 감");
+			result = adminService.addMajorCategory(major);
+		}
+		return result;
+	}
 }
 
 

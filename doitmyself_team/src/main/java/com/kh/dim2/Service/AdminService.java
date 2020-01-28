@@ -39,6 +39,18 @@ public interface AdminService {
 	public List<Category> getMajorCategoryList();
 
 	public List<SubCategory> getSubCategoryList();
+	
+	//메인 카테고리 넘버 큰것 구하기 - 카테고리 추가
+	public String getMaxMajorCategoryNo();
+	//서브 카테고리 넘버 큰것 구하기 - 카테고리 추가
+	public String getMaxSubCategoryNo(int SC_NO_REF);
+	//
+	public String C_NameCheck(String C_NAME);
 
+	public String SC_NameCheck(String SC_NAME);
+	
+	public int addSubCategory(SubCategory sub);
+
+	public int addMajorCategory(Category major);
 
 }
