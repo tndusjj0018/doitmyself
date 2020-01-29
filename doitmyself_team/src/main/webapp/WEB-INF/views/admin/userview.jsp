@@ -37,63 +37,10 @@ var go = function(page){
 }
 search_word = "";
 		
-		
-function search(page,search_word){
-	console.log(search_word);
-	//url 파라미터 삭제 	
-	//history.replaceState({}, null, location.pathname);
-	$.ajax({
-		type:"POST",
-		data:{num:"${num}", search_word:search_word, search_col:$(".search_col").val()},
-		dataType:"json",
-		url:"userList",
-		success:function(rdata){
-			search_word = rdata.search_word;
-			console.log(rdata);
-			console.log("검색 기준 = "+rdata.search_col+", 검색어= "+rdata.search_word);
-			$("#mytable").empty();
-			if(rdata.userlist.length == 0){
-				output = "<tr><td>조회된 데이터가 없습니다.</td></tr>";
-				$("#mytable").append(output);
-			}else{
-				output = "";
-				output +="<thead>";
-				output += "	 <th><input type='checkbox' id='checkall' /></th>";
-				output += "  <th>유저 번호</th>";
-				output += "  <th>아이디</th>";
-				output += "  <th>이름</th>";
-				output += "  <th>이메일</th>";
-				output += "  <th>휴대전화</th>";
-				output += "  <th>수정</th>";
-				output += "  <th>삭제</th>";
-				output += "</thead>";
-				output += "<tbody>";
-							
-				var endcnt = (rdata.num*10)-1;
-				var startcnt = endcnt -9; 
-				console.log("startcnt="+startcnt + ", endcnt = "+endcnt);
-				$(rdata.userlist).each(function(index, item){
-									
-					if(startcnt<=index && endcnt>=index){
-						output += "<tr>";
-						output += "	<td><input type='checkbox' class='checkthis' /></td>";
-						output += "<td>"+item.user_NO+"</td>";
-						output += "<td>"+item.user_ID+"</td>";
-						output += "<td>"+item.user_NAME+"</td>";
-						output += "<td>"+item.user_EMAIL+"</td>";
-						output += "<td>"+item.user_PHONE+"</td>";
-						output += "<td><button class='btn btn-primary btn-xs userModify'><span class='glyphicon glyphicon-pencil'></span></button></td>";
-						output += "<td><button class='btn btn-danger btn-xs userDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
-						output += "</tr>";
-					}// if end
-				})//each end
-			}//else end
-		}//success end
-	})//ajax end
-}//function end
 
 	function search(page){
-		console.log(search_word);
+		console.log("검색어 = "+search_word);
+		console.log("page = "+page);
 		//url 파라미터 삭제 	
 		//history.replaceState({}, null, location.pathname);
 		$.ajax({
@@ -122,9 +69,11 @@ function search(page,search_word){
 					output += "  <th>삭제</th>";
 					output += "</thead>";
 					output += "<tbody>";
-					
+
+					var num = rdata.num;
 					var endcnt = (rdata.num*10)-1;
 					var startcnt = endcnt -9; 
+					var maxpage = rdata.maxpage;
 					console.log("startcnt="+startcnt + ", endcnt = "+endcnt);
 					$(rdata.userlist).each(function(index, item){
 						
@@ -147,22 +96,6 @@ function search(page,search_word){
 					output += "</tbody>";
 					$("#mytable").append(output);
 					
-					//다음 버튼 처리
-					if((maxpage - num) > 0){//다음페이지가 존재할 때
-						//다음 페이지 버튼 : 1개씩 이동
-						
-						//현재페이지보다 큰 페이지 버튼
-						if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
-							output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
-						}else{//다음페이지가 두개 이상 존재할 때
-							output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
-							output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
-						}
-						output += "<li><a href='javascript:go("+(num+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
-						
-					}else{//다음페이지가 존재하지 않을 때
-						output += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
-					}//else end
 	
 					pagination(rdata);
 	
@@ -247,41 +180,41 @@ var pagination = function(rdata){
 
 $(document).ready(function(){
 
-$(".user_searchbtn").click(function(){
+	$(".user_searchbtn").click(function(){
+		
+		search_word = $(".user_search").val();
+		if(search_word == null || search_word == ""){
+			alert("검색어를 입력하세요");
+		}else{
+			$(".clearfix").remove();
+			go(1);
+		}
+	});//click end
 	
-	search_word = $(".user_search").val();
-	if(search_word == null || search_word == ""){
-		alert("검색어를 입력하세요");
-	}else{
-		$(".clearfix").remove();
-		go(1);
-	}
-});//click end
-
-
-$("#mytable").on("click",".userDelete",function(){
-	var check = confirm("해당 유저를 삭제하시겠습니까?");
-	var trNum = $(this).closest('tr').prevAll().length;
-
-	if(check == true){
-		alert(trNum+"번째 버튼 선택");
+	
+	$("#mytable").on("click",".userDelete",function(){
+		var check = confirm("해당 유저를 삭제하시겠습니까?");
+		var trNum = $(this).closest('tr').prevAll().length;
+	
+		if(check == true){
+			alert(trNum+"번째 버튼 선택");
+			var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
+			console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
+			location.href = "DeleteUser?USER_NO="+usernum;
+			
+		}else{
+			alert("삭제를 취소합니다.");
+		}
+	})//click end
+	
+	$("#mytable").on("click",".userModify",function(){
+		var trNum = $(this).closest('tr').prevAll().length;
+	
+		console.log(trNum+"번째 버튼 선택");
 		var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
 		console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
-		location.href = "DeleteUser?USER_NO="+usernum;
-		
-	}else{
-		alert("삭제를 취소합니다.");
-	}
-})//click end
-
-$("#mytable").on("click",".userModify",function(){
-	var trNum = $(this).closest('tr').prevAll().length;
-
-	console.log(trNum+"번째 버튼 선택");
-	var usernum = $("#mytable tr:eq("+(trNum+1)+") td:eq(1)").text();
-	console.log(trNum + "번째 userNo = " + usernum);// 선택한 버튼 줄의 유저 번호
-	location.href = "admin?doc=memberInfo&USER_NO="+usernum;
-})//click end
+		location.href = "admin?doc=memberInfo&USER_NO="+usernum;
+	})//click end
 
 })//ready end	
 

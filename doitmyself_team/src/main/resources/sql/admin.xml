@@ -114,7 +114,7 @@
 	
 	<select id="SC_NameCheck" parameterType="String" resultType="String">
 		select SC_NAME 
-		from CATEGORY_TBL 
+		from SUB_CATEGORY_TBL 
 		where SC_NAME = #{SC_NAME}
 	</select>
 	
