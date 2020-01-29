@@ -74,6 +74,16 @@ $('#main_cate_select').change(function(){
 	})//ajax		
 })//#main_cate_select change
 
+//## 가게명 ##
+$.ajax({
+	type : 'post',
+	url : 'sellerName',
+	data : {"USER_ID" : $('#USER_ID').val()},
+	success : function(data){
+		output = '';
+		$('#test_name').val(data);
+	}
+})
 
 // ## 카테고리 넘버 저장용 ##
 $('#sub_cate_select').change(function(){

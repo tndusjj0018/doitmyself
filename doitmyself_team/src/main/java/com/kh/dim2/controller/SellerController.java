@@ -2,9 +2,12 @@ package com.kh.dim2.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
@@ -186,10 +189,71 @@ public class SellerController {
 	}
 	
 	// ## 주문관리 주문리스트 ##
+//	@ResponseBody
+//	@PostMapping(value="OrderList")
+//	public List<Order> OrderListAjax(@RequestParam("USER_ID")String USER_ID){
+//		List<Order> list = sellerService.getOrderList(USER_ID);
+//		return list;
+//	}
+	
+	// ## 주문관리 주문리스트 + 페이징 ##
 	@ResponseBody
 	@PostMapping(value="OrderList")
-	public List<Order> OrderList(@RequestParam("USER_ID")String USER_ID){
-		List<Order> list = sellerService.getOrderList(USER_ID);
+	public Object OrderList(@RequestParam("USER_ID")String USER_ID,
+							@RequestParam(value="limit", defaultValue="10", required=false)int limit,
+							@RequestParam(value="page", defaultValue="1", required=false)int page)throws Exception{
+		//List<Order> list = sellerService.getOrderList(USER_ID);
+		
+		//총 리스트 수 
+		int listcount = sellerService.getOrderListCount();
+		
+		int maxpage = (listcount+limit-1)/limit;
+		System.out.println("총 페이지 수 " + maxpage);
+		
+		//현재 페이지 그룹에서 맨 처음에 표시될 페이지 수 
+		int startpage = ((page-1)/10) * 10+1;
+		//현재 페이지에 보여줄 마지막 페이지 수 (10, 20 , 30 등)
+		int endpage = startpage + 10 - 1;
+		
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		List<Order> orderlist = sellerService.getOrderList(USER_ID, page, limit);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("page", page);
+		map.put("maxpage", maxpage);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		map.put("listcount", listcount);
+		map.put("orderlist", orderlist);
+		map.put("limit",limit);
+		
+		return map;
+	}
+	
+	//## 가게이름 가져옴 ##
+	@ResponseBody
+	@PostMapping(value="sellerName")
+	public void SellerName(@RequestParam("USER_ID")String USER_ID,
+							HttpServletResponse response) throws Exception {
+		
+		String sellerName = sellerService.getSellerName(USER_ID); 
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(sellerName);
+	}
+	
+	//## 판매 관리 리스트 ##
+	@ResponseBody
+	@PostMapping(value="SaleList")
+	public List<Product> SaleList(@RequestParam("USER_ID")String USER_ID,
+								  @RequestParam("saleSelect")String saleSelect){
+		List<Product> list = sellerService.SaleList(USER_ID, saleSelect);
 		return list;
 	}
 }

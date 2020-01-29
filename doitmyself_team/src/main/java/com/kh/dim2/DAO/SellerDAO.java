@@ -39,8 +39,20 @@ public class SellerDAO {
 		sqlSession.insert("Seller.ProductInsert", product);
 	}
 
-	public List<Order> getOrderList(String USER_ID) {
-		return sqlSession.selectList("Seller.OrderList", USER_ID);
+	public List<Order> getOrderList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Seller.OrderList", map);
+	}
+
+	public String getSellerName(String USER_ID) {
+		return sqlSession.selectOne("Seller.SellerName", USER_ID);
+	}
+
+	public int getOrderListCount() {
+		return sqlSession.selectOne("Seller.OrderCount");
+	}
+
+	public List<Product> SaleSelect(HashMap<String, String> map) {
+		return sqlSession.selectList("Seller.SaleSelect", map);
 	}
 
 }

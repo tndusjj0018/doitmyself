@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<script src="resources/yeop/js/seller_sale.js"></script>
 <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -20,16 +21,6 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form>
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="nc-icon nc-zoom-split"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link btn-magnify" href="#pablo">
@@ -77,106 +68,40 @@
             <div class="card card-1 card-order">
               <div class="card-header">
                 <h5 class="title">판매관리</h5>
-                <p class="category">*등록한상품 수정,삭제</p>
+                <p class="category">*판매자가 등록한상품 보기, 수정, 삭제</p>
                 <hr>
               </div>
-              
-              <form id="orderSearchForm">
-              <div class="card-body">
-              	<h5 class="order-h5">* 상품검색</h5>
-            	<hr class="order_hr">    
-              	<table class="orderSearch-tb">
-              		<tr>
-              			<th>검색어</th>
-              			<td>
-              				<select>
-              					<option>주문 번호</option>
-              					<option>주문자ID</option>
-              					<option>배송지</option>
-              				</select>
-              				<input type="text" class="orderSearch">
-              			</td>
-              		</tr>
-              		<tr>
-              			<th>기간</th>
-              			<td>
-              				<label for="orderR-t"><input type="radio" name="orderRadio" id="orderR-t"> 오늘 </label>
-              				<label for="orderR-y"><input type="radio" name="orderRadio" id="orderR-y"> 어제 </label>
-              				<label for="orderR-1mon"><input type="radio" name="orderRadio" id="orderR-1mon"> 1개월 </label>
-              				<label for="orderR-6mon"><input type="radio" name="orderRadio" id="orderR-6mon"> 6개월 </label>
-              			</td>
-              		</tr>
-              		<tr>
-              			<th>주문상태</th>
-              			<td>
-              				<label for="order-all"><input type="checkbox" name="orderCheck" id="order-all"> 전체 </label>               				
-              				<label for="order-preparing"><input type="checkbox" name="orderCheck" id="order-preparing"> 배송 준비중 </label>     				
-              				<label for="order-shipping"><input type="checkbox" name="orderCheck" id="order-shipping"> 배송중 </label>               				
-              				<label for="order-complete"><input type="checkbox" name="orderCheck" id="order-complete"> 배송완료 </label>               				
-              			</td>
-              		</tr>              		
-              	</table>
-              	<div class="order-btn">
-	              	<button type="submit">검색</button>
-	              	<button type="reset">초기화</button>
-              	</div>
-              </div>        
-              </form>
-                              
-            </div>
-            
-            <div class="card card-order">
-           	 <div class="card-body">
-              	<h5 class="order-h5">[총 주문수 : <span class="orderCount">0</span>개]</h5>
+               	 <div class="card-body">
+              	<h5 class="order-h5">[총 상품등록수 : <span class="saleCount">0</span>개]</h5>
               	
               	<div class="orderList">
-	              	<select>
-						<option>주문날짜순</option>              	
-						<option>수량순</option>              	
-						<option>총 가격순</option>              	
-	              	</select>
-	              	<select>              	
-						<option>10개씩 보기</option>              	
-						<option>20개씩 보기</option>              	
-						<option>30개씩 보기</option>              	
+	              	<select class="saleSelect">
+						<option value="P_REGDATE">등록일순</option>              	
+						<option value="P_QUANTITY">재고수량순</option>              	
+						<option value="P_PRICE">가격순</option>              	
 	              	</select>
               	</div>
               	
             	<!-- order table2 -->
-            	<table class="orderList-tb">
+            	<table class="orderList-tb">            	
+	            	<thead>
+	            		<tr>
+	            			<td>등록일</td>
+	            			<td>상품이름</td>
+	            			<td>가격</td>
+	            			<td>재고수량</td>
+	            			<td>찜, 조회수</td>
+	            			<td>상품관리</td>
+	            		</tr>
+	            	</thead>
 	            	<tbody>
-	            		<tr>
-	            			<td>주문 날짜</td>
-	            			<td>주문 번호</td>
-	            			<td>주문자ID</td>
-	            			<td>상품명</td>
-	            			<td>배송지</td>
-	            			<td>수량</td>
-	            			<td>총 가격</td>
-	            			<td>결제수단</td>
-	            			<td>배송상태</td>
-	            		</tr>
-	            		<tr>
-	            			<td>2020-01-01</td>
-	            			<td>20200101-00000000</td>
-	            			<td>asdf1234</td>
-	            			<td>
-	            				<div>IMG</div> 품명 : kh정보교욱원
-	            			</td>
-	            			<td>서울시 종로구 ㅇㅇ동</td>
-	            			<td>3</td>
-	            			<td>100,000</td>
-	            			<td>무</td>
-	            			<td>
-	            				<button>배송준비중</button>
-	            			</td>
-	            		</tr>
+	            		<!-- sale ajax -->
 	            	</tbody>
             	</table>
-            	
-              </div>
-              <!-- card-body -->
+            	<div id="message"></div>
+              </div>                  
             </div>
+     
           </div>
         </div>
       </div>
