@@ -1,6 +1,7 @@
 li{list-style:none;}
 .order-h5{font-size:10.5pt; color:gray; margin-bottom:0;}
-.orderCount{color:red;}
+.saleCount,.orderCount{color:red;}
+.orderPriceAll{color:red;}
 .product-h5{font-size:9.5pt; color:gray; margin-bottom:3px;}
 .product-h5-1{font-size:9pt; color:silver; margin-bottom:3px;}
 .product_hr{background:#3c8cbc; margin:0; opacity:0.7;}
@@ -13,7 +14,8 @@ input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
  	.p_th{width:150px; height:39px; background:#4f97c3d4; text-align:center; font-weight:bold; color:white; font-size:10pt;}
  	.p_th,.p_td{border:1px solid #e0e0e0;}
  	#test_dname,#test_name{width:97%; display:block; margin:0 auto;}
- 	select{margin-left:10px; border-radius: 0 0 3px 3px; color:gray; font-size:10pt;}
+ 	#test_name{background:#f3f3f3;}
+ 	select{margin-left:10px!important; border-radius: 0 0 3px 3px; color:gray; font-size:10pt!important;}
  	#new_p{float:right; margin:20px 10px 0 0; width:110px; height:33px; border-style:none; background:#4f97c3d4; color:white; margin-bottom:35px;}
  	#new_cancel{float:right; margin:20px 10px 0 0; width:110px; height:33px; border-style:none; background:white; color:#4f97c3d4; border:1px solid #4f97c3d4;}
  	.active .nc-icon{color:#37a4bd!important;}
@@ -25,7 +27,7 @@ input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
  	#sub_cate_select{width:170px; text-align:center;}
  	#main_cate_select{width:150px; text-align:center;}
  	input:focus,select:focus{outline:none;}
- 	input{font-size:10.5pt; text-indent:7px;}
+ 	input{font-size:10.5pt!important; text-indent:7px;}
  	#sub_cate{width:150px; display:inline-block;}
  	#main_cate{width:190px; display:inline-block; margin:10px 25px 10px 5px;}
  	#main_cate span,#sub_cate span{margin-left:10px; background:#d3e5f0; display:inline-block;
@@ -74,7 +76,7 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 
 #p_qa,#p_price{text-align:right; padding-right:7px;}
 .btn-primary{background:#3c8dbc!important;}
-.navbar-brand{font-size:11pt!important; color:#a2a2a2!important;}
+.navbar-brand{font-size:11pt!important;}
 #post1{    
 	margin-top: 23px;
     height: 43px;
@@ -107,11 +109,17 @@ input[type=file]{text-indent:0; border:none;}
 #upLoadFileImg{display:inline-block; width:120px;height:90px; border:1px solid #dedede;}
 #uploadfile{width:290px; color:gray;}
 .orderList-tb tbody>tr>td{height:53px; color:#717171;}
-.orderDate{width:105px;}
+.orderDate,.slaeDate{width:105px;}
 .orderNo{width:115px;}
 .orderId{width:115px;}
+.saleName{width:230px;}
+.saleUpdate,.saleDelete{border:none; color:white}
+.saleUpdate:hover,.saleDelete:hover{cursor:pointer; opacity:0.7; transition:.3s;}
+.saleUpdate{width:90px; margin-bottom:13px; background:#38b1a0;}
+.saleDelete{width:90px; background:#ff3c3c;}
+.saleBtn{width:177px;}
 
-
+.ftco-navbar-light{background:white!important;}
 .order-btn img{margin-left:-5px; width:17px; opacity:0.5;}
 .orderProgress{font-size:9.5pt; color:#7b7b7b; margin:0 0 13px 17px;}
 .orderProgress>b{font-size:16pt; opacity:0.9;}
@@ -122,3 +130,9 @@ input[type=file]{text-indent:0; border:none;}
 .orderStatus{background:#ca1b1b; border:none; width:89px; height:35px; color:white;}
 .orderStatus:hover{opacity:0.7; transition:.3s; cursor:pointer;}
 .orderImg img{width:96px; margin-top:3px; display:block;}
+.saleImg img{width:96px; margin-top:3px; display:block; margin:0 auto;}
+
+.center-block{display:flex; justify-content:center;} /*가운데 정렬*/
+#viewcount{width:10%;}
+.rows{display:flex; justify-content:flex-end;}
+.gray{color:#65afff!important;}

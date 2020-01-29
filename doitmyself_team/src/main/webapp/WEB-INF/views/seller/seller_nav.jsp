@@ -83,22 +83,29 @@
   		
   	})
   </script>
+<style>
+	.navbar-brand{color:#3a8aa2!important;}
+	.form-control{font-size:10.5pt!important; color:gray!important;}
+	.navbar-absolute{z-index:0!important;}
+	input[readonly]{background:#f3f3f3!important; color:gray!important;}
+	.btn{font-size:10.5pt!important;}
+	.sidebar{top:74px; width:259px!important;}
+	.nav{margin-top:0px!important;}
+	body{margin-bottom:10px;}
+</style>
 </head>
+<!-- doc저장 -->
 <input type="hidden" value="${doc}" class="doc">
+<!-- session id 저장 -->
+<%-- <input type="hidden" value="${USER_ID}" id="USER_ID"> --%>
+<input type="hidden" value="admin" id="USER_ID">
 <body class="">
   <div class="wrapper ">
+   	<jsp:include page="../main/header.jsp"/>
     <div class="sidebar" data-color="white" data-active-color="danger">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-      <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          		Do It MySelf
-          <!-- <div class="logo-image-big">
-            <img src="../assets/img/logo-big.png">
-          </div> -->
-        </a>
-      </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
@@ -160,9 +167,7 @@
   <script src="resources/yeop/demo/demo.js"></script>
   <script src="resources/yeop/js/seller_info.js"></script>
   <script src="resources/yeop/js/seller_product.js"></script>
-  <script src="resources/yeop/js/seller_order.js"></script>
-  
-  
+    
 </body>
 
 </html>
