@@ -94,7 +94,6 @@
 				})//change end
 				
 				
-				
 				$("input[name=C_NAME]").keyup(function(){
 					console.log("입력중");
 					$.ajax({
