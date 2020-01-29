@@ -13,7 +13,7 @@ public class prdDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public Product getDetail(int num) {
-		return sqlSession.selectOne("product.detail", num);
+		return sqlSession.selectOne("Product.detail", num);
 	}
 
 }

@@ -4,9 +4,9 @@
 
 
 
-<mapper namespace="product">
-	<select id="detail" parameterType="int" resultType="qna">
-	  select * from product_tbl where P_NO = 1
+<mapper namespace="Product">
+	<select id="detail" parameterType="int" resultType="product">
+	  select * from PRODUCT_TBL where P_NO = #{P_NO}
 	</select>
 	
 	

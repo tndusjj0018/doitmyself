@@ -8,12 +8,29 @@ select * from product_tbl;
 
 select * from user_sys_privs;
 
+select * from review_tbl;
+
+CREATE TABLE REVIEW_TBL(
+	REVIEW_NO		NUMBER							PRIMARY KEY,
+	REVIEW_RATE		NUMBER(1)							NOT NULL,
+	REVIEW_CONTENT	VARCHAR2(400)				 		NOT NULL,
+	REVIEW_DATE		DATE			DEFAULT SYSDATE			NOT NULL,
+	REVIEW_WRITER	VARCHAR2(20)		REFERENCES USER_TBL(USER_ID)	NOT NULL,
+	REVIEW_P_NO	NUMBER		REFERENCES PRODUCT_TBL(P_NO)	NOT NULL,
+	REVIEW_IMG		VARCHAR2(40)
+);
+
+
+insert into review_tbl values(13, 3, '고양이 귀엽네요', SYSDATE, 'hodoo', 2, '58190333cute.png');
+
 SET DEFINE OFF
 create table SUB_CATEGORY_TBL(
 SC_NO number(4),
 SC_NAME VARCHAR2(20),
 SC_NO_REF NUMBER(4)
 );
+
+UPDATE product_tbl SET p_quantity='1' WHERE p_no=2;
 
 CREATE TABLE CATEGORY_TBL(
 	C_NO		NUMBER(4)		PRIMARY KEY,
