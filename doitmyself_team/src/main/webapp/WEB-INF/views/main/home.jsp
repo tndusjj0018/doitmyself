@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="resources/css/homecss/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/homecss/animate.css">
     <link rel="stylesheet" href="resources/css/homecss/owl.carousel.min.css">
@@ -330,6 +329,8 @@
 	     		}
 	     		getCart_count();
 	    	})
+	    	
+	    	$('')
 	    })
     </script>
   </body>

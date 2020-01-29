@@ -1,7 +1,12 @@
 package com.kh.dim2.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.List;
 
@@ -29,21 +34,24 @@ public class MainController {
 	@Autowired
 	public MainService mainService;
 	
+	private String access_token = "";
+	
 	public String generateState()
 	{
 	    SecureRandom random = new SecureRandom();
 	    return new BigInteger(130, random).toString(32);
 	}
 	
-	@RequestMapping(value="/home")
+	@RequestMapping(value="/home" , method=RequestMethod.GET)
 	public ModelAndView home(
 				ModelAndView mv , Product product , HttpServletResponse response , HttpSession session) {
 		
 		List<Product> BestproductList = mainService.getBestProduct_List();
 		List<Product> NewproductList = mainService.getNewProduct_List();
+		
 		// 상태 토큰으로 사용할 랜덤 문자열 생성
 		String state = generateState();
-		// 세션 또는 별도의 저장 공간에 상태 토큰을 저장
+		// 세션에 상태 토큰을 저장
 		session.setAttribute("StringState", state);
 		
 		mv.addObject("newDim" , NewproductList);
@@ -110,7 +118,7 @@ public class MainController {
 		out.close();
 	}
 	
-	@RequestMapping(value="/loginProcess" , method = RequestMethod.POST)
+	@RequestMapping(value="/home" , method = RequestMethod.POST)
 	public ModelAndView loginProcess(@RequestParam("USER_ID") String USER_ID , @RequestParam("USER_PASSWORD") String USER_PASSWORD , Recent_View recent_view ,
 							HttpServletRequest request , HttpServletResponse response , HttpSession session , ModelAndView mv) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
@@ -135,7 +143,7 @@ public class MainController {
 			}
 			mv.addObject("newDim" , NewproductList);
 			mv.addObject("bestDim" , BestproductList);
-			mv.addObject("adminNumber" , adminNumber);
+			session.setAttribute("adminNumber" , adminNumber);
 			mv.setViewName("main/home");
 			
 			return mv;
@@ -169,23 +177,104 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/naverLoginProcess" , method=RequestMethod.GET)
-	public String naverLoginProcess(@RequestParam("state") String state , HttpSession session ,  HttpServletResponse response) throws Exception{
+	public String naverLoginProcess(@RequestParam("state") String state , @RequestParam("code") String code , HttpSession session ,  HttpServletResponse response) throws Exception{
 		
 		String NaverState = state;
-
+		String clientSecret = "BgSe5KALbL";
+		
 		// 세션 또는 별도의 저장 공간에서 상태 토큰을 가져옴
 		String storedState = (String)session.getAttribute("state");
-
+		
 		if( !NaverState.equals( storedState ) ) {
-		    return "error"; //401 unauthorized
+		    return null; //401 unauthorized
 		} else {
-		    return "NaverLoginSuccess"; //200 success
+			
+		    return "redirect:naverLogin_ok?code=" + code + "&state=" + state;
 		}
 	}
 	
-	@RequestMapping(value="/NaverLoginCallback" , method= {RequestMethod.GET , RequestMethod.POST})
-	public String NaverLoginSuccess(ModelAndView mv , @RequestParam("code") String code) throws Exception{
-		return "home";
+	@RequestMapping(value="/naverLogin_ok" , method=RequestMethod.GET)
+	public String naverLogin_ok(HttpServletRequest request , String apiURL2) throws Exception{
+	    String clientId = "iOLTY0IrYPUE_O2gwkSU";//애플리케이션 클라이언트 아이디값";
+	    String clientSecret = "BgSe5KALbL";//애플리케이션 클라이언트 시크릿값";
+	    String code = request.getParameter("code");
+	    String state = request.getParameter("state");
+	    
+	    
+	    String redirectURI = URLEncoder.encode("http://192.168.40.48:8088/dim2/naverSuccess", "UTF-8");
+	    String apiURL;
+	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+	    apiURL += "client_id=" + clientId;
+	    apiURL += "&client_secret=" + clientSecret;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    apiURL += "&code=" + code;
+	    apiURL += "&state=" + state;
+	    access_token = "";
+	
+	    System.out.println("apiURL="+apiURL);
+	    try {
+	      URL url = new URL(apiURL);
+	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	      con.setRequestMethod("GET");
+	      int responseCode = con.getResponseCode();
+	      BufferedReader br;
+	      System.out.print("responseCode="+responseCode);
+	      if(responseCode==200) { //정상 호출
+	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	      } else {  // 에러 발생
+	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+	      }
+	      String inputLine;
+	      StringBuffer res = new StringBuffer();
+	      while ((inputLine = br.readLine()) != null) {
+	        res.append(inputLine);
+	      }
+	      br.close();
+	      if(responseCode==200) {
+	        System.out.println(res.toString());
+	        String json = res.toString();
+	        access_token = json.substring(17, json.indexOf("\"", 18));// 네아로 접근 토큰 값";
+	      }
+	    } catch (Exception e) {
+	      System.out.println(e);
+	    }
+		return "redirect:naverProfile";
 	}
 	
+	@RequestMapping(value="/naverProfile")
+	public void NaverLogin(HttpServletRequest request) throws Exception{
+		String header = "Bearer " + access_token;
+
+		try{
+			String apiURL = "https://openapi.naver.com/v1/nid/me";
+			
+			URL url=new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", header);
+			
+			int responseCode = con.getResponseCode();
+			BufferedReader br;
+	
+				if(responseCode==200){
+					br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				} else { //에러
+					br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				}
+					String inputLine;
+					StringBuffer response = new StringBuffer();
+				while((inputLine=br.readLine()) != null){
+					response.append(inputLine);
+				}
+				      br.close();
+				if(responseCode==200) {
+					System.out.println("Profile = "+response.toString());
+					
+			
+				}
+	    } catch (Exception e) {
+	      System.out.println(e);
+	    }
+	}
 }
