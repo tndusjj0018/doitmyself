@@ -16,9 +16,7 @@
 			<li><a href="admin?doc=review_management">리뷰 관리</a></li>	
 		</ul>
 		<ul class = "sidebar_category">
-			<li class = "first_category">판매자관리</li>
-			<li><a href="admin?doc=seller_info">판매자 정보 조회</a></li>
-			<li><a href="admin?doc=seller_revoke">판매자 권한 취소</a></li>
+			<li class = "first_category"><a href="admin?doc=seller_info">판매자 관리</a></li>
 		</ul>
 		<ul class = "sidebar_category">
 			<li class = "first_category">주문관리</li>

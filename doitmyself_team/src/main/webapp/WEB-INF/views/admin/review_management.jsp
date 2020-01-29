@@ -9,10 +9,41 @@
          height: 40px;
          margin-bottom: 16px;
       }
+      #reviewtable>thead{
+		border-bottom: 2px solid #ddd!important;
+      }
    </style>
    <script>
       $(document).ready(function(){
-         //선택된 정렬 방법 그대로 가져가기
+		var delete_review = function(reviewNo, trNum){
+			console.log("function delte_review()");
+			console.log("reviewNo = "+ reviewNo);
+			
+			$.ajax({
+				type:"POST",
+				data:{REVIEW_NO:reviewNo},
+				url:"DeleteReview",
+				success:function(rdata){
+					console.log("일단은 성공");
+					if(rdata == 0){
+						alert("리뷰 삭제 실패입니다.");
+					}else{
+						alert("리뷰 삭제 성공입니다.");
+						$("#reviewtable tr:eq("+(trNum+1)+")").remove();
+						
+					}
+					
+				},
+				error:function(){
+					console.log("에러");
+				}
+				
+			})
+			
+		}	
+    	  
+    	  
+    	  //선택된 정렬 방법 그대로 가져가기
          if("${reviewOrder}" == ""){//정렬 기준을 정하지 않았을 때 => 기본적으로 최신순이 선택되어 있음
             console.log("기본적으로 선택된 정렬 방법이 없습니다.최신순으로 정렬합니다.");
             console.log(".review_orderselect의 최초 value = "+$(".review_orderselect").val());
@@ -21,7 +52,6 @@
             //주소의 parameter 값 받아와서 select 설정
             $(".review_orderselect option[value = ${reviewOrder}]").prop("selected", true);
          }
-               
          
          //review 목록 가져오기
          var reviewList = function(){
@@ -55,8 +85,8 @@
                     	 output += "<td>"+this.review_WRITER+"</td>";
                     	 output += "<td>"+this.review_CONTENT+"</td>";
                     	 output += "<td>"+this.review_DATE+"</td>";
-                    	 output += "<td><button class='btn btn-danger btn-xs userDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
-                    	 
+                    	 output += "<td><button class='btn btn-danger btn-xs reviewDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
+                    	 output += "</tr>";
                      })
                      
                      output += "</tbody>";
@@ -64,6 +94,20 @@
                      $("#reviewtable").append(output);
                      
                   }
+                  
+                  $(".reviewDelete").click(function(){
+                	  var trNum = $(this).closest('tr').prevAll().length;//몇번째 row를 선택했는지 확인
+                	  var reviewNum = $("#reviewtable tr:eq("+(trNum+1)+") td:eq(0)").text();//trNum 번째 row에서 리뷰 등록 번호 확인
+                	  console.log("reviewNum = "+reviewNum);
+                	  
+                	  delete_review(reviewNum, trNum);
+                	  
+                  })
+                  
+                  
+                  
+                  
+                  
                },
                error:function(){
                   console.log("reviewList ajax 에러남");
@@ -90,6 +134,7 @@
 </head>
 <body>
    <font id = "admin_viewtitle">리뷰 관리</font><br>
+   
    <select class="review_orderselect">
       <option value="REVIEW_DATE DESC">최신순</option>
       <option value="REVIEW_WRITER DESC">아이디 내림차순</option>
@@ -97,7 +142,7 @@
       <option value="REVIEW_RATE DESC">별점 높은순</option>
       <option value="REVIEW_RATE ASC">별점 낮은순</option>
    </select>
-   <table class = "table table-bordered table-striped" id="reviewtable">
+   <table class = "table table-striped" id="reviewtable">
       
    </table>
    

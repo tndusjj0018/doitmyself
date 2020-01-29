@@ -1,6 +1,8 @@
 <!-- seller -->
 insert into seller_tbl
 values (1,'내가 1빠',3,'ccorcle','서울시 중구','110-45','11111-4567-4545');
+insert into seller_tbl
+values (2,'내가 2빠',3,'admin','서울시 중구','110-45','11111-4567-4545');
 
 INSERT INTO seller_tbl 
 VALUES((select nvl(max(SELLER_NO),0)+1 from seller_tbl),'가게이름1',0,'ccorcle','서울시 종로구','123-12','12-1234-12345');
@@ -11,6 +13,7 @@ VALUES((select nvl(max(SELLER_NO),0)+1 from seller_tbl),'가게이름2',0,'java'
 INSERT INTO seller_tbl 
 VALUES((select nvl(max(SELLER_NO),0)+1 from seller_tbl),'가게이름3',0,'admin','서울시 동대문구','123-12','12-1234-12345');
 
+select * from seller_tbl;
 
 insert into CATEGORY_TBL 
 values(1,'식품');

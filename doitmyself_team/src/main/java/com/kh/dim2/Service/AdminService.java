@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
 public interface AdminService {
@@ -52,5 +53,13 @@ public interface AdminService {
 	public int addSubCategory(SubCategory sub);
 
 	public int addMajorCategory(Category major);
+
+	public int deleteReview(int REVIEW_NO);
+
+	public List<Seller> getSellerList(Map<String, Object> map);
+
+	public int getSellerListCount();
+
+	public Seller SellerInfoView(int SELLER_NO);
 
 }

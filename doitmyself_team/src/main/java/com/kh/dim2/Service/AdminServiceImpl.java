@@ -11,6 +11,7 @@ import com.kh.dim2.DAO.adminDAO;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -151,6 +152,30 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public String SC_NameCheck(String SC_NAME) {
 		return adminDAO.SC_NameCheck(SC_NAME);
+	}
+
+
+	@Override
+	public int deleteReview(int REVIEW_NO) {
+		return adminDAO.deleteReview(REVIEW_NO);
+	}
+
+
+	@Override
+	public List<Seller> getSellerList(Map<String, Object> map) {//검색어가 없을 때 판매자 리스트 뽑기
+		return adminDAO.getSellerList(map);
+	}
+
+
+	@Override
+	public int getSellerListCount() {
+		return adminDAO.getSellerListCount();
+	}
+
+
+	@Override
+	public Seller SellerInfoView(int SELLER_NO) {
+		return adminDAO.SellerInfoView(SELLER_NO);
 	}
 
 }
