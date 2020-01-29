@@ -12,11 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="resources/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="resources/css/animate.css">
     
     <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css">
 
     <link rel="stylesheet" href="resources/css/aos.css">
 
@@ -27,12 +25,9 @@
     
     <link rel="stylesheet" href="resources/css/flaticon.css">
     <link rel="stylesheet" href="resources/css/icomoon.css">
-    <link rel="stylesheet" href="resources/css/style.css">
-    <!-- 추가  -->
+    
+    <!-- 추가  있어야됨-->
     <link rel="stylesheet" href="resources/css/admin.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/admin.js"></script>
 	
@@ -272,7 +267,7 @@
   <script src="resources/js/bootstrap-datepicker.js"></script>
   <script src="resources/js/scrollax.min.js"></script>
   <script src="resources/js/main.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"><%-- 충돌 --%>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src = "resources/js/user_table.js"></script>
     

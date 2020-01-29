@@ -37,6 +37,7 @@
                      output = "<tr><td>조회된 데이터가 없습니다.</td></tr>";
                      $("#reviewtable").append(output);
                   }else{//리뷰가 있을 때
+                	 console.log(rdata);
                      output += "<thead>";
                      output += "      <tr>";
                      output += "         <td>리뷰 번호</td>";
@@ -48,8 +49,19 @@
                      output += "</thead>";
                      output += "<tbody>";
                      
+                     $(rdata.reviewlist).each(function(){
+                    	 output += "<tr>";
+                    	 output += "<td>"+this.review_NO+"</td>";
+                    	 output += "<td>"+this.review_WRITER+"</td>";
+                    	 output += "<td>"+this.review_CONTENT+"</td>";
+                    	 output += "<td>"+this.review_DATE+"</td>";
+                    	 output += "<td><button class='btn btn-danger btn-xs userDelete'><span class='glyphicon glyphicon-trash'></span></button></td>";
+                    	 
+                     })
                      
                      output += "</tbody>";
+                     
+                     $("#reviewtable").append(output);
                      
                   }
                },

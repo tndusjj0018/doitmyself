@@ -65,7 +65,7 @@ public class AdminController {
 		if(!search_word.equals("")) {
 			word = search_word;
 			//검색을 했을 때 처음 띄워줄 페이지는 1페이지
-			num = 1;
+			//num = 1;
 		}
 		System.out.println("여기는 AdminController userList()");
 		System.out.println("search_col = "+search_col+", search_word = "+word);
@@ -103,7 +103,7 @@ public class AdminController {
 		map.put("search_word", word);
 		map.put("search_col", search_col);
 		map.put("option", option);
-		
+		System.out.println("map 에 넣을 때 num = " + num);
 		return map;
 	}
 	
