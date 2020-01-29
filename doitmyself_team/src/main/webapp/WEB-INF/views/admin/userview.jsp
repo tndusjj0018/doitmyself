@@ -259,7 +259,7 @@ $(".user_searchbtn").click(function(){
 });//click end
 
 
-$("#mytable").click(".userDelete",function(){
+$("#mytable").on("click",".userDelete",function(){
 	var check = confirm("해당 유저를 삭제하시겠습니까?");
 	var trNum = $(this).closest('tr').prevAll().length;
 
@@ -274,7 +274,7 @@ $("#mytable").click(".userDelete",function(){
 	}
 })//click end
 
-$("#mytable").click(".userModify",function(){
+$("#mytable").on("click",".userModify",function(){
 	var trNum = $(this).closest('tr').prevAll().length;
 
 	console.log(trNum+"번째 버튼 선택");
