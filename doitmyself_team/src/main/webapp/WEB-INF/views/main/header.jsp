@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="resources/css/style.css">
+ 
  <script src="resources/js/jquery.min.js"></script>
  <script>
  	$(function(){

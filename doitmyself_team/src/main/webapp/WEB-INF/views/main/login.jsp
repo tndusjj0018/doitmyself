@@ -21,22 +21,24 @@
   <body>
 	 <%
 		    String clientId = "iOLTY0IrYPUE_O2gwkSU";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://192.168.40.48:8088/dim2/home", "UTF-8");
+		    String redirectURI = URLEncoder.encode("http://192.168.40.48:8088/dim2/naverLoginProcess", "UTF-8");
 		    SecureRandom random = new SecureRandom();
 		    String state = new BigInteger(130, random).toString();
+		    
 		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
 		    apiURL += "&client_id=" + clientId;
 		    apiURL += "&redirect_uri=" + redirectURI;
 		    apiURL += "&state=" + state;
 		    session.setAttribute("state", state);
 	 %>
+	 
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
           <div class="row w-100">
             <div class="col-lg-4 mx-auto" style="min-width:600px;">
               <div class="auto-form-wrapper">
-                <form action="loginProcess" method="post">
+                <form action="home" method="post">
                   <div class="form-group">
                     <label class="label">아이디</label>
                     <div class="input-group">
