@@ -22,8 +22,8 @@
 		$(document).ready(function(){
 			
 			
-			$(".btn-return").click(function(){
-				var popup= window.open("returnRegister","","width=1000,height=700,left=450,top=100");
+			$("#btn-order").click(function(){
+				var popup= window.open("http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","","width=1000,height=700,left=450,top=100");
 			});
 			
 			
@@ -144,7 +144,7 @@
 										<span class="order_status">배송중</span><br>
 									</td>
 									<td>
-										<button type="button" class="btn" id="btn-order" >배송조회</button>
+										<button type="button" class="btn" id="btn-order" onclick="window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=${ol.ORDER_TRNO}','','width=1000,height=700,left=450,top=100');">배송조회</button>
 									</td>
 								</c:if>
 								<c:if test="${ol.ORDER_DELIVERY == 4}">
