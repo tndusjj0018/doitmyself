@@ -89,17 +89,13 @@
 	</script>
   </head>
   <body class="goto-here">
-	<header><jsp:include page="../main/header.jsp"></jsp:include></header>
+	<header><jsp:include page="../main/header.jsp" ></jsp:include></header>
 
     
 	<%-- 여기부터  작성 --%>
 	<header class="header">
           <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand p-0 mr-5" href="#"></a>
-            <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a> </div>
+           
             <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item dropdown messages-menu">
@@ -267,9 +263,13 @@
   <script src="resources/js/bootstrap-datepicker.js"></script>
   <script src="resources/js/scrollax.min.js"></script>
   <script src="resources/js/main.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"><%-- 충돌 --%>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+ <%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --%><%-- 충돌 --%>
+  <link href = "resources/css/yehyeong_css/bootstrap/3.3.0/css/bootstrap3.3.0.css" rel="stylesheet" >
+   <link href="resources/css/yehyeong_css/bootstrap/3.3.0/fonts/glyphicons-halflings-regular.woff" rel="stylesheet" id="bootstrap-css">
+   <link href="resources/css/yehyeong_css/bootstrap/3.3.0/fonts/glyphicons-halflings-regular.ttf">
+  <script src="resources/css/yehyeong_css/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src = "resources/js/user_table.js"></script>
+  
     
   </body>
 </html>

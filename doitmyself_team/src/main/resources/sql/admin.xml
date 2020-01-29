@@ -127,5 +127,29 @@
 		insert into SUB_CATEGORY_TBL
 		values(#{SC_NO}, #{SC_NAME}, #{SC_NO_REF}) 
 	</insert>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from REVIEW_TBL
+		where REVIEW_NO = #{REVIEW_NO}
+	</delete>
+	
+	<select id="getSellerListCount" resultType="int">
+		select count(*) from seller_tbl
+	</select>
+	
+	
+	<select id="getSellerList" parameterType="map" resultType="seller">
+		select * 
+			from (select rownum rnum, b.* 
+					from(select * 
+						from seller_tbl 
+						order by #{option1})b)
+		where rnum &gt;=#{startnum} and rnum &lt;= #{endnum}
+		
+	</select>
+	<select id="SellerInfoView" parameterType="int" resultType="seller">
+		select * from seller_tbl
+		where seller_no = #{seller_no}
+	</select>
 </mapper>
 

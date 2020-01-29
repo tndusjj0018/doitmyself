@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
 @Repository
@@ -88,5 +89,21 @@ public class adminDAO {
 
 	public String SC_NameCheck(String SC_NAME) {
 		return sqlSession.selectOne("Admin.SC_NameCheck", SC_NAME);
+	}
+
+	public int deleteReview(int REVIEW_NO) {
+		return sqlSession.delete("Admin.deleteReview", REVIEW_NO);
+	}
+
+	public List<Seller> getSellerList(Map<String, Object> map) {
+		return sqlSession.selectList("Admin.getSellerList",map);
+	}
+
+	public int getSellerListCount() {
+		return sqlSession.selectOne("Admin.getSellerListCount");
+	}
+
+	public Seller SellerInfoView(int SELLER_NO) {
+		return sqlSession.selectOne("Admin.SellerInfoView", SELLER_NO);
 	}
 }

@@ -21,6 +21,7 @@ import com.kh.dim2.Service.AdminService;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Review;
+import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
 
@@ -43,7 +44,13 @@ public class AdminController {
 			Member member = UserInfo(Integer.parseInt(request.getParameter("USER_NO")));
 			mv.addObject("member", member);
 			
+		}else if(doc.equals("sellerInfo")) {//판매자 정보 보기 버튼 눌렀을 때
+			System.out.println("doc = sellerInfo");
+			Seller seller = SellerInfo(Integer.parseInt(request.getParameter("SELLER_NO")));
+			mv.addObject("seller",seller);
 		}
+		
+		
 		mv.addObject("num",num);
 		mv.addObject("doc",doc);
 		mv.setViewName("admin/admin");
@@ -108,13 +115,13 @@ public class AdminController {
 	}
 	
 	@GetMapping("product")
-	public String CategoryView() {
+	public String CategoryView() {//상품 정렬 페이지로 이동
 		return "category/shop";
 	}
 	
 	
 	@GetMapping("DeleteUser")
-	public void DeleteUser(HttpServletResponse response, int USER_NO)throws Exception {
+	public void DeleteUser(HttpServletResponse response, int USER_NO)throws Exception {//유저 삭제
 		response.setContentType("text/html;charset=utf-8");
 		System.out.println("왔다 유저번호 들고 " + USER_NO);
 		PrintWriter out=  response.getWriter();
@@ -132,7 +139,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("ModifyUser")
-	public void ModifyUser(HttpServletResponse response, HttpServletRequest request, Member member)throws Exception {
+	public void ModifyUser(HttpServletResponse response, HttpServletRequest request, Member member)throws Exception {//유저 정보 수정
 		int USER_NO = Integer.parseInt(request.getParameter("USER_NO")); 
 		System.out.println("AdminController의 ModifyUser");
 		System.out.println("member의 번호는" + USER_NO);
@@ -150,8 +157,8 @@ public class AdminController {
 		response.getWriter().print(message);
 	}
 	
-	@GetMapping("user_info")
-	public Member UserInfo(int USER_NO) {
+//	@GetMapping("user_info")
+	public Member UserInfo(int USER_NO) {//유저 정보 보기
 		System.out.println("AdminController의 UserInfo");
 		Member member = adminService.getMemberInfo(USER_NO);
 		System.out.println("userno = "+USER_NO);
@@ -161,10 +168,18 @@ public class AdminController {
 	
 	
 	
+	public Seller SellerInfo(int SELLER_NO) {
+		System.out.println("adminController SellerInfoView");
+		Seller seller = adminService.SellerInfoView(SELLER_NO);
+		System.out.println("seller 주소"+seller.getSELLER_ADDRESS());
+		return seller;
+	}
+	
+	
 	@ResponseBody
 	@PostMapping("reviewlist")
 	public Object getReviewList(@RequestParam(value="num", defaultValue = "1", required = false)int num,
-								@RequestParam(value="reviewOrder")String reviewOrder) {
+								@RequestParam(value="reviewOrder")String reviewOrder) {//리뷰 리스트 뽑기
 		//한 페이지에 보여줄 항목 수 
 		int limit = 10;
 		
@@ -189,7 +204,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("admin_privilege_change")
-	public void privilege_change(int USER_NO,int USER_IS_ADMIN, HttpServletResponse response)throws Exception {
+	public void privilege_change(int USER_NO,int USER_IS_ADMIN, HttpServletResponse response)throws Exception {//관리자 권한 수정
 		System.out.println("여기는 AdminController의 privilege_change");
 		int result = adminService.updateAdminPrivilege(USER_NO, USER_IS_ADMIN);
 		String message = "권한 수정 실패";
@@ -201,7 +216,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("CategoryList")
-	public Object getCategoryList() {
+	public Object getCategoryList() {////모든 카테고리 리스트 뽑기
 		System.out.println("여기는 adminDAO의 getCategoryList");
 		List<Category> major = adminService.getMajorCategoryList();
 		List<SubCategory> sub = adminService.getSubCategoryList();
@@ -215,7 +230,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("mainCategoryList")
-	public Object getMainCategoryList() {
+	public Object getMainCategoryList() {//대분류 카테고리 리스트 뽑기
 		System.out.println("여기는 getMainCategoryList");
 		List<Category> major = adminService.getMajorCategoryList();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -225,7 +240,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("maxMajorCategoryNo")
-	public String getMaxMajorCategoryNo() {
+	public String getMaxMajorCategoryNo() {//대분류 카테고리에서 가장 큰 카테고리 넘버 구하기
 		System.out.println("여기는 AdminController의 getMaxMajorCategoryNo");
 		String c_no = adminService.getMaxMajorCategoryNo();
 		return c_no;
@@ -233,7 +248,7 @@ public class AdminController {
 	}
 	@ResponseBody
 	@PostMapping("maxSubCategoryNo")
-	public String getMaxSubCategoryNo(int SC_NO_REF) {
+	public String getMaxSubCategoryNo(int SC_NO_REF) {//소분류 카테고리에서 가장 큰 카테고리 넘버 구하기
 		System.out.println("여기는 AdminController의 getMaxMajorCategoryNo="+SC_NO_REF);
 		String sc_no = adminService.getMaxSubCategoryNo(SC_NO_REF);
 		return sc_no;
@@ -241,7 +256,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("C_NAMECheck")
-	public int C_NameCheck(String C_NAME) {
+	public int C_NameCheck(String C_NAME) {//카테고리 대분류 카테고리 이름 중복 검사
 		int result = 0;
 		String res = adminService.C_NameCheck(C_NAME);
 		if(res != null) {//중복된 카테고리 명일 때
@@ -251,7 +266,7 @@ public class AdminController {
 	}
 	@ResponseBody
 	@PostMapping("SC_NAMECheck")
-	public int SC_NameCheck(String SC_NAME) {
+	public int SC_NameCheck(String SC_NAME) {//카테고리 소분류 카테고리 이름 중복 검사
 		int result = 0;
 		String res = adminService.SC_NameCheck(SC_NAME);
 		if(res != null) {//중복된 카테고리 명일 때
@@ -265,7 +280,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("CategoryAdd")
-	public int AddCategory(SubCategory sub, Category major) {
+	public int AddCategory(SubCategory sub, Category major) {//카테고리 추가
 		int result = 0;
 		if(sub.getSC_NAME() != null) {
 			System.out.println("서브로 감");
@@ -276,6 +291,51 @@ public class AdminController {
 		}
 		return result;
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("DeleteReview")
+	public int DeleteReview(int REVIEW_NO) {//리뷰 삭제
+		int result = 0;
+		System.out.println("받아온 리뷰 번호는 = "+REVIEW_NO);
+		result = adminService.deleteReview(REVIEW_NO);
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("sellerList")
+	public Object SellerList(@RequestParam(value ="option1" , required= false)String option1,
+			@RequestParam(value = "num", required=false, defaultValue = "1")int num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int listcount = adminService.getSellerListCount();
+		
+		System.out.println("여기는 AdminController의 SellerList");
+		int limit = 10;//한 페이지에 보여줄 row 갯수
+		int startnum = (num-1)*limit +1;//시작 row
+		int endnum = startnum+limit-1;//끝 row
+		int startpage = 1;
+		int maxpage = listcount/limit;
+		if(listcount%10 !=0) {
+			maxpage +=1;
+		}
+		
+		map.put("option1", option1);//정렬 방법
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		//검색 안했을 시 - 정렬만 
+		List<Seller> list = adminService.getSellerList(map);
+		
+		map.put("sellerList", list);//판매자 정보 리스트
+		map.put("startpage", startpage);//시작 페이지
+		map.put("maxpage", maxpage);//마지막 페이지
+		map.put("num", num);//현재 페이지
+		return map;
+	}
+	
+	
+	
+	
+	
 }
 
 
