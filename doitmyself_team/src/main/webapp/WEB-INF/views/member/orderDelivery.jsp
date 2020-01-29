@@ -12,6 +12,23 @@
 	
 	<!-- CSS Files -->
 	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
+	
+	<style>
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+	</style>
+	
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			
+			$(".btn-return").click(function(){
+				var popup= window.open("returnRegister","","width=1000,height=700,left=450,top=100");
+			});
+			
+			
+		});
+	</script>
 </head>
 
 <body class="">
@@ -32,7 +49,7 @@
               				</button>
             			</div>
             			
-						<a class="navbar-brand" href="#pablo">나의 쇼핑 목록</a>
+						<a class="navbar-brand">나의 쇼핑 목록</a>
           			</div>
           			
           			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,44 +116,44 @@
 								</td>
 								
 								<c:if test="${ol.ORDER_DELIVERY == 0}">
-								<td>
-									<span class="order_status">주문완료</span><br>
-								</td>
-								<td>
-									<button type="button" class="btn" id="btn-cancel">취소 신청</button>
-								</td>
+									<td>
+										<span class="order_status">주문완료</span><br>
+									</td>
+									<td>
+										<button type="button" class="btn btn-cancel" id="btn-cancel" onclick="window.open('cancelRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">취소 신청</button>
+									</td>
 								</c:if>
 								<c:if test="${ol.ORDER_DELIVERY == 1}">
-								<td>
-									<span class="order_status">결제완료</span><br>
-								</td>
-								<td>
-									<button type="button" class="btn" id="btn-cancel">취소 신청</button>
-								</td>
+									<td>
+										<span class="order_status">결제완료</span><br>
+									</td>
+									<td>
+										<button type="button" class="btn btn-cancel" id="btn-cancel" onclick="window.open('cancelRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">취소 신청</button>
+									</td>
 								</c:if>
 								<c:if test="${ol.ORDER_DELIVERY == 2}">
-								<td>
-									<span class="order_status">상품 준비중</span><br>
-								</td>
-								<td>
-									<button type="button" class="btn" id="btn-cancel">취소 신청</button>
-								</td>
+									<td>
+										<span class="order_status">상품 준비중</span><br>
+									</td>
+									<td>
+										<button type="button" class="btn btn-cancel" id="btn-cancel" onclick="window.open('cancelRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">취소 신청</button>
+									</td>
 								</c:if>
 								<c:if test="${ol.ORDER_DELIVERY == 3}">
-								<td>
-									<span class="order_status">배송중</span><br>
-								</td>
-								<td>
-									<button type="button" class="btn" id="btn-order">배송조회</button>
-								</td>
+									<td>
+										<span class="order_status">배송중</span><br>
+									</td>
+									<td>
+										<button type="button" class="btn" id="btn-order" >배송조회</button>
+									</td>
 								</c:if>
 								<c:if test="${ol.ORDER_DELIVERY == 4}">
 								<td>
 									<span class="order_status">배송완료</span><br>
-								</td>
-								<td>
-									<button type="button" class="btn" id="btn-return">반품 신청</button>
-								</td>	
+									</td>
+									<td>
+										<button type="button" class="btn btn-return" id="btn-return" onclick="window.open('returnRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">환불 신청</button>
+									</td>	
 								</c:if>
 																						
 							</tr>

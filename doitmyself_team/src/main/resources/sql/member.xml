@@ -109,6 +109,7 @@
 		from ORDER_TBL, PRODUCT_TBL
 		WHERE ORDER_P_NO = P_NO
 		AND ORDER_ID = #{USER_ID}
+		and ORDER_R_DATE is NULL
 	</select>
 	
 	<!-- 주문내역 수 -->
@@ -185,4 +186,29 @@
 		from REVIEW_TBL
 		where REVIEW_NO = #{REVIEW_NO}
 	</delete>
+	
+	<!-- 취소/반품 현황 -->
+	<select id="cancelreturnlist" parameterType="String" resultType="o_product">
+		select *
+		from ORDER_TBL, PRODUCT_TBL
+		WHERE ORDER_P_NO = P_NO
+		AND ORDER_ID = #{USER_ID}
+		and ORDER_R_DATE is not NULL
+		order by ORDER_R_DATE desc
+	</select>
+	
+	<!-- 취소 신청 -->
+	<update id="cancelregister" parameterType="int">
+		update ORDER_TBL
+		SET ORDER_STATUS = 1,
+			ORDER_R_DATE = SYSDATE
+		WHERE ORDER_NO = #{ORDER_NO}
+	</update>
+	
+	<update id="returnregister" parameterType="int">
+		update ORDER_TBL
+		SET ORDER_STATUS = 2,
+			ORDER_R_DATE = SYSDATE
+		WHERE ORDER_NO = #{ORDER_NO}
+	</update>
 </mapper>

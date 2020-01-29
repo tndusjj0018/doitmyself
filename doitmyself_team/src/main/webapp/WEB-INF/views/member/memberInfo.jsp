@@ -61,6 +61,10 @@
 			
 		});
 	</script>
+	
+	<style>
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+	</style>
 </head>
 
 <body class="">
@@ -81,7 +85,7 @@
 							</button>
 						</div>
 
-						<a class="navbar-brand" href="#pablo">회원 정보</a>
+						<a class="navbar-brand">회원 정보</a>
 					</div>
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
@@ -225,8 +229,7 @@
 	<script src="resources/soo/js/core/popper.min.js"></script>
 	<script src="resources/soo/js/core/bootstrap.min.js"></script>
 	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	
 	<!-- Chart JS -->
 	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->

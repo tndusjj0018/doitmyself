@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body > div > div {
+	width: 100% !important;
+}
+
+body > div > div > div.content > div > div {
+	margin: auto;
+}
+
+.marleft10 {
+	margin-left: 10px;
+}
+
+body > div > div > div.content > div > div > div > div.card-body > form > ul > li {
+	padding: 5px;
+}

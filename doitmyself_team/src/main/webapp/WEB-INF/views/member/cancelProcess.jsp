@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -9,6 +10,10 @@
 	</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
+	<link href="resources/soo/css/cancelProcess.css" rel="stylesheet">
+	<style>
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+	</style>
 </head>
 
 <body class="">
@@ -29,7 +34,7 @@
               				</button>
             			</div>
             			
-						<a class="navbar-brand" href="#pablo">나의 쇼핑 목록</a>
+						<a class="navbar-brand">나의 쇼핑 목록</a>
           			</div>
           			
           			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +72,66 @@
 			        <div class="card-header">
 			          <h5 class="card-title">취소 / 반품 현황</h5>
 			        </div>
-			        <div class="card-body"></div>
+			        <div class="card-body">
+			        	<div class="container">
+			        		
+			        		<!-- 취소 반품 현황 있는 경우 -->
+			        		<c:if test="${!empty cancelreturnlist }">
+			        			<table class="table">
+			        				<tr>
+			        					<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>스토어 명</td> <td>신청 일자</td> <td>처리상태</td>
+			        				</tr>
+			        				
+			        				<c:forEach var="crl" items="${cancelreturnlist}">
+			        				<tr>
+			        					<td>
+			        						${crl.ORDER_DATE }
+			        					</td>
+			        					<td>
+											<img src="${crl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+										</td>
+										<td>
+											<span onclick="alert('제품 상세 페이지로 넘어감')">${crl.p_NAME }</span>
+										</td>
+										<td>
+											${crl.ORDER_PRICE}원<br>
+											(${crl.ORDER_AMOUNT }개)
+										</td>
+										<td>
+											${crl.ORDER_SELLER }
+										</td>
+										<td>
+											${crl.ORDER_R_DATE }
+										</td>
+										<c:if test="${crl.ORDER_STATUS == 1 }">
+											<td>
+												취소신청
+											</td>
+										</c:if>
+										<c:if test="${crl.ORDER_STATUS == 2 }">
+											<td>
+												환불신청
+											</td>
+										</c:if>
+			        				</tr>
+			        				</c:forEach>
+			        			</table>
+			        		</c:if>
+			        	
+			        	
+			        		<!-- 취소 반품 현황 없는 경우 -->
+			        		<c:if test="${empty cancelreturnlist }">
+			        			<div class="container">
+			    				<div class="leaveInfo">
+			    					<i class="nc-icon nc-cart-simple"></i>			     	        		
+			        				<span>취소 / 반품 상품이 없습니다.</span>
+			        			</div>
+			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        		</div>
+			        		</c:if>
+			        	</div>  
+			        </div>
 			      </div>
 			    </div>
 			  </div>
@@ -87,8 +151,7 @@
 	<script src="resources/soo/js/core/popper.min.js"></script>
 	<script src="resources/soo/js/core/bootstrap.min.js"></script>
 	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	
 	<!-- Chart JS -->
 	<script src="resources/soo/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->

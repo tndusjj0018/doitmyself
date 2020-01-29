@@ -77,4 +77,10 @@ public interface MemberService {
 	public int reviewUpdate(Review review);
 	
 	public int reviewDelete(int review_no);
+	
+	public List<O_Product> cancelreturnlist(String user_id);
+	
+	public int cancelRegister(int p_no);
+
+	public int returnRegister(int order_no);
 }
