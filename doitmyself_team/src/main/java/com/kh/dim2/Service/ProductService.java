@@ -1,13 +1,13 @@
 package com.kh.dim2.Service;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.kh.dim2.domain.Product;
 
-@Repository
+@Service
 public interface ProductService {
 
-	Product getDetail(int num);
+	public Product getDetail(int num);
 	
 	
 

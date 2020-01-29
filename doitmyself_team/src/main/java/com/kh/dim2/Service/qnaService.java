@@ -2,11 +2,11 @@ package com.kh.dim2.Service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.kh.dim2.domain.Qna;
 
-@Repository
+@Service
 public interface qnaService {
 	
 	//문의글 작성
