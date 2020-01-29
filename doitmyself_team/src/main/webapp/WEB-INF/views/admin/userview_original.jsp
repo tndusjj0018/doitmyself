@@ -30,8 +30,6 @@
 		
 	</style>
 <script>
-	$(document).ready(function(){
-		
 		search_word = "";
 		var search = function(search_word){
 			console.log(search_word);
