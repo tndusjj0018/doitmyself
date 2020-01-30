@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -108,10 +109,9 @@ public class SellerController {
             		MultipartFile upload) throws Exception {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
-        System.out.println("insertImage()");
+        System.out.println("insertImage()");        
         //업로드한 파일 이름
         String fileName=upload.getOriginalFilename();
- 
         //파일을 바이트 배열로 변환
         byte[] bytes=upload.getBytes();
  
@@ -121,7 +121,7 @@ public class SellerController {
 		int random = r.nextInt(100000000);
 		String refileName = random + fileName;
 		System.out.println("refileName = " + refileName);
-        
+		
         //이미지를 업로드할 디렉토리(배포 디렉토리로 설정)
         String uploadPath=
         	"C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\upload\\";
@@ -140,7 +140,7 @@ public class SellerController {
         
         printWriter.println(
         		"<script>setTimeout(function(){window.parent.CKEDITOR.tools.callFunction("
-        		+ callback + ",'" + fileUrl + "','이미지가 업로드되었습니다.')},2300);"
+        		+ callback + ",'" + fileUrl + "','이미지가 업로드되었습니다.')},2500);"
         		+"</script>");
         printWriter.flush();
     }
@@ -255,6 +255,64 @@ public class SellerController {
 								  @RequestParam("saleSelect")String saleSelect){
 		List<Product> list = sellerService.SaleList(USER_ID, saleSelect);
 		return list;
+	}
+	
+	//## 상품 수정 페이지 ##
+	@GetMapping(value="productInfo")
+	public ModelAndView productInfo(@RequestParam("P_NO")int P_NO,
+									ModelAndView mv) {
+		Product p = sellerService.productInfo(P_NO);
+		
+		mv.setViewName("seller/seller_nav");
+		mv.addObject("doc", "productUpdate");
+		mv.addObject("p", p);
+		
+		return mv;
+	}
+	
+	//## 상품 수정 ##
+	@PostMapping(value="/ProductUpdate")
+	public void ProductUpdate(Product product, HttpServletResponse response)throws Exception{
+		
+		MultipartFile uploadfile = product.getUploadfile();
+		String saveFolder = "C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\upload\\";
+		//파일이 변경된 경우
+		if(uploadfile != null && !uploadfile.isEmpty()) {
+			System.out.println("메인사진이 변경된 경우");
+			String fileName = uploadfile.getOriginalFilename(); //원래 파일 명
+			Random r = new Random();
+			int random = r.nextInt(100000000);
+			
+			//새로운 파일명
+			String refileName = random + fileName;
+			
+			//오라클 디비에 저장될 파일 명
+			// transferTo(file path) : 업로드한 파일을 매개변수의 경로에 지정합니다.
+			uploadfile.transferTo(new File(saveFolder + refileName));
+			
+			//변경된 파일명으로 저장
+			product.setP_IMG(refileName);			
+		}else {// 메인사진 변경 안한경우
+			System.out.println("uploadfile.isEmpty()");
+			product.setP_IMG("");
+		}
+		
+		int result = sellerService.productUpdate(product);
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		//수정 실패한 경우
+		out.println("<script>");
+		if(result == 0) {
+			out.println("alert('상품등록 실패')");
+			out.println("history.back()");
+		}else {
+			out.println("confirm('수정하시겠습니까?')");
+			out.println("setTimeout(function(){location.href='seller?doc=seller_sale';}, 2000);");
+		}
+		out.println("</script>");
 	}
 }
 	

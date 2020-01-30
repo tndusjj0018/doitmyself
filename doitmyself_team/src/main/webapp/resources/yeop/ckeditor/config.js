@@ -36,6 +36,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
+	//상품 설명 이미지명 첨부
 	config.filebrowserUploadUrl = 'insertImage';
 	config.filebrowserUploadMethod='form';
 };

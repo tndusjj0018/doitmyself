@@ -82,4 +82,27 @@
 			<when test="saleSelect == 'P_PRICE'">p_price DESC</when>
 		</choose> 
 	</select>
+	
+	<!-- 상품 수정 페이지 -->
+	<select id="productInfo" parameterType="int" resultType="product">
+		SELECT * from product_tbl
+		WHERE p_no = #{P_NO}
+	</select>
+	
+	<!-- 상품 수정 -->
+	<update id="productUpdate" parameterType="product">
+		UPDATE product_tbl
+		SET
+			p_name = #{P_NAME},
+			p_category_no = #{P_CATEGORY_NO},
+			p_price = #{P_PRICE},
+		<choose>
+			<when test="P_IMG != ''">
+			p_img = #{P_IMG},
+			</when>
+		</choose>
+			p_quantity = #{P_QUANTITY},
+			p_description = #{P_DESCRIPTION}
+		WHERE p_no = #{P_NO}
+	</update>
 </mapper>

@@ -55,4 +55,12 @@ public class SellerDAO {
 		return sqlSession.selectList("Seller.SaleSelect", map);
 	}
 
+	public Product productInfo(int P_NO) {
+		return sqlSession.selectOne("Seller.productInfo", P_NO);
+	}
+
+	public int productUpdate(Product product) {
+		return sqlSession.update("Seller.productUpdate", product);
+	}
+
 }
