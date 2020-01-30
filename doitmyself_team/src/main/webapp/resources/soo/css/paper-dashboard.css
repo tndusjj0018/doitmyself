@@ -2197,7 +2197,7 @@ fieldset[disabled] .btn-link.active {
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #F3F3F3;
+  background-color: #F3F3F3 !important;
   color: #66615B;
   /* cursor: not-allowed; */
 }
@@ -5489,7 +5489,7 @@ License - nucleoapp.com/license/
 }
 
 .card .card-body {
-  padding: 20px 15px 10px 15px;
+  padding: 20px 15px 60px 15px;
 }
 
 .card .card-body.table-full-width {

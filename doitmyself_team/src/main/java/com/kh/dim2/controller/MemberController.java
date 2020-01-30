@@ -219,12 +219,33 @@ public class MemberController {
 	//주문 정보 가지고 옴
 	@RequestMapping(value = "/orderDelivery", method = RequestMethod.GET)
 	public ModelAndView orderDelivery(ModelAndView mv,
-									  @RequestParam("USER_ID") String user_id) {
+									  @RequestParam("USER_ID") String user_id,
+									  @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
+		//한 화면에 출력할 레코드 갯수
+		int limit = 5;
+				
+		//총 리스트 수 받아옴
 		int ordercount = memberservice.ordercount(user_id);
+		System.out.println("주문내역수" + ordercount);
 		
-		List<O_Product> orderlist = memberservice.orderlist(user_id);
+		//총 페이지 수
+		int maxpage = (ordercount + limit -1) / limit;
+				
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+				  
+		//10, 20, 30 등
+		int endpage = startpage + 10 -1;
+				  
+		if (endpage > maxpage) endpage = maxpage;
+		
+		List<O_Product> orderlist = memberservice.orderlist(user_id, page, limit);
 		mv.addObject("doc", "od");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
 		mv.addObject("orderlist", orderlist);
 		mv.addObject("ordercount", ordercount);
 		mv.setViewName("member/orderDelivery");
@@ -305,13 +326,37 @@ public class MemberController {
 	
 	
 
+	//취소/반품 페이지
 	@RequestMapping(value = "/cancelProcess", method = RequestMethod.GET)
 	public ModelAndView cancelProcess(ModelAndView mv,
-									  @RequestParam("USER_ID") String user_id) {
+									  @RequestParam("USER_ID") String user_id,
+									  @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
-		List<O_Product> cancelreturnlist = memberservice.cancelreturnlist(user_id);
+		//한 화면에 출력할 레코드 갯수
+		int limit = 5;
+						
+		//총 리스트 수 받아옴
+		int cancelreturncount = memberservice.cancelreturncount(user_id);
+				
+		//총 페이지 수
+		int maxpage = (cancelreturncount + limit -1) / limit;
+					
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+						  
+		//10, 20, 30 등
+		int endpage = startpage + 10 -1;
+						  
+		if (endpage > maxpage) endpage = maxpage;
+		
+		List<O_Product> cancelreturnlist = memberservice.cancelreturnlist(user_id, page, limit);
+		
 		
 		mv.addObject("cancelreturnlist", cancelreturnlist);
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
 		mv.addObject("doc", "cp");
 		mv.setViewName("member/cancelProcess");
 		
@@ -501,13 +546,34 @@ public class MemberController {
 
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
 	public ModelAndView qnaList(ModelAndView mv,
-								@RequestParam("USER_ID") String user_id) {
+								@RequestParam("USER_ID") String user_id,
+								@RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
+		//한 화면에 출력할 레코드 갯수
+		int limit = 5;
+						
+		//총 리스트 수 받아옴
 		int qnacount = memberservice.qnacount(user_id);
+				
+		//총 페이지 수
+		int maxpage = (qnacount + limit -1) / limit;
+				
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+						  
+		//10, 20, 30 등
+		int endpage = startpage + 10 -1;
+						  
+		if (endpage > maxpage) endpage = maxpage;
 		
-		List<Q_Product> qnalist = memberservice.qnalist(user_id);
+		
+		List<Q_Product> qnalist = memberservice.qnalist(user_id, page, limit);
 
 		mv.addObject("doc", "ql");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
 		mv.addObject("qnacount", qnacount);
 		mv.addObject("qnalist", qnalist);
 		mv.setViewName("member/qnaList");
@@ -516,11 +582,32 @@ public class MemberController {
 
 	@RequestMapping(value = "/wishList", method = RequestMethod.GET)
 	public ModelAndView wishList(ModelAndView mv,
-								 @RequestParam("D_USER_ID") String D_USER_ID) {
-		int wishcount = memberservice.wishcount(D_USER_ID);
+								 @RequestParam("D_USER_ID") String D_USER_ID,
+								 @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
-		List<Product> wishlist = memberservice.wishlist(D_USER_ID);
+		//한 화면에 출력할 레코드 갯수
+		int limit = 5;
+								
+		//총 리스트 수 받아옴
+		int wishcount = memberservice.wishcount(D_USER_ID);
+						
+		//총 페이지 수
+		int maxpage = (wishcount + limit -1) / limit;
+						
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+								  
+		//10, 20, 30 등
+		int endpage = startpage + 10 -1;
+								  
+		if (endpage > maxpage) endpage = maxpage;		
+		
+		List<Product> wishlist = memberservice.wishlist(D_USER_ID, page, limit);
 		mv.addObject("doc", "wl");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
 		mv.addObject("wishcount", wishcount);
 		mv.addObject("wishlist", wishlist);
 		mv.setViewName("member/wishList");

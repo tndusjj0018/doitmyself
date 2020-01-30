@@ -25,6 +25,17 @@
 	
 	<style>
 		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important}
+		
+		.center-block {
+     		display: flex;  
+    		 justify-content:center; /* 가운데 정렬 */
+  		 }
+   
+   		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
+   		.rows{text-align:right;}
+   		.row{height:0}
+   		.gray{color:gray} 
+   		li .current {background:#faf7f7;} 
 	</style>
 	
 </head>
@@ -87,10 +98,10 @@
 			        </div>
 			        <div class="card-body">
 			        	<div class="container">
-			        	
+			 
 			        	<!-- qna 목록 있는 경우 -->
 			        	<c:if test="${qnacount > 0}">
-			        	<table class="table" style="display: contents">
+			        	<table class="table">
 							<tr>
 								<td>문의 번호</td><td colspan="2">상품 정보</td> <td>스토어 명</td> <td>문의 분류</td> <td width="25%">문의 제목</td> <td>작성일</td> <td>답변 상태</td>
 							</tr>
@@ -141,6 +152,52 @@
 							<%-- </c:forEach> --%>
 							</c:forEach>
 						</table>
+						
+						<div class="center-block">
+				<div class="row">
+					<div class="col">
+						<ul class="pagination">
+							<c:if test="${page <= 1 }">
+								<li class="page-item">
+									<a class="page-link current" href="#">이전&nbsp;</a>
+								</li>
+							</c:if>
+							
+							<c:if test="${page > 1 }">
+								<li class="page-item">
+									<a href="qnaList?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
+								</li>
+							</c:if>
+							
+							<c:forEach var="a" begin="${startpage }" end="${endpage }">
+								<c:if test="${a==page }">
+									<li class="page-item">
+										<a class="page-link current" href="#">${a }</a>
+									</li>
+								</c:if>
+								<c:if test="${a != page }">
+									<li class="page-item">
+										<a href="qnaList?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
+									</li>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${page >= maxpage }">
+								<li class="page-item">
+									<a class="page-link current" href="#">&nbsp;다음</a>
+								</li>
+							</c:if>
+							<c:if test="${page < maxpage }">
+								<li class="page-item">
+									<a href="qnaList?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
+								</li>
+							</c:if>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+						
 						</c:if>
 						
 						<!-- qna 목록 없는 경우 -->

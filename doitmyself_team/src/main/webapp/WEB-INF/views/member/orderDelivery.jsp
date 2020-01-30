@@ -14,7 +14,17 @@
 	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
 	
 	<style>
-		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important}
+		.center-block {
+     		display: flex;  
+    		 justify-content:center; /* 가운데 정렬 */
+  		 }
+   
+   		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
+   		.rows{text-align:right;}
+   		.row{height:0}
+   		.gray{color:gray} 
+   		li .current {background:#faf7f7;}
 	</style>
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
@@ -152,13 +162,63 @@
 									<span class="order_status">배송완료</span><br>
 									</td>
 									<td>
-										<button type="button" class="btn btn-return" id="btn-return" onclick="window.open('returnRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">환불 신청</button>
+										<button type="button" class="btn btn-return" id="btn-return" onclick="window.open('returnRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">환불 신청</button> <br>
+										<button type="button" class="btn" id="btn-order" onclick="window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=${ol.ORDER_TRNO}','','width=1000,height=700,left=450,top=100');">배송조회</button>
 									</td>	
 								</c:if>
 																						
 							</tr>
 							</c:forEach>
 						</table>
+						
+						
+						<div class="center-block">
+				<div class="row">
+					<div class="col">
+						<ul class="pagination">
+							<c:if test="${page <= 1 }">
+								<li class="page-item">
+									<a class="page-link current" href="#">이전&nbsp;</a>
+								</li>
+							</c:if>
+							
+							<c:if test="${page > 1 }">
+								<li class="page-item">
+									<a href="orderDelivery?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
+								</li>
+							</c:if>
+							
+							<c:forEach var="a" begin="${startpage }" end="${endpage }">
+								<c:if test="${a==page }">
+									<li class="page-item">
+										<a class="page-link current" href="#">${a }</a>
+									</li>
+								</c:if>
+								<c:if test="${a != page }">
+									<li class="page-item">
+										<a href="orderDelivery?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
+									</li>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${page >= maxpage }">
+								<li class="page-item">
+									<a class="page-link current" href="#">&nbsp;다음</a>
+								</li>
+							</c:if>
+							<c:if test="${page < maxpage }">
+								<li class="page-item">
+									<a href="orderDelivery?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
+								</li>
+							</c:if>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+						
+						
+						
 						</c:if>
 						
 						<!-- 주문 내역 없는 경우 -->
@@ -172,6 +232,8 @@
 			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
 			        		</div>
 						</c:if>
+						
+						
 						</div>
 			        </div>
 			      </div>

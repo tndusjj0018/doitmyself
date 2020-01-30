@@ -41,18 +41,18 @@ public interface MemberService {
 	//찜 목록 개수
 	public int wishcount(String user_id);
 	
-	public List<Product> wishlist(String user_id);
+	public List<Product> wishlist(String user_id, int page, int limit);
 	
 	public int wishdelete(int p_no, String user_id);
 	
 	public int p_dibsupdate(int p_no);
 	
-	public List<Q_Product> qnalist(String user_id);
+	public List<Q_Product> qnalist(String user_id, int page, int limit);
 	
 	//qna 목록 개수
 	public int qnacount(String user_id);
 		
-	public List<O_Product> orderlist(String user_id);
+	public List<O_Product> orderlist(String user_id, int page, int limit);
 	
 	//주문내역 개수
 	public int ordercount(String user_id);
@@ -78,7 +78,9 @@ public interface MemberService {
 	
 	public int reviewDelete(int review_no);
 	
-	public List<O_Product> cancelreturnlist(String user_id);
+	public List<O_Product> cancelreturnlist(String user_id, int page, int limit);
+	
+	public int cancelreturncount(String user_id);
 	
 	public int cancelRegister(int p_no);
 

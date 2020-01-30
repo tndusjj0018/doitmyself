@@ -97,8 +97,8 @@
 <!-- doc저장 -->
 <input type="hidden" value="${doc}" class="doc">
 <!-- session id 저장 -->
-<%-- <input type="hidden" value="${USER_ID}" id="USER_ID"> --%>
-<input type="hidden" value="admin" id="USER_ID">
+<input type="hidden" value="${USER_ID}" id="USER_ID">
+<!-- <input type="hidden" value="admin" id="USER_ID"> -->
 <body class="">
   <div class="wrapper ">
    	<jsp:include page="../main/header.jsp"/>
