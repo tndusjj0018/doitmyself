@@ -22,6 +22,10 @@
 			});
 		});
 	</script>
+	
+	<style>
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+	</style>
 </head>
 
 <body class="">
@@ -42,7 +46,7 @@
               				</button>
             			</div>
             			
-						<a class="navbar-brand" href="#pablo">내가 찜한 상품</a>
+						<a class="navbar-brand">내가 찜한 상품</a>
           			</div>
           			
           			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +111,7 @@
 									${wl.p_PRICE }원
 								</td>
 								<td>
-									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니까?') == true)location.href='wishdelete?P_NO=${wl.p_NO}';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
+									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니까?') == true)location.href='wishdelete?P_NO=${wl.p_NO}&USER_ID=${USER_ID }';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
 								</td>
 							</tr>
 							</c:forEach>

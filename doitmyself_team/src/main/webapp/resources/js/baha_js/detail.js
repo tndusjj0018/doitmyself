@@ -38,7 +38,5 @@ $(document).on('click','.clickable',function(){
 })
 
 
-		
-		
-	
+			
 });

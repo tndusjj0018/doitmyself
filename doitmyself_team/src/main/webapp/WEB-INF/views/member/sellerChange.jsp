@@ -103,6 +103,10 @@
 			*/
 		});			
 	</script>
+	
+	<style>
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+	</style>
 </head>
 
 <body class="">
@@ -123,7 +127,7 @@
               				</button>
             			</div>
             			
-						<a class="navbar-brand" href="#pablo">회원 정보</a>
+						<a class="navbar-brand">회원 정보</a>
           			</div>
           			
           			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -247,16 +251,16 @@
 								<td width="160px">스토어명</td>
 								<td>
 									<input type="text" id="SELLER_NAME" name="SELLER_NAME" placeholder="스토어 명" class="form-control placeholder_font" required>
-									<span id="namecheckmsg" style="width: 40px;"></span>
+									<span id="namecheckmsg"></span>
 								</td>
 							</tr>
 							
 							<tr>
 								<td>출고/반품 주소</td>
 								<td>
-									<div style="font-size:8px; margin-bottom:8px;">판매상품을 보내고 반품 받을 기본주소입니다.</div>
-									<input type="text" class="form-control col-md-3 placeholder_font" id="SELLER_POSTCODE" name="SELLER_POSTCODE" placeholder="우편 번호" style="display: inline-block;" required>
-									<button type="button" class="btn btn-primary" id="postsearch" onclick="Postcode()" style="height:32px; line-height:2px !important">우편 번호 찾기</button>
+									<div style="font-size:8px; margin-bottom:8px; float: left;">판매상품을 보내고 반품 받을 기본주소입니다.</div>
+									<input type="text" class="form-control col-md-3 placeholder_font" id="SELLER_POSTCODE" name="SELLER_POSTCODE" placeholder="우편 번호" required>
+									<button type="button" class="btn btn-primary" id="postsearch" onclick="Postcode()">우편 번호 찾기</button>
 									
 									<input type="text" class="form-control placeholder_font" id="SELLER_ADDRESS" name="SELLER_ADDRESS" placeholder="사업지 주소" style="margin-top: 5px;" required>
 								</td>

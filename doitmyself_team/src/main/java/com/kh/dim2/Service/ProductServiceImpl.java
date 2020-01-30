@@ -14,8 +14,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getDetail(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getDetail(num);
 	}
 	
 

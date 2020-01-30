@@ -33,7 +33,11 @@
 	</select>
 	
 	<update id="update" parameterType="qna" >
-	 update QNA_TBL set QNA_CATEGORY= ${QNA_CATEGORY}, QNA_SUBJECT= ${QNA_SUBJECT}, QNA_CONTENT= ${QNA_CONTENT}, QNA_SECRET= ${QNA_SECRET} where QNA_NO= '${QNA_NO}'
+	 update QNA_TBL 
+	 set QNA_CATEGORY= #{QNA_CATEGORY}, 
+	 QNA_SUBJECT= #{QNA_SUBJECT}, QNA_CONTENT= #{QNA_CONTENT}, 
+	 QNA_SECRET= #{QNA_SECRET} 
+	 where QNA_NO= #{QNA_NO}
 	</update>
 	
 </mapper>

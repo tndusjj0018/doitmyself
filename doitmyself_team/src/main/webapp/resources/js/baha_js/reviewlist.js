@@ -1,7 +1,7 @@
 function getList(page) {
 	$.ajax({
 		type : "get",
-		url : "QnaListAjax.bo",
+		url : "ReviewListAjax.bo",
 		data : {
 			"page" : page
 		},
@@ -81,7 +81,7 @@ function getList(page) {
 }
 
 $(function() {
-	$('.pgnation_qna').click(function(e) {
+	$('.page-link review').click(function(e) {
 		e.preventDefault();
 		getList($(this).text());
 	})

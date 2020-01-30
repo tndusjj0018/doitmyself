@@ -165,5 +165,20 @@ public class MemberServiceImpl implements MemberService {
 	public int reviewDelete(int review_no) {
 		return dao.reviewDelete(review_no);
 	}
+
+	@Override
+	public List<O_Product> cancelreturnlist(String user_id) {
+		return dao.cancelreturnlist(user_id);
+	}
+
+	@Override
+	public int cancelRegister(int order_no) {
+		return dao.cancelRegister(order_no);
+	}
+
+	@Override
+	public int returnRegister(int order_no) {
+		return dao.returnRegister(order_no);
+	}
 	
 }

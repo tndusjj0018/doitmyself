@@ -49,8 +49,33 @@ public class SellerServiceImpl implements SellerService{
 	}
 
 	@Override
-	public List<Order> getOrderList(String USER_ID) {
-		return sellerDAO.getOrderList(USER_ID);
+	public List<Order> getOrderList(String USER_ID, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit -1;
+		map.put("USER_ID", USER_ID);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return sellerDAO.getOrderList(map);
+	}
+
+	@Override
+	public String getSellerName(String USER_ID) {
+		return sellerDAO.getSellerName(USER_ID);
+	}
+
+	@Override
+	public int getOrderListCount() {
+		return sellerDAO.getOrderListCount();
+	}
+
+	@Override
+	public List<Product> SaleList(String USER_ID, String saleSelect) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("USER_ID", USER_ID);
+		map.put("saleSelect", saleSelect);
+		return sellerDAO.SaleSelect(map);
 	}
 
 }

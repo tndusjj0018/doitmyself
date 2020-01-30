@@ -25,6 +25,15 @@ public interface SellerService {
 	void insertProduct(Product product);
 	
 	//주문관리 주문리스트
-	List<Order> getOrderList(String USER_ID);
+	List<Order> getOrderList(String USER_ID, int page, int limit);
+
+	//가게이름 가져옴
+	String getSellerName(String USER_ID);
+
+	//order 리스트 수
+	int getOrderListCount();
+	
+	//판매관리 판매리스트
+	List<Product> SaleList(String USER_ID, String saleSelect);
 
 }

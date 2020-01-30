@@ -39,13 +39,47 @@
 	</insert>
 	
 	<!-- 주문관리 리스트 -->
-	<select id="OrderList" parameterType="String" resultType="order">
-		select ORDER_P_NO, ORDER_DELIVERY, ORDER_STATUS, ORDER_ID,
-				ORDER_PRICE, ORDER_PAYMENT, ORDER_ADDRESS, ORDER_DATE,
-				ORDER_AMOUNT, P.P_IMG, P.P_NAME
+	<!-- <select id="OrderList" parameterType="String" resultType="order">
+		select O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
+				O.ORDER_PRICE, O.ORDER_PAYMENT, O.ORDER_ADDRESS, O.ORDER_DATE,
+				O.ORDER_AMOUNT, P.P_IMG, P.P_NAME
 		from ORDER_TBL O join PRODUCT_TBL P
-		on P.P_NO in (select ORDER_P_NO 
-					from ORDER_TBL O join USER_TBL U
-					on O.ORDER_ID = #{USER_ID})
+		on P.P_NO = O.ORDER_P_NO
+		where O.ORDER_SELLER = #{user_id}
+	</select> -->
+	<select id="OrderList" parameterType="Map" resultType="order">
+		select * from 
+			(select rownum rnum, O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
+					O.ORDER_PRICE, O.ORDER_PAYMENT, O.ORDER_ADDRESS, O.ORDER_DATE,
+					O.ORDER_AMOUNT, P.P_IMG, P.P_NAME
+			from ORDER_TBL O join PRODUCT_TBL P
+			on P.P_NO = O.ORDER_P_NO
+			where O.ORDER_SELLER = #{USER_ID}
+			order by O.ORDER_P_NO asc)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<!-- 가게이름 가져옴 -->
+	<select id="SellerName" resultType="String">
+		SELECT seller_name FROM seller_tbl
+		WHERE seller_id = #{USER_ID}
+	</select>
+	
+	<!-- OrderCount -->
+	<select id="OrderCount" resultType="int">
+		SELECT count(*) FROM order_tbl
+	</select>
+	
+	<!-- 판매관리 판매리스트 -->
+	<select id="SaleSelect" parameterType="Map" resultType="product">
+		SELECT * FROM product_tbl
+		WHERE p_seller = (select seller_name from seller_tbl
+						where seller_id = #{USER_ID})
+		order by
+		<choose>
+			<when test="saleSelect == 'P_REGDATE'">p_regdate DESC</when>
+			<when test="saleSelect == 'P_QUANTITY'">p_quantity DESC</when>			
+			<when test="saleSelect == 'P_PRICE'">p_price DESC</when>
+		</choose> 
 	</select>
 </mapper>

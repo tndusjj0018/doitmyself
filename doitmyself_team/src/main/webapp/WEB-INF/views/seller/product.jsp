@@ -21,16 +21,6 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form>
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="nc-icon nc-zoom-split"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link btn-magnify" href="#pablo">
@@ -93,9 +83,9 @@
             			<td class="p_td"><input type="text" id="test_dname" name="P_NAME"></td>            			
             		</tr>
             		<tr>
-            			<th class="p_th">가게 명</th>
+            			<th class="p_th">사업지 명</th>
             			<td class="p_td">
-            				<input type="text" id="test_name" name="P_SELLER">
+            				<input type="text" id="test_name" name="P_SELLER" readonly>
             			</td>
             		</tr>
             		<tr>
@@ -133,7 +123,7 @@
             		<tr>
             			<th class="p_th">재고 수량</th>
             			<td class="p_td">
-            				<input type="text" id="p_qa" maxlength="5"> 개
+            				<input type="text" name="P_QUANTITY" id="p_qa" maxlength="5"> 개
             			</td>            			
             			<th class="p_th">가격</th>
             			<td class="p_td">

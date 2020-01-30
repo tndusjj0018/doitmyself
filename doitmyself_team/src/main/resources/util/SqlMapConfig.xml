@@ -21,8 +21,9 @@
 		<mapper resource="sql/member.xml"/>
 		<mapper resource="sql/seller.xml"/>
 		<mapper resource="sql/main.xml"/>
-		<mapper resource="sql/detail.xml"/>
+		<mapper resource="sql/review.xml"/>
 		<mapper resource="sql/qna.xml" />
 		<mapper resource="sql/pay.xml" />
+		<mapper resource="sql/product.xml" />
 	</mappers>
 </configuration>

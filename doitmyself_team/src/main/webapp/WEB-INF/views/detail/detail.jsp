@@ -1,25 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 아래는 숫자 포맷을 사용하기 위한 라이브러리임 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/baha_js/detail.js"></script>
 <script src="resources/js/baha_js/qnalist.js"></script>
+<script src="resources/js/baha_js/reviewlist.js"></script>
 <script>
 	$(function() {
 		//문의글의 제목만 내용은 숨김. 제목을 클릭시 나오게 할 것.
 
 	})
 </script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="resources/css/baha_css/detail.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <head>
-<jsp:include page ="../main/header.jsp"/>
+<jsp:include page="../main/header.jsp" />
 <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -67,32 +70,32 @@
 
 	<!-- END nav -->
 
-<!-- 	<div class="hero-wrap hero-bread" -->
-<!-- 		style="background-image: url('resources/image/bg_1.jpg');"> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div -->
-<!-- 				class="row no-gutters slider-text align-items-center justify-content-center"> -->
-<!-- 				<div class="col-md-9 ftco-animate text-center"> -->
-<!-- 					<p class="breadcrumbs"> -->
-<!-- 						<span class="mr-2"><a href="index.html">Home</a></span> <span -->
-<!-- 							class="mr-2"><a href="index.html">Product</a></span> <span>Product -->
-<!-- 							Single</span> -->
-<!-- 					</p> -->
-<!-- 					<h1 class="mb-0 bread">Product Single</h1> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+	<!-- 	<div class="hero-wrap hero-bread" -->
+	<!-- 		style="background-image: url('resources/image/bg_1.jpg');"> -->
+	<!-- 		<div class="container"> -->
+	<!-- 			<div -->
+	<!-- 				class="row no-gutters slider-text align-items-center justify-content-center"> -->
+	<!-- 				<div class="col-md-9 ftco-animate text-center"> -->
+	<!-- 					<p class="breadcrumbs"> -->
+	<!-- 						<span class="mr-2"><a href="index.html">Home</a></span> <span -->
+	<!-- 							class="mr-2"><a href="index.html">Product</a></span> <span>Product -->
+	<!-- 							Single</span> -->
+	<!-- 					</p> -->
+	<!-- 					<h1 class="mb-0 bread">Product Single</h1> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
 
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
-					<img src="resources/upload/${P_IMG}" class="img-fluid"
-						name="P_IMG" alt="Colorlib Template">
+					<img src="resources/upload/${prdData.p_IMG}" class="img-fluid"
+						name="P_IMG" alt="Colorlib Template" id="mainIMG">
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>${prdData.P_NAME}</h3>
+					<h3>${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
 							<a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -102,19 +105,12 @@
 								class="ion-ios-star-outline"></span></a> <a href="#"><span
 								class="ion-ios-star-outline"></span></a>
 						</p>
-						<p class="text-left mr-4">
-							<a href="#" class="mr-2" style="color: #000;">100 <span
-								style="color: #bbb;">Rating</span></a>
-						</p>
-						<p class="text-left">
-							<a href="#" class="mr-2" style="color: #000;">500 <span
-								style="color: #bbb;">Sold</span></a>
-						</p>
 					</div>
 					<p class="price">
-						<span>${prdData.P_PRICE}</span>
+						<span><fmt:formatNumber value="${prdData.p_PRICE}"
+								pattern="#,###,###" /></span>
 					</p>
-					<p>${prdData.P_DESCRIPTION}</p>
+					<p>${prdData.p_DESCRIPTION}</p>
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
@@ -144,7 +140,14 @@
 						</div>
 						<div class="w-100"></div>
 						<div class="col-md-12">
-							<p style="color: #000;">현재 주문 가능</p>
+							<p style="color: #000;">
+								<c:if test="${prdData.p_QUANTITY eq 0}">
+							품절되었습니다.
+							</c:if>
+								<c:if test="${prdData.p_QUANTITY ne 0}">
+							현재 주문 가능
+							</c:if>
+							</p>
 						</div>
 					</div>
 					<p>
@@ -179,7 +182,9 @@
 						<table border="1" class="product_detail">
 							<tr>
 
-								<td>상세정보란</td>
+								<td><img src="resources/upload/${prdData.p_IMG}"
+									class="img-fluid" name="P_IMG" alt="Colorlib Template"><br>
+									<p>${prdData.p_DESCRIPTION}</p></td>
 
 							</tr>
 						</table>
@@ -196,12 +201,98 @@
 							<option value="high">평점 높은순</option>
 							<option value="low">평점 낮은순</option>
 					</select></span>
-					<table class="review_write">
-						<tr>
-							<td>리뷰 작성 공간</td>
-						</tr>
+					<c:if test="${listcount > 0 }">
+					<c:set var="num" value="${listcount-(page-1)*10 }"/>
+					<c:forEach var="review" items="${reviewlist}">
+					<div id="review_subwrap">
+						<div id="review_top">
+							<span id="star">
+							<c:choose>
+							<c:when test="${review.REVIEW_RATE eq 1}">
+							<i class="fa fa-star checked"></i>
+							</c:when>
+							<c:when test="${review.REVIEW_RATE eq 2}">
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							</c:when>
+							<c:when test="${review.REVIEW_RATE eq 3}">
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							</c:when>
+							<c:when test="${review.REVIEW_RATE eq 4}">
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							</c:when>
+							<c:when test="${review.REVIEW_RATE eq 5}">
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							<i class="fa fa-star checked"></i>
+							</c:when>
+							</c:choose>
+							
+							</span> <span id="review_writer">${review.REVIEW_WRITER}&ensp;
+							${review.REVIEW_DATE}</span>
+						</div>
+						<div id="review_body">
+							<span><img src="resources/upload/${review.REVIEW_IMG}"
+								id="review_img"> </span> <span id="review_prdname">&ensp;&ensp;&ensp;${prdData.p_NAME } </span> <br>
+							<p id="review_content">${review.REVIEW_CONTENT }</p>
 
-					</table>
+						</div>
+					</div>
+					</c:forEach>
+					</c:if>
+					
+					<c:if test="${listcount2 == 0 }">
+	<td id="message" colspan="5">등록된 리뷰가 없습니다.</td>
+</c:if>
+
+<c:if test="${listcount2 > 0 }">
+<div class="center-block">
+
+	<div class="row">
+		<div class="col">
+			<ul class="pagination">
+				<c:if test="${page2 <= 1 }">
+					<li class="page-item"><a class="page-link review" href="#">이전&nbsp;</a>
+					</li>
+				</c:if>
+				<c:if test="${page2 > 1 }">
+					<li class="page-item"><a href="detail?page=${page2-1 }"
+						class="page-link review">이전</a>&nbsp;</li>
+				</c:if>
+
+				<c:forEach var="a" begin="${startpage2 }" end="${endpage2 }">
+					<c:if test="${a == page2 }">
+						<li class="page-item"><a class="page-link review" href="#">${a }</a>
+						</li>
+					</c:if>
+					<c:if test="${a != page2 }">
+						<li class="page-item"><a href="detail?page=${a }"
+							class="page-link">${a }</a></li>
+					</c:if>
+				</c:forEach>
+
+				<c:if test="${page2 >= maxpage2 }">
+					<li class="page-item"><a class="page-link review" href="#">&nbsp;다음</a>
+					</li>
+				</c:if>
+				<c:if test="${page2 < maxpage2 }">
+					<li class="page-item"><a href="detail?page=${page2+1 }"
+						class="page-link review">&nbsp;다음</a></li>
+				</c:if>
+			</ul>
+		</div>
+	</div>
+</div>
+</c:if>
+
+
 
 				</div>
 				<div class="QnaWrap">
@@ -259,11 +350,11 @@
 										<c:when test="${qna.QNA_CATEGORY eq 1 }">
 											<td>답변완료</td>
 										</c:when>
-										</c:choose>
-										<td class="clickable">${qna.QNA_SUBJECT}</td>
-										<td>${qna.QNA_WRITER}</td>
-										<td>${qna.QNA_DATE}</td>
-										
+									</c:choose>
+									<td class="clickable">${qna.QNA_SUBJECT}</td>
+									<td>${qna.QNA_WRITER}</td>
+									<td>${qna.QNA_DATE}</td>
+
 								</tr>
 
 								<tr class='qna_content'>
@@ -271,13 +362,12 @@
 									<td></td>
 									<td>${qna.QNA_CONTENT}<br> <c:if
 											test="${USER_ID eq qna.QNA_WRITER}">
-										<a
-										onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');" id='qnaUpdate'>
-											수정
-											</a>
+											<a
+												onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');"
+												id='qnaUpdate'> 수정 </a>
 											&emsp;
 											<a href='#' id='qnaDelete'>삭제</a>
-										
+
 										</c:if></td>
 									<td></td>
 									<td></td>
@@ -285,47 +375,47 @@
 								<input type="hidden" value="${qna.QNA_NO}">
 							</c:forEach>
 						</c:if>
+						
+						
 						<c:if test="${listcount == 0 }">
 							<td id="message" colspan="5">등록된 글이 없습니다.</td>
 						</c:if>
-
-
-
-
 					</table>
+					
+					
 					<c:if test="${listcount > 0 }">
 						<div class="center-block">
-						
+
 							<div class="row">
 								<div class="col">
 									<ul class="pagination">
 										<c:if test="${page <= 1 }">
-											<li class="page-item"><a class="page-link" href="#">이전&nbsp;</a>
+											<li class="page-item"><a class="page-link pgnation_qna" href="#">이전&nbsp;</a>
 											</li>
 										</c:if>
 										<c:if test="${page > 1 }">
 											<li class="page-item"><a href="detail?page=${page-1 }"
-												class="page-link">이전</a>&nbsp;</li>
+												class="page-link pgnation_qna">이전</a>&nbsp;</li>
 										</c:if>
 
 										<c:forEach var="a" begin="${startpage }" end="${endpage }">
 											<c:if test="${a == page }">
-												<li class="page-item"><a class="page-link" href="#">${a }</a>
+												<li class="page-item"><a class="page-link pgnation_qna" href="#">${a }</a>
 												</li>
 											</c:if>
 											<c:if test="${a != page }">
 												<li class="page-item"><a href="detail?page=${a }"
-													class="page-link">${a }</a></li>
+													class="page-link pgnation_qna">${a }</a></li>
 											</c:if>
 										</c:forEach>
 
 										<c:if test="${page >= maxpage }">
-											<li class="page-item"><a class="page-link" href="#">&nbsp;다음</a>
+											<li class="page-item"><a class="page-link pgnation_qna" href="#">&nbsp;다음</a>
 											</li>
 										</c:if>
 										<c:if test="${page < maxpage }">
 											<li class="page-item"><a href="detail?page=${page+1 }"
-												class="page-link">&nbsp;다음</a></li>
+												class="page-link pgnation_qna">&nbsp;다음</a></li>
 										</c:if>
 									</ul>
 								</div>
@@ -348,9 +438,7 @@
 					</div>
 					<table class="seller_info">
 						<colgroup width="15%">
-
-							<colgroup width="85%">
-						
+						<colgroup width="85%">
 						<tr>
 							<td>고객문의 대표번호</td>
 							<td>&emsp;070-5133-4629</td>
@@ -388,9 +476,9 @@
 
 			</div>
 			<!-- class="ServiceWrap" 끝 -->
-		<div class="SelectedWrap">
+			<div class="SelectedWrap">
 
-								<div class="selected">
+				<div class="selected">
 					<table class="product_selected">
 						<tr>
 							<td></td>
@@ -404,27 +492,31 @@
 						<tr>
 							<td>
 								<div class="chosen">
-									<span id="prd_img">상품<br>이미지
-									</span> <span id="prd_name">상품 이름</span>
+									<span id="prd_img"><img
+										src="resources/upload/${prdData.p_IMG}" class="img-fluid"
+										name="P_IMG" alt="Colorlib Template" id="detailIMG"> </span> <span
+										id="prd_name">${prdData.p_NAME}</span>
 								</div>
 
 								<div class="option_detail">
 									<label><input type="number" id="tno" value="1" min="1"></label>
-									<span id="tno_price">5,000</span><span id="won">원</span>
+									<span id="tno_price"><fmt:formatNumber
+											value="${prdData.p_PRICE}" pattern="#,###,###" /></span>원
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<div class="total_price">
-									<span class="total">총</span><span class="price"> 5,000원</span>
+									<span class="total">총</span><span class="price"><fmt:formatNumber
+											value="${prdData.p_PRICE}" pattern="#,###,###" />원</span>
 								</div>
- 								<form action="/dim2/pay">  <%--?USER_ID=${USER_ID } --%>
-								<div class="checkout">
-                                    <input type="hidden" name="USER_ID" value="${USER_ID }">
-									<input type="submit" class="checkoutGo"  value="결제하기">
-									<button class="cartGo" onclick="location.href='#'">장바구니</button>
-								</div>
+								<form action="/dim2/pay">
+									<div class="checkout">
+										<input type="hidden" name="USER_ID" value="${USER_ID }">
+										<input type="submit" class="checkoutGo" value="결제하기">
+										<button class="cartGo" onclick="location.href='#'">장바구니</button>
+									</div>
 								</form>
 							</td>
 						</tr>
@@ -436,8 +528,8 @@
 
 
 
-		
-						</div>
+
+		</div>
 		<!-- class="WRAP" 끝 -->
 	</section>
 
@@ -465,91 +557,89 @@
 	</section>
 	<footer class="ftco-footer ftco-section" style="clear: both">
 		<div class="container">
-			<div class="row">
-				
+			<div class="row"></div>
+		</div>
+		<div class="row mb-5">
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">Vegefoods</h2>
+					<p>Far far away, behind the word mountains, far from the
+						countries Vokalia and Consonantia.</p>
+					<ul
+						class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+						<li class="ftco-animate"><a href="#"><span
+								class="icon-twitter"></span></a></li>
+						<li class="ftco-animate"><a href="#"><span
+								class="icon-facebook"></span></a></li>
+						<li class="ftco-animate"><a href="#"><span
+								class="icon-instagram"></span></a></li>
+					</ul>
 				</div>
 			</div>
-			<div class="row mb-5">
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Vegefoods</h2>
-						<p>Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia.</p>
-						<ul
-							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-instagram"></span></a></li>
-						</ul>
-					</div>
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4 ml-md-5">
+					<h2 class="ftco-heading-2">Menu</h2>
+					<ul class="list-unstyled">
+						<li><a href="#" class="py-2 d-block">Shop</a></li>
+						<li><a href="#" class="py-2 d-block">About</a></li>
+						<li><a href="#" class="py-2 d-block">Journal</a></li>
+						<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+					</ul>
 				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4 ml-md-5">
-						<h2 class="ftco-heading-2">Menu</h2>
+			</div>
+			<div class="col-md-4">
+				<div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">Help</h2>
+					<div class="d-flex">
+						<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+							<li><a href="#" class="py-2 d-block">Shipping
+									Information</a></li>
+							<li><a href="#" class="py-2 d-block">Returns &amp;
+									Exchange</a></li>
+							<li><a href="#" class="py-2 d-block">Terms &amp;
+									Conditions</a></li>
+							<li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+						</ul>
 						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">Shop</a></li>
-							<li><a href="#" class="py-2 d-block">About</a></li>
-							<li><a href="#" class="py-2 d-block">Journal</a></li>
-							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+							<li><a href="#" class="py-2 d-block">FAQs</a></li>
+							<li><a href="#" class="py-2 d-block">Contact</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Help</h2>
-						<div class="d-flex">
-							<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-								<li><a href="#" class="py-2 d-block">Shipping
-										Information</a></li>
-								<li><a href="#" class="py-2 d-block">Returns &amp;
-										Exchange</a></li>
-								<li><a href="#" class="py-2 d-block">Terms &amp;
-										Conditions</a></li>
-								<li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-							</ul>
-							<ul class="list-unstyled">
-								<li><a href="#" class="py-2 d-block">FAQs</a></li>
-								<li><a href="#" class="py-2 d-block">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Have a Questions?</h2>
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon icon-map-marker"></span><span
-									class="text">203 Fake St. Mountain View, San Francisco,
-										California, USA</span></li>
-								<li><a href="#"><span class="icon icon-phone"></span><span
-										class="text">+2 392 3929 210</span></a></li>
-								<li><a href="#"><span class="icon icon-envelope"></span><span
-										class="text">info@yourdomain.com</span></a></li>
-							</ul>
-						</div>
+			</div>
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">Have a Questions?</h2>
+					<div class="block-23 mb-3">
+						<ul>
+							<li><span class="icon icon-map-marker"></span><span
+								class="text">203 Fake St. Mountain View, San Francisco,
+									California, USA</span></li>
+							<li><a href="#"><span class="icon icon-phone"></span><span
+									class="text">+2 392 3929 210</span></a></li>
+							<li><a href="#"><span class="icon icon-envelope"></span><span
+									class="text">info@yourdomain.com</span></a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
 
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
-						All rights reserved | This template is made with <i
-							class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
+				<p>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
+					All rights reserved | This template is made with <i
+						class="icon-heart color-danger" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
 			</div>
+		</div>
 		</div>
 	</footer>
 

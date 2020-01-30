@@ -22,6 +22,11 @@
 			});
 		});
 	</script>
+	
+	<style>
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important}
+	</style>
+	
 </head>
 
 <body class="">
@@ -42,7 +47,7 @@
               				</button>
             			</div>
             			
-						<a class="navbar-brand" href="#pablo">리뷰 및 QNA</a>
+						<a class="navbar-brand">리뷰 및 QNA</a>
           			</div>
           			
           			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

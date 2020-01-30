@@ -73,4 +73,32 @@
 	width: 200px;
 	display: inline-block;
 	margin-right: 10px;
+	height: 30px !important;
+	float: left;
+}
+
+#namecheckmsg {
+	float: left;
+	width: 200px;
+	position: relative;
+	top: 5px;
+}
+
+#SELLER_POSTCODE {
+	height: 30px !important;
+	clear: left;
+}
+
+#postsearch{
+	height: 30px;
+    line-height: 2px !important;
+    position: relative;
+    top: -30px;
+    left: -135px;
+}
+
+#SELLER_ADDRESS {
+	height: 30px !important;
+	position: relative;
+	top: -25px;
 }

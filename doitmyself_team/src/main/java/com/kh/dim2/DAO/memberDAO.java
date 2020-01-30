@@ -119,4 +119,16 @@ public class memberDAO {
 	public int reviewDelete(int review_no) {
 		return sqlSession.delete("Member.reviewDelete", review_no);
 	}
+	
+	public List<O_Product> cancelreturnlist(String user_id){
+		return sqlSession.selectList("Member.cancelreturnlist", user_id);
+	}
+	
+	public int cancelRegister(int order_no) {
+		return sqlSession.update("Member.cancelregister", order_no);
+	}
+
+	public int returnRegister(int order_no) {
+		return sqlSession.update("Member.returnregister", order_no);
+	}
 }

@@ -40,6 +40,8 @@ public class MemberController {
 		
 		Member m = memberservice.memberInfo(user_id);
 		//session.setAttribute("USER_ID", user_id);
+		
+		mv.addObject("doc", "mi");
 		mv.setViewName("member/memberInfo");
 		mv.addObject("memberinfo", m);
 
@@ -93,8 +95,8 @@ public class MemberController {
 			
 			out.println("<script>");
 			out.println("alert('비밀번호가 변경 되었습니다.');");
-			out.println("self.close();");
-			out.println("location.href='memberInfo';");			
+			out.println("window.opener.top.location.href='memberInfo?USER_ID=" +user_id + "';");
+			out.println("self.close();");			
 			out.println("</script>");
 			out.close();
 		} else if (result == -1) { //현재 비밀번호 틀린 경우
@@ -114,6 +116,7 @@ public class MemberController {
 									 @RequestParam("USER_ID") String user_id) {
 		
 		int isSeller = memberservice.isSeller(user_id);
+		mv.addObject("doc", "sc");
 		mv.addObject("isSeller", isSeller);		
 		mv.setViewName("member/sellerChange");
 		
@@ -160,8 +163,11 @@ public class MemberController {
 
 	//회원 탈퇴 페이지로 이동
 	@RequestMapping(value = "/memberLeave", method = RequestMethod.GET)
-	public String memberLeave() {
-		return "member/memberLeave";
+	public ModelAndView memberLeave(ModelAndView mv) {
+		mv.addObject("doc", "ml");
+		mv.setViewName("member/memberLeave");
+		
+		return mv;
 	}
 	
 	//회원 탈퇴하기
@@ -218,15 +224,98 @@ public class MemberController {
 		int ordercount = memberservice.ordercount(user_id);
 		
 		List<O_Product> orderlist = memberservice.orderlist(user_id);
+		mv.addObject("doc", "od");
 		mv.addObject("orderlist", orderlist);
 		mv.addObject("ordercount", ordercount);
 		mv.setViewName("member/orderDelivery");
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "/cancelRegister", method = RequestMethod.GET)
+	public ModelAndView cancelRegister(ModelAndView mv,
+									   @RequestParam("ORDER_NO") int order_no,
+									   @RequestParam("ORDER_P_NO") int p_no) {
+		
+		Product p = memberservice.productDetail(p_no);
+		mv.addObject("productdetail", p);
+		mv.addObject("ORDER_NO", order_no);
+		mv.setViewName("member/cancelRegister");
+	
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/cancelRegisterAction", method = RequestMethod.GET)
+	public void cancelRegisterAction(HttpServletResponse response,
+									 @RequestParam("ORDER_NO") int order_no,
+									 @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		response.setContentType("text/html; charset=utf-8"); 
+		PrintWriter out = response.getWriter();
+		
+		int result = memberservice.cancelRegister(order_no);
+		if(result == 1) {
+			System.out.println("주문번호 " + order_no + " 취소 신청 완료");
+			out.println("<script>");
+			out.println("alert('취소 신청이 완료 되었습니다.');");
+			out.println("window.opener.top.location.href='cancelProcess?USER_ID=" +user_id + "';");
+			out.println("window.close();");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/returnRegister", method = RequestMethod.GET)
+	public ModelAndView returnRegister(ModelAndView mv,
+			   						   @RequestParam("ORDER_NO") int order_no,
+			   						   @RequestParam("ORDER_P_NO") int p_no) {
+
+		Product p = memberservice.productDetail(p_no);
+		mv.addObject("productdetail", p);
+		mv.addObject("ORDER_NO", order_no);
+		mv.setViewName("member/returnRegister");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/returnRegisterAction", method = RequestMethod.GET)
+	public void returnRegisterAction(HttpServletResponse response,
+									 @RequestParam("ORDER_NO") int order_no,
+									 @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		response.setContentType("text/html; charset=utf-8"); 
+		PrintWriter out = response.getWriter();
+		
+		int result = memberservice.returnRegister(order_no);
+		if(result == 1) {
+			System.out.println("주문번호 " + order_no + " 취소 신청 완료");
+			out.println("<script>");
+			out.println("alert('환불 신청이 완료 되었습니다.');");
+			out.println("window.opener.top.location.href='cancelProcess?USER_ID=" +user_id + "';");
+			out.println("window.close();");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
+	
 
 	@RequestMapping(value = "/cancelProcess", method = RequestMethod.GET)
-	public String cancelProcess() {
-		return "member/cancelProcess";
+	public ModelAndView cancelProcess(ModelAndView mv,
+									  @RequestParam("USER_ID") String user_id) {
+		
+		List<O_Product> cancelreturnlist = memberservice.cancelreturnlist(user_id);
+		
+		mv.addObject("cancelreturnlist", cancelreturnlist);
+		mv.addObject("doc", "cp");
+		mv.setViewName("member/cancelProcess");
+		
+		return mv;
 	}
 
 	
@@ -241,7 +330,7 @@ public class MemberController {
 		int reviewwritecount = memberservice.reviewwritecount(user_id);
 		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id);
 		
-		
+		mv.addObject("doc", "rl");		
 		mv.addObject("reviewablecount", reviewablecount);
 		mv.addObject("reviewablelist", reviewablelist);
 		mv.addObject("reviewwritecount", reviewwritecount);
@@ -257,6 +346,7 @@ public class MemberController {
 									@RequestParam("P_NO") int p_no) {
 		
 		Product p = memberservice.productDetail(p_no);
+		mv.addObject("doc", "rl");
 		mv.addObject("productdetail", p);
 		mv.setViewName("member/reviewWrite");
 		
@@ -315,6 +405,7 @@ public class MemberController {
 									 @RequestParam("P_NO") int p_no) {
 		
 		O_Product r = memberservice.reviewDetail(p_no);
+		mv.addObject("doc", "rl");
 		mv.addObject("reviewdetail", r);
 		mv.setViewName("member/reviewUpdate");
 		
@@ -416,6 +507,7 @@ public class MemberController {
 		
 		List<Q_Product> qnalist = memberservice.qnalist(user_id);
 
+		mv.addObject("doc", "ql");
 		mv.addObject("qnacount", qnacount);
 		mv.addObject("qnalist", qnalist);
 		mv.setViewName("member/qnaList");
@@ -428,6 +520,7 @@ public class MemberController {
 		int wishcount = memberservice.wishcount(D_USER_ID);
 		
 		List<Product> wishlist = memberservice.wishlist(D_USER_ID);
+		mv.addObject("doc", "wl");
 		mv.addObject("wishcount", wishcount);
 		mv.addObject("wishlist", wishlist);
 		mv.setViewName("member/wishList");
