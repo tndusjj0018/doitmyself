@@ -20,13 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kh.dim2.Service.MainService;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Recent_View;
+
+import jdk.nashorn.internal.parser.JSONParser;
 
 @Controller
 public class MainController {
@@ -211,14 +216,12 @@ public class MainController {
 	    apiURL += "&state=" + state;
 	    access_token = "";
 	
-	    System.out.println("apiURL="+apiURL);
 	    try {
 	      URL url = new URL(apiURL);
 	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	      con.setRequestMethod("GET");
 	      int responseCode = con.getResponseCode();
 	      BufferedReader br;
-	      System.out.print("responseCode="+responseCode);
 	      if(responseCode==200) { //정상 호출
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	      } else {  // 에러 발생
@@ -265,16 +268,41 @@ public class MainController {
 					String inputLine;
 					StringBuffer response = new StringBuffer();
 				while((inputLine=br.readLine()) != null){
-					response.append(inputLine);
+					response.append("123"+inputLine);
 				}
 				      br.close();
 				if(responseCode==200) {
-					System.out.println("Profile = "+response.toString());
-					
-			
+					System.out.println("Profile23 = "+response.toString());
+					String NProfile = response.toString();
+					JsonParser JParser = new JsonParser();
+					JsonObject JObject = (JsonObject) JParser.parse(NProfile);
+					JsonArray JArray = (JsonArray) JObject.get("response");
+					for(int i = 0; i < JArray.size(); i++) {
+						JsonObject Object = (JsonObject) JArray.get(i);
+						JsonElement N_Id = Object.get("id");
+						JsonElement N_Pass = Object.get("email");
+						JsonElement N_Name = Object.get("name");
+						JsonElement N_Birth = Object.get("birth");
+						JsonElement N_Gender = Object.get("gender");
+						JsonElement N_Nickname = Object.get("nickname");
+						
+						System.out.println(Object.get("id"));
+						System.out.println(Object.get("nickname"));
+						System.out.println(Object.get("gender"));
+						System.out.println(Object.get("email"));
+						System.out.println(Object.get("name"));
+						System.out.println(Object.get("birthdayy"));
+						
+						System.out.println(N_Id);
+						System.out.println(N_Pass);
+						System.out.println(N_Name);
+						System.out.println(N_Birth);
+						System.out.println(N_Gender);
+						System.out.println(N_Nickname);
+					}
 				}
 	    } catch (Exception e) {
-	      System.out.println(e);
+	      System.out.println("242"+e);
 	    }
 	}
 }
