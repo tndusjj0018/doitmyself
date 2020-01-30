@@ -24,7 +24,18 @@
 	</script>
 	
 	<style>
-		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important} 
+		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important}
+		
+		.center-block {
+     		display: flex;  
+    		 justify-content:center; /* 가운데 정렬 */
+  		 }
+   
+   		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
+   		.rows{text-align:right;}
+   		.row{height:0}
+   		.gray{color:gray} 
+   		li .current {background:#faf7f7;}  
 	</style>
 </head>
 
@@ -116,6 +127,52 @@
 							</tr>
 							</c:forEach>
 						</table>
+						
+						<div class="center-block">
+				<div class="row">
+					<div class="col">
+						<ul class="pagination">
+							<c:if test="${page <= 1 }">
+								<li class="page-item">
+									<a class="page-link current" href="#">이전&nbsp;</a>
+								</li>
+							</c:if>
+							
+							<c:if test="${page > 1 }">
+								<li class="page-item">
+									<a href="wishList?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
+								</li>
+							</c:if>
+							
+							<c:forEach var="a" begin="${startpage }" end="${endpage }">
+								<c:if test="${a==page }">
+									<li class="page-item">
+										<a class="page-link current" href="#">${a }</a>
+									</li>
+								</c:if>
+								<c:if test="${a != page }">
+									<li class="page-item">
+										<a href="wishList?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
+									</li>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${page >= maxpage }">
+								<li class="page-item">
+									<a class="page-link current" href="#">&nbsp;다음</a>
+								</li>
+							</c:if>
+							<c:if test="${page < maxpage }">
+								<li class="page-item">
+									<a href="wishList?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
+								</li>
+							</c:if>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+						
 						</c:if>
 						
 						<!-- 찜 목록 없는 경우 -->
