@@ -65,15 +65,18 @@
 		where D_USER_ID = #{USER_ID}
 	</select>
 	
+	
 	<!-- 찜 목록 -->
-	<select id="wishlist" resultType="product" parameterType="String">
-		select *
-		from PRODUCT_TBL, DIBS_TBL
-		WHERE P_NO = D_P_NO
-		AND D_USER_ID = #{user_id}
-		order by D_NO DESC
+	<select id="wishlist" resultType="product" parameterType="HashMap">
+		select * from (select rownum rnum, b.*
+						from (select * from PRODUCT_TBL, DIBS_TBL
+								WHERE P_NO = D_P_NO
+								AND D_USER_ID = #{USER_ID}
+								order by D_NO DESC)b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
+				
 	<!-- 찜 삭제시 수행되는 sql문 두 개 -->
 	<delete id="wishdelete" parameterType="map">
 		delete
@@ -87,12 +90,13 @@
 	</update>
 	
 	<!-- QNA 리스트 -->
-	<select id="qnalist" resultType="q_product" parameterType="String">
-		select *
-		from QNA_TBL, PRODUCT_TBL
-		WHERE QNA_P_NO = P_NO
-		AND QNA_WRITER = #{USER_ID}
-		ORDER BY QNA_NO DESC
+	<select id="qnalist" resultType="q_product" parameterType="HashMap">
+		select * from (select rownum rnum, b.*
+						from (select * from QNA_TBL, PRODUCT_TBL
+								WHERE QNA_P_NO = P_NO
+								AND QNA_WRITER = #{USER_ID}
+								ORDER BY QNA_NO DESC)b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}	
 	</select>
 	
 	<!-- QNA 개수 -->
@@ -104,12 +108,13 @@
 	
 	
 	<!-- 주문내역 불러오기 -->	
-	<select id="orderlist" resultType="o_product" parameterType="String">
-		select *
-		from ORDER_TBL, PRODUCT_TBL
-		WHERE ORDER_P_NO = P_NO
-		AND ORDER_ID = #{USER_ID}
-		and ORDER_R_DATE is NULL
+	<select id="orderlist" resultType="o_product" parameterType="HashMap">
+		select * from (select rownum rnum, b.*
+						from (select * from ORDER_TBL, PRODUCT_TBL
+								WHERE ORDER_P_NO = P_NO
+								AND ORDER_ID = #{USER_ID}
+								and ORDER_R_DATE is NULL)b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}		
 	</select>
 	
 	<!-- 주문내역 수 -->
@@ -117,6 +122,7 @@
 		select count(*)
 		from ORDER_TBL
 		where ORDER_ID = #{USER_ID}
+		and ORDER_R_DATE is NULL
 	</select>
 	
 	<!-- 리뷰 작성 가능 리스트 -->
@@ -188,8 +194,21 @@
 	</delete>
 	
 	<!-- 취소/반품 현황 -->
-	<select id="cancelreturnlist" parameterType="String" resultType="o_product">
-		select *
+	<select id="cancelreturnlist" parameterType="HashMap" resultType="o_product">
+		select * from (select rownum rnum, b.*
+						from (select * from ORDER_TBL, PRODUCT_TBL
+								WHERE ORDER_P_NO = P_NO
+								AND ORDER_ID = #{USER_ID}
+								and ORDER_R_DATE is not NULL
+								order by ORDER_R_DATE desc)b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	
+	
+	<!-- 취소/반품 수 -->
+	<select id="cancelreturncount" parameterType="String" resultType="int">
+		select count(*)
 		from ORDER_TBL, PRODUCT_TBL
 		WHERE ORDER_P_NO = P_NO
 		AND ORDER_ID = #{USER_ID}
