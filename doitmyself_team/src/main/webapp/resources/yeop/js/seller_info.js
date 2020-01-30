@@ -1,4 +1,4 @@
-var senddata = {"id" : "admin"}; //테스트용 아이디
+var senddata = {"id" : $('#USER_ID').val()}; //테스트용 아이디
 $.ajax({
 	type : 'post',
 	url : 'sellerInfo',
