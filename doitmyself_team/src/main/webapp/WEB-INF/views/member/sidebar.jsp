@@ -10,7 +10,9 @@
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 	
+	<link href="resources/css/homecss/style.css" rel="stylesheet">
 	<script src="resources/soo/js/core/jquery.min.js"></script>
   
 	<!-- CSS Files -->
