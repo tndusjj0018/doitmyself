@@ -18,3 +18,13 @@ values(review_seq.nextval, 5, '아 ㅈㅅ 1점 나감', sysdate, 'ccorcle', 1,''
 
 select * from product_tbl;
 select * from review_tbl;
+
+drop table DIBS_TBL;
+drop table QNA_TBL;
+drop table IMG_TBL;
+drop table RECENT_VIEW_TBL;
+drop table CART_TBL;
+drop table REFUND_TBL;
+drop table review_tbl;
+drop table ORDER_TBL;
+drop table product_tbl;
