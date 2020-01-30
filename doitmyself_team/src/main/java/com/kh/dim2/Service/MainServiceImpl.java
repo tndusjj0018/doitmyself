@@ -1,5 +1,6 @@
 package com.kh.dim2.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,4 +82,11 @@ public class MainServiceImpl implements MainService{
 	public List<Recent_View> getRecent_View_List(String uSER_ID) {
 		return dao.getRecent_View_List(uSER_ID);
 	}
+
+	@Override
+	public int NaverInsert(HashMap<String, String> map) {
+		return dao.NaverInsert(map);
+	}
+
+	
 }

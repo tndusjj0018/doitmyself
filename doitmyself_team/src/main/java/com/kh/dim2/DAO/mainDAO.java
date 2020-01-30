@@ -1,5 +1,6 @@
 package com.kh.dim2.DAO;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -58,5 +59,9 @@ public class mainDAO {
 
 	public List<Recent_View> getRecent_View_List(String uSER_ID) {
 		return sqlSession.selectList("Main.getRecent_View_List" , uSER_ID);
+	}
+
+	public int NaverInsert(HashMap<String, String> map) {
+		return sqlSession.insert("Main.NaverInsert" , map);
 	}
 }

@@ -1,5 +1,6 @@
 package com.kh.dim2.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,5 +23,5 @@ public interface MainService {
 	int cartCount(String id);
 	int recentViewCount(String uSER_ID);
 	List<Recent_View> getRecent_View_List(String uSER_ID);
-
+	int NaverInsert(HashMap<String, String> map);
 }
