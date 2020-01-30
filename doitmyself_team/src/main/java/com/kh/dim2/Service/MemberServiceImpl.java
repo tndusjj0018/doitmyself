@@ -8,13 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.memberDAO;
-import com.kh.dim2.domain.DIBS;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
-import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
-import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
@@ -83,8 +80,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Product> wishlist(String user_id) {
-		return dao.wishlist(user_id);
+	public List<Product> wishlist(String user_id, int page, int limit) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.wishlist(map);
 	}
 	
 	public int wishdelete(int p_no, String user_id) {
@@ -101,8 +107,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Q_Product> qnalist(String user_id) {
-		return dao.qnalist(user_id);
+	public List<Q_Product> qnalist(String user_id, int page, int limit) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.qnalist(map);
 	}
 
 
@@ -117,8 +132,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<O_Product> orderlist(String user_id) {
-		return dao.orderlist(user_id);
+	public List<O_Product> orderlist(String user_id, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.orderlist(map);
 	}
 
 	@Override
@@ -167,8 +190,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<O_Product> cancelreturnlist(String user_id) {
-		return dao.cancelreturnlist(user_id);
+	public List<O_Product> cancelreturnlist(String user_id, int page, int limit) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return dao.cancelreturnlist(map);
+	}
+	
+	@Override
+	public int cancelreturncount(String user_id) {
+		return dao.cancelreturncount(user_id);
 	}
 
 	@Override
@@ -180,5 +218,6 @@ public class MemberServiceImpl implements MemberService {
 	public int returnRegister(int order_no) {
 		return dao.returnRegister(order_no);
 	}
-	
+
+
 }
