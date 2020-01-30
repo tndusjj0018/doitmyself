@@ -7,6 +7,16 @@
 		#sellerinfotable>thead{
 			border-bottom: 2px solid #ddd!important;
 	      }
+	      .search{
+	      	    margin-bottom: 28px!important;
+	      	    margin-top: 40px;
+	      	    float: right;
+	      }
+	      .sellerinfo_orderselect, .search_col{
+	      		height: 26px;
+	      		position: relative;
+    			top: 1px;
+	      }
 	</style>
 	<script>
 		$(document).ready(function(){
@@ -100,12 +110,39 @@
 						var maxpage = rdata.maxpage;
 						pagination(page, startpage, maxpage);
 						
-						$(".info_view").click(function(){
+						$("#sellerinfotable").on("click",".info_view",function(){//판매자 정보 조회
 							var trNum = $(this).closest('tr').prevAll().length;//몇번째 row를 선택했는지 확인
-		                	var sellerNum = $("#reviewtable tr:eq("+(trNum+1)+") td:eq(0)").text();//trNum 번째 row에서 판매자 번호 확인
+		                	var sellerNum = $("#sellerinfotable tr:eq("+(trNum+1)+") td:eq(0)").text();//trNum 번째 row에서 판매자 번호 확인
 		                	console.log("trNum = "+trNum + " / sellerNum = "+sellerNum);
 							
 		                	location.href = "admin?doc=sellerInfo&SELLER_NO="+sellerNum;
+						})
+						
+						$("#sellerinfotable").on("click",".cancel",function(){//판매자 삭제
+							var trNum = $(this).closest('tr').prevAll().length;//몇번째 row를 선택했는지 확인
+							var sellerNum = $("#sellerinfotable tr:eq("+(trNum+1)+") td:eq(0)").text();//trNum 번째 row에서 판매자 번호 확인
+							console.log("trNum = "+trNum + " / sellerNum = "+sellerNum);
+							var checkboolean = confirm("해당 판매자를 삭제하시겠습니까?");
+							if(checkboolean == true){
+								$.ajax({
+									type:"POST",
+									data:{SELLER_NO:sellerNum},
+									url:"DeleteSeller",
+									success:function(rdata){
+										if(rdata == 1){
+											alert("해당 판매자가 삭제되었습니다.");
+											history.go(0);//새로고침
+										}else{
+											alert("해당 판매자를 삭제 할 수 없습니다.");
+										}
+										
+									},
+									error:function(){
+										console.log("판매자 삭제 에러남");
+									}
+								})
+							}
+							
 						})
 						
 						
@@ -127,7 +164,21 @@
 				
 			})//change end
 				
-			
+			$(".seller_searchbtn").click(function(){
+				order1 = $(".sellerinfo_orderselect").val();
+				search_word = $(".seller_search").val();
+				search_col = $(".search_col").val();
+				if(search_word == ""){
+					alert("검색어를 입력하세요");
+				}else{
+					console.log("검색 학꾸임");
+					console.log("검색 칼럼 = "+search_col+"검색어= "+search_word);
+					sellerList(order1, search_col, search_word);
+					
+				}
+				
+				
+			})
 			
 			
 			
