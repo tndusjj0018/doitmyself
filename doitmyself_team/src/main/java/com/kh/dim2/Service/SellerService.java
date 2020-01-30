@@ -36,4 +36,10 @@ public interface SellerService {
 	//판매관리 판매리스트
 	List<Product> SaleList(String USER_ID, String saleSelect);
 
+	//상품 수정 페이지
+	Product productInfo(int p_NO);
+	
+	//상품 수정
+	int productUpdate(Product product);
+
 }

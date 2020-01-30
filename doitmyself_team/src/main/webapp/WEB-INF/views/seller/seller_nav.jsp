@@ -92,6 +92,8 @@
 	.sidebar{top:74px; width:259px!important;}
 	.nav{margin-top:0px!important;}
 	body{margin-bottom:10px;}
+	.nav-link{color:gray!important;}
+	.cta-colored>a{color:white!important;}
 </style>
 </head>
 <!-- doc저장 -->

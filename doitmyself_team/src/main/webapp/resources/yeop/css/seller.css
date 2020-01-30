@@ -113,10 +113,10 @@ input[type=file]{text-indent:0; border:none;}
 .orderNo{width:115px;}
 .orderId{width:115px;}
 .saleName{width:230px;}
-.saleUpdate,.saleDelete{border:none; color:white}
+.saleUpdate,.saleDelete{width:90px; height:30px; border:none; color:white}
 .saleUpdate:hover,.saleDelete:hover{cursor:pointer; opacity:0.7; transition:.3s;}
-.saleUpdate{width:90px; margin-bottom:13px; background:#38b1a0;}
-.saleDelete{width:90px; background:#ff3c3c;}
+.saleUpdate{margin-bottom:13px; background:#38b1a0;}
+.saleDelete{background:#ff3c3c;}
 .saleBtn{width:177px;}
 
 .ftco-navbar-light{background:white!important;}

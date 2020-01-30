@@ -78,4 +78,14 @@ public class SellerServiceImpl implements SellerService{
 		return sellerDAO.SaleSelect(map);
 	}
 
+	@Override
+	public Product productInfo(int P_NO) {
+		return sellerDAO.productInfo(P_NO);
+	}
+
+	@Override
+	public int productUpdate(Product product) {
+		return sellerDAO.productUpdate(product);
+	}
+
 }

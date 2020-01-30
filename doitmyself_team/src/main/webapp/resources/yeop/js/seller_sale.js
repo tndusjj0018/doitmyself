@@ -39,7 +39,9 @@ function ajax(data){
 					output += "<td class='saleReadCount'>찜:" + this.p_READCOUNT +"<br>조회수:"+ this.p_DIBS + "</td>";
 					output += "<td class='saleBtn'>" +
 							"		<input type='hidden' value='"+ this.p_NO +"'>" +
-							"		<button class='saleUpdate'>상품수정</button>" +
+							"		<a href='productInfo?P_NO="+ this.p_NO +"'>" +
+							"			<button class='saleUpdate'>상품수정</button>" +
+							"		</a>" +
 							"		<button class='saleDelete'>상품삭제</button>" +
 							"</td>";
 					output += "</tr>";		
