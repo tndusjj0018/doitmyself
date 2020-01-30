@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -185,7 +186,6 @@ public class MainController {
 	public String naverLoginProcess(@RequestParam("state") String state , @RequestParam("code") String code , HttpSession session ,  HttpServletResponse response) throws Exception{
 		
 		String NaverState = state;
-		String clientSecret = "BgSe5KALbL";
 		
 		// 세션 또는 별도의 저장 공간에서 상태 토큰을 가져옴
 		String storedState = (String)session.getAttribute("state");
@@ -245,7 +245,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/naverProfile")
-	public void NaverLogin(HttpServletRequest request) throws Exception{
+	public void NaverLogin(HttpServletRequest request , Member member, HttpServletResponse response2) throws Exception{
+		
 		String header = "Bearer " + access_token;
 
 		try{
@@ -268,41 +269,66 @@ public class MainController {
 					String inputLine;
 					StringBuffer response = new StringBuffer();
 				while((inputLine=br.readLine()) != null){
-					response.append("123"+inputLine);
+					response.append(inputLine);
 				}
 				      br.close();
 				if(responseCode==200) {
-					System.out.println("Profile23 = "+response.toString());
+					System.out.println("Profile = "+response.toString());
 					String NProfile = response.toString();
 					JsonParser JParser = new JsonParser();
 					JsonObject JObject = (JsonObject) JParser.parse(NProfile);
-					JsonArray JArray = (JsonArray) JObject.get("response");
-					for(int i = 0; i < JArray.size(); i++) {
-						JsonObject Object = (JsonObject) JArray.get(i);
-						JsonElement N_Id = Object.get("id");
-						JsonElement N_Pass = Object.get("email");
-						JsonElement N_Name = Object.get("name");
-						JsonElement N_Birth = Object.get("birth");
-						JsonElement N_Gender = Object.get("gender");
-						JsonElement N_Nickname = Object.get("nickname");
+					JsonObject ProfileObject = (JsonObject) JObject.get("response");
+					
+						String N_Id = ProfileObject.get("id").toString();
+						String N_Pass = ProfileObject.get("email").toString();
+						String N_Name = ProfileObject.get("name").toString();
+						String N_Birth = ProfileObject.get("birthday").toString();
+						String N_Gender = ProfileObject.get("gender").toString();
+						String N_Nickname = ProfileObject.get("nickname").toString();
+					
+//						int index = N_Id.indexOf("@");
+//						String NaverId = N_Id.substring(0 , index);
+					
+					
 						
-						System.out.println(Object.get("id"));
-						System.out.println(Object.get("nickname"));
-						System.out.println(Object.get("gender"));
-						System.out.println(Object.get("email"));
-						System.out.println(Object.get("name"));
-						System.out.println(Object.get("birthdayy"));
+						HashMap<String, String> map = new HashMap<>();
 						
-						System.out.println(N_Id);
-						System.out.println(N_Pass);
-						System.out.println(N_Name);
-						System.out.println(N_Birth);
-						System.out.println(N_Gender);
-						System.out.println(N_Nickname);
+						map.put("N_Id", N_Id);
+						map.put("N_Pass", N_Pass);
+						map.put("N_Name", N_Name);
+						map.put("N_Birth", N_Birth);
+						map.put("N_Gender", N_Gender);
+						map.put("N_Nickname", N_Nickname);
+						
+						response2.setContentType("text/html;charset=utf-8");
+						PrintWriter out = response2.getWriter();
+						int result = mainService.NaverInsert(map);
+						out.println("<script>");
+
+						if(result == 1) {//삽입 성공시
+							out.println("alert('네이버 회원가입에 성공했습니다.');");
+							out.println("location.href='login';");
+						} else if(result == -1) {
+							out.println("alert('네이버 회원가입에 실패했습니다.');");
+							out.println("history.back()");
+						}
+						out.println("</script>");
+						out.close();
+						
 					}
-				}
+				
 	    } catch (Exception e) {
-	      System.out.println("242"+e);
+	      System.out.println(e);
 	    }
+	}
+	@RequestMapping(value="/Naver_idcheck" , method=RequestMethod.GET)
+	@ResponseBody
+	public void Naver_idcheck(@RequestParam("USER_ID") String USER_ID,
+						HttpServletResponse response) throws Exception {
+		
+		int result = mainService.isId(USER_ID);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 }

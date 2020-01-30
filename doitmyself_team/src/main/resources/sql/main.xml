@@ -74,4 +74,13 @@
 		WHERE RV_ID=#{id}
 	</select>
 	
+	<insert id="NaverInsert" parameterType="map">
+		INSERT INTO 
+		USER_TBL		
+		VALUES(
+			USER_SEQ.NEXTVAL, #{N_ID}, #{N_PASS}, #{N_NAME}, "NAVER",
+			"NAVER", "NAVER", #{N_EMAIL}, #{N_BIRTHDAY}, #{N_GENDER}, SYSDATE , 0
+		)
+	</insert>
+	
 </mapper>
