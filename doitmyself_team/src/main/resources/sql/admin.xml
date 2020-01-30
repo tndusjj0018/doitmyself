@@ -143,13 +143,41 @@
 			from (select rownum rnum, b.* 
 					from(select * 
 						from seller_tbl 
-						order by #{option1})b)
+						<if test="search_word != null">
+							<where>
+								<choose>
+									<when test="search_col = 'SELLER_ID'">SELLER_ID</when>
+									<when test="search_col = 'SELLER_NAME'">SELLER_NAME</when>
+									<when test="search_col = 'SELLER_ADDRESS'">SELLER_ADDRESS</when>
+								</choose>
+								like '%'||#{search_word}||'%'
+							</where>
+						</if>
+						order by 
+						<choose>
+							<when test="option1 == 'SELLER_NAME ASC'">SELLER_NAME ASC</when>
+							<when test="option1 == 'SELLER_NAME DESC'">SELLER_NAME DESC</when>
+							<when test="option1 == 'SELLER_ID ASC'">SELLER_ID ASC</when>
+							<when test="option1 == 'SELLER_ID DESC'">SELLER_ID DESC</when>
+							<when test="option1 == 'SELLER_RATE ASC'">SELLER_RATE ASC</when>
+							<when test="option1 == 'SELLER_RATE DESC'">SELLER_RATE DESC</when>
+						</choose>
+						)b)
 		where rnum &gt;=#{startnum} and rnum &lt;= #{endnum}
 		
 	</select>
 	<select id="SellerInfoView" parameterType="int" resultType="seller">
 		select * from seller_tbl
 		where seller_no = #{seller_no}
+	</select>
+	
+	<delete id="DeleteSeller" parameterType="int">
+		delete from seller_tbl
+		where SELLER_NO = #{SELLER_NO}
+	</delete>
+	
+	<select id="getOrderList" resultType="order">
+		select * from order_tbl
 	</select>
 </mapper>
 
