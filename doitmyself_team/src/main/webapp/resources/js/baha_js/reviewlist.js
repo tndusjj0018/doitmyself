@@ -1,88 +1,87 @@
-function getList(page) {
+function getList2(page2) {
 	$.ajax({
-		type : "get",
-		url : "ReviewListAjax.bo",
-		data : {
-			"page" : page
-		},
-		dataType : "json",
-		success : function(rdata) {
-			if (rdata.length > 0) {
-				$(".qna_subjects tbody").empty();
-				output = '';
-				output += "<tr><td>문의유형</td>"
-				output += "<td></td>"
-				output += "<td>문의/답변</td>"
-				output += "<td>작성자</td>"
-				output += "<td>작성일</td></tr>"
-				// output+= '<table>';
-				$(rdata).each(
-						function() {
+				type : "get",
+				url : "ReviewListAjax.bo",
+				data : {
+					"page2" : page2
+				},
+				dataType : "json",
+				success : function(rdata) {
+					if (rdata.length > 0) {
+						$(".ReviewWrap").empty();
+						output = '';
+						output += "<div class=\"review\"><p>전체 리뷰</p></div>";
+						output += "<span class=\"product_review\"><select name=\"filter\"id=\"filter\">";
+						output += "<option value=\"all\" selected>모든 리뷰</option>";
+						output += "<option value=\"new\">최신 등록순</option>";
+						output += "<option value=\"high\">평점 높은순</option>";
+						output += "<option value=\"low\">평점 낮은순</option>";
+						output += "</select></span>";
+						$(rdata)
+								.each(
+										function() {
+											output += "<div id=\"review_subwrap\">"
+													+ "<div id=\"review_top\">"
+													+ "<span id=\"star\">";
+											if (this.review_RATE == 1) {
+												output += "<i class=\"fa fa-star checked\"></i>"
+											} else if (this.review_RATE == 2) {
+												this.qna_CATEGORY = '배송'
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+											} else if (this.review_RATE == 3) {
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+											} else if (this.review_RATE == 4) {
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+											} else if (this.review_RATE == 5) {
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+												output += "<i class=\"fa fa-star checked\"></i>"
+											}
+											output += "</span><span id=\"review_writer\">"
+													+ this.review_WRITER
+													+ "&ensp;"
+													+ this.review_DATE
+													+ "</span></div>"
+											output += "<div id=\"review_body\"><span>"
+											output += "<img src=\"resources/upload/"
+													+ this.review_IMG
+													+ "\" id=\"review_img\"> </span>"
+											output += "<span id=\"review_prdname\">&ensp;&ensp;&ensp;"
+													+ this.p_NAME
+													+ "</span> <br>"
+											output += "<p id=\"review_content\">"
+													+ this.review_CONTENT
+													+ "</p>"
+											output += "</div></div>"
 
-							if (this.qna_CATEGORY == 0) {
-								this.qna_CATEGORY = '상품'
-								output += "<tr><td>" + this.qna_CATEGORY
-										+ "</td>";
-							} else if (this.qna_CATEGORY == 1) {
-								this.qna_CATEGORY = '배송'
-								output += "<tr><td>" + this.qna_CATEGORY
-										+ "</td>";
-							} else if (this.qna_CATEGORY == 2) {
-								this.qna_CATEGORY = '반품/취소'
-								output += "<tr><td>" + this.qna_CATEGORY
-										+ "</td>";
-							} else if (this.qna_CATEGORY == 3) {
-								this.qna_CATEGORY = '교환/변경'
-								output += "<tr><td>" + this.qna_CATEGORY
-										+ "</td>";
-							} else if (this.qna_CATEGORY == 4) {
-								this.qna_CATEGORY = '기타'
-								output += "<tr><td>" + this.qna_CATEGORY
-										+ "</td>";
-							}
-							if (this.qna_ISRESPONSE == 0) {
-								this.qna_ISRESPONSE = '답변대기'
-								output += "<td>" + this.qna_ISRESPONSE
-										+ "</td>";
-							} else {
-								this.qna_ISRESPONSE = '답변완료'
-								output += "<td>" + this.qna_ISRESPONSE
-										+ "</td>";
-							}
+										});
+						
+						console.log("에이잭스 체크" + output)
+						// output += '</table>';
+						$(".ReviewWrap").append(output);
 
-							output += "<td class='clickable'>"
-									+ this.qna_SUBJECT + "</td>";
-							output += "<td>" + this.qna_WRITER + "</td>";
-							output += "<td>" + this.qna_DATE + "</td></tr>";
+					} else {
+						$(".ReviewWrap").empty();
+						output += "<div id=\"message2\">등록된 리뷰가 없습니다.</div>"
+						$(".ReviewWrap").append(output);
+					}
 
-							output += "<tr class='qna_content'>"
-									+ "<td></td> <td></td>" + "<td>"
-									+ this.qna_CONTENT + "<br>";
-							if ($("#loginid").val() == this.qna_WRITER) {
-								output += "<a onclick=\"window.open('qnaUpdateView?num=" + this.qna_NO + "','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');\" id='qnaUpdate'>수정</a>&emsp;" +
-										"<a href='qnaDelete'>삭제</a></td>"
-							}
-							output += "<td></td><td></td>"
-							output += "</tr>";
-
-						});
-				// output += '</table>';
-				$(".qna_subjects tbody").append(output);
-
-			} else {
-				$(".qna_subjects tbody").empty();
-				output += "<td id='message' colspan='5'>등록된 글이 없습니다.</td>"
-
-			}
-
-		}
-	})
+				}
+			})
 
 }
 
 $(function() {
-	$('.page-link review').click(function(e) {
+	$('.pgnation_review').click(function(e) {
 		e.preventDefault();
-		getList($(this).text());
+		getList2($(this).text());
 	})
 })

@@ -18,6 +18,7 @@
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="resources/css/baha_css/detail.css">
+<link rel="stylesheet" href="resources/css/baha_css/style.css">  
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
@@ -92,7 +93,7 @@
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
 					<img src="resources/upload/${prdData.p_IMG}" class="img-fluid"
-						name="P_IMG" alt="Colorlib Template" id="mainIMG">
+						name="P_IMG"  id="mainIMG">
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
 					<h3>${prdData.p_NAME}</h3>
@@ -125,15 +126,13 @@
 						<div class="w-100"></div>
 						<div class="input-group col-md-6 d-flex mb-3">
 							<span class="input-group-btn mr-2">
-								<button type="button" class="quantity-left-minus btn"
-									data-type="minus" data-field="">
+								<button type="button" class="quantity_minus btn">
 									<i class="ion-ios-remove"></i>
 								</button>
-							</span> <input type="text" id="quantity" name="quantity"
-								class="form-control input-number" value="1" min="1" max="100">
+							</span> <input type="text" id="quantity" name="CART_COUNT"
+								class="form-control input-number" value="1" min="1" max="100" readonly>
 							<span class="input-group-btn ml-2">
-								<button type="button" class="quantity-right-plus btn"
-									data-type="plus" data-field="">
+								<button type="button" class="quantity_plus btn">
 									<i class="ion-ios-add"></i>
 								</button>
 							</span>
@@ -201,8 +200,8 @@
 							<option value="high">평점 높은순</option>
 							<option value="low">평점 낮은순</option>
 					</select></span>
-					<c:if test="${listcount > 0 }">
-					<c:set var="num" value="${listcount-(page-1)*10 }"/>
+					<c:if test="${listcount2 > 0 }">
+					<c:set var="num" value="${listcount2-(page2-1)*10 }"/>
 					<c:forEach var="review" items="${reviewlist}">
 					<div id="review_subwrap">
 						<div id="review_top">
@@ -249,8 +248,9 @@
 					</c:if>
 					
 					<c:if test="${listcount2 == 0 }">
-	<td id="message" colspan="5">등록된 리뷰가 없습니다.</td>
+	<div id="message2">등록된 리뷰가 없습니다.</div>
 </c:if>
+</div>
 
 <c:if test="${listcount2 > 0 }">
 <div class="center-block">
@@ -259,32 +259,32 @@
 		<div class="col">
 			<ul class="pagination">
 				<c:if test="${page2 <= 1 }">
-					<li class="page-item"><a class="page-link review" href="#">이전&nbsp;</a>
+					<li class="page-item"><a class="page-link pgnation_review" href="#">이전&nbsp;</a>
 					</li>
 				</c:if>
 				<c:if test="${page2 > 1 }">
-					<li class="page-item"><a href="detail?page=${page2-1 }"
-						class="page-link review">이전</a>&nbsp;</li>
+					<li class="page-item"><a href="detail?page=${page2 - 1 }"
+						class="page-link pgnation_review">이전</a>&nbsp;</li>
 				</c:if>
 
 				<c:forEach var="a" begin="${startpage2 }" end="${endpage2 }">
 					<c:if test="${a == page2 }">
-						<li class="page-item"><a class="page-link review" href="#">${a }</a>
+						<li class="page-item"><a class="page-link pgnation_review" href="#">${a }</a>
 						</li>
 					</c:if>
 					<c:if test="${a != page2 }">
 						<li class="page-item"><a href="detail?page=${a }"
-							class="page-link">${a }</a></li>
+							class="page-link pgnation_review">${a }</a></li>
 					</c:if>
 				</c:forEach>
 
 				<c:if test="${page2 >= maxpage2 }">
-					<li class="page-item"><a class="page-link review" href="#">&nbsp;다음</a>
+					<li class="page-item"><a class="page-link pgnation_review" href="#">&nbsp;다음</a>
 					</li>
 				</c:if>
 				<c:if test="${page2 < maxpage2 }">
 					<li class="page-item"><a href="detail?page=${page2+1 }"
-						class="page-link review">&nbsp;다음</a></li>
+						class="page-link pgnation_review">&nbsp;다음</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -294,7 +294,7 @@
 
 
 
-				</div>
+				
 				<div class="QnaWrap">
 					<div class="qna">
 						<p>문의</p>
@@ -515,9 +515,10 @@
 									<div class="checkout">
 										<input type="hidden" name="USER_ID" value="${USER_ID }">
 										<input type="submit" class="checkoutGo" value="결제하기">
-										<button class="cartGo" onclick="location.href='#'">장바구니</button>
+										
 									</div>
 								</form>
+								<button class="cartGo" onclick="add()">장바구니</button>
 							</td>
 						</tr>
 
@@ -707,6 +708,11 @@
 			});
 
 		});
+		
+		function go() {
+			alert('상품을 장바구니에 담았습니다.');
+			
+		}
 	</script>
 
 </body>

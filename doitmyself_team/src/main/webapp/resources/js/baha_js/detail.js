@@ -37,6 +37,29 @@ $(document).on('click','.clickable',function(){
 	$(this).parent().next().toggle();	
 })
 
+$(document).on('click','.quantity_plus', function(){
+	var old = $('.input-number').val();
+	var p = parseInt(old, 10);
+	$('.input-number').val(p+1);
+})
+
+$(document).on('click','.quantity_minus', function(){
+	var old = $('.input-number').val();
+	old = $('.input-number').val(+old-1);
+})
+
+$(document).on('change','.input-number', function(){
+	var main = $('.input-number').val();
+	$('#tno').val(main);
+})
+
+$(document).on('change','#tno', function(){
+	var main = $('#tno').val();
+	$('.input-number').val(main);
+})
+
+
+
 
 			
 });
