@@ -31,6 +31,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/admin.js"></script>
 	
+	<!-- header 의 css 각자 첨부 -->
+	<link rel = "stylesheet" href = "resources/css/homecss/style.css">
+	<link rel = "stylesheet" href = "resources/css/homecss/style.css.map">	
 	
 	
 	<style>
@@ -245,8 +248,6 @@
 	
   
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
   <script src="resources/js/jquery.min.js"></script>
@@ -263,7 +264,7 @@
   <script src="resources/js/bootstrap-datepicker.js"></script>
   <script src="resources/js/scrollax.min.js"></script>
   <script src="resources/js/main.js"></script>
- <%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --%><%-- 충돌 --%>
+  <%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --%><%-- 충돌 --%>
   <link href = "resources/css/yehyeong_css/bootstrap/3.3.0/css/bootstrap3.3.0.css" rel="stylesheet" >
    <link href="resources/css/yehyeong_css/bootstrap/3.3.0/fonts/glyphicons-halflings-regular.woff" rel="stylesheet" id="bootstrap-css">
    <link href="resources/css/yehyeong_css/bootstrap/3.3.0/fonts/glyphicons-halflings-regular.ttf">

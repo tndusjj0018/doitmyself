@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.dim2.Service.AdminService;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -37,7 +38,7 @@ public class AdminController {
 	public ModelAndView AdminPage(String doc, @RequestParam(value = "num", defaultValue = "1", required = false) int num, 
 									ModelAndView mv, HttpServletRequest request) {
 
-		System.out.println("view = "+ doc);
+		System.out.println("doc = "+ doc);
 		if(doc == null) {
 			doc = "userview";
 		}else if (doc.equals("memberInfo")) {//회원관리에서 수정버튼 눌렀을 때
@@ -45,8 +46,9 @@ public class AdminController {
 			mv.addObject("member", member);
 			
 		}else if(doc.equals("sellerInfo")) {//판매자 정보 보기 버튼 눌렀을 때
-			System.out.println("doc = sellerInfo");
-			Seller seller = SellerInfo(Integer.parseInt(request.getParameter("SELLER_NO")));
+			int seller_no = Integer.parseInt(request.getParameter("SELLER_NO"));
+			System.out.println("seller_no = "+seller_no);
+			Seller seller = SellerInfo(seller_no);
 			mv.addObject("seller",seller);
 		}
 		
@@ -305,7 +307,9 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("sellerList")
 	public Object SellerList(@RequestParam(value ="option1" , required= false)String option1,
-			@RequestParam(value = "num", required=false, defaultValue = "1")int num) {
+			@RequestParam(value = "num", required=false, defaultValue = "1")int num,
+			@RequestParam(value = "search_col", required = true)String search_col, 
+			@RequestParam(value = "search_word", required = false, defaultValue = "")String search_word) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int listcount = adminService.getSellerListCount();
 		
@@ -319,10 +323,14 @@ public class AdminController {
 			maxpage +=1;
 		}
 		
+		if(!search_word.equals("")) {//검색어가 있을 때만 map에 추가
+			map.put("search_word", search_word);//검색어
+			map.put("search_col", search_col);//검색 방법
+		}
 		map.put("option1", option1);//정렬 방법
 		map.put("startnum", startnum);
 		map.put("endnum", endnum);
-		//검색 안했을 시 - 정렬만 
+		//리스트 뽑아오기	
 		List<Seller> list = adminService.getSellerList(map);
 		
 		map.put("sellerList", list);//판매자 정보 리스트
@@ -330,12 +338,31 @@ public class AdminController {
 		map.put("maxpage", maxpage);//마지막 페이지
 		map.put("num", num);//현재 페이지
 		return map;
+	}//SellerList end
+	
+	
+	@ResponseBody
+	@PostMapping("DeleteSeller")
+	public int DeleteSeller(int SELLER_NO) {//판매자 삭제 - 판매자의 등록 상품 & 상품의 리뷰 모두 사라집니다.
+		int result = 0;
+		System.out.println("adminController의 DeleteSeller SELLER_NO="+SELLER_NO );
+		result = adminService.DeleteSeller(SELLER_NO);
+		
+		return result;
+	}//DeleteSeller end
+
+	
+	@ResponseBody
+	@PostMapping("getOrderList")
+	public Object getOrderList() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Order> list = adminService.getOrderList();
+		map.put("list", list);
+		return map;
 	}
 	
-	
-	
-	
-	
-}
+}//class end
+
+
 
 

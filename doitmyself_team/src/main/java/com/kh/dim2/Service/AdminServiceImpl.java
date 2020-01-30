@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.dim2.DAO.adminDAO;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -176,6 +177,18 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Seller SellerInfoView(int SELLER_NO) {
 		return adminDAO.SellerInfoView(SELLER_NO);
+	}
+
+
+	@Override
+	public int DeleteSeller(int SELLER_NO) {
+		return adminDAO.DeleteSeller(SELLER_NO);
+	}
+
+
+	@Override
+	public List<Order> getOrderList() {
+		return adminDAO.getOrderList();
 	}
 
 }

@@ -227,6 +227,7 @@ a.navbar-brand {
  
  .navbar-nav {
     float: right !important;
+    display: inline-block!important;
 }
 
 .admin_content{

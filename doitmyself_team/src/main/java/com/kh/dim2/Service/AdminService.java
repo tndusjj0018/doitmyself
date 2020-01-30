@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -61,5 +62,9 @@ public interface AdminService {
 	public int getSellerListCount();
 
 	public Seller SellerInfoView(int SELLER_NO);
+
+	public int DeleteSeller(int SELLER_NO);
+
+	public List<Order> getOrderList();
 
 }
