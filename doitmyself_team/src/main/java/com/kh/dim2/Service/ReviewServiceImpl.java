@@ -10,7 +10,7 @@ import com.kh.dim2.DAO.reviewDAO;
 import com.kh.dim2.domain.Review;
 
 @Service
-public class ReviewServiceImpl2 implements ReviewService {
+public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private reviewDAO dao;

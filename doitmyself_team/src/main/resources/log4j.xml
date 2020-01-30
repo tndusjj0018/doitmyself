@@ -20,6 +20,10 @@
 		<level value="trace" />
 	</logger>
 	
+	<logger name="review">
+		<level value="trace" />
+	</logger>
+	
   	<logger name="Member">
 		<level value="trace" />
 	</logger>

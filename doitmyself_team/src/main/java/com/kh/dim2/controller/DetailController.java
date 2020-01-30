@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.dim2.Service.CartService;
 import com.kh.dim2.Service.ProductService;
 import com.kh.dim2.Service.ReviewService;
 import com.kh.dim2.Service.qnaService;
+import com.kh.dim2.domain.Cart;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Review;
@@ -39,6 +41,9 @@ public class DetailController {
 
 	@Autowired
 	private ReviewService reviewsvc;
+	
+	@Autowired
+	private CartService cartsvc;
 
 	@GetMapping(value = "/qnaWrite")
 	public String qnaWrite() throws Exception {
@@ -152,7 +157,7 @@ public class DetailController {
 		
 		
 		// 상품 불러오기
-		Product prd = prdsvc.getDetail(2);
+		Product prd = prdsvc.getDetail(3);
 		if (prd == null) {
 			System.out.println("상품 정보 가져오기 실패!");
 			mv.setViewName("detail/error");
@@ -221,6 +226,24 @@ public class DetailController {
 
 		return mv;
 
+	}
+	
+	//장바구니 테이블에 상품 담기
+	@RequestMapping(value="/addCart", method = RequestMethod.POST)
+	public void addCart(Cart cart, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		int result = cartsvc.insert(cart);
+		out.println("<script>");
+		
+		if(result == 1) { //입력 성공시
+			out.println("history.go(-1)");
+			out.println("alert('상품을 장바구니에 담았습니다.');");
+			
+		} else {
+			out.println("alert('상품을 장바구니에 담는데 실패했습니다. 관리자에게 문의하세요');");
+
+		}
 	}
 
 }
