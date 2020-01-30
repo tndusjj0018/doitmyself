@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -105,5 +106,13 @@ public class adminDAO {
 
 	public Seller SellerInfoView(int SELLER_NO) {
 		return sqlSession.selectOne("Admin.SellerInfoView", SELLER_NO);
+	}
+
+	public int DeleteSeller(int SELLER_NO) {
+		return sqlSession.delete("Admin.DeleteSeller",SELLER_NO);
+	}
+
+	public List<Order> getOrderList() {
+		return sqlSession.selectList("Admin.getOrderList");
 	}
 }
