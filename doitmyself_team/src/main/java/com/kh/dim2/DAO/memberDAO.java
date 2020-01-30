@@ -1,5 +1,6 @@
 package com.kh.dim2.DAO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,8 +57,8 @@ public class memberDAO {
 		return sqlSession.selectOne("Member.wishcount", user_id);
 	}
 	
-	public List<Product> wishlist(String user_id) {
-		return sqlSession.selectList("Member.wishlist", user_id);
+	public List<Product> wishlist(HashMap<String, Object> map) {
+		return sqlSession.selectList("Member.wishlist", map);
 	}
 	
 	public int wishdelete(Map<String, Object> map) {
@@ -68,16 +69,16 @@ public class memberDAO {
 		return sqlSession.update("Member.p_dibsupdate", p_no);
 	}
 
-	public List<Q_Product> qnalist(String user_id){
-		return sqlSession.selectList("Member.qnalist", user_id);
+	public List<Q_Product> qnalist(HashMap<String, Object> map){
+		return sqlSession.selectList("Member.qnalist", map);
 	}
 		
 	public int qnacount(String user_id) {
 		return sqlSession.selectOne("Member.qnacount", user_id);
 	}
 	
-	public List<O_Product> orderlist(String user_id){
-		return sqlSession.selectList("Member.orderlist", user_id);
+	public List<O_Product> orderlist(HashMap<String, Object> map){
+		return sqlSession.selectList("Member.orderlist", map);
 	}
 	
 	public int ordercount(String user_id) {
@@ -120,8 +121,12 @@ public class memberDAO {
 		return sqlSession.delete("Member.reviewDelete", review_no);
 	}
 	
-	public List<O_Product> cancelreturnlist(String user_id){
-		return sqlSession.selectList("Member.cancelreturnlist", user_id);
+	public List<O_Product> cancelreturnlist(HashMap<String, Object> map){
+		return sqlSession.selectList("Member.cancelreturnlist", map);
+	}
+	
+	public int cancelreturncount(String user_id) {
+		return sqlSession.selectOne("Member.cancelreturncount", user_id);
 	}
 	
 	public int cancelRegister(int order_no) {
