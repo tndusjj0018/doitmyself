@@ -65,6 +65,7 @@
 		where D_USER_ID = #{USER_ID}
 	</select>
 	
+	
 	<!-- 찜 목록 -->
 	<select id="wishlist" resultType="product" parameterType="HashMap">
 		select * from (select rownum rnum, b.*
