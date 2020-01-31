@@ -84,7 +84,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>사업지 이름</label>
-                        <input type="text" class="form-control" id="seller_name" placeholder="seller_name" name="SELLER_NAME">
+                        <input type="text" class="form-control" id="seller_name" placeholder="seller_name" name="SELLER_NAME" readonly>
                       </div>
                     </div>
                     <div class="col-md-12">
