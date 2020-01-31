@@ -32,9 +32,12 @@ $.ajax({
 			output = '';
 			orderPrice = null;
 			listcount = 0;
-			$(data.orderlist).each(function(){				
+			$(data.orderlist).each(function(){		
+				//시간빼고 날짜만 뽑아옴
+				var orderDateAll = this.order_DATE;
+				var orderDate = orderDateAll.split(" ");
 				output += "<tr>";
-				output += "<td class='orderDate'>" + this.order_DATE + "</td>";
+				output += "<td class='orderDate'>" + orderDate[0] + "</td>";
 				output += "<td class='orderNo'>" + this.order_P_NO + "</td>";
 				output += "<td class='orderId'>" + this.order_ID + "</td>";				
 				output += "<td class='orderName'>" +

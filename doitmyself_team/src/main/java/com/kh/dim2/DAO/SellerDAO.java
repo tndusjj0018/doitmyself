@@ -47,8 +47,8 @@ public class SellerDAO {
 		return sqlSession.selectOne("Seller.SellerName", USER_ID);
 	}
 
-	public int getOrderListCount() {
-		return sqlSession.selectOne("Seller.OrderCount");
+	public int getOrderListCount(String USER_ID) {
+		return sqlSession.selectOne("Seller.OrderCount", USER_ID);
 	}
 
 	public List<Product> SaleSelect(HashMap<String, String> map) {

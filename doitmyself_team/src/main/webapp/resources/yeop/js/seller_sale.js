@@ -25,17 +25,18 @@ function ajax(data){
 				$('#message').text('');
 				output = '';
 				salePrice = null;
-				$(data).each(function(){				
+				$(data).each(function(){
+					var regdate = this.p_REGDATE.split(" ");
 					output += "<tr>";
-					output += "<td class='slaeDate'>" + this.p_REGDATE + "</td>";				
+					output += "<td class='slaeDate'>" + regdate[0] + "</td>";				
 					output += "<td class='saleName'>" +
 							  "		<div class='saleImg'>" +
 							  "			<img src='resources/upload/"+ this.p_IMG +"'>" +
 							  "		품명 : "+ this.p_NAME +"" +
 							  "		</div>" +
 							  "</td>";
-					output += "<td class='salePrice'>" + this.p_PRICE.toLocaleString() + "</td>";
-					output += "<td class='saleQuantity'>" + this.p_QUANTITY + "</td>";
+					output += "<td class='salePrice'>" + this.p_PRICE.toLocaleString() + "원</td>";
+					output += "<td class='saleQuantity'>" + this.p_QUANTITY + "개</td>";
 					output += "<td class='saleReadCount'>찜:" + this.p_READCOUNT +"<br>조회수:"+ this.p_DIBS + "</td>";
 					output += "<td class='saleBtn'>" +
 							"		<input type='hidden' value='"+ this.p_NO +"'>" +
