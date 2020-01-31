@@ -55,7 +55,7 @@ function getList2(page2) {
 													+ this.review_IMG
 													+ "\" id=\"review_img\"> </span>"
 											output += "<span id=\"review_prdname\">&ensp;&ensp;&ensp;"
-													+ this.p_NAME
+													+ $('#p_name').text()
 													+ "</span> <br>"
 											output += "<p id=\"review_content\">"
 													+ this.review_CONTENT

@@ -229,16 +229,17 @@ public class DetailController {
 	}
 	
 	//장바구니 테이블에 상품 담기
+	@ResponseBody
 	@RequestMapping(value="/addCart", method = RequestMethod.POST)
 	public void addCart(Cart cart, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		int result = cartsvc.insert(cart);
-		out.println("<script>");
 		
+		int result = cartsvc.insert(cart);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html;charset=utf-8");
 		if(result == 1) { //입력 성공시
-			out.println("history.go(-1)");
-			out.println("alert('상품을 장바구니에 담았습니다.');");
+			
+			out.println("상품을 장바구니에 담았습니다");
 			
 		} else {
 			out.println("alert('상품을 장바구니에 담는데 실패했습니다. 관리자에게 문의하세요');");

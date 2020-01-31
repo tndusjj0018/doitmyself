@@ -21,6 +21,7 @@
 	margin-left: 300px;
 	width: 1050px;
 }
+
 /* product_service START */
 .product_service {
 	margin-bottom: 20px;
@@ -139,7 +140,10 @@ float:left;
 	color:#333;
 }
 
-
+#message2 {
+	clear:both;
+	text-align:center;
+}
 
 
 /* product_review END */
@@ -363,9 +367,10 @@ float:left;
 }
 
 #tno {
+	text-align:center;
 	margin-top: 10px;
 	margin-left: 15px;
-	width: 38px;
+	width: 70px;
 	height: 33px;
 }
 
@@ -387,6 +392,7 @@ float:left;
 .total_price {
 	float:right;
 	margin-right:24px;
+	
 }
 
 .total {
@@ -394,14 +400,20 @@ float:left;
 	font-weight:bold;
 	margin-right:15px;
 }
-.price {
+.totalprice {
 	color:red;
 	font-weight:bold;
 	font-size:22px;
 }
 .checkout {
 	clear:both;
-	text-align:center
+	height:50px;	
+	text-align:center;
+}
+
+#paygo {
+	width:100px;
+	margin:0;
 }
 .checkoutGo {
 	width:102px;
@@ -435,6 +447,11 @@ background-color: white;
   align-self: center;
   cursor: pointer;
   font-weight: bold;
+}
+.form-control:hover
+{
+    text-decoration: none;
+    outline: none;
 }
 
 /************* detail.js 연동 부분 *****************/

@@ -8,7 +8,7 @@
 			keyProperty="CART_NO">
 			select nvl(max(CART_NO),0)+1 from cart_tbl
 		</selectKey>
-		insert into cart values(#{CART_NO}, #{USER_ID}, #{P_NO}, #{CART_COUNT})
+		insert into cart_tbl values(#{CART_NO}, #{CART_ID}, #{CART_P_NO}, #{CART_COUNT})
 	</insert>
 
 </mapper>
