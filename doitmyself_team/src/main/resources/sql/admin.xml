@@ -101,9 +101,7 @@
 	
 	<select id="getMaxSubCategoryNo" resultType="String" parameterType="int">
 		select max(SC_NO) from SUB_CATEGORY_TBL
-		<where>
-			SC_NO_REF = #{SC_NO_REF}
-		</where>
+		
 	</select>
 	
 	<select id="C_NameCheck" parameterType="String" resultType="String">
@@ -137,7 +135,6 @@
 		select count(*) from seller_tbl
 	</select>
 	
-	
 	<select id="getSellerList" parameterType="map" resultType="seller">
 		select * 
 			from (select rownum rnum, b.* 
@@ -166,6 +163,7 @@
 		where rnum &gt;=#{startnum} and rnum &lt;= #{endnum}
 		
 	</select>
+	
 	<select id="SellerInfoView" parameterType="int" resultType="seller">
 		select * from seller_tbl
 		where seller_no = #{seller_no}
@@ -179,5 +177,39 @@
 	<select id="getOrderList" resultType="order">
 		select * from order_tbl
 	</select>
+	
+	<update id="updateMajorCategory" parameterType="map">
+		update CATEGORY_TBL 
+		set C_NAME = #{C_NAME}
+		where C_NO = #{C_NO}
+	</update>
+	
+	<update id="updateSubCategory" parameterType="map">
+		update SUB_CATEGORY_TBL
+		set SC_NAME = #{SC_NAME}
+		where SC_NO = #{SC_NO}
+	</update>
+	
+	<delete id="DeleteSubCategory" parameterType="String">
+		delete from SUB_CATEGORY_TBL
+		where SC_NAME = #{SC_NAME}
+	</delete>
+	
+	<delete id="DeleteMajorCategory" parameterType="String">
+		delete from CATEGORY_TBL
+		where C_NAME = #{C_NAME}
+	</delete>
+	
+	<select id="getRefundList" resultType="refund">
+		select o.*, r.REFUND_STATUS
+		from order_tbl o full outer join refund_tbl r
+		on o.order_no = r.refund_no
+		where o.order_delivery&gt;=1 and order_status=1 or order_status=2
+	</select>	
+	<select id="getExchangeList" resultType="order">
+		select * from ORDER_TBL
+		where order_delivery = 4 AND ORDER_STATUS = 3
+	</select>
+	
 </mapper>
 
