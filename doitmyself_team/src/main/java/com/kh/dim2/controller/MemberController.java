@@ -223,7 +223,7 @@ public class MemberController {
 									  @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
 		//한 화면에 출력할 레코드 갯수
-		int limit = 5;
+		int limit = 4;
 				
 		//총 리스트 수 받아옴
 		int ordercount = memberservice.ordercount(user_id);
@@ -258,7 +258,7 @@ public class MemberController {
 									   @RequestParam("ORDER_NO") int order_no,
 									   @RequestParam("ORDER_P_NO") int p_no) {
 		
-		Product p = memberservice.productDetail(p_no);
+		O_Product p = memberservice.cancelDetail(order_no);
 		mv.addObject("productdetail", p);
 		mv.addObject("ORDER_NO", order_no);
 		mv.setViewName("member/cancelRegister");
@@ -296,7 +296,7 @@ public class MemberController {
 			   						   @RequestParam("ORDER_NO") int order_no,
 			   						   @RequestParam("ORDER_P_NO") int p_no) {
 
-		Product p = memberservice.productDetail(p_no);
+		O_Product p = memberservice.cancelDetail(order_no);
 		mv.addObject("productdetail", p);
 		mv.addObject("ORDER_NO", order_no);
 		mv.setViewName("member/returnRegister");
@@ -333,7 +333,7 @@ public class MemberController {
 									  @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
 		//한 화면에 출력할 레코드 갯수
-		int limit = 5;
+		int limit = 4;
 						
 		//총 리스트 수 받아옴
 		int cancelreturncount = memberservice.cancelreturncount(user_id);
@@ -550,7 +550,7 @@ public class MemberController {
 								@RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
 		//한 화면에 출력할 레코드 갯수
-		int limit = 5;
+		int limit = 4;
 						
 		//총 리스트 수 받아옴
 		int qnacount = memberservice.qnacount(user_id);
@@ -586,7 +586,7 @@ public class MemberController {
 								 @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
 		//한 화면에 출력할 레코드 갯수
-		int limit = 5;
+		int limit = 4;
 								
 		//총 리스트 수 받아옴
 		int wishcount = memberservice.wishcount(D_USER_ID);

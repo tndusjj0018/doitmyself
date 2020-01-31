@@ -132,7 +132,11 @@ public class memberDAO {
 	public int cancelRegister(int order_no) {
 		return sqlSession.update("Member.cancelregister", order_no);
 	}
-
+	
+	public O_Product cancelDetail(int order_no) {
+		return sqlSession.selectOne("Member.cancelDetail", order_no);
+	}
+	
 	public int returnRegister(int order_no) {
 		return sqlSession.update("Member.returnregister", order_no);
 	}

@@ -28,7 +28,9 @@
 		
 		.center-block {
      		display: flex;  
-    		 justify-content:center; /* 가운데 정렬 */
+    		justify-content:center; /* 가운데 정렬 */
+    		position: relative;
+    		top: 4px;
   		 }
    
    		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
@@ -128,7 +130,7 @@
 										상품문의
 									</c:if>
 									<c:if test="${ql.QNA_CATEGORY == 2}">
-										취소/환불 문의
+										취소/반품 문의
 									</c:if>
 									<c:if test="${ql.QNA_CATEGORY == 3}">
 										기타문의
@@ -145,7 +147,7 @@
 										<span style="color: #9d9da5">답변예정</span>
 									</c:if>
 									<c:if test="${ql.QNA_ISRESPONSE == 1}">
-										답변완료
+										<a href="#">답변완료</a>
 									</c:if>
 								</td>
 							</tr>

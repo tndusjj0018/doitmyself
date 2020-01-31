@@ -15,16 +15,19 @@
 	
 	<style>
 		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important}
+		
 		.center-block {
      		display: flex;  
-    		 justify-content:center; /* 가운데 정렬 */
+    		justify-content:center; /* 가운데 정렬 */
+    		position: relative;
+    		top: 4px;
   		 }
    
    		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
    		.rows{text-align:right;}
    		.row{height:0}
    		.gray{color:gray} 
-   		li .current {background:#faf7f7;}
+   		li .current {background:#faf7f7;} 
 	</style>
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
@@ -102,6 +105,16 @@
 			        	
 			        	<!-- 주문내역 있는 경우 -->
 			        	<c:if test="${ordercount > 0}">
+			        	
+			        	<div class="orderDeliveryInfo">
+			        		<ul>
+			        			<li>취소 신청은 상품이 발송되지 않은 경우만 가능합니다.</li>
+			        			<li>결제수단별 환불 절차에 따라 결제 금액이 환불됩니다.</li>
+			        		</ul>
+			        	</div>
+			        	
+			        	
+			        	
 			        	<table class="table">
 							<tr>
 								<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>스토어 명</td> <td>주문상태</td> <td>신청 및 조회</td>
@@ -162,7 +175,7 @@
 									<span class="order_status">배송완료</span><br>
 									</td>
 									<td>
-										<button type="button" class="btn btn-return" id="btn-return" onclick="window.open('returnRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">환불 신청</button> <br>
+										<button type="button" class="btn btn-return" id="btn-return" onclick="window.open('returnRegister?ORDER_NO=${ol.ORDER_NO}&ORDER_P_NO=${ol.ORDER_P_NO }','','width=1000,height=700,left=450,top=100');">반품 신청</button> <br>
 										<button type="button" class="btn" id="btn-order" onclick="window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=${ol.ORDER_TRNO}','','width=1000,height=700,left=450,top=100');">배송조회</button>
 									</td>	
 								</c:if>
@@ -247,6 +260,8 @@
     		<div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;">
     			<div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div>
     		</div>
+    		
+    		
     	</div>
 	</div>
 	

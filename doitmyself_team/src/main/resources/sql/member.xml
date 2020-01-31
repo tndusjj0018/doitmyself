@@ -173,9 +173,9 @@
 	<select id="productDetail" resultType="product" parameterType="int">
 		select *
 		from PRODUCT_TBL
-		where P_NO = #{P_NO}
+		WHERE P_NO = #{P_NO}
 	</select>
-	
+		
 	<insert id="reviewWrite" parameterType="review">
 		insert into REVIEW_TBL
 		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG, jdbcType=VARCHAR})
@@ -223,6 +223,14 @@
 			ORDER_R_DATE = SYSDATE
 		WHERE ORDER_NO = #{ORDER_NO}
 	</update>
+	
+	
+	<select id="cancelDetail" resultType="o_product" parameterType="int">
+		select *
+		from PRODUCT_TBL, ORDER_TBL
+		WHERE P_NO = ORDER_P_NO
+		AND ORDER_NO = #{ORDER_NO}
+	</select>	
 	
 	<update id="returnregister" parameterType="int">
 		update ORDER_TBL

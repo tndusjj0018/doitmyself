@@ -82,7 +82,9 @@ public interface MemberService {
 	
 	public int cancelreturncount(String user_id);
 	
-	public int cancelRegister(int p_no);
+	public int cancelRegister(int order_no);
+	
+	public O_Product cancelDetail(int order_no);
 
 	public int returnRegister(int order_no);
 }
