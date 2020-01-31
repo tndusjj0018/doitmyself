@@ -11,6 +11,7 @@ import com.kh.dim2.DAO.adminDAO;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -190,5 +191,43 @@ public class AdminServiceImpl implements AdminService{
 	public List<Order> getOrderList() {
 		return adminDAO.getOrderList();
 	}
+
+
+	@Override
+	public int updateMajorCategory(Map<String, Object> map) {
+		return adminDAO.updateMajorCategory(map);
+	}
+
+
+	@Override
+	public int updateSubCategory(Map<String, Object> map) {
+		return adminDAO.updateSubCategory(map);
+	}
+
+
+	@Override
+	public int DeleteMajorCategory(String category_name) {
+		return adminDAO.DeleteMajorCategory(category_name);
+	}
+
+
+	@Override
+	public int DeleteSubCategory(String category_name) {
+		return adminDAO.DeleteSubCategory(category_name);
+	}
+
+
+	@Override
+	public List<Refund> getRefundList() {
+		return adminDAO.getRefundList();
+	}
+
+
+	@Override
+	public List<Order> getExchangeList() {
+		return adminDAO.getExchangeList();
+	}
+
+
 
 }

@@ -38,6 +38,11 @@
 		
 		#btntd{ 
 			text-align: center;
+			padding-left: 78px;
+		}
+		#btntd button{
+			margin-left: 5px;
+			margin-right:5px;
 		}
 		
 		.updatebtn{
@@ -48,6 +53,15 @@
 		    color: white;
 		    border: none;
 		}
+		.deletebtn{
+			width: 113px;
+		    height: 39px;
+		    margin-top: 37px;
+		    background: #a97ab5;
+		    color: white;
+		    border: none;
+		}
+		
 		.column{
 			font-size: 17px;
 			font-weight: 600;
@@ -68,7 +82,10 @@
 				type:"POST",
 				url:"CategoryList",
 				dataType:"json",
+				async:false,
 				success:function(rdata){
+					$(".major_categorylist").empty();
+					$(".sub_categorylist").empty();
 					output ="";
 					if(rdata.length == 0){
 						output += "분류가 존재하지 않습니다.";
@@ -98,13 +115,14 @@
 						console.log($(this).text() + "/" + $(this).children().val());
 						$("input[name=category_name]").val($(this).text());
 						$("input[name=major_category]").val($(this).children().val());
+						$("input[name=sub_category]").val("");
 					})
 					//소분류 클릭시 처리 
 					$(".sublist").click(function(){
 						console.log($(this).text() + "/" + $(this).children().val() + "/" +$(this).children().next().val());
 						$("input[name=category_name]").val($(this).text());
-						$("input[name=major_category]").val($(this).children().val());
-						$("input[name=sub_category]").val($(this).children().next().val());
+						$("input[name=sub_category]").val($(this).children().val());
+						$("input[name=major_category]").val($(this).children().next().val());
 					})
 					
 				},//success end
@@ -114,13 +132,60 @@
 			})//ajax end
 			
 			$(".updatebtn").click(function(){
+				var category_name =  $("input[name=category_name]").val();
+				var major_category = $("input[name=major_category]").val();
+				var sub_category = $("input[name=sub_category]").val();
+				
 				if($("input[name=category_name]").val() == ""){
 					alert("카테고리명을 입력하세요");
-				}else if($("input[name=category_name]").val() == ""){
-					alert("카테고리명을 입력하세요");
-				}
+				}else if($("input[name=major_category]").val() == "" && $("input[name=sub_category]").val() == ""){//분류가 선택이 되어 있지 않을 때 
+					alert("분류를 선택하세요");
+				}else{//분류도 선택되어 있고 카테고리명도 입력되어있을 때
+										
+					$.ajax({
+						type:"POST",
+						url:"UpdateCategory",
+						data:{category_name:category_name, major_category:major_category, sub_category:sub_category},
+						success:function(rdata){
+							console.log("성공");
+							history.go(0);
+						},
+						error:function(){
+							console.log("실패");
+						}
+						
+					})//ajax end
+					
+				}//if-else end
 				
+			})//click end
+			
+			$(".deletebtn").click(function(){
+				var category_name =  $("input[name=category_name]").val();
+				var major_category = $("input[name=major_category]").val();
+				var sub_category = $("input[name=sub_category]").val();
+				
+				if($("input[name=category_name]").val() == ""){
+					alert("카테고리명을 입력하세요");
+				}else if($("input[name=major_category]").val() == "" && $("input[name=sub_category]").val() == ""){//분류가 선택이 되어 있지 않을 때 
+					alert("분류를 선택하세요");
+				}else{//분류도 선택되어 있고 카테고리명도 입력되어있을 때
+					$.ajax({
+						type:"POST",
+						url:"DeleteCategory",
+						data:{category_name:category_name, major_category:major_category, sub_category:sub_category},
+						success:function(rdata){
+							console.log("성공");
+							history.go(0);
+						},
+						error:function(){
+							console.log("실패");
+						}
+						
+					})//ajax end
+				}
 			})
+			
 			
 			
 		})//ready end
@@ -130,7 +195,7 @@
 <body>
 	<font id = "admin_viewtitle">카테고리 관리</font><br>
 	
-	<form action="" method="post" class="category_updateform">
+	<form class="category_updateform">
 		<div class="category_list">
 			<font class= "major_sub_font">대분류</font>
 			<ul class = "major_categorylist">
@@ -155,7 +220,7 @@
 				<td><input type="text" name="sub_category" class="input" readOnly></td>
 			</tr>
 			<tr>
-				<td colspan="2" id="btntd"><button type="button" class="updatebtn">카테고리 수정</button></td>
+				<td colspan="2" id="btntd"><button type="button" class="updatebtn">카테고리 수정</button><button type="button" class="deletebtn">카테고리 삭제</button></td>
 			</tr>
 		</table>
 	</form>

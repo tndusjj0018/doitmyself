@@ -1,5 +1,8 @@
 create sequence review_seq;
 
+insert into PRODUCT_TBL
+values(1, '콩콩','가게이름1',203,20000,'no-image',23,'딱히 할 설명이 없당',0,0,sysdate);
+
 
 insert into review_tbl
 values(review_seq.nextval, 1, '정말  soso 한 맛이네요 ㅡㅡ 3점 주기도 아까움', sysdate, 'java', 1,'');
