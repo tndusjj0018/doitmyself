@@ -66,8 +66,9 @@
 	</select>
 	
 	<!-- OrderCount -->
-	<select id="OrderCount" resultType="int">
+	<select id="OrderCount" resultType="int" parameterType="String">
 		SELECT count(*) FROM order_tbl
+		WHERE order_seller = #{USER_ID}
 	</select>
 	
 	<!-- 판매관리 판매리스트 -->
