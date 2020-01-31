@@ -137,6 +137,39 @@
 						
 					})
 				})//keyup end
+					$(".categoryAdd").click(function(){
+						console.log("버튼 클릭");
+						var selectval = $(".category_select").val();
+						console.log(selectval);
+						if(selectval == "대분류" || selectval == "소분류"){
+							if($("input[name=C_NAME]").val()==""||$("input[name=SC_NAME]").val()==""){
+								alert("카테고리 이름을 입력하세요");
+							}else{
+								var data=$(".categoryAddForm").serialize();
+								console.log("formdata = "+data);
+								$.ajax({
+									type:"POST",
+									url:"CategoryAdd",
+									data:data,
+									success:function(rdata){
+										console.log("CategoryAdd 갔다옴");
+										if(rdata == 1){
+											alert("카테고리 추가 성공");
+											history.go(0);
+										}else{
+											alert("카테고리 추가 실패");
+										}
+									},
+									error:function(){
+										console.log("실패");
+									}
+									
+								})//ajax end
+							}//if-else end
+						}		
+					})//click end
+					
+					
 				
 			}//function change end
 			
@@ -203,43 +236,6 @@
 				console.log("value 바뀜 = "+$(this).val());
 				change($(this).val());	
 			})
-			
-			$(".categoryAdd").click(function(){
-				console.log("버튼 클릭");
-				var selectval = $(".category_select").val();
-				if(selectval == "대분류"){
-					if($("input[name=C_NAME]").val()==""){
-						alert("카테고리 이름을 입력하세요");
-					}else{
-						var data=$(".categoryAddForm").serialize();
-						console.log("formdata = "+data);
-						$.ajax({
-							type:"POST",
-							url:"CategoryAdd",
-							data:data,
-							success:function(rdata){
-								console.log("CategoryAdd 갔다옴");
-								if(rdata == 1){
-									alert("카테고리 추가 성공");
-									history.go(0);
-								}else{
-									alert("카테고리 추가 실패");
-								}
-							},
-							error:function(){
-								console.log("실패");
-							}
-							
-						})
-					}//if-else end
-				}else{
-					if($("input[name=SC_NAME]").val()==""){
-						alert("카테고리 이름을 입력하세요");
-					}//if end
-				}//else end
-				
-			})//click end
-			
 			
 			
 		})//document end
