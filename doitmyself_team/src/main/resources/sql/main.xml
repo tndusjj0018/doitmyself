@@ -78,9 +78,21 @@
 		INSERT INTO 
 		USER_TBL		
 		VALUES(
-			USER_SEQ.NEXTVAL, #{N_ID}, #{N_PASS}, #{N_NAME}, "NAVER",
-			"NAVER", "NAVER", #{N_EMAIL}, #{N_BIRTHDAY}, #{N_GENDER}, SYSDATE , 0
+			USER_SEQ.NEXTVAL, #{USER_ID}, #{USER_PASS}, #{USER_NAME}, 'N',
+			'N', 'N' , #{USER_EMAIL}, #{USER_BIRTH}, #{USER_GENDER}, SYSDATE , 0
 		)
 	</insert>
+	
+	<select id="Naver_IdCheck" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM
+		USER_TBL
+		WHERE USER_ID=#{N_Id}
+	</select>
+	
+	<select id="Find_check" resultType="String" parameterType="member">
+		SELECT * FROM 
+		USER_TBL 
+		WHERE USER_ID=#{USER_ID}
+	</select>
 	
 </mapper>

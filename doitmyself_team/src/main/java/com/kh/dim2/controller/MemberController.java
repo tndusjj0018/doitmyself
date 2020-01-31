@@ -634,13 +634,10 @@ public class MemberController {
 		} else {
 			System.out.println("찜 삭제 중 오류");
 		}
-		
-		
 	}
 
 	@RequestMapping(value = "/change_password", method = RequestMethod.GET)
 	public String change_password() {
 		return "member/change_password";
 	}
-	
 }
