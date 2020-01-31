@@ -16,9 +16,10 @@
 
 	})
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="resources/css/baha_css/detail.css">
-<link rel="stylesheet" href="resources/css/baha_css/style.css">  
+<link rel="stylesheet" href="resources/css/baha_css/style.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
@@ -64,7 +65,7 @@
 <body class="goto-here">
 
 	<input type="hidden" id="loginid" value="${USER_ID}" name="loginid">
-	<input type="hidden" id="prd_no" value="${P_NO}" name="num">
+	<input type="hidden" id="prd_no" value="${prdData.p_NO}" name="num">
 
 
 
@@ -93,10 +94,10 @@
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
 					<img src="resources/upload/${prdData.p_IMG}" class="img-fluid"
-						name="P_IMG"  id="mainIMG">
+						name="P_IMG" id="mainIMG">
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>${prdData.p_NAME}</h3>
+					<h3 id="p_name">${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
 							<a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -107,9 +108,9 @@
 								class="ion-ios-star-outline"></span></a>
 						</p>
 					</div>
+					<input type="hidden" value="${prdData.p_PRICE}" id="hiddenprice">
 					<p class="price">
-						<span><fmt:formatNumber value="${prdData.p_PRICE}"
-								pattern="#,###,###" /></span>
+						<span id="mainPrice"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 					</p>
 					<p>${prdData.p_DESCRIPTION}</p>
 					<div class="row mt-4">
@@ -125,17 +126,18 @@
 						</div>
 						<div class="w-100"></div>
 						<div class="input-group col-md-6 d-flex mb-3">
-							<span class="input-group-btn mr-2">
-								<button type="button" class="quantity_minus btn">
-									<i class="ion-ios-remove"></i>
-								</button>
-							</span> <input type="text" id="quantity" name="CART_COUNT"
-								class="form-control input-number" value="1" min="1" max="100" readonly>
-							<span class="input-group-btn ml-2">
-								<button type="button" class="quantity_plus btn">
-									<i class="ion-ios-add"></i>
-								</button>
-							</span>
+							<!-- 							<span class="input-group-btn mr-2"> -->
+							<!-- 								<button type="button" class="quantity_minus btn"> -->
+							<!-- 									<i class="ion-ios-remove"></i> -->
+							<!-- 								</button> -->
+							<!-- 							</span> -->
+							<input type="number" id="quantity" name="CART_COUNT"
+								class="form-control input-number" value="1" min="1" max="100">
+							<!-- 							<span class="input-group-btn ml-2"> -->
+							<!-- 								<button type="button" class="quantity_plus btn"> -->
+
+							<!-- 								</button> -->
+							<!-- 							</span> -->
 						</div>
 						<div class="w-100"></div>
 						<div class="col-md-12">
@@ -150,8 +152,9 @@
 						</div>
 					</div>
 					<p>
-						<a href="cart.html" class="btn btn-black py-3 px-5">Add to
+						<a class="btn btn-black py-3 px-5" onclick="add()" style="color:white">Add to
 							Cart</a>
+							
 					</p>
 				</div>
 			</div>
@@ -201,100 +204,100 @@
 							<option value="low">평점 낮은순</option>
 					</select></span>
 					<c:if test="${listcount2 > 0 }">
-					<c:set var="num" value="${listcount2-(page2-1)*10 }"/>
-					<c:forEach var="review" items="${reviewlist}">
-					<div id="review_subwrap">
-						<div id="review_top">
-							<span id="star">
-							<c:choose>
-							<c:when test="${review.REVIEW_RATE eq 1}">
-							<i class="fa fa-star checked"></i>
-							</c:when>
-							<c:when test="${review.REVIEW_RATE eq 2}">
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							</c:when>
-							<c:when test="${review.REVIEW_RATE eq 3}">
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							</c:when>
-							<c:when test="${review.REVIEW_RATE eq 4}">
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							</c:when>
-							<c:when test="${review.REVIEW_RATE eq 5}">
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							<i class="fa fa-star checked"></i>
-							</c:when>
-							</c:choose>
-							
-							</span> <span id="review_writer">${review.REVIEW_WRITER}&ensp;
-							${review.REVIEW_DATE}</span>
-						</div>
-						<div id="review_body">
-							<span><img src="resources/upload/${review.REVIEW_IMG}"
-								id="review_img"> </span> <span id="review_prdname">&ensp;&ensp;&ensp;${prdData.p_NAME } </span> <br>
-							<p id="review_content">${review.REVIEW_CONTENT }</p>
+						<c:set var="num" value="${listcount2-(page2-1)*10 }" />
+						<c:forEach var="review" items="${reviewlist}">
+							<div id="review_subwrap">
+								<div id="review_top">
+									<span id="star"> <c:choose>
+											<c:when test="${review.REVIEW_RATE eq 1}">
+												<i class="fa fa-star checked"></i>
+											</c:when>
+											<c:when test="${review.REVIEW_RATE eq 2}">
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+											</c:when>
+											<c:when test="${review.REVIEW_RATE eq 3}">
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+											</c:when>
+											<c:when test="${review.REVIEW_RATE eq 4}">
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+											</c:when>
+											<c:when test="${review.REVIEW_RATE eq 5}">
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+												<i class="fa fa-star checked"></i>
+											</c:when>
+										</c:choose>
 
+									</span> <span id="review_writer">${review.REVIEW_WRITER}&ensp;
+										${review.REVIEW_DATE}</span>
+								</div>
+								<div id="review_body">
+									<span><img src="resources/upload/${review.REVIEW_IMG}"
+										id="review_img"> </span> <span id="review_prdname">&ensp;&ensp;&ensp;${prdData.p_NAME }
+									</span> <br>
+									<p id="review_content">${review.REVIEW_CONTENT }</p>
+
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+
+					<c:if test="${listcount2 == 0 }">
+						<div id="message2">등록된 리뷰가 없습니다.</div>
+					</c:if>
+				</div>
+
+				<c:if test="${listcount2 > 0 }">
+					<div class="center-block">
+
+						<div class="row">
+							<div class="col">
+								<ul class="pagination">
+									<c:if test="${page2 <= 1 }">
+										<li class="page-item"><a
+											class="page-link pgnation_review" href="#">이전&nbsp;</a></li>
+									</c:if>
+									<c:if test="${page2 > 1 }">
+										<li class="page-item"><a href="detail?page=${page2 - 1 }"
+											class="page-link pgnation_review">이전</a>&nbsp;</li>
+									</c:if>
+
+									<c:forEach var="a" begin="${startpage2 }" end="${endpage2 }">
+										<c:if test="${a == page2 }">
+											<li class="page-item"><a
+												class="page-link pgnation_review" href="#">${a }</a></li>
+										</c:if>
+										<c:if test="${a != page2 }">
+											<li class="page-item"><a href="detail?page=${a }"
+												class="page-link pgnation_review">${a }</a></li>
+										</c:if>
+									</c:forEach>
+
+									<c:if test="${page2 >= maxpage2 }">
+										<li class="page-item"><a
+											class="page-link pgnation_review" href="#">&nbsp;다음</a></li>
+									</c:if>
+									<c:if test="${page2 < maxpage2 }">
+										<li class="page-item"><a href="detail?page=${page2+1 }"
+											class="page-link pgnation_review">&nbsp;다음</a></li>
+									</c:if>
+								</ul>
+							</div>
 						</div>
 					</div>
-					</c:forEach>
-					</c:if>
-					
-					<c:if test="${listcount2 == 0 }">
-	<div id="message2">등록된 리뷰가 없습니다.</div>
-</c:if>
-</div>
-
-<c:if test="${listcount2 > 0 }">
-<div class="center-block">
-
-	<div class="row">
-		<div class="col">
-			<ul class="pagination">
-				<c:if test="${page2 <= 1 }">
-					<li class="page-item"><a class="page-link pgnation_review" href="#">이전&nbsp;</a>
-					</li>
-				</c:if>
-				<c:if test="${page2 > 1 }">
-					<li class="page-item"><a href="detail?page=${page2 - 1 }"
-						class="page-link pgnation_review">이전</a>&nbsp;</li>
 				</c:if>
 
-				<c:forEach var="a" begin="${startpage2 }" end="${endpage2 }">
-					<c:if test="${a == page2 }">
-						<li class="page-item"><a class="page-link pgnation_review" href="#">${a }</a>
-						</li>
-					</c:if>
-					<c:if test="${a != page2 }">
-						<li class="page-item"><a href="detail?page=${a }"
-							class="page-link pgnation_review">${a }</a></li>
-					</c:if>
-				</c:forEach>
-
-				<c:if test="${page2 >= maxpage2 }">
-					<li class="page-item"><a class="page-link pgnation_review" href="#">&nbsp;다음</a>
-					</li>
-				</c:if>
-				<c:if test="${page2 < maxpage2 }">
-					<li class="page-item"><a href="detail?page=${page2+1 }"
-						class="page-link pgnation_review">&nbsp;다음</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-</div>
-</c:if>
 
 
 
-				
 				<div class="QnaWrap">
 					<div class="qna">
 						<p>문의</p>
@@ -310,17 +313,22 @@
 					</select></span>
 					<table class="qna_subjects">
 						<colgroup width="10%">
-						<colgroup width="8%">
+
+							<colgroup width="8%">
+						
 						<colgroup width="52%">
+						
 						<colgroup width="10%">
+						
 						<colgroup width="20%">
+						
 						<tr>
 							<td>문의유형</td>
 							<td></td>
 							<td>문의/답변</td>
 							<td>작성자</td>
 							<td>작성일</td>
-						</tr>
+						</tr>						
 
 						<c:if test="${listcount > 0 }">
 							<c:set var="num" value="${listcount-(page-1)*10}" />
@@ -390,7 +398,8 @@
 								<div class="col">
 									<ul class="pagination">
 										<c:if test="${page <= 1 }">
-											<li class="page-item"><a class="page-link pgnation_qna" href="#">이전&nbsp;</a>
+											<li class="page-item"><a class="page-link pgnation_qna"
+												href="#">이전&nbsp;</a>
 											</li>
 										</c:if>
 										<c:if test="${page > 1 }">
@@ -400,7 +409,8 @@
 
 										<c:forEach var="a" begin="${startpage }" end="${endpage }">
 											<c:if test="${a == page }">
-												<li class="page-item"><a class="page-link pgnation_qna" href="#">${a }</a>
+												<li class="page-item"><a class="page-link pgnation_qna"
+													href="#">${a }</a>
 												</li>
 											</c:if>
 											<c:if test="${a != page }">
@@ -410,7 +420,8 @@
 										</c:forEach>
 
 										<c:if test="${page >= maxpage }">
-											<li class="page-item"><a class="page-link pgnation_qna" href="#">&nbsp;다음</a>
+											<li class="page-item"><a class="page-link pgnation_qna"
+												href="#">&nbsp;다음</a>
 											</li>
 										</c:if>
 										<c:if test="${page < maxpage }">
@@ -438,7 +449,9 @@
 					</div>
 					<table class="seller_info">
 						<colgroup width="15%">
+						
 						<colgroup width="85%">
+						
 						<tr>
 							<td>고객문의 대표번호</td>
 							<td>&emsp;070-5133-4629</td>
@@ -476,49 +489,46 @@
 
 			</div>
 			<!-- class="ServiceWrap" 끝 -->
-			<div class="SelectedWrap">
+		<div class="SelectedWrap">
 
-				<div class="selected">
+								<div class="selected">
 					<table class="product_selected">
 						<tr>
 							<td></td>
 						</tr>
-						<tr>
-							<td><select name="option" id="option">
-									<option value="choice" selected>옵션선택</option>
-							</select></td>
-						</tr>
+						
 
 						<tr>
 							<td>
 								<div class="chosen">
 									<span id="prd_img"><img
-										src="resources/upload/${prdData.p_IMG}" class="img-fluid"
-										name="P_IMG" alt="Colorlib Template" id="detailIMG"> </span> <span
-										id="prd_name">${prdData.p_NAME}</span>
+														src="resources/upload/${prdData.p_IMG}" class="img-fluid"
+														name="P_IMG" alt="Colorlib Template" id="detailIMG"> </span> <span
+														id="prd_name">${prdData.p_NAME}</span>
 								</div>
 
 								<div class="option_detail">
 									<label><input type="number" id="tno" value="1" min="1"></label>
-									<span id="tno_price"><fmt:formatNumber
-											value="${prdData.p_PRICE}" pattern="#,###,###" /></span>원
+									<span id="tno_price">${prdData.p_PRICE}</span>원
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<div class="total_price">
-									<span class="total">총</span><span class="price"><fmt:formatNumber
-											value="${prdData.p_PRICE}" pattern="#,###,###" />원</span>
+									<span class="total">총</span><span class="totalprice"><fmt:formatNumber
+															value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 								</div>
-								<form action="/dim2/pay">
-									<div class="checkout">
+								<div class="checkout">
+								<form>
+									    <input type="hidden" name="P_NAME" value="${prdData.p_NAME}">
+									    <input type="hidden" name="P_QUANTITY" value="${prdData.p_QUANTITY}">
 										<input type="hidden" name="USER_ID" value="${USER_ID }">
-										<input type="submit" class="checkoutGo" value="결제하기">
-										
-									</div>
+										<input type="submit" class="checkoutGo" value="결제하기" onclick="javascript: form.action='/dim2/pay';"/>
+									<button class="cartGo" value="장바구니" onclick="add()">장바구니</button>	
 								</form>
-								<button class="cartGo" onclick="add()">장바구니</button>
+										
+								</div>
 							</td>
 						</tr>
 
@@ -530,7 +540,8 @@
 
 
 
-		</div>
+		
+						</div>
 		<!-- class="WRAP" 끝 -->
 	</section>
 
@@ -708,9 +719,19 @@
 			});
 
 		});
-		
-		function go() {
-			alert('상품을 장바구니에 담았습니다.');
+
+		function add(){
+			
+			var no = $('#prd_no').val()
+			var data = {"CART_ID" : $('#loginid').val(), "CART_P_NO" : no, "CART_COUNT" : $('#quantity').val()}
+			$.ajax({
+				type : "POST",
+				url : "addCart",
+				data : data,
+				success : function(data) {
+					alert(data)
+			}
+			})
 			
 		}
 	</script>

@@ -37,17 +37,7 @@ $(document).on('click','.clickable',function(){
 	$(this).parent().next().toggle();	
 })
 
-$(document).on('click','.quantity_plus', function(){
-	var old = $('.input-number').val();
-	var p = parseInt(old, 10);
-	$('.input-number').val(p+1);
-})
-
-$(document).on('click','.quantity_minus', function(){
-	var old = $('.input-number').val();
-	old = $('.input-number').val(+old-1);
-})
-
+//수량 변동을 연동시킴
 $(document).on('change','.input-number', function(){
 	var main = $('.input-number').val();
 	$('#tno').val(main);
@@ -57,6 +47,39 @@ $(document).on('change','#tno', function(){
 	var main = $('#tno').val();
 	$('.input-number').val(main);
 })
+
+//가격, 세 자리 수 마다 콤마
+ function comma(str) {
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    }
+
+//수량 변동시 가격 변동시킴
+$(document).on('change','#tno', function(){
+    var c = $('#tno').val();
+    var hidprc = $('#hiddenprice').val();
+    $('#tno_price').text(hidprc*c)
+ 
+})
+
+$(document).on('change','.input-number', function(){
+    var c = $('.input-number').val();
+    var hidprc = $('#hiddenprice').val();
+    $('#tno_price').text(hidprc*c);
+})
+
+$(document).on('change','.input-number', function(){
+    var c = $('.input-number').val();
+    var hidprc = $('#hiddenprice').val();
+    $('.totalprice').text(hidprc*c);
+})
+
+$(document).on('change','#tno', function(){
+    var c = $('#tno').val();
+    var hidprc = $('#hiddenprice').val();
+    $('.totalprice').text(hidprc*c);
+})
+
 
 
 

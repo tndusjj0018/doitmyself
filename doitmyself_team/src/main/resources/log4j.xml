@@ -24,6 +24,10 @@
 		<level value="trace" />
 	</logger>
 	
+	<logger name="cart">
+	<level value="trace" />
+	</logger>
+	
   	<logger name="Member">
 		<level value="trace" />
 	</logger>

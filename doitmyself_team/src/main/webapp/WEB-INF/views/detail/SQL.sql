@@ -10,6 +10,10 @@ select * from user_sys_privs;
 
 select * from review_tbl;
 
+select * from cart_tbl;
+
+drop table cart_tbl;
+
 CREATE TABLE REVIEW_TBL(
 	REVIEW_NO		NUMBER							PRIMARY KEY,
 	REVIEW_RATE		NUMBER(1)							NOT NULL,
