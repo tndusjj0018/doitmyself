@@ -93,7 +93,7 @@
       		</nav>
       		<!-- End Navbar -->
      
-			<div class="content">
+			<div class="content" style="margin-bottom: 110px">
 			  <div class="row">
 			    <div class="col-md-10">
 			      <div class="card card-user">

@@ -126,16 +126,18 @@
 	</select>
 	
 	<!-- 리뷰 작성 가능 리스트 -->
-	<select id="reviewablelist" resultType="o_product" parameterType="String">
-		SELECT *
-		FROM ORDER_TBL INNER JOIN PRODUCT_TBL
-		ON ORDER_P_NO = P_NO
-		WHERE ORDER_ID = #{USER_ID}
-		AND ORDER_DELIVERY = 4
-		AND ORDER_P_NO not in ( SELECT REVIEW_P_NO
-							FROM REVIEW_TBL 
-							WHERE REVIEW_WRITER= #{USER_ID})
+	<select id="reviewablelist" resultType="o_product" parameterType="HashMap">
+		select * from (select rownum rnum, b.*
+						from (select * FROM ORDER_TBL INNER JOIN PRODUCT_TBL
+								ON ORDER_P_NO = P_NO
+								WHERE ORDER_ID = #{USER_ID}
+								AND ORDER_DELIVERY = 4
+								<!-- AND ORDER_P_NO not in ( SELECT REVIEW_P_NO
+														FROM REVIEW_TBL 
+														WHERE REVIEW_WRITER= #{USER_ID}) -->) b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}		
 	</select>
+
 	
 	<!-- 리뷰 작성 가능 개수 -->
 	<select id="reviewablecount" resultType="int" parameterType="String">
