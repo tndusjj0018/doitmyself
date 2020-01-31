@@ -367,15 +367,54 @@ public class MemberController {
 	//리뷰 작성 가능한 리스트 가져옴
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public ModelAndView reviewList(ModelAndView mv,
-								   @RequestParam("USER_ID") String user_id) {
+								   @RequestParam("USER_ID") String user_id,
+								   @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
 		
-		int reviewablecount = memberservice.reviewablecount(user_id);		
-		List<O_Product> reviewablelist = memberservice.reviewablelist(user_id);
+		//한 화면에 출력할 레코드 갯수
+		int limit = 4;						
+		//총 리스트 수 받아옴
+		int reviewablecount = memberservice.reviewablecount(user_id);						
+		//총 페이지 수
+		int maxpage_able = (reviewablecount + limit -1) / limit;						
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage_able = ((page - 1) / 10) * 10 + 1;								  
+		//10, 20, 30 등
+		int endpage_able = startpage_able + 10 -1;								  
+		if (endpage_able > maxpage_able) endpage_able = maxpage_able;
 		
-		int reviewwritecount = memberservice.reviewwritecount(user_id);
-		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id);
+		List<O_Product> reviewablelist = memberservice.reviewablelist(user_id, page, limit);
 		
-		mv.addObject("doc", "rl");		
+		//int reviewablecount = memberservice.reviewablecount(user_id);		
+		//List<O_Product> reviewablelist = memberservice.reviewablelist(user_id);
+		
+		
+		
+		int reviewwritecount = memberservice.reviewwritecount(user_id);						
+		//총 페이지 수
+		int maxpage_write = (reviewablecount + limit -1) / limit;						
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage_write = ((page - 1) / 10) * 10 + 1;								  
+		//10, 20, 30 등
+		int endpage_write = startpage_write + 10 -1;								  
+		if (endpage_write > maxpage_write) endpage_write = maxpage_write;
+		
+		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id, page, limit);
+		
+		
+		//int reviewwritecount = memberservice.reviewwritecount(user_id);
+		//List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id);
+		
+		mv.addObject("doc", "rl");
+		mv.addObject("page", page);
+		mv.addObject("maxpage_able", maxpage_able);
+		mv.addObject("startpage_able", startpage_able);
+		mv.addObject("endpage_able", endpage_able);
+		
+		mv.addObject("maxpage_write", maxpage_write);
+		mv.addObject("startpage_write", startpage_write);
+		mv.addObject("endpage_write", endpage_write);
+		
+		
 		mv.addObject("reviewablecount", reviewablecount);
 		mv.addObject("reviewablelist", reviewablelist);
 		mv.addObject("reviewwritecount", reviewwritecount);
@@ -411,7 +450,7 @@ public class MemberController {
 				String fileName = uploadfile.getOriginalFilename(); //원래 파일명
 				review.setREVIEW_IMG(fileName); //원래 파일명 저장
 				
-				String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
+				String saveFolder = "C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
 				
 				// 난수를 구합니다.(랜덤)
 				Random r = new Random();

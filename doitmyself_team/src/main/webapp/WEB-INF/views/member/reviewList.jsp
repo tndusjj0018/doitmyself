@@ -19,7 +19,7 @@
 		
 		.center-block {
      		display: flex;  
-    		 justify-content:center; /* 가운데 정렬 */
+    		 justify-content:center !important; /* 가운데 정렬 */
   		 }
    
    		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
@@ -122,7 +122,7 @@
       		</nav>
       		<!-- End Navbar -->
      
-			<div class="content">
+			<div class="content" style="margin-bottom: 110px">
 			  <div class="row">
 			    <div class="col-md-10">
 			      <div class="card card-user">
@@ -192,7 +192,7 @@
 								</li>
 							</c:if>
 							
-							<c:forEach var="a" begin="${startpage }" end="${endpage }">
+							<c:forEach var="a" begin="${startpage_able }" end="${endpage_able }">
 								<c:if test="${a==page }">
 									<li class="page-item">
 										<a class="page-link current" href="#">${a }</a>
@@ -205,12 +205,12 @@
 								</c:if>
 							</c:forEach>
 							
-							<c:if test="${page >= maxpage }">
+							<c:if test="${page >= maxpage_able }">
 								<li class="page-item">
 									<a class="page-link current" href="#">&nbsp;다음</a>
 								</li>
 							</c:if>
-							<c:if test="${page < maxpage }">
+							<c:if test="${page < maxpage_able }">
 								<li class="page-item">
 									<a href="reviewList?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
 								</li>
@@ -330,6 +330,53 @@
 										</tr>
 										</c:forEach>
 									</table>
+									
+									<div class="center-block">
+				<div class="row">
+					<div class="col">
+						<ul class="pagination">
+							<c:if test="${page <= 1 }">
+								<li class="page-item">
+									<a class="page-link current" href="#">이전&nbsp;</a>
+								</li>
+							</c:if>
+							
+							<c:if test="${page > 1 }">
+								<li class="page-item">
+									<a href="reviewList#home?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
+								</li>
+							</c:if>
+							
+							<c:forEach var="a" begin="${startpage }" end="${endpage }">
+								<c:if test="${a==page }">
+									<li class="page-item">
+										<a class="page-link current" href="#">${a }</a>
+									</li>
+								</c:if>
+								<c:if test="${a != page }">
+									<li class="page-item">
+										<a href="reviewList#home?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
+									</li>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${page >= maxpage }">
+								<li class="page-item">
+									<a class="page-link current" href="#">&nbsp;다음</a>
+								</li>
+							</c:if>
+							<c:if test="${page < maxpage }">
+								<li class="page-item">
+									<a href="reviewList#home?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
+								</li>
+							</c:if>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+									
+									
 									</c:if>
 									
 									<!-- 작성한 리뷰 없는 경우 -->

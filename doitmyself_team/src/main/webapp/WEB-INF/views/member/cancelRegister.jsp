@@ -64,9 +64,12 @@
 											<tr>
 												<td>결제 수단</td>
 												<td>${productdetail.ORDER_PAYMENT }</td>
-											</tr>
-											
+											</tr>										
 										</table>
+										
+										<div>
+											<span>취소 사유</span>
+										</div>
 
 									</div>
 																	
