@@ -64,4 +64,12 @@ public class mainDAO {
 	public int NaverInsert(HashMap<String, String> map) {
 		return sqlSession.insert("Main.NaverInsert" , map);
 	}
+
+	public int isNaverId(String n_Id) {
+		return sqlSession.selectOne("Main.Naver_IdCheck" , n_Id);
+	}
+
+	public Member Find_check(String uSER_ID , String uSER_EMAIL) {
+		return sqlSession.selectOne("Main.Find_check" , uSER_ID);
+	}
 }

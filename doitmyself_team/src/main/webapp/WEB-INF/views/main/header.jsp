@@ -100,11 +100,11 @@
             	 </c:if>
             </c:if>
           	<c:if test="${empty USER_ID}">
-          	 	<a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">Log-in</a>
+          	 	<a class="navbar-brand" href="login" style="font-size:13pt !important; margin-left: 20px; margin-top: 3.7px;">Log-in</a>
           	</c:if>
 
           	<c:if test="${adminNumber == 1}">
-	          	 <a class="navbar-brand" href="login" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">관리자</a>
+	          	 <a class="navbar-brand" href="login" style="font-size:13pt !important; margin-left: 20px; margin-top: 3.7px;">관리자</a>
 	          	 <li class="nav-item">
 	                 <a class="nav-link" href="#" id="dropdown04">관리자페이지</a>
 	              </li>
@@ -113,7 +113,12 @@
 	              </li>
           	</c:if>
           	<c:if test="${!empty USER_ID && adminNumber != 1}">
-	             <a class="navbar-brand" href="memberInfo?USER_ID=${USER_ID }" style="font-size:13pt; margin-left: 20px; margin-top: 4.8px;">${USER_ID}</a>
+          		<c:if test="${empty N_NAME }">
+	             <a class="navbar-brand" href="memberInfo?USER_ID=${USER_ID }" style="font-size:13pt; margin-left: 20px; margin-top: 2px;">${USER_ID}</a>
+          		</c:if>
+          		<c:if test="${!empty N_NAME }">
+	             <a class="navbar-brand" href="memberInfo?USER_ID=${N_NAME }" style="font-size:13pt; margin-left: 20px; margin-top: 2px;">${N_NAME}</a>
+          		</c:if>
 	             
 	             <c:if test="${SELLER_RESULT == 1}">
 	             	 <a class="navbar-brand" href="#" style="font-size:9pt; margin-left: -13px; margin-top: 1px;">$</a>
@@ -122,7 +127,7 @@
 					<a class="navbar-brand" href="#" style="font-size:9pt; margin-left: -13px; margin-top: 1px;"></a>
 	             </c:if>
 	             
-	             <a class="navbar-brand" href="logout" style="font-size:10pt; margin-left: 10px; margin-top: 9.5px; color: dimgray;">로그아웃</a>
+	             <a class="navbar-brand" href="logout" style="font-size:10pt !important; margin-left: 10px; margin-top: 9.5px; color: dimgray;">로그아웃</a>
             </c:if>
            </ul>
          </div>

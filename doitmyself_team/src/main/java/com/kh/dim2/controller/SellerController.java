@@ -205,7 +205,8 @@ public class SellerController {
 		//List<Order> list = sellerService.getOrderList(USER_ID);
 		
 		//총 리스트 수 
-		int listcount = sellerService.getOrderListCount();
+		int listcount = sellerService.getOrderListCount(USER_ID);
+		System.out.println("listcount" + listcount);
 		
 		int maxpage = (listcount+limit-1)/limit;
 		System.out.println("총 페이지 수 " + maxpage);
@@ -306,7 +307,7 @@ public class SellerController {
 		//수정 실패한 경우
 		out.println("<script>");
 		if(result == 0) {
-			out.println("alert('상품등록 실패')");
+			out.println("alert('상품수정 실패')");
 			out.println("history.back()");
 		}else {
 			out.println("confirm('수정하시겠습니까?')");

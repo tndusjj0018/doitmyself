@@ -1,7 +1,7 @@
---유저 시퀀스 생성
+--�쑀�� �떆���뒪 �깮�꽦
 CREATE SEQUENCE USER_SEQ;
 
---유저 테이블 생성
+--�쑀�� �뀒�씠釉� �깮�꽦
 CREATE TABLE USER_TBL(
 	USER_NO				NUMBER 				PRIMARY KEY,
 	USER_ID				VARCHAR2(20)		UNIQUE 				NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE USER_TBL(
 
 select * from user_tbl
 
---카테고리 테이블 생성
+--移댄뀒怨좊━ �뀒�씠釉� �깮�꽦
 CREATE TABLE CATEGORY_TBL(
 	C_NO		NUMBER(4)					PRIMARY KEY,
 	C_NAME		VARCHAR2(20)				NOT NULL
@@ -27,7 +27,7 @@ CREATE TABLE CATEGORY_TBL(
 
 --insert into CATEGORY_TBL values(101 , 'test') 
 
---판매자 정보 테이블 생성
+--�뙋留ㅼ옄 �젙蹂� �뀒�씠釉� �깮�꽦
 CREATE TABLE SELLER_TBL(
 	SELLER_NO 			NUMBER				PRIMARY KEY,
 	SELLER_NAME			VARCHAR2(30)		UNIQUE 							NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE SELLER_TBL(
 
 --select * from SELLER_TBL
 
---상품 테이블 생성
+--�긽�뭹 �뀒�씠釉� �깮�꽦
 CREATE TABLE PRODUCT_TBL(
 	P_NO			NUMBER					PRIMARY KEY,	
 	P_NAME			VARCHAR2(40)													NOT NULL,
@@ -53,22 +53,22 @@ CREATE TABLE PRODUCT_TBL(
 	P_DIBS			NUMBER(10)				DEFAULT 0								NOT NULL,
 	P_REGDATE		DATE					DEFAULT SYSDATE							NOT NULL
 );
---insert into product_tbl values(7 , 'test7' , 'qweqrqqr' , 101 , 110000 , '11' , 1100 , 'test중7' , 499 , 5515 , sysdate);
---insert into product_tbl values(8 , 'test8' , 'qweqrqqr' , 101 , 340000 , '11' , 5500 , 'test중다8' , 21500 ,15 , sysdate);
---insert into product_tbl values(9 , 'test9' , 'qweqrqqr' , 101 , 4330000 , '11' , 6400 , 'test중9' , 120 , 552 , sysdate);
---insert into product_tbl values(10 , 'test10' , 'qweqrqqr' , 101 , 2000000 , '11' , 220 , 'test중입니네다10' , 20 , 125 , sysdate);
---insert into product_tbl values(5 , 'test6' , 'qweqrqqr' , 101 , 6000 , '11' , 130 , 'test중입니다ddd5' , 50 , 333 , sysdate);
-insert into product_tbl values(11 , 'test11' , 'qweqrqqr' , 101 , 24000 , '11' , 1220 , 'test중입니네다11' , 221 , 1225 , sysdate);
-insert into product_tbl values(12 , 'test12' , 'qweqrqqr' , 101 , 60200 , '11' , 1430 , 'test중입니다12' , 545 , 38 , sysdate);
+--insert into product_tbl values(7 , 'test7' , 'qweqrqqr' , 101 , 110000 , '11' , 1100 , 'test以�7' , 499 , 5515 , sysdate);
+--insert into product_tbl values(8 , 'test8' , 'qweqrqqr' , 101 , 340000 , '11' , 5500 , 'test以묐떎8' , 21500 ,15 , sysdate);
+--insert into product_tbl values(9 , 'test9' , 'qweqrqqr' , 101 , 4330000 , '11' , 6400 , 'test以�9' , 120 , 552 , sysdate);
+--insert into product_tbl values(10 , 'test10' , 'qweqrqqr' , 101 , 2000000 , '11' , 220 , 'test以묒엯�땲�꽕�떎10' , 20 , 125 , sysdate);
+--insert into product_tbl values(5 , 'test6' , 'qweqrqqr' , 101 , 6000 , '11' , 130 , 'test以묒엯�땲�떎ddd5' , 50 , 333 , sysdate);
+insert into product_tbl values(11 , 'test11' , 'qweqrqqr' , 101 , 24000 , '11' , 1220 , 'test以묒엯�땲�꽕�떎11' , 221 , 1225 , sysdate);
+insert into product_tbl values(12 , 'test12' , 'qweqrqqr' , 101 , 60200 , '11' , 1430 , 'test以묒엯�땲�떎12' , 545 , 38 , sysdate);
 
---상품 추가 사진 테이블
+--�긽�뭹 異붽� �궗吏� �뀒�씠釉�
 CREATE TABLE IMG_TBL(
 	IMG_NO		NUMBER														PRIMARY KEY,
 	IMG_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)	NOT NULL,
 	IMG_NAME	VARCHAR2(50)												NOT NULL
 );
 
---질의 응답 테이블
+--吏덉쓽 �쓳�떟 �뀒�씠釉�
 CREATE TABLE QNA_TBL(
 	QNA_NO 	NUMBER																	PRIMARY KEY,
 	QNA_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)			NOT NULL,
@@ -78,17 +78,20 @@ CREATE TABLE QNA_TBL(
 	QNA_DATE	DATE						DEFAULT SYSDATE							NOT NULL,
 	QNA_CATEGORY	NUMBER(1)														NOT NULL,
 	QNA_S_ID	VARCHAR2(20)														NOT NULL,	
-	QNA_SECRET	NUMBER(1)					DEFAULT 0 	CHECK(QNA_SECRET IN(0,1))	NOT NULL
+	QNA_SECRET	NUMBER(1)					DEFAULT 0 	CHECK(QNA_SECRET IN(0,1))	NOT NULL ,
+	QNA_ISRESPONSE NUMBER(1) 				DEFAULT 0 
 );
 
---찜 테이블
+DROP TABLE QNA_TBL;
+
+--李� �뀒�씠釉�
 CREATE TABLE DIBS_TBL(
 	D_NO		NUMBER			  												PRIMARY KEY,
 	D_P_NO		NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
 	D_USER_ID	VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL
 );
 
---주문/취소/반품/교환 내역 테이블
+--二쇰Ц/痍⑥냼/諛섑뭹/援먰솚 �궡�뿭 �뀒�씠釉�
 CREATE TABLE ORDER_TBL(
 	ORDER_NO		NUMBER																	PRIMARY KEY,
 	ORDER_P_NO		NUMBER					REFERENCES PRODUCT_TBL(P_NO)					NOT NULL,
@@ -105,7 +108,7 @@ CREATE TABLE ORDER_TBL(
 	ORDER_TRNO		VARCHAR2(20)
 );
 
---리뷰 테이블
+--由щ럭 �뀒�씠釉�
 CREATE TABLE REVIEW_TBL(
 	REVIEW_NO		NUMBER					PRIMARY KEY,
 	REVIEW_RATE		NUMBER(1)													NOT NULL,
@@ -116,7 +119,7 @@ CREATE TABLE REVIEW_TBL(
 	REVIEW_IMG		VARCHAR2(40)
 );
 
---최근 본 상품 테이블
+--理쒓렐 蹂� �긽�뭹 �뀒�씠釉�
 CREATE TABLE RECENT_VIEW_TBL(
 	RV_ID		VARCHAR2(30)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
 	RV_P_NO		NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
@@ -130,7 +133,7 @@ CREATE TABLE RECENT_VIEW_TBL(
 		WHERE RV_ID = 'qweqrqqr'
 		ORDER BY RV_NO DESC;
 
---장바구니 테이블
+--�옣諛붽뎄�땲 �뀒�씠釉�
 CREATE TABLE CART_TBL(
 	CART_NO 	NUMBER															PRIMARY KEY,
 	CART_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
@@ -141,13 +144,13 @@ CREATE TABLE CART_TBL(
 --insert into cart_tbl values(11112,'sun112',1);
 --insert into cart_tbl values(11113,'sun112',1);
 
---보안 인증 번호 테이블
+--蹂댁븞 �씤利� 踰덊샇 �뀒�씠釉�
 CREATE TABLE SECURITY_NO_TBL(
 	SN_NO		NUMBER(6),
 	SN_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		PRIMARY KEY
 );
 
---환불 테이블
+--�솚遺� �뀒�씠釉�
 CREATE TABLE REFUND_TBL(
 	REFUND_NO		NUMBER					REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
 	REFUND_P_NO		NUMBER					REFERENCES ORDER_TBL(ORDER_NO)		NOT NULL,

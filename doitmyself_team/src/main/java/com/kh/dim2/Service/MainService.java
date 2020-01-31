@@ -24,4 +24,6 @@ public interface MainService {
 	int recentViewCount(String uSER_ID);
 	List<Recent_View> getRecent_View_List(String uSER_ID);
 	int NaverInsert(HashMap<String, String> map);
+	int isNaverId(String n_Id);
+	int Find_check(String uSER_ID , String uSER_EMAIL);
 }

@@ -28,14 +28,16 @@
 		
 		.center-block {
      		display: flex;  
-    		 justify-content:center; /* 가운데 정렬 */
+    		justify-content:center; /* 가운데 정렬 */
+    		position: relative;
+    		top: 4px;
   		 }
    
    		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
    		.rows{text-align:right;}
    		.row{height:0}
    		.gray{color:gray} 
-   		li .current {background:#faf7f7;}  
+   		li .current {background:#faf7f7;} 
 	</style>
 </head>
 

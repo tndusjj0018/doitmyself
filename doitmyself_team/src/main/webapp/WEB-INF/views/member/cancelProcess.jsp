@@ -16,7 +16,9 @@
 		
 		.center-block {
      		display: flex;  
-    		 justify-content:center; /* 가운데 정렬 */
+    		justify-content:center; /* 가운데 정렬 */
+    		position: relative;
+    		top: 4px;
   		 }
    
    		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
@@ -76,7 +78,7 @@
       		</nav>
       		<!-- End Navbar -->
      
-			<div class="content">
+			<div class="content" style="margin-bottom: 110px">
 			  <div class="row">
 			    <div class="col-md-10">
 			      <div class="card card-user">
@@ -88,6 +90,17 @@
 			        		
 			        		<!-- 취소 반품 현황 있는 경우 -->
 			        		<c:if test="${!empty cancelreturnlist }">
+			        		
+			        			<div class="cancelProcessInfo">
+			        				<img src="resources/soo/img/mark.PNG" class="leaveImg">			        		
+					        		<span class="cancelProcessInfoSpan">반품 절차 안내</span>
+					        		<ul>
+					        			<li>반품 신청 : 반품하고자 하는 상품을 판매자에게 반품 신청 합니다.</li>
+					        			<li>반품 처리중 : 판매자에게 발송한 반품 상품을 판매자는 회수 대기중에 있습니다.</li>
+					        			<li>반품 완료 : 반품 상품을 확인 후 이상이 없을 경우 반품이 승인 되며, 환불이 진행됩니다.</li>
+					        		</ul>
+					        	</div>
+			        		
 			        			<table class="table">
 			        				<tr>
 			        					<td>주문 일자</td> <td colspan="2">주문 상품 정보</td> <td>상품 금액 (수량)</td> <td>스토어 명</td> <td>신청 일자</td> <td>처리상태</td>
@@ -121,7 +134,7 @@
 										</c:if>
 										<c:if test="${crl.ORDER_STATUS == 2 }">
 											<td>
-												환불신청
+												반품신청
 											</td>
 										</c:if>
 			        				</tr>

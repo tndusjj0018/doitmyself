@@ -145,8 +145,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<O_Product> reviewablelist(String user_id) {
-		return dao.reviewablelist(user_id);
+	public List<O_Product> reviewablelist(String user_id, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.reviewablelist(map);
 	}
 
 	@Override
@@ -155,8 +163,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<O_Product> reviewwritelist(String user_id) {
-		return dao.reviewwritelist(user_id);
+	public List<O_Product> reviewwritelist(String user_id, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.reviewwritelist(map);
 	}
 
 	@Override
@@ -213,11 +229,18 @@ public class MemberServiceImpl implements MemberService {
 	public int cancelRegister(int order_no) {
 		return dao.cancelRegister(order_no);
 	}
+	
+	@Override
+	public O_Product cancelDetail(int order_no) {
+		return dao.cancelDetail(order_no);
+	}
 
 	@Override
 	public int returnRegister(int order_no) {
 		return dao.returnRegister(order_no);
 	}
+
+	
 
 
 }

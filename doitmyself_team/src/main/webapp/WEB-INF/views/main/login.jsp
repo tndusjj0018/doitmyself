@@ -68,7 +68,7 @@
                   <div class="form-group d-flex justify-content-between">
                     <div class="form-check form-check-flat mt-0">
                     </div>
-                    <a href="#" class="text-small forgot-password text-black" style="text-align: center; flex: auto;">비밀번호를 잊으셨나요?</a>
+                    <a href="Find_Pass" class="text-small forgot-password text-black" style="text-align: center; flex: auto;">비밀번호를 잊으셨나요?</a>
                   </div>
                   <hr>
                   <div class="form-group">

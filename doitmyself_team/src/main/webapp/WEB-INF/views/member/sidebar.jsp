@@ -22,7 +22,6 @@
 	<style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
 
-
 </style>
 
 
@@ -37,14 +36,12 @@
 		$(document).ready(function(){
 			
 			$('.nav li').hover(function(){
-				$(this).css('background','#e3e3e3')
-						.css('transition','.3s')
-						.css('padding-left','10px')
+				$(this)	.css('transition','.3s')
+						.css('padding-left','10px') //children().next().children().next()
 						.children().children().css('color','#3c8dbc').css('transition','.3s');
 
 			},function(){//hover 떠낫을때
-				$(this).css('background','white')
-		  				.css('transition','.3s')
+				$(this)	.css('transition','.3s')
 		  				.css('padding-left','0')
 						.children().children().css('color','gray').css('transition','.3s');
 			})

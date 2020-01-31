@@ -31,7 +31,7 @@ public interface SellerService {
 	String getSellerName(String USER_ID);
 
 	//order 리스트 수
-	int getOrderListCount();
+	int getOrderListCount(String USER_ID);
 	
 	//판매관리 판매리스트
 	List<Product> SaleList(String USER_ID, String saleSelect);

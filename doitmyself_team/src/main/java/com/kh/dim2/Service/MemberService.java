@@ -58,12 +58,12 @@ public interface MemberService {
 	public int ordercount(String user_id);
 	
 	//리뷰 작성 가능 리스트
-	public List<O_Product> reviewablelist(String user_id);
+	public List<O_Product> reviewablelist(String user_id, int page, int limit);
 	
 	//리뷰 작성 가능 개수
 	public int reviewablecount(String user_id);
 	
-	public List<O_Product> reviewwritelist(String user_id);
+	public List<O_Product> reviewwritelist(String user_id, int page, int limit);
 	
 	public int reviewwritecount(String user_id);
 	
@@ -82,7 +82,9 @@ public interface MemberService {
 	
 	public int cancelreturncount(String user_id);
 	
-	public int cancelRegister(int p_no);
+	public int cancelRegister(int order_no);
+	
+	public O_Product cancelDetail(int order_no);
 
 	public int returnRegister(int order_no);
 }

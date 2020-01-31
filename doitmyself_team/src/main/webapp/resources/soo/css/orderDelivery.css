@@ -44,3 +44,13 @@ div.card-body > div > div > div > i {
     top: 2px;
     margin-right :5px;
 }
+
+.orderDeliveryInfo {
+	border: 1px solid lightgray;
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+
+div.orderDeliveryInfo > ul {
+	line-height: 27px;
+}

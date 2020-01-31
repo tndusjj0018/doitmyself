@@ -85,16 +85,16 @@ public class memberDAO {
 		return sqlSession.selectOne("Member.ordercount", user_id);
 	}
 	
-	public List<O_Product> reviewablelist(String user_id){
-		return sqlSession.selectList("Member.reviewablelist", user_id);
+	public List<O_Product> reviewablelist(HashMap<String, Object> map){
+		return sqlSession.selectList("Member.reviewablelist", map);
 	}
 	
 	public int reviewablecount(String user_id) {
 		return sqlSession.selectOne("Member.reviewablecount", user_id);
 	}
 	
-	public List<O_Product> reviewwritelist(String user_id){
-		return sqlSession.selectList("Member.reviewwritelist", user_id);
+	public List<O_Product> reviewwritelist(HashMap<String, Object> map){
+		return sqlSession.selectList("Member.reviewwritelist", map);
 	}
 	
 	public int reviewwritecount(String user_id) {
@@ -132,7 +132,11 @@ public class memberDAO {
 	public int cancelRegister(int order_no) {
 		return sqlSession.update("Member.cancelregister", order_no);
 	}
-
+	
+	public O_Product cancelDetail(int order_no) {
+		return sqlSession.selectOne("Member.cancelDetail", order_no);
+	}
+	
 	public int returnRegister(int order_no) {
 		return sqlSession.update("Member.returnregister", order_no);
 	}

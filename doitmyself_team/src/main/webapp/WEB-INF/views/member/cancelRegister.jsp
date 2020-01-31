@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>
- 	비밀번호 변경
+ 	취소 신청
 	</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
 	
@@ -22,9 +22,7 @@
 	<script src="resources/soo/js/core/jquery.min.js"></script>
 	
 	<style>
-		.font-size {
-			font-size: 12px;
-		}
+		
 	</style>
 </head>
 
@@ -51,7 +49,28 @@
 									</ul>
 									
 									<div>
-									${productdetail.p_NAME }
+								
+										<table class="table cancelRegisterProduct">
+											<tr>
+												<td>취소 상품</td>
+												<td>${productdetail.p_NAME }</td>
+											</tr>
+											
+											<tr>
+												<td>취소 금액</td>
+												<td>${productdetail.ORDER_PRICE }원</td>
+											</tr>
+
+											<tr>
+												<td>결제 수단</td>
+												<td>${productdetail.ORDER_PAYMENT }</td>
+											</tr>										
+										</table>
+										
+										<div>
+											<span>취소 사유</span>
+										</div>
+
 									</div>
 																	
 									<div class="row">

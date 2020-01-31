@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -114,5 +115,28 @@ public class adminDAO {
 
 	public List<Order> getOrderList() {
 		return sqlSession.selectList("Admin.getOrderList");
+	}
+
+	public int updateMajorCategory(Map<String, Object> map) {
+		return sqlSession.update("Admin.updateMajorCategory",map);
+	}
+
+	public int updateSubCategory(Map<String, Object> map) {
+		return sqlSession.update("Admin.updateSubCategory",map);
+	}
+
+	public int DeleteSubCategory(String category_name) {
+		return sqlSession.delete("Admin.DeleteSubCategory",category_name);
+	}
+	public int DeleteMajorCategory(String category_name) {
+		return sqlSession.delete("Admin.DeleteMajorCategory",category_name);
+	}
+
+	public List<Refund> getRefundList() {
+		return sqlSession.selectList("Admin.getRefundList");
+	}
+
+	public List<Order> getExchangeList() {
+		return sqlSession.selectList("Admin.getExchangeList");
 	}
 }

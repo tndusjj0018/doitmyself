@@ -126,16 +126,18 @@
 	</select>
 	
 	<!-- 리뷰 작성 가능 리스트 -->
-	<select id="reviewablelist" resultType="o_product" parameterType="String">
-		SELECT *
-		FROM ORDER_TBL INNER JOIN PRODUCT_TBL
-		ON ORDER_P_NO = P_NO
-		WHERE ORDER_ID = #{USER_ID}
-		AND ORDER_DELIVERY = 4
-		AND ORDER_P_NO not in ( SELECT REVIEW_P_NO
-							FROM REVIEW_TBL 
-							WHERE REVIEW_WRITER= #{USER_ID})
+	<select id="reviewablelist" resultType="o_product" parameterType="HashMap">
+		select * from (select rownum rnum, b.*
+						from (select * FROM ORDER_TBL INNER JOIN PRODUCT_TBL
+								ON ORDER_P_NO = P_NO
+								WHERE ORDER_ID = #{USER_ID}
+								AND ORDER_DELIVERY = 4
+								<!-- AND ORDER_P_NO not in ( SELECT REVIEW_P_NO
+														FROM REVIEW_TBL 
+														WHERE REVIEW_WRITER= #{USER_ID}) -->) b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}		
 	</select>
+
 	
 	<!-- 리뷰 작성 가능 개수 -->
 	<select id="reviewablecount" resultType="int" parameterType="String">
@@ -173,9 +175,9 @@
 	<select id="productDetail" resultType="product" parameterType="int">
 		select *
 		from PRODUCT_TBL
-		where P_NO = #{P_NO}
+		WHERE P_NO = #{P_NO}
 	</select>
-	
+		
 	<insert id="reviewWrite" parameterType="review">
 		insert into REVIEW_TBL
 		values(REVIEW_SEQ.nextval, #{REVIEW_RATE}, #{REVIEW_CONTENT}, sysdate, #{REVIEW_WRITER}, #{REVIEW_P_NO}, #{REVIEW_IMG, jdbcType=VARCHAR})
@@ -223,6 +225,14 @@
 			ORDER_R_DATE = SYSDATE
 		WHERE ORDER_NO = #{ORDER_NO}
 	</update>
+	
+	
+	<select id="cancelDetail" resultType="o_product" parameterType="int">
+		select *
+		from PRODUCT_TBL, ORDER_TBL
+		WHERE P_NO = ORDER_P_NO
+		AND ORDER_NO = #{ORDER_NO}
+	</select>	
 	
 	<update id="returnregister" parameterType="int">
 		update ORDER_TBL

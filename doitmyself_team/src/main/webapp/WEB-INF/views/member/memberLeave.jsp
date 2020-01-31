@@ -79,12 +79,12 @@
 			        	<div class="container">
 			        		<p>회원 탈퇴 전 다음 사항을 꼭 숙지하시기 바랍니다.</p>
 			    			<div class="leaveInfo">
-			        		<img src="resources/soo/img/mark.PNG" class="leaveImg">			        		
-			        		<span>회원 탈퇴 안내</span>
-			        		<ul>
-			        			<li>회원 탈퇴 시 회원님께서 보유하셨던 회원정보, 거래정보 등은 모두 삭제 됩니다.</li>
-			        			<li>회원 탈퇴 후 재가입 시에는 신규 회원 가입으로 처리되며, 탈퇴 전의 회원정보와 거래정보 등은 복구되지 않습니다.</li>
-			        		</ul>
+			        			<img src="resources/soo/img/mark.PNG" class="leaveImg">			        		
+				        		<span>회원 탈퇴 안내</span>
+				        		<ul>
+				        			<li>회원 탈퇴 시 회원님께서 보유하셨던 회원정보, 거래정보 등은 모두 삭제 됩니다.</li>
+				        			<li>회원 탈퇴 후 재가입 시에는 신규 회원 가입으로 처리되며, 탈퇴 전의 회원정보와 거래정보 등은 복구되지 않습니다.</li>
+				        		</ul>
 			        		</div>
 			        		<input type="button" id="memberLeave_btn" name="memberLeave_btn" class="btn btn-primary btn-round" value="회원 탈퇴 신청" 
 			        			   style="margin-left:38%; margin-right:15px;" data-toggle="modal" data-target="#memberLeave">

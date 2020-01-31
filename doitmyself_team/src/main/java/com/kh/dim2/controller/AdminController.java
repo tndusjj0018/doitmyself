@@ -21,6 +21,7 @@ import com.kh.dim2.Service.AdminService;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -294,6 +295,45 @@ public class AdminController {
 		return result;
 	}
 	
+	@ResponseBody
+	@PostMapping("UpdateCategory")
+	public int UpdateCategory(String category_name, int major_category, @RequestParam(value = "sub_category", required = false,defaultValue = "0")int sub_category) {
+		int result = 0;
+		System.out.println("category_name= "+category_name);
+		System.out.println("major_category= "+major_category);
+		System.out.println("sub_category= "+sub_category);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(sub_category == 0) {//대분류 카테고리 업데이트
+			map.put("C_NAME", category_name);
+			map.put("C_NO", major_category);
+			result = adminService.updateMajorCategory(map);
+			
+		}else {//소분류 카테고리 업데이트
+			map.put("SC_NAME", category_name);
+			map.put("SC_NO_REF", major_category);
+			map.put("SC_NO", sub_category);
+			result = adminService.updateSubCategory(map);
+		}
+		
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("DeleteCategory")
+	public int DeleteCategory(String category_name, int major_category, @RequestParam(value = "sub_category", required = false,defaultValue = "0")int sub_category) {
+		int result = 0;
+		System.out.println("category_name="+category_name);
+		if(sub_category == 0) {
+			result = adminService.DeleteMajorCategory(category_name);
+		}else{
+			result = adminService.DeleteSubCategory(category_name);
+		}
+		return result;
+	}
+	
+	
+	
 	
 	@ResponseBody
 	@PostMapping("DeleteReview")
@@ -360,6 +400,25 @@ public class AdminController {
 		map.put("list", list);
 		return map;
 	}
+	
+	@ResponseBody
+	@PostMapping("refundList")
+	public Object refundList(int num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Refund> list = adminService.getRefundList();
+		map.put("list", list);
+		return map;
+	}
+	@ResponseBody
+	@PostMapping("exchangeList")
+	public Object exchangeList(int num) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Order> list = adminService.getExchangeList();
+		map.put("list", list);
+		return map;
+	}
+	
+	
 	
 }//class end
 
