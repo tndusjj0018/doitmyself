@@ -88,5 +88,22 @@ public class MainServiceImpl implements MainService{
 		return dao.NaverInsert(map);
 	}
 
-	
+	@Override
+	public int isNaverId(String n_Id) {
+		return dao.isNaverId(n_Id);
+	}
+
+	@Override
+	public int Find_check(String uSER_ID , String uSER_EMAIL) {
+		Member mb = dao.Find_check(uSER_ID , uSER_EMAIL);
+		int result = -1;
+		if(mb != null) {
+			if(mb.getUSER_EMAIL().equals(uSER_EMAIL)) {
+				result = 1;
+			} else {
+				result = 0;
+			}
+		}
+		return result;
+	}
 }

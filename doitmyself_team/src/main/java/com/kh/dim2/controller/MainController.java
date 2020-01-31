@@ -23,16 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.dim2.Service.MainService;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Recent_View;
-
-import jdk.nashorn.internal.parser.JSONParser;
 
 @Controller
 public class MainController {
@@ -245,7 +241,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/naverProfile")
-	public void NaverLogin(HttpServletRequest request , Member member, HttpServletResponse response2) throws Exception{
+	public ModelAndView NaverLogin(HttpServletRequest request , Member member, HttpServletResponse response2 , 
+								   HttpSession session ,  Recent_View recent_view , ModelAndView mv) throws Exception{
 		
 		String header = "Bearer " + access_token;
 
@@ -273,53 +270,93 @@ public class MainController {
 				}
 				      br.close();
 				if(responseCode==200) {
-					System.out.println("Profile = "+response.toString());
+					//System.out.println("Profile = "+response.toString());
 					String NProfile = response.toString();
 					JsonParser JParser = new JsonParser();
 					JsonObject JObject = (JsonObject) JParser.parse(NProfile);
 					JsonObject ProfileObject = (JsonObject) JObject.get("response");
 					
-						String N_Id = ProfileObject.get("id").toString();
-						String N_Pass = ProfileObject.get("email").toString();
-						String N_Name = ProfileObject.get("name").toString();
-						String N_Birth = ProfileObject.get("birthday").toString();
-						String N_Gender = ProfileObject.get("gender").toString();
-						String N_Nickname = ProfileObject.get("nickname").toString();
+						String N_Id = ProfileObject.get("id").toString().replace("\"", "");
+						String N_Pass = ProfileObject.get("name").toString().replace("\"", "");
+						String N_Name = ProfileObject.get("name").toString().replace("\"", "");
+						String N_Birth = ProfileObject.get("birthday").toString().replace("\"", "");
+						String N_Gender = ProfileObject.get("gender").toString().replace("\"", "");
+						String N_Email = ProfileObject.get("email").toString().replace("\"", "");
 					
-//						int index = N_Id.indexOf("@");
-//						String NaverId = N_Id.substring(0 , index);
-					
-					
+						//int index = N_Id.indexOf("@");
+						//String NaverId = N_Id.substring(0 , index);
+					int result = mainService.isNaverId(N_Id);
+						//System.out.println("NaverId result = "+result);
+					if(result == 1) { //네아로 가입된 아이디가 있을 시
+						session.setAttribute("USER_ID", N_Id);
+						int seller_result = mainService.isSeller(N_Id);
+						int recentView_Count = mainService.recentViewCount(N_Id);
+						List<Product> BestproductList = mainService.getBestProduct_List();//Best Dim 구하기
+						List<Product> NewproductList = mainService.getNewProduct_List();//New Dim 구하기
+						session.setAttribute("SELLER_RESULT" , seller_result);
 						
+						if(recentView_Count > 0) {
+							List<Recent_View> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM
+							mv.addObject("recentView", recentViewList);
+						}
+						mv.addObject("newDim" , NewproductList);
+						mv.addObject("bestDim" , BestproductList);
+						mv.setViewName("main/home");
+						
+						return mv;
+						
+					} else if(result == 0) { //네아로 가입된 아이디 없을 시 회원가입
 						HashMap<String, String> map = new HashMap<>();
 						
-						map.put("N_Id", N_Id);
-						map.put("N_Pass", N_Pass);
-						map.put("N_Name", N_Name);
-						map.put("N_Birth", N_Birth);
-						map.put("N_Gender", N_Gender);
-						map.put("N_Nickname", N_Nickname);
+						map.put("USER_ID", N_Id);
+						map.put("USER_PASS", N_Pass);
+						map.put("USER_NAME", N_Name);
+						map.put("USER_BIRTH", N_Birth);
+						map.put("USER_GENDER", N_Gender);
+						map.put("USER_EMAIL" , N_Email);
 						
 						response2.setContentType("text/html;charset=utf-8");
 						PrintWriter out = response2.getWriter();
-						int result = mainService.NaverInsert(map);
+						int result2 = mainService.NaverInsert(map);
 						out.println("<script>");
-
-						if(result == 1) {//삽입 성공시
-							out.println("alert('네이버 회원가입에 성공했습니다.');");
-							out.println("location.href='login';");
-						} else if(result == -1) {
+						
+						if(result2 == 1) {//삽입 성공시 로그인까지
+							session.setAttribute("USER_ID", N_Id);
+							int seller_result = mainService.isSeller(N_Id);
+							int recentView_Count = mainService.recentViewCount(N_Id);
+							List<Product> BestproductList = mainService.getBestProduct_List();//Best Dim 구하기
+							List<Product> NewproductList = mainService.getNewProduct_List();//New Dim 구하기
+							session.setAttribute("SELLER_RESULT" , seller_result);
+							session.setAttribute("N_NAME", N_Name);
+							
+							if(recentView_Count > 0) { //최근 본 DIM가 있을 시
+								List<Recent_View> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM 리스트 추출
+								mv.addObject("recentView", recentViewList);
+							}
+							mv.addObject("newDim" , NewproductList);
+							mv.addObject("bestDim" , BestproductList);
+							mv.setViewName("main/home");
+							
+							return mv;
+						} else if(result2 == -1) {
 							out.println("alert('네이버 회원가입에 실패했습니다.');");
 							out.println("history.back()");
+							out.println("</script>");
+							out.close();
 						}
+					} else {
+						PrintWriter out = response2.getWriter();
+						out.println("<script>");
+						out.println("alert('네이버 로그인에 실패했습니다.');");
+						out.println("history.back()");
 						out.println("</script>");
 						out.close();
-						
 					}
-				
+				}
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
+		return null;
 	}
 	@RequestMapping(value="/Naver_idcheck" , method=RequestMethod.GET)
 	@ResponseBody
@@ -331,4 +368,20 @@ public class MainController {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
+	
+	@RequestMapping(value="/Find_Pass" , method=RequestMethod.GET)
+	public String Find_Pass(HttpServletResponse response) throws Exception {
+		return "main/Find_Pass";
+	}
+
+	@RequestMapping(value="/check_findPass" , method=RequestMethod.POST)
+	public String check_findPass(HttpServletResponse response , @RequestParam("USER_ID") String USER_ID  , @RequestParam("USER_EMAIL") String USER_EMAIL) throws Exception {
+		
+		int result = mainService.Find_check(USER_ID , USER_EMAIL);
+		if(result == 1) {
+			
+		}
+		return "main/Find_Pass";
+	}
+	
 }
