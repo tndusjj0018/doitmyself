@@ -75,7 +75,7 @@
 			$('.nav').children().eq(2).addClass('active');
 			break;
 		case 'seller_sale':
-			$('.nav').children().eq(4).addClass('active');
+			$('.nav').children().eq(3).addClass('active');
 			break;
 		default:
 			break;
@@ -91,14 +91,16 @@
 	.btn{font-size:10.5pt!important;}
 	.sidebar{top:74px; width:259px!important;}
 	.nav{margin-top:0px!important;}
+	.nav-link{color:black!important; font-size:11.5px!important;}
+	#id_X{color:white!important}
 	body{margin-bottom:10px;}
 </style>
 </head>
 <!-- doc저장 -->
 <input type="hidden" value="${doc}" class="doc">
 <!-- session id 저장 -->
-<input type="hidden" value="${USER_ID}" id="USER_ID">
-<!-- <input type="hidden" value="admin" id="USER_ID"> -->
+<%-- <input type="hidden" value="${USER_ID}" id="USER_ID"> --%>
+<input type="hidden" value="admin" id="USER_ID">
 <body class="">
   <div class="wrapper ">
    	<jsp:include page="../main/header.jsp"/>
@@ -127,17 +129,17 @@
             </a>
           </li>
           <li>
+            <a href="seller?doc=seller_sale">
+              <i class="nc-icon nc-chart-bar-32"></i>
+              <p>상품관리</p>
+            </a>
+          </li>
+          <li>
             <a href="seller?doc=seller_cancel">
               <i class="nc-icon nc-cart-simple"></i>
               <p>취소/교환/환불</p>
             </a>
-          </li>
-          <li>
-            <a href="seller?doc=seller_sale">
-              <i class="nc-icon nc-chart-bar-32"></i>
-              <p>판매관리</p>
-            </a>
-          </li>
+          </li>          
           <li>
             <a href="./tables.html">
               <i class="nc-icon nc-tile-56"></i>
