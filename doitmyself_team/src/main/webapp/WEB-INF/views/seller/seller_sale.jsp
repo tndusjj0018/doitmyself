@@ -13,7 +13,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">판매관리 페이지</a>
+            <a class="navbar-brand" href="#pablo">상품관리 페이지</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -67,7 +67,7 @@
           <div class="col-md-12">
             <div class="card card-1 card-order">
               <div class="card-header">
-                <h5 class="title">판매관리</h5>
+                <h5 class="title">상품관리</h5>
                 <p class="category">*판매자가 등록한상품 보기, 수정, 삭제</p>
                 <hr>
               </div>
