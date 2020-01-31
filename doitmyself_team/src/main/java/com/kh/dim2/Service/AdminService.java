@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
@@ -66,5 +67,17 @@ public interface AdminService {
 	public int DeleteSeller(int SELLER_NO);
 
 	public List<Order> getOrderList();
+
+	public int updateMajorCategory(Map<String, Object> map);
+
+	public int updateSubCategory(Map<String, Object> map);
+
+	public int DeleteMajorCategory(String category_name);
+	
+	public int DeleteSubCategory(String category_name);
+
+	public List<Refund> getRefundList();
+
+	public List<Order> getExchangeList();
 
 }
