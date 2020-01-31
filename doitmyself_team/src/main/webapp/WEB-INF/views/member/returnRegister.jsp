@@ -39,7 +39,7 @@
 					<div class="col-md-11">
 						<div class="card card-user">
 							<div class="card-header">
-								<h5 class="card-title marleft10">환불 신청</h5>
+								<h5 class="card-title marleft10">반품 신청</h5>
 							</div>
 							<div class="card-body">
 								<form action="returnRegisterAction?ORDER_NO=${ORDER_NO }">
@@ -49,10 +49,32 @@
 										<li>묶음배송 상품 취소 시 배송비 정책에 조건이 맞지 않을 경우 추가배송비가 발생할 수 있습니다.</li>
 										<li>결제수단별 환불방법과 환불소요기간에 차이가 있습니다.</li>
 									</ul>
+									
+									<div>
+								
+										<table class="table returnRegisterProduct">
+											<tr>
+												<td>반품 상품</td>
+												<td>${productdetail.p_NAME }</td>
+											</tr>
+											
+											<tr>
+												<td>반품 금액</td>
+												<td>${productdetail.ORDER_PRICE }원</td>
+											</tr>
+
+											<tr>
+												<td>결제 수단</td>
+												<td>${productdetail.ORDER_PAYMENT }</td>
+											</tr>
+											
+										</table>
+
+									</div>
 																	
 									<div class="row">
 										<div class="update ml-auto mr-auto">
-											<button type="submit" class="btn btn-primary btn-round">환불 신청하기</button>
+											<button type="submit" class="btn btn-primary btn-round">반품 신청하기</button>
 										</div>
 									</div>
 								</form>

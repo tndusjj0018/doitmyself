@@ -22,3 +22,25 @@ div.card-body > div > table{
 	height: 100px;
 	cursor: pointer;
 }
+
+.cancelProcessInfo {
+	border: 1px solid lightgray;
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+
+div.cancelProcessInfo > ul {
+	line-height: 27px;
+	padding-left: 55px;
+}
+
+.leaveImg {
+	width: 20px;
+	height: 20px;
+	margin: 0px 10px 10px 15px;
+}
+
+.cancelProcessInfoSpan{
+	position: relative;
+	top: -3px;
+}

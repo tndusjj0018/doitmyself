@@ -213,11 +213,18 @@ public class MemberServiceImpl implements MemberService {
 	public int cancelRegister(int order_no) {
 		return dao.cancelRegister(order_no);
 	}
+	
+	@Override
+	public O_Product cancelDetail(int order_no) {
+		return dao.cancelDetail(order_no);
+	}
 
 	@Override
 	public int returnRegister(int order_no) {
 		return dao.returnRegister(order_no);
 	}
+
+	
 
 
 }
