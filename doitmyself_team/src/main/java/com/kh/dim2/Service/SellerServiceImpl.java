@@ -66,8 +66,8 @@ public class SellerServiceImpl implements SellerService{
 	}
 
 	@Override
-	public int getOrderListCount() {
-		return sellerDAO.getOrderListCount();
+	public int getOrderListCount(String USER_ID) {
+		return sellerDAO.getOrderListCount(USER_ID);
 	}
 
 	@Override
