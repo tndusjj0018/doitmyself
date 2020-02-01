@@ -16,10 +16,11 @@ public class ReviewServiceImpl implements ReviewService {
 	private reviewDAO dao;
 
 	@Override
-	public List<Review> getReviewList(int page, int limit) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+	public List<Review> getReviewList(int p_no, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		int startrow = (page-1)*limit+1;
 		int endrow = startrow+limit-1;
+		map.put("review_p_no", p_no);
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getReviewList(map);
@@ -27,8 +28,8 @@ public class ReviewServiceImpl implements ReviewService {
 	
 
 	@Override
-	public int getListCount() {
-		return dao.getListCount();
+	public int getListCount(int p_no) {
+		return dao.getListCount(p_no);
 	}
 	
 

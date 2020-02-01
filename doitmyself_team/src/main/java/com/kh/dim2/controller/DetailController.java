@@ -136,8 +136,9 @@ public class DetailController {
 	@ResponseBody
 	@RequestMapping(value = "/ReviewListAjax.bo")
 	public Object ReviewListAjax(@RequestParam(value = "page2", defaultValue = "1", required = false) int page2,
-			@RequestParam(value = "limit2", defaultValue = "5", required = false) int limit2) throws Exception {
-		List<Review> reviewlist = reviewsvc.getReviewList(page2, limit2);
+			@RequestParam(value = "limit2", defaultValue = "5", required = false) int limit2,
+			@RequestParam(value="P_NO") int p_no) throws Exception {
+		List<Review> reviewlist = reviewsvc.getReviewList(p_no, page2, limit2);
 		return reviewlist;
 
 	}
@@ -167,7 +168,7 @@ public class DetailController {
 		// 리뷰 페이지네이션
 		int limit2 = 5; // 한 화면에 출력할 레코드 갯수
 
-		int listcount2 = reviewsvc.getListCount(); // 총 리스트 수를 받아옴
+		int listcount2 = reviewsvc.getListCount(p_no); // 총 리스트 수를 받아옴
 
 		// 총 페이지 수
 		int maxpage2 = (listcount2 + limit2 - 1) / limit2;
@@ -181,7 +182,7 @@ public class DetailController {
 		if (endpage2 > maxpage2)
 			endpage2 = maxpage2;
 
-		List<Review> reviewlist = reviewsvc.getReviewList(page2, limit2);
+		List<Review> reviewlist = reviewsvc.getReviewList(p_no, page2, limit2);
 		mv.addObject("reviewlist", reviewlist);
 
 		mv.addObject("page2", page2);

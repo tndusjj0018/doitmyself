@@ -16,12 +16,12 @@ public class reviewDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public List<Review> getReviewList(HashMap<String, Integer> map) {
+	public List<Review> getReviewList(HashMap<String, Object> map) {
 		return sqlSession.selectList("review.list", map);
 	}
 
-	public int getListCount() {
-		return sqlSession.selectOne("review.count");
+	public int getListCount(int p_no) {
+		return sqlSession.selectOne("review.count", p_no);
 	}
 
 }

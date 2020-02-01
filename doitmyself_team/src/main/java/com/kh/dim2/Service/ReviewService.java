@@ -10,10 +10,10 @@ import com.kh.dim2.domain.Review;
 public interface ReviewService {
 
 	//리뷰 갯수 구하기
-	public int getListCount();
+	public int getListCount(int p_no);
 
 	//리뷰 목록 보기
-	public List<Review> getReviewList(int page2, int limit2);
+	public List<Review> getReviewList(int p_no, int page2, int limit2);
 	
 	
 
