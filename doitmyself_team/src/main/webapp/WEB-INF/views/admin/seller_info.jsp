@@ -70,8 +70,8 @@
 						//판매자 정보 테이블
 						$("#sellerinfotable").empty();
 						output = "";
-						if(rdata.length == 0){
-							output += "<tr><td>등록되어 있는 판매자가 존재하지 않습니다.</td></tr>";
+						if(rdata.sellerList.length == 0){
+							output += "<tr><td>조회된 데이터가 없습니다.</td></tr>";
 						}else{
 							output += "<thead>";
 							output += "		<tr>";

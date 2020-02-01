@@ -19,7 +19,7 @@
 						console.log(rdata);
 						$(".refundtbl").empty();
 						if(rdata.list.length == 0){
-							$(".refundlistTbl").append('환불 내역이 존재하지 않습니다.')
+							$(".refundtbl").append('환불 내역이 존재하지 않습니다.')
 						}else{
 							var output = "";
 							output += "<thead>";

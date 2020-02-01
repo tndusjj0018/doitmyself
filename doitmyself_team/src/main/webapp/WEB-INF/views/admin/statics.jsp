@@ -44,177 +44,215 @@
     <div id="myChart" class="chart--container"><a class="zc-ref" href="https://www.zingchart.com/">Powered by ZingChart</a></div>
     <script>
     	$(document).ready(function(){
-    		var title = "카테고리별 주문 통계";
-    		function categoryOrder(){//카테고리별 주문 통계
-    			
+    		var title = "카테고리별 주문 통계";//멘 처음은 카테고리별 주문 통계를 보여줌
+    		var name = "";
+    		var per = "";
+    		function category(){//카테고리별 주문 통계
+    			$.ajax({
+    				type:"POST",
+    				url:"staticsPerCategory",
+    				async:false,
+    				success:function(rdata){
+    					console.log(rdata);
+    					name = rdata.name;
+    					per = rdata;
+    				},
+    				error:function(){
+    					console.log("에러");
+    				}
+    			})//ajax end	
     		}
+    		category();
+    		
     		function allOrder(){//전체 주문 통계
-    			
+    			$.ajax({
+    				type:"POST",
+    				url:"OrderStatics",
+    				async:false,
+    				success:function(rdata){
+    					
+    				},
+    				error:function(){
+    					console.log("에러");
+    				}
+    			})
     		}
     		
     		
-    		
-	        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
-	        let chartConfig = {
-	            gui: {
-	                contextMenu: {
-	                    backgroundColor: '#306EAA', // sets background for entire contextMenu
-	                    button: {
-	                        backgroundColor: '#2D66A4',
-	                        lineColor: '#2D66A4',
-	                        visible: true
-	                    },
-	                    docked: true,
-	                    gear: {
-	                        alpha: 1,
-	                        backgroundColor: '#2D66A4'
-	                    },
-	                    item: {
-	                        backgroundColor: '#306EAA',
-	                        borderColor: '#306EAA',
-	                        borderWidth: '0px',
-	                        color: '#fff',
-	                        fontFamily: 'Lato'
-	                    },
-	                    position: 'right'
-	                }
-	            },
-	            graphset: [{
-	                type: 'ring',
-	                backgroundColor: '#FBFCFE',
-	                title: {
-	                    text: title,//통계 제목
-	                    padding: '15px',
-	                    fontColor: '#1E5D9E',
-	                    fontFamily: 'Lato',
-	                    fontSize: '14px'
-	                },
-	                subtitle: {
-	                    text: '06/10/18 - 07/11/18',
-	                    padding: '5px',
-	                    fontColor: '#777',
-	                    fontFamily: 'Lato',
-	                    fontSize: '12px'
-	                },
-	                legend: {
-	                    adjustLayout: true,
-	                    align: 'center',
-	                    backgroundColor: '#FBFCFE',
-	                    borderWidth: '0px',
-	                    item: {
-	                        cursor: 'pointer',
-	                        fontColor: '#777',
-	                        fontSize: '12px',
-	                        offsetX: '-6px'
-	                    },
-	                    marker: {
-	                        type: 'circle',
-	                        borderWidth: '0px',
-	                        cursor: 'pointer',
-	                        size: 5
-	                    },
-	                    mediaRules: [{
-	                        maxWidth: '500px',
-	                        visible: false
-	                    }],
-	                    toggleAction: 'remove',
-	                    verticalAlign: 'bottom'
-	                },
-	                plot: {
-	                    valueBox: [{
-	                            type: 'all',
-	                            text: '%t',
-	                            placement: 'out'
-	                        },
-	                        {
-	                            type: 'all',
-	                            text: '%npv%',
-	                            placement: 'in'
-	                        }
-	                    ],
-	                    animation: {
-	                        effect: 'ANIMATION_EXPAND_VERTICAL',
-	                        sequence: 'ANIMATION_BY_PLOT_AND_NODE'
-	                    },
-	                    backgroundColor: '#FBFCFE',
-	                    borderWidth: '0px',
-	                    hoverState: {
-	                        cursor: 'hand',
-	                    },
-	                    slice: '60%'
-	                },
-	                plotarea: {
-	                    margin: '70px 0px 10px 0px',
-	                    backgroundColor: 'transparent',
-	                    borderRadius: '10px',
-	                    borderWidth: '0px'
-	                },
-	                scaleR: {
-	                    refAngle: 270
-	                },
-	                tooltip: {
-	                    text: '<span style="color:%color">카테고리: %t</span><br><span style="color:%color">주문 수: %v</span>',
-	                    anchor: 'c',
-	                    backgroundColor: 'none',
-	                    borderWidth: '0px',
-	                    fontSize: '16px',
-	                    mediaRules: [{
-	                        maxWidth: '500px',
-	                        y: '54%'
-	                    }],
-	                    sticky: true,
-	                    thousandsSeparator: ',',
-	                    x: '50%',
-	                    y: '50%'
-	                },
-	                noData: {
-	                    text: 'No Selection',
-	                    alpha: .6,
-	                    backgroundColor: '#20b2db',
-	                    bold: true,
-	                    fontSize: '18px',
-	                    textAlpha: .9
-	                },
-	                series: [{
-	                        text: '문서',
-	                        values: [106541],//퍼센트??
-	                        backgroundColor: '#00BAF2',
-	                        lineColor: '#00BAF2',
-	                        lineWidth: '1px',
-	                        marker: {
-	                            backgroundColor: '#00BAF2'
-	                        }
-	                    },
-	                    {
-	                        text: '사진',
-	                        values: [56711],
-	                        backgroundColor: '#E80C60',
-	                        lineColor: '#E80C60',
-	                        lineWidth: '1px',
-	                        marker: {
-	                            backgroundColor: '#E80C60'
-	                        }
-	                    },
-	                    {
-	                        text: '테스트',
-	                        values: [43781],
-	                        backgroundColor: '#9B26AF',
-	                        lineColor: '#9B26AF',
-	                        lineWidth: '1px',
-	                        marker: {
-	                            backgroundColor: '#9B26AF'
-	                        }
-	                    }
-	                ]
-	            }]
-	        };
-	 
+    		function chartdata(){//차트에 들어갈 데이터
+    			
+		        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+		     	let chartConfig = {
+		            gui: {
+		                contextMenu: {
+		                    backgroundColor: '#306EAA', // sets background for entire contextMenu
+		                    button: {
+		                        backgroundColor: '#2D66A4',
+		                        lineColor: '#2D66A4',
+		                        visible: true
+		                    },
+		                    docked: true,
+		                    gear: {
+		                        alpha: 1,
+		                        backgroundColor: '#2D66A4'
+		                    },
+		                    item: {
+		                        backgroundColor: '#306EAA',
+		                        borderColor: '#306EAA',
+		                        borderWidth: '0px',
+		                        color: '#fff',
+		                        fontFamily: 'Lato'
+		                    },
+		                    position: 'right'
+		                }
+		            },
+		            graphset: [{
+		                type: 'ring',
+		                backgroundColor: '#FBFCFE',
+		                title: {
+		                    text: title,//통계 제목
+		                    padding: '15px',
+		                    fontColor: '#1E5D9E',
+		                    fontFamily: 'Lato',
+		                    fontSize: '14px'
+		                },
+		                //subtitle: {
+		                //    text: '06/10/18 - 07/11/18',
+		                //    padding: '5px',
+		                //    fontColor: '#777',
+		                //    fontFamily: 'Lato',
+		                //    fontSize: '12px'
+		                //},
+		                legend: {
+		                    adjustLayout: true,
+		                    align: 'center',
+		                    backgroundColor: '#FBFCFE',
+		                    borderWidth: '0px',
+		                    item: {
+		                        cursor: 'pointer',
+		                        fontColor: '#777',
+		                        fontSize: '12px',
+		                        offsetX: '-6px'
+		                    },
+		                    marker: {
+		                        type: 'circle',
+		                        borderWidth: '0px',
+		                        cursor: 'pointer',
+		                        size: 5
+		                    },
+		                    mediaRules: [{
+		                        maxWidth: '500px',
+		                        visible: false
+		                    }],
+		                    toggleAction: 'remove',
+		                    verticalAlign: 'bottom'
+		                },
+		                plot: {
+		                    valueBox: [{
+		                            type: 'all',
+		                            text: '%t',
+		                            placement: 'out'
+		                        },
+		                        {
+		                            type: 'all',
+		                            text: '%npv%',
+		                            placement: 'in'
+		                        }
+		                    ],
+		                    animation: {
+		                        effect: 'ANIMATION_EXPAND_VERTICAL',
+		                        sequence: 'ANIMATION_BY_PLOT_AND_NODE'
+		                    },
+		                    backgroundColor: '#FBFCFE',
+		                    borderWidth: '0px',
+		                    hoverState: {
+		                        cursor: 'hand',
+		                    },
+		                    slice: '60%'
+		                },
+		                plotarea: {
+		                    margin: '70px 0px 10px 0px',
+		                    backgroundColor: 'transparent',
+		                    borderRadius: '10px',
+		                    borderWidth: '0px'
+		                },
+		                scaleR: {
+		                    refAngle: 270
+		                },
+		                tooltip: {
+		                    text: '<span style="color:%color">카테고리: %t</span><br><span style="color:%color">주문 수: %v</span>',
+		                    anchor: 'c',
+		                    backgroundColor: 'none',
+		                    borderWidth: '0px',
+		                    fontSize: '16px',
+		                    mediaRules: [{
+		                        maxWidth: '500px',
+		                        y: '54%'
+		                    }],
+		                    sticky: true,
+		                    thousandsSeparator: ',',
+		                    x: '50%',
+		                    y: '50%'
+		                },
+		                noData: {
+		                    text: 'No Selection',
+		                    alpha: .6,
+		                    backgroundColor: '#20b2db',
+		                    bold: true,
+		                    fontSize: '18px',
+		                    textAlpha: .9
+		                },
+		                series: [{
+		                        text: name[0],
+		                        values: [per.name[0]],//퍼센트??
+		                        backgroundColor: '#00BAF2',
+		                        lineColor: '#00BAF2',
+		                        lineWidth: '1px',
+		                        marker: {
+		                            backgroundColor: '#00BAF2'
+		                        }
+		                    },
+		                    {
+		                        text: name[1],
+		                        values: [per.name[1]],
+		                        backgroundColor: '#E80C60',
+		                        lineColor: '#E80C60',
+		                        lineWidth: '1px',
+		                        marker: {
+		                            backgroundColor: '#E80C60'
+		                        }
+		                    },
+		                    {
+		                        text: name[2],
+		                        values: [per.name[2]],
+		                        backgroundColor: '#9B26AF',
+		                        lineColor: '#9B26AF',
+		                        lineWidth: '1px',
+		                        marker: {
+		                            backgroundColor: '#9B26AF'
+		                        }
+		                    }
+		                ]
+		            }]
+		        };
+		     	
+		     	return chartConfig;
+    		}
+			let zingdata = chartdata(); 
 	        zingchart.render({
 	            id: 'myChart',
-	            data: chartConfig
+	            data: zingdata
 	        });
 	        
-	        
+	        $(".btndiv button").click(function(){
+	        	console.log($(this).text());
+	        	title = $(this).text();
+	        	zingdata = chartdata(); 
+		        zingchart.render({
+		            id: 'myChart',
+		            data: zingdata
+		        });	
+	        })
 	        
 	        
 	        
