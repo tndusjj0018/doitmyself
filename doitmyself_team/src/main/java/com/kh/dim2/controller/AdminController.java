@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +20,7 @@ import com.kh.dim2.Service.AdminService;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
@@ -417,7 +417,21 @@ public class AdminController {
 		map.put("list", list);
 		return map;
 	}
-	
+	@ResponseBody
+	@PostMapping("getProductList")
+	public Object getProductList(int num, String option) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int limit = 6;
+		int startnum = limit *(num-1)+1;
+		int endnum = limit+num;
+		map.put("start", startnum);
+		map.put("end", endnum);
+		map.put("option", option);
+		List<Product> list = adminService.getProductList(map);
+		map.put("list", list);
+		return map;
+	}
+
 	
 	
 }//class end

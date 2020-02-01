@@ -11,6 +11,7 @@ import com.kh.dim2.DAO.adminDAO;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Order;
+import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
@@ -228,6 +229,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.getExchangeList();
 	}
 
-
+	@Override
+	public List<Product> getProductList(Map<String, Object> map) {
+		return adminDAO.getProductList(map);
+	}
 
 }

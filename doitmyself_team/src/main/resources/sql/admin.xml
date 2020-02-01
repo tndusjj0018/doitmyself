@@ -211,5 +211,14 @@
 		where order_delivery = 4 AND ORDER_STATUS = 3
 	</select>
 	
+	<select id = "productList" parameterType="map" resultType="product">
+		select * 
+		from (select rownum rnum, p.* 
+			from(select * from product_tbl 
+				order by #{option}
+				)p
+			)
+		where rnum &gt;=#{start} and rnum &lt;=#{end} 
+	</select>	
 </mapper>
 
