@@ -3,11 +3,27 @@
 <mapper namespace="Category">
 	<select id="getProductListcount" parameterType="map" resultType="int">
 		select count(*) from product_tbl
+			<where>	
+				<if test="category != null">
+					P_CATEGORY_NO like  #{category} ||'%'
+				</if>
+				<if test="search_word != null">
+					P_NAME like '%'||#{search_word}||'%'
+				</if>
+			</where>
 	</select>
 	<select id = "productList" parameterType="map" resultType="product">
 		select * 
 		from (select rownum rnum, p.* 
 			from(select * from product_tbl 
+				<where>
+					<if test="category != null">
+						P_CATEGORY_NO like  #{category} ||'%'
+					</if>
+					<if test="search_word != null">
+						P_NAME like '%'||#{search_word}||'%'
+					</if>
+				</where>
 				order by 
 				<choose>
 					<when test="option == 'P_REGDATE DESC'">P_REGDATE DESC</when>

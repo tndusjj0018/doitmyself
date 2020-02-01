@@ -41,3 +41,6 @@ where o.order_delivery>=1 and order_status=1 or order_status=2;
 
 select * from ORDER_TBL
 where order_delivery = 4 AND ORDER_STATUS = 3;
+
+
+select * from sub_category_tbl;

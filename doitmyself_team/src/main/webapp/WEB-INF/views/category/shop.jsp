@@ -61,6 +61,7 @@
     		var num = 1;// 더보기를 누를 때 마다 num 의 값은 1씩 증가함
     		var option = $(".order_option").val();
     		var category = "";
+    		var search_word = "";
     		function productList(){
     			console.log("더보기 할 번호는 = "+ num);
     			console.log("정렬 순서는 ="+option);
@@ -68,7 +69,7 @@
     			$.ajax({
     				type:"POST",
     				url:"getProductList",
-    				data:{num:num, option:option, category:category},
+    				data:{num:num, option:option, category:category, search_word:search_word},
     				async:false,
     				dataType:"json",
     				success:function(rdata){
@@ -123,7 +124,7 @@
     					console.log("실패");
     				}
     			})
-    		}//function productList end
+    		};//function productList end
     		
     		//처음 페이지 로드 시 실행
     		productList();
@@ -141,7 +142,25 @@
     			productList();	
     		})//click end
     		
+    		$(".list li").click(function(){
+    			search_word="";
+    			$(".productsearch").val('');
+    			var list_name = $(this).text();
+    			category = $(this).val();
+    			console.log("클릭한 메뉴는 "+list_name + "/ category 번호는 = "+category);
+    			productList();
+    		})
     		
+    		$(".searchbtn").click(function(){
+    			console.log("검색 버튼누름");
+    			search_word = $(".productsearch").val();
+    			console.log("입력된 검색어 = "+search_word);
+    			if(search_word == "" || search_word == null){
+    				alert("검색어를 입력하세요");
+    			}else{
+    				productList();
+    			}
+    		})
     	})
     	
     </script>
@@ -188,28 +207,28 @@
                 			<li class="allcategory_li">모든 상품 보기</li>
                 		</ul>
                     	<ul class="list">
-		                   <li class="main_li1">가구</li>
-		                   <li class="sub_li">침실</li>
-		                   <li class="sub_li">주방</li>
-		                   <li class="sub_li">수납</li>
-		                   <li class="sub_li">거실</li>
-		                   <li class="sub_li">욕실</li>
+		                   <li class="main_li1" value="100">가구</li>
+		                   <li class="sub_li" value="101">침실</li>
+		                   <li class="sub_li" value="102">주방</li>
+		                   <li class="sub_li" value="103">수납</li>
+		                   <li class="sub_li" value="104">거실</li>
+		                   <li class="sub_li" value="105">욕실</li>
                     	</ul>
                     	<ul class="list">
-		                   <li class="main_li2">음식</li>
-		                   <li class="sub_li">한식</li>
-		                   <li class="sub_li">일식</li>
-		                   <li class="sub_li">양식</li>
-		                   <li class="sub_li">중식</li>
-		                   <li class="sub_li">베이킹</li>
+		                   <li class="main_li2" value="200">음식</li>
+		                   <li class="sub_li" value="206">한식</li>
+		                   <li class="sub_li" value="207">일식</li>
+		                   <li class="sub_li" value="208">양식</li>
+		                   <li class="sub_li" value="209">중식</li>
+		                   <li class="sub_li" value="210">베이킹</li>
 		                 </ul>
 		                 <ul class="list">
-		                   <li class="main_li3">취미</li>
-		                   <li class="sub_li">드로잉</li>
-		                   <li class="sub_li">미니어쳐</li>
-		                   <li class="sub_li">캔들/향수</li>
-		                   <li class="sub_li">슬라임</li>
-		                   <li class="sub_li">액세서리</li>
+		                   <li class="main_li3" value="300">취미</li>
+		                   <li class="sub_li" value="311">드로잉</li>
+		                   <li class="sub_li" value="312">미니어쳐</li>
+		                   <li class="sub_li" value="313">캔들&향수</li>
+		                   <li class="sub_li" value="314">슬라임</li>
+		                   <li class="sub_li" value="315">액세서리</li>
 		                 </ul>
                 	</div>
             	</div>
