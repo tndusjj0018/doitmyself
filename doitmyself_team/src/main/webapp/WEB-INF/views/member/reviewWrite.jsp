@@ -94,6 +94,7 @@
 			        	<form action="reviewWriteAction?USER_ID=${USER_ID }" method="post" enctype="multipart/form-data" name="reviewWriteForm">
 			        		<input type="hidden" name="REVIEW_WRITER" value="${USER_ID }">
 			        		<input type="hidden" name="REVIEW_P_NO" value="${productdetail.p_NO }">
+			        		<input type="hidden" name="REVIEW_ORDER_NO" value="${REVIEW_ORDER_NO }">
 			        		<div class="modal-header" style="position: relative; top: -45px;">
 							</div>
 							<div class="modal-body">							

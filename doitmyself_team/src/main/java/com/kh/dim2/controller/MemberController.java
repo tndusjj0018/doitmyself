@@ -368,7 +368,8 @@ public class MemberController {
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public ModelAndView reviewList(ModelAndView mv,
 								   @RequestParam("USER_ID") String user_id,
-								   @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
+								   @RequestParam(value="page_able", defaultValue="1", required=false) int page_able,
+								   @RequestParam(value="page_write", defaultValue="1", required=false) int page_write) throws Exception {
 		
 		//한 화면에 출력할 레코드 갯수
 		int limit = 4;						
@@ -377,39 +378,41 @@ public class MemberController {
 		//총 페이지 수
 		int maxpage_able = (reviewablecount + limit -1) / limit;						
 		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
-		int startpage_able = ((page - 1) / 10) * 10 + 1;								  
+		int startpage_able = ((page_able - 1) / 10) * 10 + 1;								  
 		//10, 20, 30 등
 		int endpage_able = startpage_able + 10 -1;								  
 		if (endpage_able > maxpage_able) endpage_able = maxpage_able;
 		
-		List<O_Product> reviewablelist = memberservice.reviewablelist(user_id, page, limit);
+		List<O_Product> reviewablelist = memberservice.reviewablelist(user_id, page_able, limit);
 		
 		//int reviewablecount = memberservice.reviewablecount(user_id);		
 		//List<O_Product> reviewablelist = memberservice.reviewablelist(user_id);
 		
 		
 		
-		int reviewwritecount = memberservice.reviewwritecount(user_id);						
+		int reviewwritecount = memberservice.reviewwritecount(user_id);
+		System.out.println("작성 리뷰 개수 " + reviewwritecount);
 		//총 페이지 수
-		int maxpage_write = (reviewablecount + limit -1) / limit;						
+		int maxpage_write = (reviewwritecount + limit -1) / limit;						
 		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
-		int startpage_write = ((page - 1) / 10) * 10 + 1;								  
+		int startpage_write = ((page_write - 1) / 10) * 10 + 1;								  
 		//10, 20, 30 등
 		int endpage_write = startpage_write + 10 -1;								  
 		if (endpage_write > maxpage_write) endpage_write = maxpage_write;
 		
-		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id, page, limit);
+		List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id, page_write, limit);
 		
 		
 		//int reviewwritecount = memberservice.reviewwritecount(user_id);
 		//List<O_Product> reviewwritelist = memberservice.reviewwritelist(user_id);
 		
 		mv.addObject("doc", "rl");
-		mv.addObject("page", page);
+		mv.addObject("page_able", page_able);
 		mv.addObject("maxpage_able", maxpage_able);
 		mv.addObject("startpage_able", startpage_able);
 		mv.addObject("endpage_able", endpage_able);
 		
+		mv.addObject("page_write", page_write);
 		mv.addObject("maxpage_write", maxpage_write);
 		mv.addObject("startpage_write", startpage_write);
 		mv.addObject("endpage_write", endpage_write);
@@ -427,9 +430,12 @@ public class MemberController {
 	//리뷰 적는 폼으로 이동
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.GET)
 	public ModelAndView reviewWrite(ModelAndView mv,
-									@RequestParam("P_NO") int p_no) {
+									@RequestParam("P_NO") int p_no,
+									@RequestParam("REVIEW_ORDER_NO") int REVIEW_ORDER_NO) {
 		
 		Product p = memberservice.productDetail(p_no);
+		
+		mv.addObject("REVIEW_ORDER_NO", REVIEW_ORDER_NO);
 		mv.addObject("doc", "rl");
 		mv.addObject("productdetail", p);
 		mv.setViewName("member/reviewWrite");
@@ -486,9 +492,10 @@ public class MemberController {
 	//리뷰 수정/삭제 폼으로 이동
 	@RequestMapping(value = "/reviewUpdate", method = RequestMethod.GET)
 	public ModelAndView reviewUpdate(ModelAndView mv,
-									 @RequestParam("P_NO") int p_no) {
+									 @RequestParam("P_NO") int p_no,
+									 @RequestParam("REVIEW_NO") int review_no) {
 		
-		O_Product r = memberservice.reviewDetail(p_no);
+		O_Product r = memberservice.reviewDetail(p_no, review_no);
 		mv.addObject("doc", "rl");
 		mv.addObject("reviewdetail", r);
 		mv.setViewName("member/reviewUpdate");

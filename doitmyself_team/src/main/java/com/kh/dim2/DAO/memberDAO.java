@@ -101,8 +101,8 @@ public class memberDAO {
 		return sqlSession.selectOne("Member.reviewwritecount", user_id);
 	}
 	
-	public O_Product reviewDetail(int p_no) {
-		return sqlSession.selectOne("Member.reviewDetail", p_no);
+	public O_Product reviewDetail(Map<String, Object> map) {
+		return sqlSession.selectOne("Member.reviewDetail", map);
 	}
 	
 	public Product productDetail(int p_no) {

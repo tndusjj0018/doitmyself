@@ -67,7 +67,7 @@ public interface MemberService {
 	
 	public int reviewwritecount(String user_id);
 	
-	public O_Product reviewDetail(int p_no);
+	public O_Product reviewDetail(int p_no, int review_no);
 	
 	public Product productDetail(int p_no);
 	

@@ -18,15 +18,17 @@
 		}
 		
 		.center-block {
-     		display: flex;  
+     		display: flex !important;  
     		 justify-content:center !important; /* 가운데 정렬 */
+    		 position: relative;
+    		 top: -12px;
   		 }
    
    		select.form-control{width:auto;margin-bottom:2em;display:inline-block;}
    		.rows{text-align:right;}
    		.row{height:0}
    		.gray{color:gray} 
-   		li .current {background:#faf7f7;} 
+   		li .current {background:#faf7f7 !important;} 
 	</style>
 		
 	<!-- tab 필요 -->
@@ -170,7 +172,7 @@
 											</td>
 											<td>
 												<!-- <button type="button" class="btn" data-toggle="modal" data-target="#myModal">리뷰 작성</button> -->
-												<button type="button" class="btn" onclick="location.href='reviewWrite?P_NO=${ral.p_NO}';">리뷰 작성</button>
+												<button type="button" class="btn" onclick="location.href='reviewWrite?P_NO=${ral.p_NO}&REVIEW_ORDER_NO=${ral.ORDER_NO }';">리뷰 작성</button>
 											</td>
 										</tr>
 										</c:forEach>
@@ -180,39 +182,39 @@
 				<div class="row">
 					<div class="col">
 						<ul class="pagination">
-							<c:if test="${page <= 1 }">
+							<c:if test="${page_able <= 1 }">
 								<li class="page-item">
 									<a class="page-link current" href="#">이전&nbsp;</a>
 								</li>
 							</c:if>
 							
-							<c:if test="${page > 1 }">
+							<c:if test="${page_able > 1 }">
 								<li class="page-item">
-									<a href="reviewList?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
+									<a href="reviewList?page_able=${page_able -1 }&USER_ID=${USER_ID}" class="page-link" style="float: none">이전</a> &nbsp;
 								</li>
 							</c:if>
 							
 							<c:forEach var="a" begin="${startpage_able }" end="${endpage_able }">
-								<c:if test="${a==page }">
+								<c:if test="${a==page_able }">
 									<li class="page-item">
 										<a class="page-link current" href="#">${a }</a>
 									</li>
 								</c:if>
-								<c:if test="${a != page }">
+								<c:if test="${a != page_able }">
 									<li class="page-item">
-										<a href="reviewList?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
+										<a href="reviewList?page_able=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
 									</li>
 								</c:if>
 							</c:forEach>
 							
-							<c:if test="${page >= maxpage_able }">
+							<c:if test="${page_able >= maxpage_able }">
 								<li class="page-item">
 									<a class="page-link current" href="#">&nbsp;다음</a>
 								</li>
 							</c:if>
-							<c:if test="${page < maxpage_able }">
+							<c:if test="${page_able < maxpage_able }">
 								<li class="page-item">
-									<a href="reviewList?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
+									<a href="reviewList?page_able=${page_able+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
 								</li>
 							</c:if>
 							
@@ -235,67 +237,6 @@
 			        					</div>
 			        				</c:if>
 									
-									
-									  <!-- Modal -->
-									<div class="modal fade" id="myModal" role="dialog">
-										<div class="modal-dialog">
-									  
-											<!-- Modal content-->
-											<div class="modal-content" style="width: 750px; position: relative; right: 110px; top: 50px;">
-											<form>
-												<div class="modal-header">
-													<p class="modal-title" style="position:relative; right:290px; font-size:20px;">리뷰 작성</p>
-												</div>
-												<div class="modal-body">
-													
-													<table id="reviewWriteTable">
-														<tr>
-															<td>구매 상품</td>
-															<td><img src="resources/soo/img/product.PNG" class="review_img">[샤오미] 스마트 미밴드 4</td>
-														</tr>
-														<tr>
-															<td>상품 평가</td>
-															<td>
-																<div class="star_style">
-																	<span class="fa fa-star star" id="1"></span>
-																	<span class="fa fa-star star" id="2"></span>
-																	<span class="fa fa-star star" id="3"></span>
-																	<span class="fa fa-star star" id="4"></span>
-																	<span class="fa fa-star star" id="5"></span>
-                        										</div>
-                        									</td>
-														</tr>
-														<tr>
-															<td>첨부 사진</td>
-															<td>
-																<input type="file" name="REVIEW_IMG" id="REVIEW_IMG">
-															</td>
-														</tr>
-														<tr>
-															<td colspan="2">
-																<textarea name="review_content" class="review_content" placeholder="후기를 입력하세요." required></textarea>
-															</td>
-														</tr>
-													</table>
-													
-													<div style="margin: 5px 5px 0 25px;">
-														<img src="resources/soo/img/caution.gif">
-														<span>작성 시 주의사항</span>
-														<ul>
-															<li>등록된 내용은 메인페이지, 검색페이지, 상품페이지 등에 노출될 수 있습니다.</li>
-															<li>상대방에 대한 욕설, 비방, 명예훼손, 불성실한 내용, 반복문자, 특정 효능에 있어 오해의 소지가 있는 내용을 담고 있거나 저작권/초상권 등 타인의 권리를 침해하는 이미지 사용하면 삭제될 수 있습니다.<br>
-																다만, 상품에 대한 불만, 판매자에게 불리한 내용이라는 이유만으로는 삭제하지 않습니다.</li>
-														</ul>
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-primary" style="position:relative; top:5px;">작성하기</button>
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												</div>
-											</form>
-											</div>   
-										</div>
-									</div>
 								</div>
 								
 								<div id="menu1" class="tab-pane fade">
@@ -325,7 +266,7 @@
 											</td>
 											<td>
 												<%-- <button type="button" class="btn" data-toggle="modal" data-target="#myModal_update${rwl.p_NO }">수정 / 삭제</button> --%>
-												<button type="button" class="btn" onclick="location.href='reviewUpdate?P_NO=${rwl.p_NO}';">수정 / 삭제</button>
+												<button type="button" class="btn" onclick="location.href='reviewUpdate?P_NO=${rwl.p_NO}&REVIEW_NO=${rwl.REVIEW_NO }';">수정 / 삭제</button>
 											</td>
 										</tr>
 										</c:forEach>
@@ -335,39 +276,39 @@
 				<div class="row">
 					<div class="col">
 						<ul class="pagination">
-							<c:if test="${page <= 1 }">
+							<c:if test="${page_write <= 1 }">
 								<li class="page-item">
 									<a class="page-link current" href="#">이전&nbsp;</a>
 								</li>
 							</c:if>
 							
-							<c:if test="${page > 1 }">
+							<c:if test="${page_write > 1 }">
 								<li class="page-item">
-									<a href="reviewList#home?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
+									<a href="reviewList#menu1?page_write=${page_write -1 }" class="page-link">이전</a> &nbsp;
 								</li>
 							</c:if>
 							
-							<c:forEach var="a" begin="${startpage }" end="${endpage }">
-								<c:if test="${a==page }">
+							<c:forEach var="a" begin="${startpage_write }" end="${endpage_write }">
+								<c:if test="${a==page_write }">
 									<li class="page-item">
 										<a class="page-link current" href="#">${a }</a>
 									</li>
 								</c:if>
-								<c:if test="${a != page }">
+								<c:if test="${a != page_write }">
 									<li class="page-item">
-										<a href="reviewList#home?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
+										<a href="reviewList#menu1?page_write=${a }" class="page-link">${a }</a>
 									</li>
 								</c:if>
 							</c:forEach>
 							
-							<c:if test="${page >= maxpage }">
+							<c:if test="${page_write >= maxpage_write }">
 								<li class="page-item">
 									<a class="page-link current" href="#">&nbsp;다음</a>
 								</li>
 							</c:if>
-							<c:if test="${page < maxpage }">
+							<c:if test="${page_write < maxpage_write }">
 								<li class="page-item">
-									<a href="reviewList#home?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
+									<a href="reviewList#menu1?page_write=${page_write+1 }" class="page-link">&nbsp;다음</a>
 								</li>
 							</c:if>
 							
@@ -390,108 +331,8 @@
 			        			   					style="margin-left:38%; margin-right:15px;">
 			        					</div>
 			        				</c:if>
-			        				
+			        			
 									
-									  <!-- Modal -->
-									<div class="modal fade" id="myModal_update${reviewdetail.REVIEW_P_NO }" role="dialog">
-										<div class="modal-dialog">
-									  
-											<!-- Modal content-->
-											<div class="modal-content" style="width: 750px; position: relative; right: 110px; top: 50px;">
-											<form>
-												<div class="modal-header">
-													<p class="modal-title" style="position:relative; right:290px; font-size:20px;">리뷰 수정</p>
-												</div>
-												<div class="modal-body">
-													
-													<table id="reviewUpdateTable">
-														<tr>
-															<td>구매 상품</td>
-															<td><img src="resources/soo/img/product.PNG" class="review_img">[샤오미] 스마트 미밴드 4</td>
-														</tr>
-														<tr>
-															<td>상품 평가</td>
-															<td>
-																<c:if test="${reviewdetail.REVIEW_RATE == 1}">
-																	<div class="star_style">
-																		<span class="fa fa-star star checked" id="1"></span>
-																		<span class="fa fa-star star" id="2"></span>
-																		<span class="fa fa-star star" id="3"></span>
-																		<span class="fa fa-star star" id="4"></span>
-																		<span class="fa fa-star star" id="5"></span>
-	                        										</div>
-																</c:if>
-																<c:if test="${reviewdetail.REVIEW_RATE == 2}">
-																	<div class="star_style">
-																		<span class="fa fa-star star checked" id="1"></span>
-																		<span class="fa fa-star star checked" id="2"></span>
-																		<span class="fa fa-star star" id="3"></span>
-																		<span class="fa fa-star star" id="4"></span>
-																		<span class="fa fa-star star" id="5"></span>
-	                        										</div>
-																</c:if>
-																<c:if test="${reviewdetail.REVIEW_RATE == 3}">
-																	<div class="star_style">
-																		<span class="fa fa-star star checked" id="1"></span>
-																		<span class="fa fa-star star checked" id="2"></span>
-																		<span class="fa fa-star star checked" id="3"></span>
-																		<span class="fa fa-star star" id="4"></span>
-																		<span class="fa fa-star star" id="5"></span>
-	                        										</div>
-	                        									</c:if>
-                        										<c:if test="${reviewdetail.REVIEW_RATE == 4}">
-																	<div class="star_style">
-																		<span class="fa fa-star star checked" id="1"></span>
-																		<span class="fa fa-star star checked" id="2"></span>
-																		<span class="fa fa-star star checked" id="3"></span>
-																		<span class="fa fa-star star checked" id="4"></span>
-																		<span class="fa fa-star star" id="5"></span>
-	                        										</div>
-	                        									</c:if>
-                        										<c:if test="${reviewdetail.REVIEW_RATE == 5}">
-																	<div class="star_style">
-																		<span class="fa fa-star star checked" id="1"></span>
-																		<span class="fa fa-star star checked" id="2"></span>
-																		<span class="fa fa-star star checked" id="3"></span>
-																		<span class="fa fa-star star checked" id="4"></span>
-																		<span class="fa fa-star star checked" id="5"></span>
-	                        										</div>
-																</c:if>
-															
-                        									</td>
-														</tr>
-														<tr>
-															<td>첨부 사진</td>
-															<td>
-																<input type="file" name="REVIEW_IMG" id="REVIEW_IMG">
-															</td>
-														</tr>
-														<tr>
-															<td colspan="2">
-																<textarea name="review_update" class="review_content" placeholder="후기를 입력하세요." required>${reviewdetail.REVIEW_CONTENT }</textarea>
-															</td>
-														</tr>
-													</table>
-													
-													<div style="margin: 5px 5px 0 25px;">
-														<img src="resources/soo/img/caution.gif">
-														<span>작성 시 주의사항</span>
-														<ul>
-															<li>등록된 내용은 메인페이지, 검색페이지, 상품페이지 등에 노출될 수 있습니다.</li>
-															<li>상대방에 대한 욕설, 비방, 명예훼손, 불성실한 내용, 반복문자, 특정 효능에 있어 오해의 소지가 있는 내용을 담고 있거나 저작권/초상권 등 타인의 권리를 침해하는 이미지 사용하면 삭제될 수 있습니다.<br>
-																다만, 상품에 대한 불만, 판매자에게 불리한 내용이라는 이유만으로는 삭제하지 않습니다.</li>
-														</ul>
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-primary" style="position:relative; top:5px;">수정하기</button>
-													<button type="button" class="btn btn-danger" style="position:relative;">삭제하기</button>
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												</div>
-											</form>
-											</div>   
-										</div>
-									</div>
 								</div>
     						</div>    					
     					</div>

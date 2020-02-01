@@ -34,6 +34,7 @@ public class O_Product {
 	private int REVIEW_RATE;
 	private String REVIEW_CONTENT;
 	private String REVIEW_IMG;
+	private int REVIEW_ORDER_NO;
 	
 	public int getP_NO() {
 		return P_NO;
@@ -142,7 +143,8 @@ public class O_Product {
 	}
 	public void setORDER_AMOUNT(int oRDER_AMOUNT) {
 		ORDER_AMOUNT = oRDER_AMOUNT;
-	}
+	}	
+	
 	
 	
 	public int getREVIEW_NO() {
@@ -174,6 +176,12 @@ public class O_Product {
 	}
 	public void setREVIEW_IMG(String rEVIEW_IMG) {
 		REVIEW_IMG = rEVIEW_IMG;
+	}
+	public int getREVIEW_ORDER_NO() {
+		return REVIEW_ORDER_NO;
+	}
+	public void setREVIEW_ORDER_NO(int rEVIEW_ORDER_NO) {
+		REVIEW_ORDER_NO = rEVIEW_ORDER_NO;
 	}
 	
 	

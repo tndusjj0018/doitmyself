@@ -101,7 +101,7 @@
 			        	<form action="reviewUpdateAction?USER_ID=${USER_ID }" method="post" enctype="multipart/form-data" name="reviewUpdateForm">
 			        		<input type="hidden" name="REVIEW_NO" value="${reviewdetail.REVIEW_NO }">
 							<input type="hidden" name="REVIEW_IMG" value="${reviewdetail.REVIEW_IMG }">
-							<input type="hidden" name="USER_ID" value="${USER_ID }">
+							<%-- <input type="hidden" name="USER_ID" value="${USER_ID }"> --%>
 							
 			        		<div class="modal-header" style="position: relative; top: -45px;">
 							</div>

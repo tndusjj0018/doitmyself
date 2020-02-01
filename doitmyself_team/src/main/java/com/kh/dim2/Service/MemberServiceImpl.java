@@ -181,8 +181,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public O_Product reviewDetail(int p_no) {
-		return dao.reviewDetail(p_no);
+	public O_Product reviewDetail(int p_no, int review_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("P_NO", p_no);
+		map.put("REVIEW_NO", review_no);
+		
+		return dao.reviewDetail(map);
 	}
 
 	@Override
