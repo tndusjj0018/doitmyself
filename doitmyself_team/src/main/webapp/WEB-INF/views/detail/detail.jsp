@@ -240,7 +240,7 @@
 										${review.REVIEW_DATE}</span>
 								</div>
 								<div id="review_body">
-									<span><img src="resources/upload/${review.REVIEW_IMG}"
+									<span><img src="resources/reviewupload/${review.REVIEW_IMG}"
 										id="review_img"> </span> <span id="review_prdname">&ensp;&ensp;&ensp;${prdData.p_NAME }
 									</span> <br>
 									<p id="review_content">${review.REVIEW_CONTENT }</p>
