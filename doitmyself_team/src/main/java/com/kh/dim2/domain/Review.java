@@ -10,7 +10,14 @@ public class Review {
 	private String REVIEW_WRITER;
 	private int REVIEW_P_NO;
 	private String REVIEW_IMG;
+	private int REVIEW_ORDER_NO;
 	
+	public int getREVIEW_ORDER_NO() {
+		return REVIEW_ORDER_NO;
+	}
+	public void setREVIEW_ORDER_NO(int rEVIEW_ORDER_NO) {
+		REVIEW_ORDER_NO = rEVIEW_ORDER_NO;
+	}
 	private MultipartFile uploadfile;	
 	public MultipartFile getUploadfile() {
 		return uploadfile;
