@@ -144,4 +144,8 @@ public class adminDAO {
 	public List<Product> getProductList(Map<String, Object> map) {
 		return sqlSession.selectList("Admin.productList",map);
 	}
+
+	public int getProductListcount(Map<String, Object> map) {
+		return sqlSession.selectOne("Admin.getProductListcount",map);
+	}
 }

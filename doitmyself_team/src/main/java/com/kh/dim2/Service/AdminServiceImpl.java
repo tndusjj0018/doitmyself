@@ -234,4 +234,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.getProductList(map);
 	}
 
+
+	@Override
+	public int getProductListcount(Map<String, Object> map) {
+		return adminDAO.getProductListcount(map);
+	}
+
 }
