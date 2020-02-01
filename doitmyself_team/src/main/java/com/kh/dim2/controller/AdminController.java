@@ -418,6 +418,31 @@ public class AdminController {
 		return map;
 	}
 	
+	@ResponseBody
+	@PostMapping("staticsPerCategory")
+	public Object staticsPerCategory() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List list = adminService.getCategoryNoList();//대분류 카테고리 넘버의 맨 앞자리만 받아온다. ex)C_NO = 300 일때 3
+		List name = adminService.getCategoryName();//대분류 카테고리 이름
+		System.out.println(list);
+		System.out.println("list의 size="+list.size());
+		map.put("name", name);
+		for(int i = 0 ;i<list.size();i++) {
+			map.put((String)name.get(i), adminService.getCategoryStatics(list.get(i)));
+		}
+		
+		return map;
+	}
+	@ResponseBody
+	@PostMapping("OrderStatics")
+	public Object OrderStatics() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(int i=0;i<=4;i++) {//0: 주문완료 / 1: 결제완료 / 2: 상품준비중  / 3: 배송중 / 4: 배송완료
+			
+		}
+		return map;
+	}
+	
 }//class end
 
 

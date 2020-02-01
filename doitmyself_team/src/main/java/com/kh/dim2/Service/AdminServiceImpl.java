@@ -230,4 +230,22 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
+	@Override
+	public List getCategoryNoList() {
+		return adminDAO.getCategoryNoList();
+	}
+
+
+	@Override
+	public List getCategoryName() {
+		return adminDAO.getCategoryName();
+	}
+
+
+	@Override
+	public Object getCategoryStatics(Object category) {
+		return adminDAO.getCategoryStatics(category);
+	}
+
+
 }

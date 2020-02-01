@@ -81,4 +81,10 @@ public interface AdminService {
 
 	public List<Order> getExchangeList();
 
+	public List getCategoryNoList();
+
+	public List getCategoryName();
+
+	public Object getCategoryStatics(Object category);
+
 }

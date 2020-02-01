@@ -44,3 +44,5 @@ where order_delivery = 4 AND ORDER_STATUS = 3;
 
 
 select * from sub_category_tbl;
+
+delete from CATEGORY_TBL where c_no = 1;

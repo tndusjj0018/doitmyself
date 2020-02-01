@@ -140,6 +140,18 @@ public class adminDAO {
 	public List<Order> getExchangeList() {
 		return sqlSession.selectList("Admin.getExchangeList");
 	}
+
+	public List getCategoryNoList() {
+		return sqlSession.selectList("Admin.getCategoryNoList");
+	}
+
+	public List getCategoryName() {
+		return sqlSession.selectList("Admin.getCategoryName");
+	}
+
+	public Object getCategoryStatics(Object category) {
+		return sqlSession.selectOne("Admin.getCategoryStatics",category);
+	}
 	
 
 }

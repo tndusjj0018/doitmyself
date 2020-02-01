@@ -210,6 +210,15 @@
 		select * from ORDER_TBL
 		where order_delivery = 4 AND ORDER_STATUS = 3
 	</select>
-		
+	<select id="getCategoryNoList" resultType="int">
+		select SUBSTR(C_NO,1,1) from CATEGORY_TBL
+	</select>	
+	<select id="getCategoryName" resultType="String">
+		select c_name from category_tbl
+	</select>	
+	<select id="getCategoryStatics" parameterType="Object" resultType="int">
+		select count(*) from order_tbl
+		where ORDER_CATEGORY like #{category}||'%' 
+	</select>
 </mapper>
 
