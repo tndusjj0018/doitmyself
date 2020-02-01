@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.PayService;
 import com.kh.dim2.domain.Member;
+import com.kh.dim2.domain.Product;
 
 
 /*
@@ -23,13 +24,14 @@ public class PayController {
 	
 	// 회원 정보 조회를 통해 배송지 입력
 	@RequestMapping(value = "/pay")
-	public ModelAndView loc_info(@RequestParam("USER_ID") String USER_ID, ModelAndView mv) {
+	public ModelAndView loc_info(@RequestParam("USER_ID") String USER_ID, @RequestParam("P_NO") int P_NO, ModelAndView mv) {
 
 		Member m = paysvc.locInfo(USER_ID);
+		Product p = paysvc.prdInfo(P_NO);
 		
 		mv.setViewName("detail/pay");
 		mv.addObject("locInfo",m);
-	
+	    mv.addObject("prdInfo",p);
 
 		return mv;
 

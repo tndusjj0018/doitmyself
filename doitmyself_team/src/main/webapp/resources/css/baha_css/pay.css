@@ -44,6 +44,10 @@ table {
    font-size: 12px;
    height: 260px;
 }
+#mainIMG {
+	width:120px;
+	height:120px;
+}
 
 .info_name {
 	width:80px;

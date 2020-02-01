@@ -25,7 +25,7 @@ CREATE TABLE REVIEW_TBL(
 );
 
 
-insert into review_tbl values(13, 3, '고양이 귀엽네요', SYSDATE, 'hodoo', 2, '58190333cute.png');
+update qna_tbl set  qna_SECRET=1 where qna_no = 14;
 
 SET DEFINE OFF
 create table SUB_CATEGORY_TBL(

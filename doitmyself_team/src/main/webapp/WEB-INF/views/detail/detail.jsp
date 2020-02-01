@@ -324,7 +324,7 @@
 						
 						<tr>
 							<td>문의유형</td>
-							<td></td>
+							<td>답변상태</td>
 							<td>문의/답변</td>
 							<td>작성자</td>
 							<td>작성일</td>
@@ -355,7 +355,7 @@
 										<c:when test="${qna.QNA_ISRESPONSE eq 0 }">
 											<td>답변대기</td>
 										</c:when>
-										<c:when test="${qna.QNA_CATEGORY eq 1 }">
+										<c:when test="${qna.QNA_ISRESPONSE eq 1 }">
 											<td>답변완료</td>
 										</c:when>
 									</c:choose>
@@ -368,19 +368,36 @@
 								<tr class='qna_content'>
 									<td></td>
 									<td></td>
-									<td>${qna.QNA_CONTENT}<br> <c:if
+									<td><br>
+									<c:if test= "${qna.QNA_SECRET eq 1 && qna.QNA_WRITER ne USER_ID}">
+									비밀글로 작성되었습니다.<hr> 
+									</c:if>
+									<c:if test= "${qna.QNA_SECRET eq 1 && qna.QNA_WRITER eq USER_ID}">
+									문의 :&emsp;${qna.QNA_CONTENT}<br> 
+									</c:if>
+									<c:if test= "${qna.QNA_SECRET eq 0 && qna.QNA_WRITER eq USER_ID }">
+									문의 :&emsp;${qna.QNA_CONTENT}<br> 
+									</c:if>
+									<c:if test= "${qna.QNA_SECRET eq 0 && qna.QNA_WRITER ne USER_ID }">
+									문의 :&emsp;${qna.QNA_CONTENT}<hr> 
+									</c:if>
+																	
+									<c:if
 											test="${USER_ID eq qna.QNA_WRITER}">
 											<a
 												onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');"
 												id='qnaUpdate'> 수정 </a>
 											&emsp;
-											<a href='#' id='qnaDelete'>삭제</a>
+											<a href='qnaDelete?QNA_NO=${qna.QNA_NO }' id='qnaDelete'>삭제</a><hr>
+											<c:if test ="${qna.QNA_ISRESPONSE eq 1 && qna.QNA_WRITER eq USER_ID}">
+									 답변 :&emsp;${qna.QNA_ANSWER}<hr>
+									</c:if>
 
 										</c:if></td>
 									<td></td>
 									<td></td>
 								</tr>
-								<input type="hidden" value="${qna.QNA_NO}">
+								<input type="hidden" value="${qna.QNA_NO}" name="QNA_NO">
 							</c:forEach>
 						</c:if>
 						
@@ -521,6 +538,7 @@
 								</div>
 								<div class="checkout">
 								<form>
+								<input type="hidden" id="prd_no" value="${prdData.p_NO}" name="P_NO">
 									    <input type="hidden" name="P_NAME" value="${prdData.p_NAME}">
 									    <input type="hidden" name="P_QUANTITY" value="${prdData.p_QUANTITY}">
 										<input type="hidden" name="USER_ID" value="${USER_ID }">

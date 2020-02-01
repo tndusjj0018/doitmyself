@@ -18,7 +18,7 @@
 	<select id="list" parameterType="java.util.Map" resultType="qna">
 	 select * from
 		(select rownum rnum, QNA_CATEGORY, QNA_ISRESPONSE, QNA_SUBJECT, 
-		QNA_WRITER, QNA_CONTENT, QNA_DATE, QNA_NO
+		QNA_WRITER, QNA_CONTENT, QNA_DATE, QNA_NO, QNA_ANSWER, QNA_SECRET
 		from
 		(select * from qna_tbl order by QNA_NO desc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="qna">
-	  select * from qna_tbl where QNA_NO = #{num}
+	  select * from qna_tbl where QNA_NO = #{NUM}
 	</select>
 	
 	<update id="update" parameterType="qna" >
@@ -39,6 +39,10 @@
 	 QNA_SECRET= #{QNA_SECRET} 
 	 where QNA_NO= #{QNA_NO}
 	</update>
+	
+	<delete id="delete" parameterType="qna">
+	 delete from qna_tbl where QNA_NO = #{QNA_NO}
+	</delete>
 	
 </mapper>
 

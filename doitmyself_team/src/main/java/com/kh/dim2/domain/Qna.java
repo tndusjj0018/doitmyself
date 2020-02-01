@@ -12,21 +12,9 @@ public class Qna {
 	private String QNA_S_ID;
 	private int QNA_SECRET;
 	private int QNA_ISRESPONSE;
-	private int QNA_RE_REF;
+	private String QNA_ANSWER;
 	
-	public String getQNA_DATE() {
-		return QNA_DATE;
-	}
-	public void setQNA_DATE(String qNA_DATE) {
-		QNA_DATE = qNA_DATE.substring(0,16);
-	}
 	
-	public int getQNA_RE_REF() {
-		return QNA_RE_REF;
-	}
-	public void setQNA_RE_REF(int qNA_RE_REF) {
-		QNA_RE_REF = qNA_RE_REF;
-	}
 	public int getQNA_NO() {
 		return QNA_NO;
 	}
@@ -57,7 +45,12 @@ public class Qna {
 	public void setQNA_WRITER(String qNA_WRITER) {
 		QNA_WRITER = qNA_WRITER;
 	}
-
+	public String getQNA_DATE() {
+		return QNA_DATE;
+	}
+	public void setQNA_DATE(String qNA_DATE) {
+		QNA_DATE = qNA_DATE;
+	}
 	public int getQNA_CATEGORY() {
 		return QNA_CATEGORY;
 	}
@@ -82,5 +75,16 @@ public class Qna {
 	public void setQNA_ISRESPONSE(int qNA_ISRESPONSE) {
 		QNA_ISRESPONSE = qNA_ISRESPONSE;
 	}
+	public String getQNA_ANSWER() {
+		return QNA_ANSWER;
+	}
+	public void setQNA_ANSWER(String qNA_ANSWER) {
+		QNA_ANSWER = qNA_ANSWER;
+	}
+	
+	
+	
+	
+	
 
 }

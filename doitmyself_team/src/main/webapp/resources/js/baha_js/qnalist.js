@@ -20,33 +20,29 @@ function getList(page) {
 						function() {
 
 							if (this.qna_CATEGORY == 0) {
-								this.qna_CATEGORY = '상품'
-								output += "<tr><td>" + this.qna_CATEGORY
+
+								output += "<tr><td>상품"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 1) {
-								this.qna_CATEGORY = '배송'
-								output += "<tr><td>" + this.qna_CATEGORY
+								output += "<tr><td>배송"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 2) {
-								this.qna_CATEGORY = '반품/취소'
-								output += "<tr><td>" + this.qna_CATEGORY
+
+								output += "<tr><td>반품/취소"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 3) {
-								this.qna_CATEGORY = '교환/변경'
-								output += "<tr><td>" + this.qna_CATEGORY
+
+								output += "<tr><td>교환/변경"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 4) {
-								this.qna_CATEGORY = '기타'
-								output += "<tr><td>" + this.qna_CATEGORY
+								output += "<tr><td>기타"
 										+ "</td>";
 							}
 							if (this.qna_ISRESPONSE == 0) {
-								this.qna_ISRESPONSE = '답변대기'
-								output += "<td>" + this.qna_ISRESPONSE
+								output += "<td>답변대기"
 										+ "</td>";
-							} else {
-								this.qna_ISRESPONSE = '답변완료'
-								output += "<td>" + this.qna_ISRESPONSE
+							} else if (this.qna_ISRESPONSE == 1){
+								output += "<td>답변완료"
 										+ "</td>";
 							}
 
@@ -57,11 +53,25 @@ function getList(page) {
 
 							output += "<tr class='qna_content'>"
 									+ "<td></td> <td></td>" + "<td>"
-									+ this.qna_CONTENT + "<br>";
+									if(this.qna_SECRET == 1 && this.qna_WRITER != $("#loginid").val()) {
+									output += "비밀글로 작성되었습니다." + "<hr>";
+									} else if (this.qna_SECRET == 1 && this.qna_WRITER == $("#loginid").val()) {
+										output += "문의 : " + this.qna_CONTENT + "<br>"; 
+									} else if (this.qna_SECRET == 0 && this.qna_WRITER == $("#loginid").val()) {
+										output += "문의 : " + this.qna_CONTENT + "<br>"; 
+									} else if (this.qna_SECRET == 0 && this.qna_WRITER != $("#loginid").val()) {
+										output += "문의 : " + this.qna_CONTENT + "<hr>"; 
+									}
+							
+							
 							if ($("#loginid").val() == this.qna_WRITER) {
 								output += "<a onclick=\"window.open('qnaUpdateView?num=" + this.qna_NO + "','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');\" id='qnaUpdate'>수정</a>&emsp;" +
-										"<a href='qnaDelete'>삭제</a></td>"
+										"<a href='qnaDelete'>삭제</a><hr>"							
+							} 
+							if(this.qna_ISRESPONSE == 1 && this.qna_WRITER == $("#loginid").val()) {
+								output +=	"답변 : " + this.qna_ANSWER;
 							}
+							output += "</td>";
 							output += "<td></td><td></td>"
 							output += "</tr>";
 

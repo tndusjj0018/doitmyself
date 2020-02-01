@@ -45,5 +45,10 @@ public class qnaServiceImpl implements qnaService {
 	public Qna getDetail(int num) {
 		return dao.getDetail(num);
 	}
+
+	@Override
+	public int qnaDelete(int qna_no) {
+        return dao.qnaDelete(qna_no);
+	}
 	
 }
