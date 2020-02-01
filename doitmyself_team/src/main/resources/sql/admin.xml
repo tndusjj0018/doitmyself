@@ -210,12 +210,20 @@
 		select * from ORDER_TBL
 		where order_delivery = 4 AND ORDER_STATUS = 3
 	</select>
-	
+	<select id="getProductListcount" parameterType="map" resultType="int">
+		select count(*) from product_tbl
+	</select>
 	<select id = "productList" parameterType="map" resultType="product">
 		select * 
 		from (select rownum rnum, p.* 
 			from(select * from product_tbl 
-				order by #{option}
+				order by 
+				<choose>
+					<when test="option == 'P_REGDATE DESC'">P_REGDATE DESC</when>
+					<when test="option == 'P_DIBS DESC'">P_DIBS DESC</when>
+					<when test="option == 'P_PRICE DESC'">P_PRICE DESC</when>
+					<when test="option == 'P_PRICE ASC'">P_PRICE ASC</when>
+				</choose>
 				)p
 			)
 		where rnum &gt;=#{start} and rnum &lt;=#{end} 

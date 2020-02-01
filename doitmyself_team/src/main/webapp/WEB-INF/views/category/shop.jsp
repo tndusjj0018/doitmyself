@@ -32,7 +32,6 @@
     <%-- side bar 위해서 추가 --%>
     <link media="all" type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href = "resources/css/sidebar.css">
     <link rel="stylesheet" href = "resources/css/productdiv.css">
     
     
@@ -52,25 +51,30 @@
     				color: white;border: none;}
 		.ftco-animate {
     				display: inline-block;
-				}	    
+				}
+		.main_li1,.main_li2,.main_li3,.allcategory_li{
+			list-style-type: none;
+		}	    
     </style>
       <script>
     	$(document).ready(function(){
     		var num = 1;// 더보기를 누를 때 마다 num 의 값은 1씩 증가함
     		var option = $(".order_option").val();
+    		var category = "";
     		function productList(){
     			console.log("더보기 할 번호는 = "+ num);
     			console.log("정렬 순서는 ="+option);
+    			
     			$.ajax({
     				type:"POST",
     				url:"getProductList",
-    				data:{num:num, option:option},
+    				data:{num:num, option:option, category:category},
     				async:false,
     				dataType:"json",
     				success:function(rdata){
     					console.log(rdata);
     					var output = "";
-    					$(rdata.list).each(function(){
+    					$(rdata.list).each(function(index){
     						output += "<div class='col-md-6 col-lg-3 ftco-animate  fadeInUp ftco-animated'>";
     						output += "		<div class='product'>";
     						output += "			<a href='detail?P_NO="+this.p_NO+"' class='img-prod'><img class='img-fluid' src='resources/upload/"+this.p_IMG+"'>";
@@ -99,8 +103,14 @@
     						output += "			</div>";
     						output += "		</div>";
     						output += "</div>"
+    						if((index+1)/4 == 0){
+    							output+="<br>";
+    						}
     						
-    					})
+    					})//each end
+    					if(rdata.listcount>rdata.end){
+    						output += "<div>더보기▼</div>";
+    					}
     					$(".productsection").append(output);
     					
     					$(".img-fluid").click(function(){
@@ -117,6 +127,13 @@
     		
     		//처음 페이지 로드 시 실행
     		productList();
+    		
+    		$(".order_option").change(function(){
+    			console.log("select = "+$(this).val());
+    			option = $(this).val();
+    			$(".productsection").empty();
+    			productList();	
+    		})
     		
     		
     	})
@@ -197,20 +214,12 @@
 
             	</section>
     		<div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+	          <div class="col text-center">
+	            <div class="block-27">
+					
+	            </div>
+	          </div>
+	        </div>
     	</div>
     </section>
 
@@ -324,8 +333,6 @@
   <script src="resources/js/jquery.animateNumber.min.js"></script>
   <script src="resources/js/bootstrap-datepicker.js"></script>
   <script src="resources/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="resources/js/google-map.js"></script>
   <script src="resources/js/main.js"></script>
    <script>
     	$(function(){
