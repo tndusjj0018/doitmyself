@@ -81,7 +81,4 @@ public interface AdminService {
 
 	public List<Order> getExchangeList();
 
-	public List<Product> getProductList(Map<String, Object> map);
-
-	public int getProductListcount(Map<String, Object> map);
 }

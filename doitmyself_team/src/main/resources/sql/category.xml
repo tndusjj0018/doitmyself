@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>	<!-- SQL 맵퍼 파일은 xml 이기 때문에 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Category">
+	<select id="getProductListcount" parameterType="map" resultType="int">
+		select count(*) from product_tbl
+	</select>
+	<select id = "productList" parameterType="map" resultType="product">
+		select * 
+		from (select rownum rnum, p.* 
+			from(select * from product_tbl 
+				order by 
+				<choose>
+					<when test="option == 'P_REGDATE DESC'">P_REGDATE DESC</when>
+					<when test="option == 'P_DIBS DESC'">P_DIBS DESC</when>
+					<when test="option == 'P_PRICE DESC'">P_PRICE DESC</when>
+					<when test="option == 'P_PRICE ASC'">P_PRICE ASC</when>
+				</choose>
+				)p
+			)
+		where rnum &gt;=#{start} and rnum &lt;=#{end} 
+	</select>
+</mapper>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+    <title>DIM - 상품 보기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
@@ -74,49 +74,49 @@
     				success:function(rdata){
     					console.log(rdata);
     					var output = "";
-    					$(rdata.list).each(function(index){
-    						output += "<div class='col-md-6 col-lg-3 ftco-animate  fadeInUp ftco-animated'>";
-    						output += "		<div class='product'>";
-    						output += "			<a href='detail?P_NO="+this.p_NO+"' class='img-prod'><img class='img-fluid' src='resources/upload/"+this.p_IMG+"'>";
-    						output += "				<div class='overlay'></div>";
-    						output += "			</a>";
-    						output += "			<div class='text py-3 pb-4 px-3 text-center'>";
-    						output += "				<h3><a href='#'>"+this.p_NAME+"</a></h3>";
-    						output += "				<div class='d-flex'>";
-    						output += "					<div class='pricing'>";
-    						output += "						<p class='price'><span>"+this.p_PRICE+"원</span></p>";
-    						output += "					</div>";
-    						output += "				</div>";
-    						output += "				<div class='bottom-area d-flex px-3'>";
-    						output += "					<div class='m-auto d-flex'>";
-    						//output += "						<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>";
-    						//output += "							<span><i class='ion-ios-menu'></i></span>";
-    						//output += "						</a>";
-    						//output += "						<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>";
-    						//output += "							<span><i class='ion-ios-cart'></i></span>";
-    						//output += "						</a>";
-    						output += "						<a href='#' class='heart d-flex justify-content-center align-items-center '>";
-							output += "							<span><i class='ion-ios-heart'></i></span>"
-							output += "						</a>"
-    						output += "					</div>";
-    						output += "				</div>";
-    						output += "			</div>";
-    						output += "		</div>";
-    						output += "</div>"
-    						if((index+1)/4 == 0){
-    							output+="<br>";
-    						}
+    					if(rdata.list.length == 0){
+    						output += "<div style='text-align:center;line-height: 300px;'>상품이 존재하지 않습니다.</div>";
+    					}else{
     						
-    					})//each end
-    					if(rdata.listcount>rdata.end){
-    						output += "<div>더보기▼</div>";
-    					}
+	    					$(rdata.list).each(function(index){
+	    						output += "<div class='col-md-6 col-lg-3 ftco-animate  fadeInUp ftco-animated'>";
+	    						output += "		<div class='product'>";
+	    						output += "			<a href='detail?P_NO="+this.p_NO+"' class='img-prod'><img class='img-fluid' src='resources/upload/"+this.p_IMG+"'>";
+	    						output += "				<div class='overlay'></div>";
+	    						output += "			</a>";
+	    						output += "			<div class='text py-3 pb-4 px-3 text-center'>";
+	    						output += "				<h3><a href='#'>"+this.p_NAME+"</a></h3>";
+	    						output += "				<div class='d-flex'>";
+	    						output += "					<div class='pricing'>";
+	    						output += "						<p class='price'><span>"+this.p_PRICE+"원</span></p>";
+	    						output += "					</div>";
+	    						output += "				</div>";
+	    						output += "				<div class='bottom-area d-flex px-3'>";
+	    						output += "					<div class='m-auto d-flex'>";
+	    						//output += "						<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>";
+	    						//output += "							<span><i class='ion-ios-menu'></i></span>";
+	    						//output += "						</a>";
+	    						//output += "						<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>";
+	    						//output += "							<span><i class='ion-ios-cart'></i></span>";
+	    						//output += "						</a>";
+	    						output += "						<a href='#' class='heart d-flex justify-content-center align-items-center '>";
+								output += "							<span><i class='ion-ios-heart'></i></span>"
+								output += "						</a>"
+	    						output += "					</div>";
+	    						output += "				</div>";
+	    						output += "			</div>";
+	    						output += "		</div>";
+	    						output += "</div>"
+	    						if((index+1)/4 == 0){//한 줄에 4개씩 띄워주기
+	    							output+="<br>";
+	    						}
+	    						
+	    					})//each end
+	    					if(rdata.listcount>rdata.end){
+	    						output += "<div class='view_more'>더보기▼</div>";
+	    					}
+    					}//else end
     					$(".productsection").append(output);
-    					
-    					$(".img-fluid").click(function(){
-    						console.log("상품 번호는 "+$(this).next().val());
-    					})
-    					
     					
     				},
     				error:function(){
@@ -131,9 +131,15 @@
     		$(".order_option").change(function(){
     			console.log("select = "+$(this).val());
     			option = $(this).val();
-    			$(".productsection").empty();
+    			$(".productsection").empty();//정렬 방법을 바꿀 시  비우고 다시 띄워줌 
     			productList();	
-    		})
+    		})//change end
+    		
+    		$(".view_more").click(function(){//더보기 클릭 시 
+    			num++;//더보기 클릭시 num 의 값은 1씩 올라감
+    			console.log("더보기 클릭 num = "+num);
+    			productList();	
+    		})//click end
     		
     		
     	})
