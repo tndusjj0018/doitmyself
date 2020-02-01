@@ -143,6 +143,7 @@
     		})//click end
     		
     		$(".list li").click(function(){
+                        $(".productsection").empty();
     			search_word="";
     			$(".productsearch").val('');
     			var list_name = $(this).text();
