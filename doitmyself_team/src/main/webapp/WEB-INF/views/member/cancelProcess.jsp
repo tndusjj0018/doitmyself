@@ -27,6 +27,15 @@
    		.gray{color:gray} 
    		li .current {background:#faf7f7;} 
 	</style>
+	
+	<script src="resources/soo/js/core/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
+		});
+	</script>
 </head>
 
 <body class="">
@@ -112,10 +121,10 @@
 			        						${crl.ORDER_DATE }
 			        					</td>
 			        					<td>
-											<img src="${crl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+											<img src="${crl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${crl.p_NO}';">
 										</td>
 										<td>
-											<span onclick="alert('제품 상세 페이지로 넘어감')">${crl.p_NAME }</span>
+											<span style="cursor:pointer" onclick="location.href='detail?P_NO=${crl.p_NO}';">${crl.p_NAME }</span>
 										</td>
 										<td>
 											${crl.ORDER_PRICE}원<br>
@@ -196,8 +205,8 @@
 			    					<i class="nc-icon nc-cart-simple"></i>			     	        		
 			        				<span>취소 / 반품 상품이 없습니다.</span>
 			        			</div>
-			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        			<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;">
 			        		</div>
 			        		</c:if>
 			        	</div>  
@@ -217,7 +226,7 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<script src="resources/soo/js/core/jquery.min.js"></script>
+	
 	<script src="resources/soo/js/core/popper.min.js"></script>
 	<script src="resources/soo/js/core/bootstrap.min.js"></script>
 	<script src="resources/soo/js/plugins/perfect-scrollbar.jquery.min.js"></script>

@@ -112,10 +112,10 @@
 									${wl.p_NO}
 								</td>
 								<td>
-									<img src="${wl.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+									<img src="${wl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${wl.p_NO}';">
 								</td>
 								<td>
-									<span style="cursor: pointer" onclick="alert('제품 상세 페이지로 넘어감')">${wl.p_NAME }</span>
+									<span style="cursor: pointer" onclick="location.href='detail?P_NO=${wl.p_NO}';">${wl.p_NAME }</span>
 								</td>
 								<td>
 									${wl.p_SELLER }

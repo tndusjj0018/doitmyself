@@ -67,6 +67,10 @@
 		   $('#productPageGo').click(function(){
 				location.href='product?category=all';
 			});
+		
+			$('#ReviewListGo').click(function(){
+				location.href='reviewList?USER_ID=${USER_ID}'
+			});
 		});
 	</script>
 	
@@ -158,10 +162,10 @@
 												${ral.ORDER_DATE }
 											</td>
 											<td>
-												<img src="${ral.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+												<img src="${ral.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ral.p_NO}';">
 											</td>
 											<td>
-												<span onclick="alert('제품 상세 페이지로 넘어감')">${ral.p_NAME }</span>
+												<span style="cursor:pointer"onclick="location.href='detail?P_NO=${ral.p_NO}';">${ral.p_NAME }</span>
 											</td>
 											<td>
 												${ral.ORDER_PRICE }<br>
@@ -253,10 +257,10 @@
 												${rwl.REVIEW_DATE }
 											</td>
 											<td>
-												<img src="${rwl.p_IMG}" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+												<img src="${rwl.p_IMG}" class="product_img" onclick="location.href='detail?P_NO=${rwl.p_NO}';">
 											</td>
 											<td>
-												<span onclick="alert('제품 상세 페이지로 넘어감')">${rwl.p_NAME}</span>
+												<span style="cursor:pointer" onclick="location.href='detail?P_NO=${rwl.p_NO}';">${rwl.p_NAME}</span>
 											</td>
 											<td>
 												${rwl.p_SELLER }
@@ -327,7 +331,7 @@
 			    								<i class="nc-icon nc-paper"></i>			     	        		
 			        							<span>작성한 리뷰가 없습니다.</span>
 			        						</div>
-			        						<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        						<input type="button" id="ReviewListGo" name="productPageGo" class="btn btn-primary btn-round" value="리뷰 작성하러 가기" 
 			        			   					style="margin-left:38%; margin-right:15px;">
 			        					</div>
 			        				</c:if>
