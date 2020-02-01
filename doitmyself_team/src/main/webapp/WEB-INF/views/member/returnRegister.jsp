@@ -68,6 +68,11 @@
 												<td>${productdetail.ORDER_PAYMENT }</td>
 											</tr>
 											
+											<tr>
+												<td>반품 사유</td>
+												<td><textarea style="height:140px; width:225px;"></textarea></td>
+											</tr>
+											
 										</table>
 
 									</div>
