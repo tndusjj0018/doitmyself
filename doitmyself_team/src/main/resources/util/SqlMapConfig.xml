@@ -28,5 +28,6 @@
 		<mapper resource="sql/pay.xml" />
 		<mapper resource="sql/product.xml" />
 		<mapper resource="sql/cart.xml" />
+		<mapper resource="sql/category.xml" />
 	</mappers>
 </configuration>

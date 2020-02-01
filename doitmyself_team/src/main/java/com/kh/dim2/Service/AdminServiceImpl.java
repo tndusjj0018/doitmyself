@@ -229,15 +229,5 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.getExchangeList();
 	}
 
-	@Override
-	public List<Product> getProductList(Map<String, Object> map) {
-		return adminDAO.getProductList(map);
-	}
-
-
-	@Override
-	public int getProductListcount(Map<String, Object> map) {
-		return adminDAO.getProductListcount(map);
-	}
 
 }

@@ -417,24 +417,6 @@ public class AdminController {
 		map.put("list", list);
 		return map;
 	}
-	@ResponseBody
-	@PostMapping("getProductList")
-	public Object getProductList(int num, String option) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		int limit = 12;
-		int startnum = limit *(num-1)+1;
-		int endnum = limit+startnum-1;
-		map.put("start", startnum);
-		map.put("end", endnum);
-		map.put("option", option);
-		int listcount = adminService.getProductListcount(map);
-		map.put("listcount", listcount);
-		List<Product> list = adminService.getProductList(map);
-		map.put("list", list);
-		return map;
-	}
-
-	
 	
 }//class end
 
