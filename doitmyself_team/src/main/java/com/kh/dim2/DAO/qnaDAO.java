@@ -39,4 +39,9 @@ public class qnaDAO {
 		return sqlSession.selectOne("qna.detail", num);
 	}
 
+
+	public int qnaDelete(int qna_no) {
+		return sqlSession.selectOne("qna.delete", qna_no);
+	}
+
 }

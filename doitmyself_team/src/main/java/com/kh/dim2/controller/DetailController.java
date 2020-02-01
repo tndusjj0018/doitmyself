@@ -246,5 +246,28 @@ public class DetailController {
 
 		}
 	}
+	
+	//문의글 삭제하기
+	@GetMapping("qnaDelete")
+	public void qnaDelete(int qna_no, HttpServletResponse response) throws Exception {
+		System.out.println("qna no  : " + qna_no);
+		int result = qnasvc.qnaDelete(qna_no);
+		
+		//삭제 실패한 경우
+		if (result==0) {
+			System.out.println("게시판 삭제 실패");
+		}
+		
+		//삭제 성공한 경우 - 페이지 새로고침
+		response.setContentType("text/html;charset=utf-8");
+		   PrintWriter out = response.getWriter();
+		   out.println("<script>");
+		   out.println("alert('삭제 되었습니다');");
+		   out.println("location.href='detail';");
+		   out.println("</script>");
+		   out.close();
+			
+	}
+	
 
 }

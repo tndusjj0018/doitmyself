@@ -24,6 +24,9 @@ public interface qnaService {
 	//문의글 수정을 위해 불러올 원문글  번호
 	public Qna getDetail(int num);
 
+	//문의글 삭제
+	public int qnaDelete(int qna_no);
+
 
 
 }

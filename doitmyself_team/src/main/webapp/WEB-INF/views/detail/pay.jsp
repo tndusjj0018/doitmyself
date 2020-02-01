@@ -42,17 +42,17 @@
 				<tbody>
 					<tr>
 						<td class="test">
-							<div class="prd_Photo">상품 사진</div>
+							<div class="prd_Photo"><img src="resources/upload/${prdInfo.p_IMG}" class="img-fluid"
+						name="P_IMG" id="mainIMG"></div>
 						</td>
 						<td class="td_prdWrap">
-							<div class="prd_Name">상품명</div>
-							<div class="prd_Option">상품 옵션</div>
+							<div class="prd_Name">${prdInfo.p_NAME }</div>						
 						</td>
 						<td>
 							<div class="prd_Count">개수</div>
 						</td>
 						<td class="test2">
-							<div class="prd_Price">금액</div>
+							<div class="prd_Price">${prdInfo.p_PRICE }원</div>
 						</td>
 					</tr>
 				</tbody>
