@@ -146,18 +146,15 @@ public class DetailController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView QnaList(@RequestParam(value = "page2", defaultValue = "1", required = false) int page2,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			ModelAndView mv/*
-							 * ,
-							 * 
-							 * @RequestParam("P_NO") int p_no
-							 */) {
+			ModelAndView mv,
+			@RequestParam("P_NO") int p_no) {
 		// 페이지 이동
 		mv.setViewName("detail/detail");
 		
 		
 		
 		// 상품 불러오기
-		Product prd = prdsvc.getDetail(3);
+		Product prd = prdsvc.getDetail(p_no);
 		if (prd == null) {
 			System.out.println("상품 정보 가져오기 실패!");
 			mv.setViewName("detail/error");

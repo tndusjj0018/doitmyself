@@ -33,12 +33,14 @@
 	<script src="resources/soo/js/core/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			
-			
+					
 			$("#btn-order").click(function(){
 				var popup= window.open("http://service.epost.go.kr/trace.RetrieveRegiPrclDeliv.postal?sid1=","","width=1000,height=700,left=450,top=100");
 			});
 			
+			$('#productPageGo').click(function(){
+				location.href='product?category=all';
+			});
 			
 		});
 	</script>
@@ -125,10 +127,10 @@
 								${ol.ORDER_DATE }
 								</td>
 								<td>
-									<img src="${ol.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
+									<img src="${ol.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ol.p_NO}';">
 								</td>
 								<td>
-									<span onclick="alert('제품 상세 페이지로 넘어감')">${ol.p_NAME }</span>
+									<span style="cursor:pointer" onclick="location.href='detail?P_NO=${ol.p_NO}';">${ol.p_NAME }</span>
 								</td>
 								<td>
 									${ol.ORDER_PRICE}원<br>
@@ -241,8 +243,8 @@
 			    					<i class="nc-icon nc-cart-simple"></i>			     	        		
 			        				<span>주문한 상품이 없습니다.</span>
 			        			</div>
-			        			<input type="button" id="sellerPageGo" name="sellerPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
-			        			   style="margin-left:38%; margin-right:15px;" onclick="alert('상품 목록 페이지');">
+			        			<input type="button" id="productPageGo" name="productPageGo" class="btn btn-primary btn-round" value="상품 보러 가기" 
+			        			   style="margin-left:38%; margin-right:15px;">
 			        		</div>
 						</c:if>
 						
