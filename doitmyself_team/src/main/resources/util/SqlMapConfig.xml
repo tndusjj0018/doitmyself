@@ -16,6 +16,7 @@
 		<typeAlias alias="o_product" type="com.kh.dim2.domain.O_Product" />
 		<typeAlias alias="recent_view" type="com.kh.dim2.domain.Recent_View" />
 		<typeAlias alias="refund" type="com.kh.dim2.domain.Refund" />
+		<typeAlias alias="c_product" type="com.kh.dim2.domain.C_Product" />
 	</typeAliases>
 	
 	<mappers>

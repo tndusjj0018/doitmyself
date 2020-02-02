@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dim2.DAO.memberDAO;
+import com.kh.dim2.domain.C_Product;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
@@ -251,6 +252,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int returnRegister(int order_no) {
 		return dao.returnRegister(order_no);
+	}
+
+	@Override
+	public int cartcount(String user_id) {
+		return dao.cartcount(user_id);
+	}
+
+	@Override
+	public List<C_Product> cartlist(String user_id, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit -1;
+		
+		map.put("USER_ID", user_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.cartlist(map);
 	}
 
 	

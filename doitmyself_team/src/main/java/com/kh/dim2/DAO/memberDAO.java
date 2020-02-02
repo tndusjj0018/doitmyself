@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dim2.domain.C_Product;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
@@ -139,5 +140,13 @@ public class memberDAO {
 	
 	public int returnRegister(int order_no) {
 		return sqlSession.update("Member.returnregister", order_no);
+	}
+
+	public int cartcount(String user_id) {
+		return sqlSession.selectOne("Member.cartcount", user_id);
+	}
+
+	public List<C_Product> cartlist(HashMap<String, Object> map) {
+		return sqlSession.selectList("Member.cartlist", map);
 	}
 }

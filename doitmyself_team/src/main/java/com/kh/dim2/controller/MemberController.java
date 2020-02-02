@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.MemberService;
+import com.kh.dim2.domain.C_Product;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
@@ -734,6 +735,56 @@ public class MemberController {
 			System.out.println("찜 삭제 중 오류");
 		}
 	}
+	
+	
+	@RequestMapping(value = "/cartList", method = RequestMethod.GET)
+	public ModelAndView cartList(ModelAndView mv,
+								 @RequestParam("USER_ID") String USER_ID,
+								 @RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
+		
+		//한 화면에 출력할 레코드 갯수
+		int limit = 4;
+								
+		//총 리스트 수 받아옴
+		int cartcount = memberservice.cartcount(USER_ID);
+		System.out.println(cartcount +"장바구니 수");				
+		//총 페이지 수
+		int maxpage = (cartcount + limit -1) / limit;
+						
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+								  
+		//10, 20, 30 등
+		int endpage = startpage + 10 -1;
+								  
+		if (endpage > maxpage) endpage = maxpage;		
+		
+		List<C_Product> cartlist = memberservice.cartlist(USER_ID, page, limit);
+		mv.addObject("doc", "cl");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("cartcount", cartcount);
+		mv.addObject("cartlist", cartlist);
+		mv.setViewName("member/cartList");
+		return mv;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="totalAjax")
+	public Object totalAjax(@RequestParam("USER_ID") String user_id,
+							@RequestParam(value="total", defaultValue="0") int total) throws Exception {
+		
+		Map<String, Object> cartajax = new HashMap<String, Object>();
+		cartajax.put("total", total);
+		
+		System.out.println("total " + total);
+		return cartajax;
+	}
+	
+	
 
 	@RequestMapping(value = "/change_password", method = RequestMethod.GET)
 	public String change_password() {

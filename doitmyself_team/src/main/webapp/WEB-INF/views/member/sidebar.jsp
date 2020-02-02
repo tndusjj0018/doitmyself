@@ -77,6 +77,10 @@
 			case 'wl':
 				$('.nav').children().eq(3).addClass('active');
 				break;
+				
+			case 'cl':
+				$('.nav').children().eq(4).addClass('active');
+				break;
 			
 			default:
 				break;
@@ -142,6 +146,13 @@
 	              			<i class="nc-icon nc-favourite-28"></i>
 	              			<p>내가 찜한 상품</p>
 	              			
+						</a>
+          			</li>
+          			
+          			<li>
+            			<a href="cartList?USER_ID=${USER_ID }&doc=cl" id="cartList" class="collapsed">
+	              			<i class="nc-icon nc-cart-simple"></i>
+	              			<p>장바구니</p>
 						</a>
           			</li>
         		</ul>

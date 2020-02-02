@@ -29,3 +29,12 @@ div.card-body > div > div > div > i {
     top: 2px;
     margin-right :5px;
 }
+
+
+#cart_checked {
+	margin: auto;
+}
+
+#cart_checked > thead > tr > th {
+	color: #3a8aa2;
+}
