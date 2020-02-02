@@ -44,7 +44,8 @@
 							<div class="card-body">
 								<form action="returnRegisterAction?ORDER_NO=${ORDER_NO }">
 									<input type="hidden" name="ORDER_NO" value="${ORDER_NO }">
-									<input type="hidden" name="USER_ID" value="${USER_ID }">									
+									<input type="hidden" name="USER_ID" value="${USER_ID }">
+									<input type="hidden" name="ORDER_P_NO" value="${productdetail.p_NO }">
 									<ul>
 										<li>묶음배송 상품 취소 시 배송비 정책에 조건이 맞지 않을 경우 추가배송비가 발생할 수 있습니다.</li>
 										<li>결제수단별 환불방법과 환불소요기간에 차이가 있습니다.</li>
@@ -70,7 +71,7 @@
 											
 											<tr>
 												<td>반품 사유</td>
-												<td><textarea style="height:140px; width:225px;"></textarea></td>
+												<td><textarea style="height:140px; width:225px;" required></textarea></td>
 											</tr>
 											
 										</table>

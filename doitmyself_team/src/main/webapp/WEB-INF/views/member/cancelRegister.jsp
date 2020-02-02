@@ -20,19 +20,6 @@
 	<link href="resources/soo/css/cancelRegister.css" rel="stylesheet">
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
-	
-	<script>
-		$(document).ready(function(){
-			
-			$('form').submit(function(){
-				
-				if($('#cancelTextarea').text == null) {
-					alert('판매 이용약관에 동의하세요');
-					return false;
-				}				
-			});
-		});
-	</script>
 </head>
 
 <body class="">
@@ -77,7 +64,7 @@
 											
 											<tr>
 												<td>취소 사유</td>
-												<td><textarea id="cancelTextarea" style="height:140px; width:225px;"></textarea></td>
+												<td><textarea id="cancelTextarea" style="height:140px; width:225px;" required></textarea></td>
 											</tr>										
 										</table>
 									

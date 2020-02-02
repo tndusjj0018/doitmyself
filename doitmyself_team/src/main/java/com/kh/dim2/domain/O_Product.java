@@ -36,6 +36,14 @@ public class O_Product {
 	private String REVIEW_IMG;
 	private int REVIEW_ORDER_NO;
 	
+	private int REFUND_STATUS;
+	
+	public int getREFUND_STATUS() {
+		return REFUND_STATUS;
+	}
+	public void setREFUND_STATUS(int rEFUND_STATUS) {
+		REFUND_STATUS = rEFUND_STATUS;
+	}
 	public int getP_NO() {
 		return P_NO;
 	}
