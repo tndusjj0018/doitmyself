@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dim2.domain.C_Product;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
@@ -89,6 +90,10 @@ public interface MemberService {
 	public O_Product cancelDetail(int order_no);
 
 	public int returnRegister(int order_no);
+
+	public int cartcount(String user_id);
+
+	public List<C_Product> cartlist(String user_id, int page, int limit);
 
 	
 }

@@ -268,4 +268,19 @@
 			ORDER_R_DATE = SYSDATE
 		WHERE ORDER_NO = #{ORDER_NO}
 	</update>
+	
+	<select id="cartcount" resultType="int" parameterType="String">
+		select count(*)
+		from CART_TBL
+		where CART_ID = #{USER_ID}
+	</select>
+	
+	<select id="cartlist" resultType="c_product" parameterType="HashMap">
+		select * from (select rownum rnum, b.*
+						from (select * from CART_TBL, PRODUCT_TBL
+								WHERE P_NO = CART_P_NO
+								AND CART_ID = #{USER_ID}
+								order by CART_NO DESC)b)
+				where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
 </mapper>
