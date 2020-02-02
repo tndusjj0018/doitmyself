@@ -47,7 +47,9 @@ public interface MemberService {
 	
 	public int p_dibsupdate(int p_no);
 	
-	public List<Q_Product> qnalist(String user_id, int page, int limit);
+	public List<Q_Product> qnalist(String user_id, String qnaCate);
+	
+	public List<Q_Product> qnalist(String user_id);
 	
 	//qna 목록 개수
 	public int qnacount(String user_id);
@@ -87,4 +89,6 @@ public interface MemberService {
 	public O_Product cancelDetail(int order_no);
 
 	public int returnRegister(int order_no);
+
+	
 }

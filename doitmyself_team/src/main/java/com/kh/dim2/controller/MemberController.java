@@ -2,7 +2,9 @@ package com.kh.dim2.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -590,41 +593,90 @@ public class MemberController {
 	}
 
 
+
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
 	public ModelAndView qnaList(ModelAndView mv,
 								@RequestParam("USER_ID") String user_id,
-								@RequestParam(value="page", defaultValue="1", required=false) int page) throws Exception {
+//								@RequestParam(value="page", defaultValue="1", required=false) int page,
+								@RequestParam("qnaCate") String qnaCate) throws Exception {
 		
 		//한 화면에 출력할 레코드 갯수
-		int limit = 4;
+//		int limit = 4;
 						
 		//총 리스트 수 받아옴
 		int qnacount = memberservice.qnacount(user_id);
 				
 		//총 페이지 수
-		int maxpage = (qnacount + limit -1) / limit;
+//		int maxpage = (qnacount + limit -1) / limit;
 				
 		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
-		int startpage = ((page - 1) / 10) * 10 + 1;
+//		int startpage = ((page - 1) / 10) * 10 + 1;
 						  
 		//10, 20, 30 등
-		int endpage = startpage + 10 -1;
+//		int endpage = startpage + 10 -1;
 						  
-		if (endpage > maxpage) endpage = maxpage;
+//		if (endpage > maxpage) endpage = maxpage;
 		
 		
-		List<Q_Product> qnalist = memberservice.qnalist(user_id, page, limit);
+		List<Q_Product> qnalist = memberservice.qnalist(user_id, qnaCate);
 
 		mv.addObject("doc", "ql");
-		mv.addObject("page", page);
-		mv.addObject("maxpage", maxpage);
-		mv.addObject("startpage", startpage);
-		mv.addObject("endpage", endpage);
+//		mv.addObject("page", page);
+//		mv.addObject("maxpage", maxpage);
+//		mv.addObject("startpage", startpage);
+//		mv.addObject("endpage", endpage);
 		mv.addObject("qnacount", qnacount);
 		mv.addObject("qnalist", qnalist);
 		mv.setViewName("member/qnaList");
 		return mv;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="qnaListAjax")
+	public Object qnaCateList(
+			@RequestParam("USER_ID") String user_id,
+//			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			@RequestParam(value="qnaCate", defaultValue="q_all") String qnaCate) throws Exception {
+		
+		
+		//한 화면에 출력할 레코드 갯수
+//		int limit = 4;
+								
+		//총 리스트 수 받아옴
+		int qnacount = memberservice.qnacount(user_id);
+						
+		//총 페이지 수
+//		int maxpage = (qnacount + limit -1) / limit;
+						
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+//		int startpage = ((page - 1) / 10) * 10 + 1;
+								  
+		//10, 20, 30 등
+//		int endpage = startpage + 10 -1;
+							  
+//		if (endpage > maxpage) endpage = maxpage;
+		
+		System.out.println(qnaCate);
+				
+		List<Q_Product> qnalist = memberservice.qnalist(user_id, qnaCate);
+		
+		//Map 이용
+		Map<String, Object> qnaajax = new HashMap<String, Object>();
+//		qnaajax.put("page", page);
+//		qnaajax.put("maxpage", maxpage);
+//		qnaajax.put("startpage", startpage);
+//		qnaajax.put("endpage", endpage);
+		qnaajax.put("qnacount", qnacount);
+		qnaajax.put("qnalist", qnalist);
+		qnaajax.put("qnaCate", qnaCate);
+		System.out.println(qnaajax);
+		return qnaajax;
+		
+	}
+	
+	
+	
 
 	@RequestMapping(value = "/wishList", method = RequestMethod.GET)
 	public ModelAndView wishList(ModelAndView mv,

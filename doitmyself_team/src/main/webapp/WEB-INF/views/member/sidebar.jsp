@@ -88,6 +88,7 @@
 </head>
 
 <body>
+<input type="hidden" value="${USER_ID}" id="USER_ID">
 <input type="hidden" value="${doc}" class="doc">
 <div class="sidebar" data-color="white" data-active-color="danger" style="position: absolute;">     
 			<div class="logo" style="background: #f4f3ef">
@@ -132,7 +133,7 @@
 		            	<div class="collapse" id="toggleDemo3" style="height: 0px;">
 							<ul class="nav nav-list">
 								<li class="mar20"><a href="reviewList?USER_ID=${USER_ID }&doc=rl">나의 상품 리뷰</a></li>
-								<li class="mar20"><a href="qnaList?USER_ID=${USER_ID }&doc=ql">나의 QnA</a></li>
+								<li class="mar20"><a href="qnaList?USER_ID=${USER_ID }&doc=ql&qnaCate=q_all">나의 QnA</a></li>
 							</ul>
 						</div>
 		          	</li>
