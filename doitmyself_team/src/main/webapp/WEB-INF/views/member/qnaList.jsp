@@ -14,14 +14,7 @@
 	<link href="resources/soo/css/orderDelivery.css" rel="stylesheet">
 	
 	<script src="resources/soo/js/core/jquery.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			
-			$('#productPageGo').click(function(){
-				location.href='product?category=all';
-			});
-		});
-	</script>
+	<script src="resources/soo/js/qnaCate.js"></script>
 	
 	<style>
 		body > div > div.main-panel.ps-container.ps-theme-default > nav > div > div.navbar-wrapper > a:hover {color:#66615B !important}
@@ -104,101 +97,29 @@
 			        	<!-- qna 목록 있는 경우 -->
 			        	<c:if test="${qnacount > 0}">
 			        	<table class="table">
-							<tr>
-								<td>문의 번호</td><td colspan="2">상품 정보</td> <td>스토어 명</td> <td>문의 분류</td> <td width="25%">문의 제목</td> <td>작성일</td> <td>답변 상태</td>
-							</tr>
-							<c:forEach var="ql" items="${qnalist}">
-							<%-- <c:forEach var="ql2" items="${qnalist2}"> --%>
-							<tr>
-								<td>
-								${ql.QNA_NO }
-								</td>
-								<td>
-									<img src="${ql.p_IMG }" class="product_img" onclick="alert('제품 상세 페이지로 넘어감')">
-								</td>
-								<td>
-									<span style="cursor: pointer" onclick="alert('제품 상세 페이지로 넘어감')">${ql.p_NAME }</span>
-								</td>
-								<td>
-									${ql.p_SELLER }
-								</td>
-								<td>
-									<c:if test="${ql.QNA_CATEGORY == 0}">
-										배송문의
-									</c:if>
-									<c:if test="${ql.QNA_CATEGORY == 1}">
-										상품문의
-									</c:if>
-									<c:if test="${ql.QNA_CATEGORY == 2}">
-										취소/반품 문의
-									</c:if>
-									<c:if test="${ql.QNA_CATEGORY == 3}">
-										기타문의
-									</c:if>
-								</td>
-								<td>
-									${ql.QNA_SUBJECT }
-								</td>
-								<td>
-									${ql.QNA_DATE }
-								</td>
-								<td>
-									<c:if test="${ql.QNA_ISRESPONSE == 0}">
-										<span style="color: #9d9da5">답변예정</span>
-									</c:if>
-									<c:if test="${ql.QNA_ISRESPONSE == 1}">
-										<a href="#">답변완료</a>
-									</c:if>
-								</td>
-							</tr>
-							<%-- </c:forEach> --%>
-							</c:forEach>
+			        		<thead>
+								<tr>
+									<td>문의 번호</td>
+									<td colspan="2">상품 정보</td>
+									<td>스토어 명</td>
+									<td><select id="qnaCate">
+											<option value="q_all">문의 분류</option>
+											<option>=========</option>
+											<option value="q_delivery">배송문의</option>
+											<option value="q_product">상품문의</option>
+											<option value="q_cancel">환불문의</option>
+											<option value="q_other">기타문의</option>
+										</select></td>
+									<td width="25%">문의 제목</td>
+									<td>작성일</td>
+									<td>답변 상태</td>
+								</tr>
+							</thead>
+							
+							<tbody>
+								
+							</tbody>
 						</table>
-						
-						<div class="center-block">
-				<div class="row">
-					<div class="col">
-						<ul class="pagination">
-							<c:if test="${page <= 1 }">
-								<li class="page-item">
-									<a class="page-link current" href="#">이전&nbsp;</a>
-								</li>
-							</c:if>
-							
-							<c:if test="${page > 1 }">
-								<li class="page-item">
-									<a href="qnaList?page=${page -1 }&USER_ID=${USER_ID}" class="page-link">이전</a> &nbsp;
-								</li>
-							</c:if>
-							
-							<c:forEach var="a" begin="${startpage }" end="${endpage }">
-								<c:if test="${a==page }">
-									<li class="page-item">
-										<a class="page-link current" href="#">${a }</a>
-									</li>
-								</c:if>
-								<c:if test="${a != page }">
-									<li class="page-item">
-										<a href="qnaList?page=${a }&USER_ID=${USER_ID}" class="page-link">${a }</a>
-									</li>
-								</c:if>
-							</c:forEach>
-							
-							<c:if test="${page >= maxpage }">
-								<li class="page-item">
-									<a class="page-link current" href="#">&nbsp;다음</a>
-								</li>
-							</c:if>
-							<c:if test="${page < maxpage }">
-								<li class="page-item">
-									<a href="qnaList?page=${page+1 }&USER_ID=${USER_ID}" class="page-link">&nbsp;다음</a>
-								</li>
-							</c:if>
-							
-						</ul>
-					</div>
-				</div>
-			</div>
 						
 						</c:if>
 						

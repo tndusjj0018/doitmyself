@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class Q_Product {
 
-	//private int P_NO;
+	private int P_NO;
 	private String P_NAME;
 	private String P_SELLER;
 	//private int P_CATEGORY_NO;
@@ -27,6 +27,14 @@ public class Q_Product {
 	private String QNA_S_ID;
 	private int QNA_SECRET;
 	private int QNA_ISRESPONSE;
+	
+	
+	public int getP_NO() {
+		return P_NO;
+	}
+	public void setP_NO(int p_NO) {
+		P_NO = p_NO;
+	}
 	public String getP_NAME() {
 		return P_NAME;
 	}

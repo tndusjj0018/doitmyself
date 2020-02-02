@@ -107,16 +107,25 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Q_Product> qnalist(String user_id, int page, int limit) {
+	public List<Q_Product> qnalist(String user_id, String qnaCate) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		int startrow = (page - 1) * limit + 1;
-		int endrow = startrow + limit -1;
+//		int startrow = (page - 1) * limit + 1;
+//		int endrow = startrow + limit -1;
 		
 		map.put("USER_ID", user_id);
-		map.put("start", startrow);
-		map.put("end", endrow);
+//		map.put("start", startrow);
+//		map.put("end", endrow);
+		map.put("qnaCate", qnaCate);
+		return dao.qnalist(map);
+	}
+	
+	@Override
+	public List<Q_Product> qnalist(String user_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("USER_ID", user_id);
 		return dao.qnalist(map);
 	}
 
@@ -243,6 +252,8 @@ public class MemberServiceImpl implements MemberService {
 	public int returnRegister(int order_no) {
 		return dao.returnRegister(order_no);
 	}
+
+	
 
 	
 
