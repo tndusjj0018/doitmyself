@@ -136,14 +136,25 @@
 										<td>
 											${crl.ORDER_R_DATE }
 										</td>
-										<c:if test="${crl.ORDER_STATUS == 1 }">
+									
+										<c:if test="${crl.ORDER_STATUS == 1 && crl.REFUND_STATUS == 0}">
 											<td>
 												취소완료
 											</td>
 										</c:if>
-										<c:if test="${crl.ORDER_STATUS == 2 }">
+										<c:if test="${crl.REFUND_STATUS == 0 }">
 											<td>
 												반품신청
+											</td>
+										</c:if>
+										<c:if test="${crl.REFUND_STATUS == 1 }">
+											<td>
+												반품처리중
+											</td>
+										</c:if>
+										<c:if test="${crl.REFUND_STATUS == 2 }">
+											<td>
+												반품완료
 											</td>
 										</c:if>
 			        				</tr>

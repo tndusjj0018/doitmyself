@@ -9,6 +9,7 @@ import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
+import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
@@ -94,6 +95,8 @@ public interface MemberService {
 	public int cartcount(String user_id);
 
 	public List<C_Product> cartlist(String user_id, int page, int limit);
+
+	public int refundinsert(Refund refund);
 
 	
 }

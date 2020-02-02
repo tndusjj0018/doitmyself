@@ -26,6 +26,7 @@ import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.O_Product;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Q_Product;
+import com.kh.dim2.domain.Refund;
 import com.kh.dim2.domain.Review;
 import com.kh.dim2.domain.Seller;
 
@@ -310,17 +311,20 @@ public class MemberController {
 	
 	@RequestMapping(value = "/returnRegisterAction", method = RequestMethod.GET)
 	public void returnRegisterAction(HttpServletResponse response,
+									 Refund refund,
 									 @RequestParam("ORDER_NO") int order_no,
 									 @RequestParam("USER_ID") String user_id) throws Exception {
 		
 		response.setContentType("text/html; charset=utf-8"); 
 		PrintWriter out = response.getWriter();
 		
-		int result = memberservice.returnRegister(order_no);
-		if(result == 1) {
-			System.out.println("주문번호 " + order_no + " 취소 신청 완료");
+		int result1 = memberservice.returnRegister(order_no);
+		int result2 = memberservice.refundinsert(refund);
+		int result = result1 + result2;
+		if(result == 2) {
+			System.out.println("주문번호 " + order_no + " 반품 신청 완료");
 			out.println("<script>");
-			out.println("alert('환불 신청이 완료 되었습니다.');");
+			out.println("alert('반품 신청이 완료 되었습니다.');");
 			out.println("window.opener.top.location.href='cancelProcess?USER_ID=" +user_id + "';");
 			out.println("window.close();");
 			out.println("</script>");
