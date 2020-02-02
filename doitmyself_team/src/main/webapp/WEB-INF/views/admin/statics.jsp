@@ -46,7 +46,8 @@
     	$(document).ready(function(){
     		var title = "카테고리별 주문 통계";//멘 처음은 카테고리별 주문 통계를 보여줌
     		var name = "";
-    		var per = "";
+			var statics_data = new Array;
+			var bgcolor = ['#00BAF2','#E80C60','#9B26AF'];
     		function category(){//카테고리별 주문 통계
     			$.ajax({
     				type:"POST",
@@ -54,8 +55,20 @@
     				async:false,
     				success:function(rdata){
     					console.log(rdata);
-    					name = rdata.name;
-    					per = rdata;
+    					statics_data.pop();//배열 초기화 
+    					for(var i = 0; i<=rdata.name.length;i++){
+    						statics_data.push({text:rdata.name[i], 
+    								   values:rdata.statics[i],
+    								   backgroundColor:bgcolor[i],
+    								   lineColor:bgcolor[i],
+    								   lineWidth: '1px',
+    								   marker: {
+    			                            backgroundColor: bgcolor[i]
+    			                        }
+    								});//push end
+    					}
+    					console.log("statics_data 의  카테고리 이름="+statics_data[0].text);
+    					console.log("statics_data 의  value="+statics_data[0].values);
     				},
     				error:function(){
     					console.log("에러");
@@ -202,9 +215,10 @@
 		                    fontSize: '18px',
 		                    textAlpha: .9
 		                },
-		                series: [{
+		                series: [
+		                	{
 		                        text: name[0],
-		                        values: [per.name[0]],//퍼센트??
+		                        values: [353453],//퍼센트??
 		                        backgroundColor: '#00BAF2',
 		                        lineColor: '#00BAF2',
 		                        lineWidth: '1px',
@@ -214,7 +228,7 @@
 		                    },
 		                    {
 		                        text: name[1],
-		                        values: [per.name[1]],
+		                        values: [5645645],
 		                        backgroundColor: '#E80C60',
 		                        lineColor: '#E80C60',
 		                        lineWidth: '1px',
@@ -224,7 +238,7 @@
 		                    },
 		                    {
 		                        text: name[2],
-		                        values: [per.name[2]],
+		                        values: [654654645],
 		                        backgroundColor: '#9B26AF',
 		                        lineColor: '#9B26AF',
 		                        lineWidth: '1px',
