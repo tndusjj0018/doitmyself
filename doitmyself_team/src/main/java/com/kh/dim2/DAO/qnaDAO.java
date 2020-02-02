@@ -30,8 +30,8 @@ public class qnaDAO {
 	}
 
 
-	public int getListCount() {
-		return sqlSession.selectOne("qna.count");
+	public int getListCount(int p_no) {
+		return sqlSession.selectOne("qna.count", p_no);
 	}
 
 

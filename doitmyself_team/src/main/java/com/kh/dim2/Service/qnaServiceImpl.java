@@ -22,15 +22,16 @@ public class qnaServiceImpl implements qnaService {
 	}
 
 	@Override
-	public int getListCount() {
-		return dao.getListCount();
+	public int getListCount(int p_no) {
+		return dao.getListCount(p_no);
 	}
 
 	@Override
-	public List<Qna> getQnaList(int page, int limit) {
+	public List<Qna> getQnaList(int p_no, int page, int limit) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		int startrow = (page-1)*limit+1;
 		int endrow = startrow+limit-1;
+		map.put("QNA_P_NO", p_no);
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getQnaList(map);

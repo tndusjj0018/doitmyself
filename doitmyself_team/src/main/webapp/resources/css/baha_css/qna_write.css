@@ -1,0 +1,43 @@
+#header {
+	width:100%;
+	height:37px;
+	background:#3a8aa2;
+}
+
+h1 {
+	font-size:14px;
+	color:white;
+	line-height: 20px;
+}
+
+form {
+	margin-top:20px;
+}
+
+tbody tr td:nth-child(1) {
+	background:#F8F8F8;
+	text-align:center;
+	font-size:12px;
+}
+
+tbody tr:nth-child(1){
+	height:33.6px;
+}
+
+tbody tr td:nth-child(2) {
+	font-size:12px;
+}
+
+#subject {
+	width:242px;
+}
+
+#content {
+	width:484px;
+	height:96px;
+}
+
+#buttons{
+	text-align:center;
+	margin-top: 10px;
+}
