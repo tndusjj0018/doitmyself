@@ -93,7 +93,7 @@
 			<div class="content">
 			  <div class="row">
 			    <div class="col-md-10">
-			      <div class="card card-user">
+			      <div class="card card-user" style="width:1100px;">
 			        <div class="card-header">
 			          <h5 class="card-title">WISH LIST<span class="badge" style="margin-left: 15px; position: relative; top: -4px;">${wishcount }</span></h5>
 			        </div>
