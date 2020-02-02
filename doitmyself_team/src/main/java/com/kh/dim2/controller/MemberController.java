@@ -627,6 +627,7 @@ public class MemberController {
 //		mv.addObject("endpage", endpage);
 		mv.addObject("qnacount", qnacount);
 		mv.addObject("qnalist", qnalist);
+		mv.addObject("qnaCate", qnaCate);
 		mv.setViewName("member/qnaList");
 		return mv;
 	}

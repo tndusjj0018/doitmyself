@@ -90,7 +90,7 @@
 	</update>
 	
 	<!-- QNA 리스트 -->
-	<select id="qnalist3" resultType="q_product" parameterType="HashMap">
+	<select id="qnalist1" resultType="q_product" parameterType="HashMap">
 		select * from (select rownum rnum, b.*
 						from (select * from QNA_TBL, PRODUCT_TBL
 								WHERE QNA_P_NO = P_NO

@@ -98,7 +98,7 @@
 			<div class="content" style="margin-bottom: 110px">
 			  <div class="row">
 			    <div class="col-md-10">
-			      <div class="card card-user">
+			      <div class="card card-user" style="width:1100px;">
 			        <div class="card-header">
 			          <h5 class="card-title">주문 / 배송 조회</h5>
 			        </div>
