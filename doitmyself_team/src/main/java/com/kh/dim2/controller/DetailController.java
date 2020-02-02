@@ -126,8 +126,9 @@ public class DetailController {
 	@ResponseBody
 	@RequestMapping(value = "/QnaListAjax.bo")
 	public Object QnaListAjax(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit) throws Exception {
-		List<Qna> qnalist = qnasvc.getQnaList(page, limit);
+			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit,
+			@RequestParam(value="P_NO") int p_no) throws Exception {
+		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit);
 		return qnalist;
 
 	}
@@ -198,7 +199,7 @@ public class DetailController {
 		// 문의글 페이지네이션
 		int limit = 10; // 한 화면에 출력할 레코드 갯수
 
-		int listcount = qnasvc.getListCount(); // 총 리스트 수를 받아옴
+		int listcount = qnasvc.getListCount(p_no); // 총 리스트 수를 받아옴
 
 		// 총 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
@@ -212,8 +213,8 @@ public class DetailController {
 		if (endpage > maxpage)
 			endpage = maxpage;
 
-		List<Qna> qnalist = qnasvc.getQnaList(page, limit);
-
+		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit);
+       
 		mv.addObject("qnalist", qnalist); // 문의글 집합 목록
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);

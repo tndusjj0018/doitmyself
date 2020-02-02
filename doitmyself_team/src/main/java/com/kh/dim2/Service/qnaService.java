@@ -13,10 +13,10 @@ public interface qnaService {
 	public int insertQna(Qna qna);
 
 	//문의글 갯수 구하기
-	public int getListCount();
+	public int getListCount(int p_no);
 
 	//문의글 목록 보기
-	public List<Qna> getQnaList(int page, int limit);
+	public List<Qna> getQnaList(int p_no, int page, int limit);
 
 	//문의글 수정
 	public int qnaUpdate(Qna qna);

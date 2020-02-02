@@ -385,7 +385,7 @@
 									<c:if
 											test="${USER_ID eq qna.QNA_WRITER}">
 											<a
-												onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');"
+												onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes');"
 												id='qnaUpdate'> 수정 </a>
 											&emsp;
 											<a href='qnaDelete?QNA_NO=${qna.QNA_NO }' id='qnaDelete'>삭제</a><hr>
@@ -453,8 +453,9 @@
 
 					<span class="qnaWrite">
 						<button
-							onclick="window.open('qnaWrite','qnaWrite_pop','width=430,height=500,location=no,status=no,scrollbars=yes');">상품
+							onclick="window.open('qnaWrite?QNA_P_NO=${prdData.p_NO}','qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes');">상품
 							문의하기</button>
+							
 					</span>
 
 				</div>
