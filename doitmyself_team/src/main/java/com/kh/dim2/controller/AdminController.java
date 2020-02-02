@@ -1,6 +1,7 @@
 package com.kh.dim2.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -424,12 +425,14 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List list = adminService.getCategoryNoList();//대분류 카테고리 넘버의 맨 앞자리만 받아온다. ex)C_NO = 300 일때 3
 		List name = adminService.getCategoryName();//대분류 카테고리 이름
+		List<Object> statics = new ArrayList<Object>();
 		System.out.println(list);
 		System.out.println("list의 size="+list.size());
 		map.put("name", name);
-		for(int i = 0 ;i<list.size();i++) {
-			map.put((String)name.get(i), adminService.getCategoryStatics(list.get(i)));
+		for(int i = 0 ;i<list.size();i++) {//대분류 카테고리 별로 주문 수 구하기
+			statics.add(adminService.getCategoryStatics(list.get(i)));
 		}
+		map.put("statics", statics);
 		
 		return map;
 	}

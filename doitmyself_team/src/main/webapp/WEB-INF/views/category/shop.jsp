@@ -143,7 +143,7 @@
     		})//click end
     		
     		$(".list li").click(function(){
-                        $(".productsection").empty();
+                $(".productsection").empty();
     			search_word="";
     			$(".productsearch").val('');
     			var list_name = $(this).text();
@@ -161,7 +161,7 @@
     			}else{
     				productList();
     			}
-    		})
+    		});
     	})
     	
     </script>
@@ -227,7 +227,7 @@
 		                   <li class="main_li3" value="300">취미</li>
 		                   <li class="sub_li" value="311">드로잉</li>
 		                   <li class="sub_li" value="312">미니어쳐</li>
-		                   <li class="sub_li" value="313">캔들&향수</li>
+		                   <li class="sub_li" value="313">캔들/향수</li>
 		                   <li class="sub_li" value="314">슬라임</li>
 		                   <li class="sub_li" value="315">액세서리</li>
 		                 </ul>
@@ -271,6 +271,7 @@
       <div class="container">
       	<div class="row">
       		<div class="mouse">
+						<a>	
 							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
 						</a>
 					</div>
