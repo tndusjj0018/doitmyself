@@ -54,7 +54,8 @@
 				}
 		.main_li1,.main_li2,.main_li3,.allcategory_li{
 			list-style-type: none;
-		}	    
+		}
+		.heart_background{ background: red!important;}	    
     </style>
       <script>
       
@@ -132,6 +133,9 @@
 	    						//output += "						<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>";
 	    						//output += "							<span><i class='ion-ios-cart'></i></span>";
 	    						//output += "						</a>";
+	    						
+	    						//찜하기 되어 있을 경우 .heart_background a태그에 주어야함
+	    						
 	    						output += "						<a href='javascript:dibs("+this.p_NO+")' class='heart d-flex justify-content-center align-items-center '>";
 								output += "							<span><i class='ion-ios-heart'></i></span>"
 								output += "						</a>"
