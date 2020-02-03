@@ -47,7 +47,7 @@
 					    border: 1px solid lightgray;}
     	.productsearch::placeholder{color:lightgrey;text-indent: 38%;} 
     	.searchbtn{    height: 40px;
-    width: 57px;background: #87cfea;
+    	width: 57px;background: #87cfea;
     				color: white;border: none;}
 		.ftco-animate {
     				display: inline-block;
@@ -67,9 +67,9 @@
 					data:{P_NO:p_NO, D_USER_ID:"${USER_ID}"},
 					success:function(rdata){
 						if(rdata == 2){
-							console.log("찜 취소 완료")
+							console.log("찜 취소 완료");
 						}else{
-							console.log("찜 하기 완료")
+							console.log("찜 하기 완료");
 						}
 					},
 					error:function(){
@@ -84,6 +84,26 @@
     	  	}
     	  
 		}//function dibs end
+		
+		function ProductDibsCheck(P_NO,USER_ID){
+			$.ajax({
+				type:"POST",
+				url:"ProductDibsCheck",
+				data:{P_NO:P_NO,D_USER_ID:USER_ID},
+				async:false,
+				success:function(rdata){
+					console.log(rdata);
+					if(rdata == null){
+						
+					}else{
+						
+					}
+				},
+				error:function(){
+					
+				}
+			})
+		}
 		
     	$(document).ready(function(){
     		var num = 1;// 더보기를 누를 때 마다 num 의 값은 1씩 증가함

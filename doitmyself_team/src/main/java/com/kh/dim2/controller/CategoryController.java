@@ -72,4 +72,17 @@ public class CategoryController {
 		
 		return result;
 	}
+	
+	//상품 리스트를 보여줄 때 찜인 상품과 찜이 아닌 상품을 구별
+	@ResponseBody
+	@PostMapping("ProductDibsCheck")
+	public int ProductDibsCheck(int P_NO, @RequestParam(value = "D_USER_ID",required = true)String D_USER_ID) {//0: 찜이 되어있지 않은 상품
+		int result = 0;
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("P_NO", P_NO);
+		map.put("D_USER_ID", D_USER_ID);
+		String check = categoryService.checkDibs(map);
+		
+		return result;
+	}
 }
