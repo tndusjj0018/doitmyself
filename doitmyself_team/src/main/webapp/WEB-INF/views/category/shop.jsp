@@ -60,8 +60,13 @@
     	$(document).ready(function(){
     		var num = 1;// 더보기를 누를 때 마다 num 의 값은 1씩 증가함
     		var option = $(".order_option").val();
-    		var category = "";
+    		var category = "all";
+    		
+    		if("${category}"){
+    			category = "${category}";
+    		}
     		var search_word = "";
+    		
     		function productList(){
     			console.log("더보기 할 번호는 = "+ num);
     			console.log("정렬 순서는 ="+option);
@@ -108,22 +113,22 @@
 	    						output += "			</div>";
 	    						output += "		</div>";
 	    						output += "</div>"
-	    						if((index+1)/4 == 0){//한 줄에 4개씩 띄워주기
+	    						if(((index+1)/4) == 0){//한 줄에 4개씩 띄워주기
 	    							output+="<br>";
-	    						}
+	    						}//if end
 	    						
 	    					})//each end
 	    					if(rdata.listcount>rdata.end){
 	    						output += "<div class='view_more'>더보기▼</div>";
-	    					}
+	    					}//if end
     					}//else end
     					$(".productsection").append(output);
     					
     				},
     				error:function(){
     					console.log("실패");
-    				}
-    			})
+    				}//error end
+    			})//ajax end
     		};//function productList end
     		
     		//처음 페이지 로드 시 실행
@@ -208,7 +213,7 @@
             	<div class="col-md-3 col-sm-3 sidebar2">
                 	<div class="left-navigation">
                 		<ul class="list">
-                			<li class="allcategory_li">모든 상품 보기</li>
+                			<li class="allcategory_li" value = "ALL">모든 상품 보기</li>
                 		</ul>
                     	<ul class="list">
 		                   <li class="main_li1" value="100">가구</li>

@@ -93,4 +93,6 @@ public interface AdminService {
 	
 	public int getExchangeListCount();
 
+	public Object getOrderStatics(int i);
+
 }

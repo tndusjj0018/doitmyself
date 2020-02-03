@@ -17,11 +17,14 @@
 		var pagination = function(page, startpage, maxpage){
 			$(".clearfix").empty();
 			console.log("function pagination");
+			console.log("startpage="+startpage);
+			console.log("maxpage="+maxpage);
+			
 			pageoutput = "";
 			//페이지네이션 내용
 			pageoutput += "<ul class='pagination pull-right'>";
-			if(startpage<page){//이전페이지가 존재할 때
-				pageoutput += "<li><a href='javasript:go("+(page-1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+			if(startpage < page){//이전페이지가 존재할 때
+				pageoutput += "<li><a href='javascript:go("+(page-1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
 			}else{//이전페이지가 존재하지 않을 때
 				pageoutput += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";	
 			}
@@ -35,7 +38,7 @@
 				
 			}
 			if(page<maxpage){//다음페이지가 존재할 때
-				pageoutput += "<li><a href='javasript:go("+(page+1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+				pageoutput += "<li><a href='javascript:go("+(page+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
 			}else{//다음페이지가 존재하지 않을 때
 				pageoutput += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";	
 			}
@@ -43,7 +46,6 @@
 			
 			$(".clearfix").append(pageoutput);
 		}//function pagination end
-		$(document).ready(function(){
 			var num = 1;
 			function refundList(){
 				$.ajax({
@@ -113,6 +115,7 @@
 					}//error end
 				})
 			}//function refundList end
+		$(document).ready(function(){
 			
 			//최초 실행
 			refundList();
