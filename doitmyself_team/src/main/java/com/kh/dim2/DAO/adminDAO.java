@@ -114,8 +114,8 @@ public class adminDAO {
 		return sqlSession.delete("Admin.DeleteSeller",SELLER_NO);
 	}
 
-	public List<Order> getOrderList() {
-		return sqlSession.selectList("Admin.getOrderList");
+	public List<Order> getOrderList(Map<String, Object> map) {
+		return sqlSession.selectList("Admin.getOrderList",map);
 	}
 
 	public int updateMajorCategory(Map<String, Object> map) {
@@ -133,12 +133,12 @@ public class adminDAO {
 		return sqlSession.delete("Admin.DeleteMajorCategory",category_name);
 	}
 
-	public List<Refund> getRefundList() {
-		return sqlSession.selectList("Admin.getRefundList");
+	public List<Refund> getRefundList(Map<String, Object> map) {
+		return sqlSession.selectList("Admin.getRefundList",map);
 	}
 
-	public List<Order> getExchangeList() {
-		return sqlSession.selectList("Admin.getExchangeList");
+	public List<Order> getExchangeList(Map<String, Object> map) {
+		return sqlSession.selectList("Admin.getExchangeList",map);
 	}
 
 	public List getCategoryNoList() {
@@ -151,6 +151,18 @@ public class adminDAO {
 
 	public Object getCategoryStatics(Object category) {
 		return sqlSession.selectOne("Admin.getCategoryStatics",category);
+	}
+
+	public int getOrderListCount() {
+		return sqlSession.selectOne("Admin.getOrderListCount");
+	}
+
+	public int getRefundListCount() {
+		return sqlSession.selectOne("Admin.getRefundListCount");
+	}
+
+	public int getExchangeListCount() {
+		return sqlSession.selectOne("Admin.getExchangeListCount");
 	}
 	
 

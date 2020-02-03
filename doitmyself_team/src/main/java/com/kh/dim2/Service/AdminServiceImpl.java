@@ -71,12 +71,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Review> getReviewList(int page, int limit, String orderBy) {
+	public List<Review> getReviewList(Map<String, Object> map) {
 		System.out.println("여기는 AdminServiceImpl의 getReviewList()");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("page", page);
-		map.put("limit", limit);
-		map.put("orderBy", orderBy);
 		return adminDAO.getReviewList(map);
 	}
   
@@ -189,8 +185,8 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public List<Order> getOrderList() {
-		return adminDAO.getOrderList();
+	public List<Order> getOrderList(Map<String, Object> map) {
+		return adminDAO.getOrderList(map);
 	}
 
 
@@ -219,14 +215,14 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public List<Refund> getRefundList() {
-		return adminDAO.getRefundList();
+	public List<Refund> getRefundList(Map<String, Object> map) {
+		return adminDAO.getRefundList(map);
 	}
 
 
 	@Override
-	public List<Order> getExchangeList() {
-		return adminDAO.getExchangeList();
+	public List<Order> getExchangeList(Map<String, Object> map) {
+		return adminDAO.getExchangeList(map);
 	}
 
 
@@ -245,6 +241,24 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Object getCategoryStatics(Object category) {
 		return adminDAO.getCategoryStatics(category);
+	}
+
+
+	@Override
+	public int getOrderListCount() {
+		return adminDAO.getOrderListCount();
+	}
+
+
+	@Override
+	public int getRefundListCount() {
+		return adminDAO.getRefundListCount();
+	}
+
+
+	@Override
+	public int getExchangeListCount() {
+		return adminDAO.getExchangeListCount();
 	}
 
 
