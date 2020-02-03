@@ -132,7 +132,8 @@
     		$(".order_option").change(function(){
     			console.log("select = "+$(this).val());
     			option = $(this).val();
-    			$(".productsection").empty();//정렬 방법을 바꿀 시  비우고 다시 띄워줌 
+    			$(".productsection").empty();//정렬 방법을 바꿀 시  비우고 다시 띄워줌
+    			num = 1;
     			productList();	
     		})//change end
     		
@@ -149,6 +150,7 @@
     			var list_name = $(this).text();
     			category = $(this).val();
     			console.log("클릭한 메뉴는 "+list_name + "/ category 번호는 = "+category);
+    			num = 1;
     			productList();
     		})
     		
@@ -159,6 +161,7 @@
     			if(search_word == "" || search_word == null){
     				alert("검색어를 입력하세요");
     			}else{
+	    			num = 1;
     				productList();
     			}
     		});
