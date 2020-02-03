@@ -1,10 +1,11 @@
-div {
+#BodyWrap {
    margin: 0 auto;
 }
 
-table {
+.table_DetailCheck .table_InfoCheck .table_PayMethod .table_TotalPrice{
    border-collapse: collapse;
 }
+
 
 .table_DetailCheck {
    width: 1000px;
@@ -86,7 +87,7 @@ table {
 }
 
 .table_InfoCheck tr td:first-child {
-   font-weight: bold
+   font-weight: bold;
 }
 
 .table_InfoCheck td:nth-child(odd) {
@@ -150,6 +151,7 @@ font-weight: bold;
 .table_TotalPrice tr:nth-child(4) {
    height: 30px;
    border-top: hidden;
+   border-bottom:hidden;
 }
 
 .table_TotalPrice tr:nth-child(-n+2) {

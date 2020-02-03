@@ -15,7 +15,9 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="resources/js/baha_js/iamport.js"></script>
+<link rel="stylesheet" href="resources/css/baha_css/style.css">
 <head>
+<jsp:include page="../main/header.jsp" />
 <link rel="stylesheet" href="resources/css/baha_css/pay.css">
 <script>
 
@@ -60,7 +62,7 @@
 							</div>
 						</td>
 						<td class="td_prdWrap">
-							<div class="prd_Name">${prdInfo.p_NAME }</div>
+							<div class="prd_Name"><span id="pname">${prdInfo.p_NAME }</span></div>
 						</td>
 						<td>
 							<div class="prd_Count">
@@ -86,8 +88,8 @@
 				<tbody>
 					<tr>
 						<td>배송지 선택</td>
-						<td><label><input type="radio" name="loc" id="dft"
-								checked>기본배송지</label> <label><input type="radio"
+						<td><label><input type="radio" class="addrchk" name="loc" id="dft"
+								checked>기본배송지</label> <label><input type="radio" class="addrchk"
 								name="loc" id="input">직접입력</label></td>
 					</tr>
 					<tr class="default">
@@ -102,8 +104,7 @@
 							type="button" value="주소 찾기"></td>
 					</tr>
 					<tr class="default">
-						<td><input type="hidden" id="info_address1"
-							value="${locInfo.USER_ADDRESS }"></td>
+						<td><input type="hidden" id="info_address1" value="${locInfo.USER_ADDRESS}"></td>
 						<td><input type="text" class="info_loc2" name="USER_ADDRESS"
 							value="${locInfo.USER_ADDRESS}"></td>
 					</tr>
@@ -129,12 +130,12 @@
 					</tr>
 					<tr class="put">
 						<td>주소</td>
-						<td><input type="text" class="info_loc1" name="USER_POSTCODE">&ensp;<input
+						<td><input type="text" class="info_loc1" name="USER_POSTCODE" id="input_postcode" value="">&ensp;<input
 							type="button" value="주소 찾기"></td>
 					</tr>
 					<tr class="put">
 						<td></td>
-						<td><input type="text" class="info_loc2" name="USER_ADDRESS"></td>
+						<td><input type="text" class="info_loc2" name="USER_ADDRESS" id="input_address" value=""></td>
 					</tr>
 					<tr class="put">
 						<td>연락처</td>
@@ -155,8 +156,8 @@
 			<table class="table_PayMethod" border="1">
 				<thead>
 					<tr>
-						<td><label><input type="radio" name="pay">신용카드</label>
-							&ensp;<label><input type="radio" name="pay">무통장입금</label>
+						<td>&emsp;<label><input type="radio" name="pay" id="kaka">카카오페이</label>
+							
 						</td>
 					</tr>
 				</thead>
@@ -179,15 +180,13 @@
 						<td><span id="totalprice"></span>원</td>
 					</tr>
 					<tr>
-						<td>&nbsp;&nbsp;&nbsp;현금 영수증 신청<br></td>
+						<td></td>
 					</tr>
 					<tr>
-						<td><label>&nbsp;&nbsp;<input type="radio"
-								name="receipt">신청
-						</label> <label><input type="radio" name="receipt">미신청</label></td>
+						<td></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">개인정보
+						<td>&nbsp;<label><input type="checkbox" id="chk1">개인정보
 								판매자 제공에 동의합니다.</label></td>
 					</tr>
 					<tr>
@@ -198,7 +197,7 @@
 보유기간 : 구매확정 후 3개월까지></textarea></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">개인정보
+						<td>&nbsp;<label><input type="checkbox" id="chk2">개인정보
 								수집 및 이용에 동의합니다.</label></td>
 					</tr>
 					<tr>
@@ -218,19 +217,19 @@
 결제수단에 따른 개인정보 수집.이용 항목이 상이할 수 있음</textarea></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">주문
+						<td>&nbsp;<label><input type="checkbox" id="chk3">주문
 								상품정보에 동의</label></td>
 					</tr>
 					<tr>
 						<td><textarea class="agree">주문 상품의 상품명,가격,배송정보에 동의합니다.</textarea></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">위 내용을
+						<td>&nbsp;<label><input type="checkbox" id="allchk">위 내용을
 								확인하였으며 모든 내용에 동의합니다.</label></td>
 					</tr>
 					<tr>
 						<td>				
-						
+
 								<input type="hidden" id="ORDER_P_NO" name="ORDER_P_NO" value="${prdInfo.p_NO }">
 								<input type="hidden" id="ORDER_ID" name="ORDER_ID" value="${USER_ID}">
 								<input type="hidden" id="ORDER_CATEGORY" name="ORDER_CATEGORY" value="${prdInfo.p_CATEGORY_NO}">
