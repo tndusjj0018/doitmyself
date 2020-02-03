@@ -30,8 +30,11 @@ import com.kh.dim2.Service.SellerService;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
+
+import oracle.net.aso.s;
 
 @Controller  
 public class SellerController {
@@ -312,6 +315,65 @@ public class SellerController {
 		}else {
 			out.println("confirm('수정하시겠습니까?')");
 			out.println("setTimeout(function(){location.href='seller?doc=seller_sale';}, 2000);");
+		}
+		out.println("</script>");
+	}
+	
+	//## 배송상태 처리 ##
+	@ResponseBody
+	@PostMapping(value="/orderDelivery")
+	public void orderStatus(@RequestParam("ORDER_P_NO")int P_NO,
+							@RequestParam(value="ORDER_TRNO", required=false)int ORDER_TRNO,
+							@RequestParam("orderDeliveryVal")int orderDeliveryVal) {
+		System.out.println("ORDER_P_NO = " + P_NO);
+		int result = sellerService.orderStatus(P_NO, ORDER_TRNO, orderDeliveryVal);
+		if(result == 1) {
+			System.out.println("주문상태 변경 완료");
+		}else {
+			System.out.println("주문상태 변경 실패");
+		}
+	}
+	
+	//## 상품문의 답변 리스트 ##
+	@ResponseBody
+	@PostMapping(value="/sellerQna")
+	public List<Qna> sellerQna(@RequestParam("USER_ID")String USER_ID){
+		//@RequestParam("qnaSelect")String qnaSelect
+		List<Qna> list = sellerService.sellerQna(USER_ID);
+		return list; 
+	}
+	
+	//## 질문 답변 페이지 ##
+	@GetMapping(value="/QnaReplyView")
+	public ModelAndView QnaReplyView(int q_p_no, ModelAndView mv) {
+		Qna qnaView = sellerService.QnaReplyView(q_p_no);
+		System.out.println(q_p_no);
+		mv.setViewName("seller/seller_nav");
+		mv.addObject("doc", "QnaReplyView"); // QnaReplyView.jsp 이동
+		mv.addObject("qnaView", qnaView);
+		
+		return mv;
+	}
+	
+	//## 질문 답변 답변작성 ##
+	@GetMapping(value="/QnaUpdate")
+	public void QnaUpdate(HttpServletResponse response,
+							int QnaNo, String QnaAnswer)throws Exception {
+		int result = sellerService.QnaUpdate(QnaNo, QnaAnswer);
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		//수정 실패한 경우
+		out.println("<script>");
+		if(result == 0) {
+			out.println("alert('답변작성 실패')");
+			out.println("history.back()");
+		}else {
+			//out.println("confirm('수정하시겠습니까?')");
+			out.println("alert('답변작성 완료')");
+			out.println("location.href='seller?doc=seller_qna'");
 		}
 		out.println("</script>");
 	}

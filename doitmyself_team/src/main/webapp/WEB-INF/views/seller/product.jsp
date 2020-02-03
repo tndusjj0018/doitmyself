@@ -15,44 +15,6 @@
             </div>
             <a class="navbar-brand" href="#pablo">상품등록 페이지</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link btn-magnify" href="#pablo">
-                  <i class="nc-icon nc-layout-11"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-bell-55"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="#pablo">
-                  <i class="nc-icon nc-settings-gear-65"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
       </nav>
       <!-- End Navbar -->
@@ -80,7 +42,7 @@
             	<table class="product_tb">
             		<tr>
             			<th class="p_th">상품명</th>
-            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME"></td>            			
+            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME" required></td>            			
             		</tr>
             		<tr>
             			<th class="p_th">사업지 명</th>
@@ -93,7 +55,7 @@
             			<td class="p_td">
             				<div id="main_cate">
             				<span>대분류</span>
-	            				<select size="3" id="main_cate_select">
+	            				<select size="3" id="main_cate_select" required>
 	            				
 	            				</select>
             				</div>
@@ -102,7 +64,7 @@
             				
             				<div id="sub_cate">
             				<span>소분류</span>
-	            				<select size="3" id="sub_cate_select">
+	            				<select size="3" id="sub_cate_select" required>
 	            					<option value="">-선택-</option>
 	            				</select>
             				</div>
@@ -123,11 +85,11 @@
             		<tr>
             			<th class="p_th">재고 수량</th>
             			<td class="p_td">
-            				<input type="text" name="P_QUANTITY" id="p_qa" maxlength="5"> 개
+            				<input type="text" name="P_QUANTITY" id="p_qa" maxlength="5" required> 개
             			</td>            			
             			<th class="p_th">가격</th>
             			<td class="p_td">
-            				<input type="text" id="p_price" maxlength="13"> 원
+            				<input type="text" id="p_price" maxlength="13" required> 원
             				<!-- 콤마뺀가격 저장 -->
             				<input type="hidden" id="p_price_removeComma" name="P_PRICE" maxlength="13">
             			</td>

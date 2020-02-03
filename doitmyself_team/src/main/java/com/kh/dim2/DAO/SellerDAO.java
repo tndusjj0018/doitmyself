@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
@@ -61,6 +62,22 @@ public class SellerDAO {
 
 	public int productUpdate(Product product) {
 		return sqlSession.update("Seller.productUpdate", product);
+	}
+
+	public int orderStatus(HashMap<String, Integer> map) {
+		return sqlSession.update("Seller.orderDelivery", map);
+	}
+
+	public List<Qna> sellerQna(String USER_ID) {
+		return sqlSession.selectList("Seller.sellerQna", USER_ID);
+	}
+
+	public Qna QnaReplyView(int q_p_no) {
+		return sqlSession.selectOne("Seller.QnaReplyView", q_p_no);
+	}
+
+	public int QnaUpdate(HashMap<String, Object> map) {
+		return sqlSession.update("Seller.QnaUpdate", map);
 	}
 
 }

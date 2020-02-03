@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<script src="resources/yeop/js/seller_sale.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="resources/yeop/js/seller_qna.js"></script>
+<style>
+	.orderList-tb thead>tr{background:#3c8dbcc9; color:white;}
+	.orderList-tb tbody>tr>td{height:38px;}
+	.qnaWriter{color:red;}
+	.orderList-tb tbody>tr:hover{cursor:pointer;}
+</style>
 <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -13,7 +20,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">상품관리 페이지</a>
+            <a class="navbar-brand" href="#pablo">상품문의 답변 페이지</a>
           </div>
         </div>
       </nav>
@@ -29,18 +36,17 @@
           <div class="col-md-12">
             <div class="card card-1 card-order">
               <div class="card-header">
-                <h5 class="title">상품관리</h5>
-                <p class="category">*판매자가 등록한상품 보기, 수정, 삭제</p>
+                <h5 class="title">상품문의 답변</h5>
+                <p class="category">*판매등록한 상품의 문의글 답변 페이지 입니다.</p>
                 <hr>
               </div>
                	 <div class="card-body">
-              	<h5 class="order-h5">[총 상품등록수 : <span class="saleCount">0</span>개]</h5>
+              	<h5 class="order-h5">[총 글의 수 : <span class="saleCount">0</span>개]</h5>
               	
               	<div class="orderList">
-	              	<select class="saleSelect">
-						<option value="P_REGDATE">등록일순</option>              	
-						<option value="P_QUANTITY">재고수량순</option>              	
-						<option value="P_PRICE">가격순</option>              	
+	              	<select class="qnaSelect">
+						<option value="Q_REGDATE">등록일순</option>              	
+						<option value="Q_QUANTITY">답변여부</option>              	
 	              	</select>
               	</div>
               	
@@ -48,16 +54,16 @@
             	<table class="orderList-tb">            	
 	            	<thead>
 	            		<tr>
-	            			<td>등록일</td>
-	            			<td>상품이름</td>
-	            			<td>가격</td>
-	            			<td>재고수량</td>
-	            			<td>찜, 조회수</td>
-	            			<td>상품관리</td>
+	            			<td width="10%">작성일</td>
+	            			<td width="13%">질문 분류</td>
+	            			<td width="10%">상품번호</td>
+	            			<td width="30%">제목</td>
+	            			<td width="14%">작성자</td>
+	            			<td>답변여부</td>
 	            		</tr>
 	            	</thead>
 	            	<tbody>
-	            		<!-- sale ajax -->
+	            		<!-- qna ajax -->
 	            	</tbody>
             	</table>
             	<div id="message"></div>
