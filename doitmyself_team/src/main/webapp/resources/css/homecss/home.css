@@ -53,6 +53,11 @@ fieldset {
           flex-grow: 1;
 }
 
+.enter:hover{
+	color:black;
+	cursor:pointer;
+}
+
 label {
   position: absolute;
   top: -5px;
