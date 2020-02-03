@@ -3,14 +3,29 @@ $(function() {
 	   IMP.init('imp62546931');  // 가맹점 식별 코드
 	   
 $('#paygo').click(function () {
-	
-
+	var chk1 = $('#chk1').is(":checked")
+	var chk2 = $('#chk2').is(":checked")
+	var chk3 = $('#chk3').is(":checked")
+	var paychk = $('#kaka').is(":checked")
+	if(chk1==false){
+		alert('개인정보 판매자 제공에 동의하셔야 합니다.');
+		return false;
+	} else if (chk2==false) {
+		alert('개인정보 수집 및 이용에 동의하셔야 합니다.');
+		return false;
+	} else if (chk3==false) {
+		alert('주문 상품 정보에 동의하셔야 합니다.');
+		return false;
+	} else if (paychk==false){
+		alert('결제 방식을 선택하셔야 합니다.');
+		return false;
+	} else {
 
 	   IMP.request_pay({
 	      pg : 'kakao', // 결제방식
 	       pay_method : 'card',	// 결제 수단
 	       merchant_uid : 'merchant_' + new Date().getTime(),
-	      name : '주문명: 결제 테스트',	// order 테이블에 들어갈 주문명 혹은 주문 번호
+	      name : $('#pname').text(),	// order 테이블에 들어갈 주문명 혹은 주문 번호
 	       amount : $('#totalprice').text(),	// 결제 금액
 	       buyer_email : '',	// 구매자 email
 	      buyer_name :  $('#info_name1').val(),	// 구매자 이름
@@ -25,12 +40,13 @@ $('#paygo').click(function () {
 			msg += '결제 금액 : ' + rsp.paid_amount;
 			msg += '카드 승인번 : ' + rsp.apply_num;
 			location.href="/dim2/payComplete" +
-					"?ORDER_P_NO="+$('#ORDER_P_NO').val() + "&ORDER_ID=" +$('#ORDER_ID').val() + "&ORDER_CATEGORY=" +$('#ORDER_CATEGORY').val() + "&ORDER_PRICE=" + $('#ORDER_PRICE').val() + "&ORDER_PAYMENT=" +$('#ORDER_PAYMENT').val()+ "&ORDER_ADDRESS=" +$('#ORDER_ADDRESS').val()+ "&ORDER_SELLER=" +$('#ORDER_SELLER').val()+ "&ORDER_AMOUNT=" +$('#ORDER_AMOUNT').val()
+					"?ORDER_P_NO="+$('#ORDER_P_NO').val() + "&ORDER_ID=" + $('#ORDER_ID').val() + "&ORDER_CATEGORY=" +$('#ORDER_CATEGORY').val() + "&ORDER_PRICE=" + $('#ORDER_PRICE').val() + "&ORDER_PAYMENT=" +$('#ORDER_PAYMENT').val()+ "&ORDER_ADDRESS=" +$('#ORDER_ADDRESS').val()+ "&ORDER_SELLER=" +$('#ORDER_SELLER').val()+ "&ORDER_AMOUNT=" +$('#ORDER_AMOUNT').val()
 		} else { // 실패시
 			var msg = '결제에 실패하였습니다.';
 			msg += '에러내용 : ' + rsp.error_msg;
 		}
 	});
-   
+}
 })
+
 })
