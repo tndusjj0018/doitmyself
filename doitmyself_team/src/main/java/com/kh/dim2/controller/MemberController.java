@@ -480,6 +480,8 @@ public class MemberController {
 				//바뀐 파일명으로 저장
 				review.setREVIEW_IMG(refileName);
 				System.out.println("refileName = " + refileName);
+			} else {
+				review.setREVIEW_IMG("noimage.jpg");
 			}
 			
 			memberservice.reviewWrite(review);
@@ -811,8 +813,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="cartpay")
-	public String cartpay() {
-		return "detail/pay";
+	public ModelAndView cartpay(ModelAndView mv,
+								HttpSession session,
+								@RequestParam("total") int total) {
+		
+		String user_id = session.getAttribute("USER_ID").toString();
+		Member m = memberservice.memberInfo(user_id);
+		System.out.println("장바구니" + user_id);
+		mv.addObject("total", total);
+		mv.addObject("memberinfo", m);
+		mv.setViewName("member/cartpay");
+		return mv;
 	}
 	
 	
