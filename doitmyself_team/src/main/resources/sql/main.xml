@@ -54,8 +54,8 @@
 		ORDER BY P_NO DESC
 	</select>
 
-	<select id="getRecent_View_List" resultType="recent_view" parameterType="String">
-		SELECT PT.P_IMG , RVT.RV_NO FROM
+	<select id="getRecent_View_List" resultType="map" parameterType="String">
+		SELECT PT.P_IMG img , RVT.RV_NO no FROM
 		RECENT_VIEW_TBL RVT JOIN PRODUCT_TBL PT
 		ON RV_P_NO = P_NO
 		WHERE RV_ID = #{USER_ID}
@@ -95,4 +95,11 @@
 		WHERE USER_ID=#{USER_ID}
 	</select>
 	
+	<insert id="Add_Recent" parameterType="map">
+		INSERT INTO
+		RECENT_VIEW_TBL
+		VALUES(
+			#{USER_ID} , #{P_NO} , SYSDATE , RECENT_VIEW_SEQ.NEXTVAL
+		)
+	</insert>
 </mapper>

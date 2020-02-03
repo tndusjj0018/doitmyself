@@ -62,4 +62,27 @@
 	<!-- maxUploadSize : 한 번의 Request로 전달될 수 있는 최대의 크기를 의미합니다.
 		 name="maxUploadSize"를 지정하지 않으면 기본으로 "-1"이 설정되는데,
 		  파일 크기가 무제한이라는 의미입니다. -->
+		  
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	      <property name="host" value="smtp.gmail.com" />
+	      <property name="port" value="587" />
+	      <property name="defaultEncoding" value="utf-8"/>
+	      <property name="username" value="dende1594" />
+	      <property name="password" value="tk1455tk55" />
+	    
+	
+	      <!-- email 요청시는 SMTP -->
+	      <property name="javaMailProperties">
+	         <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.debug">true</prop>
+	         </props>
+	      </property>
+	   </bean>
+	<bean id="email" class="com.kh.dim2.domain.Mail">
+	</bean>
+	<bean id="emailSender" class="com.kh.dim2.task.SendMail">
+	</bean>		  
 </beans>

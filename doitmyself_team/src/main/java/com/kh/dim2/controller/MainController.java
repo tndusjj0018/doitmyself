@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,15 +27,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.dim2.Service.MainService;
+import com.kh.dim2.domain.Mail;
 import com.kh.dim2.domain.Member;
 import com.kh.dim2.domain.Product;
 import com.kh.dim2.domain.Recent_View;
+import com.kh.dim2.task.SendMail;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	public MainService mainService;
+	
+	private Mail mail;
+	
+	private SendMail sendMail;
 	
 	private String access_token = "";
 	
@@ -55,6 +62,15 @@ public class MainController {
 		String state = generateState();
 		// 세션에 상태 토큰을 저장
 		session.setAttribute("StringState", state);
+		
+		if(session.getAttribute("USER_ID") != null) {
+			String USER_ID = session.getAttribute("USER_ID").toString();
+			int recentView_Count = mainService.recentViewCount(USER_ID);
+			if(recentView_Count > 0) {
+				List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
+				mv.addObject("recentView", recentViewList);
+			}
+		}
 		
 		mv.addObject("newDim" , NewproductList);
 		mv.addObject("bestDim" , BestproductList);
@@ -140,7 +156,7 @@ public class MainController {
 			session.setAttribute("SELLER_RESULT" , seller_result);
 			
 			if(recentView_Count > 0) {
-				List<Recent_View> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
+				List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
 				mv.addObject("recentView", recentViewList);
 			}
 			mv.addObject("newDim" , NewproductList);
@@ -296,7 +312,7 @@ public class MainController {
 						session.setAttribute("SELLER_RESULT" , seller_result);
 						
 						if(recentView_Count > 0) {
-							List<Recent_View> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM
+							List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM
 							mv.addObject("recentView", recentViewList);
 						}
 						mv.addObject("newDim" , NewproductList);
@@ -330,7 +346,7 @@ public class MainController {
 							session.setAttribute("N_NAME", N_Name);
 							
 							if(recentView_Count > 0) { //최근 본 DIM가 있을 시
-								List<Recent_View> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM 리스트 추출
+								List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM 리스트 추출
 								mv.addObject("recentView", recentViewList);
 							}
 							mv.addObject("newDim" , NewproductList);
@@ -370,8 +386,9 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/Find_Pass" , method=RequestMethod.GET)
-	public String Find_Pass(HttpServletResponse response) throws Exception {
-		return "main/Find_Pass";
+	public String Find_Pass(HttpServletResponse response , ModelAndView mv) throws Exception {
+		
+			return "main/Find_Pass";
 	}
 
 	@RequestMapping(value="/check_findPass" , method=RequestMethod.POST)
@@ -383,5 +400,19 @@ public class MainController {
 		}
 		return "main/Find_Pass";
 	}
-	
+
+	@RequestMapping(value="/MailSender" , method = RequestMethod.GET)
+	@ResponseBody
+	public void MailSender(@RequestParam("USER_PASSWORD") String USER_PASSWORD , 
+			HttpServletResponse response , HttpSession session) throws Exception{
+		
+				String USER_ID = session.getId();
+				session.getAttribute(USER_PASSWORD);
+				mail.setContent("당신의 비밀번호는 " + USER_PASSWORD + " 입니다.");
+				mail.setReceiver(USER_PASSWORD);
+				mail.setSubject("안녕하세요 "+USER_ID + "님," + "USER_ID" + "님의 비밀번호를 확인해주세요");
+				sendMail.SendEmail(mail);
+				System.out.println(mail);
+				session.invalidate();
+	}
 }

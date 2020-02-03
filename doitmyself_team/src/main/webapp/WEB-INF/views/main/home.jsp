@@ -40,7 +40,7 @@
     			방금 본 DIM
     			<br>
     			<c:forEach var="rv" items="${recentView }" begin="0" end="3" step="1">
-					<img src="resources/upload/${rv.RV_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
+					<img src="resources/upload/${rv.IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
 				<br>
     			</c:forEach>
     		</c:if>
@@ -81,10 +81,7 @@
 		<form action="#" autocomplete="off" name="selectbox_form" id= "selectbox_form">
 		    	<fieldset class="url">
 					<select name=first onchange="firstChange()" size=1>
-						<option value='all'>전체</option>
-						<option value='101'>가구</option>
-						<option value='201'>음식</option>
-						<option value='301'>취미</option>
+						
 					</select>
 					
 					<c:if test=""></c:if>
@@ -160,8 +157,10 @@
     		<div class="row">
     			<c:forEach var="best" items="${bestDim}" begin="0" end="7" step="1">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="Product?No=${best.p_NO}" class="img-prod"><img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template">
+    				<div class="product product-add">
+    					<a href="detail?P_NO=${best.p_NO}" class="img-prod">
+    					<input type="hidden" name="Product_NO" value="${best.p_NO}">
+    					<img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -176,10 +175,7 @@
 	    							<a href="Product?No=${best.p_NO}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
     							</div>
@@ -206,8 +202,10 @@
     		<div class="row">
     			<c:forEach var="New" items="${newDim }" begin="0" end="11" step="1">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="Product?No=${New.p_NO }" class="img-prod"><img class="img-fluid" src="resources/upload/${New.p_IMG }" alt="Colorlib Template">
+    				<div class="product product-add">
+    					<a href="detail?P_NO=${New.p_NO }" class="img-prod">
+    					<input type="hidden" name="Product_NO" value="${New.p_NO}">
+    					<img class="img-fluid" src="resources/upload/${New.p_IMG }" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -219,12 +217,10 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="Product?No=${New.p_NO }" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    							<a href="detail?P_NO=${New.p_NO }" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
+	    						
 	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
@@ -329,8 +325,6 @@
 	     		}
 	     		getCart_count();
 	    	})
-	    	
-	    	$('')
 	    })
     </script>
   </body>
