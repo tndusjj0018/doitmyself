@@ -63,11 +63,11 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="product?category=100" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">가구</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="product?category=101">침실</a>
-                <a class="dropdown-item" href="product?category=102">주방</a>
-                <a class="dropdown-item" href="product?category=103">수납</a>
-                <a class="dropdown-item" href="product?category=104">거실</a>
-                <a class="dropdown-item" href="product?category=105">욕실</a>
+                <a class="dropdown-item" href="getProductList?category=101&num=101">침실</a>
+                <a class="dropdown-item" href="getProductList?category=" value="101">주방</a>
+                <a class="dropdown-item" href="category=" value="101">수납</a>
+                <a class="dropdown-item" href="category=104">거실</a>
+                <a class="dropdown-item" href="category=105">욕실</a>
               </div>
               </li>
                <li class="nav-item dropdown">
@@ -83,7 +83,7 @@
                <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="product?category=300" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">취미</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="product?category=311">드로잉</a>
+                <a class="dropdown-item" href="product?category=" value="103">드로잉</a>
                 <a class="dropdown-item" href="product?category=312">미니어쳐</a>
                 <a class="dropdown-item" href="product?category=313">캔들&향수</a>
                 <a class="dropdown-item" href="product?category=314">슬라임</a>

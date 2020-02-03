@@ -415,4 +415,65 @@ public class MainController {
 				System.out.println(mail);
 				session.invalidate();
 	}
+	
+	@RequestMapping(value="/Search_home" , method = RequestMethod.GET)
+	public ModelAndView memberList(
+			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			@RequestParam(value="limit", defaultValue="3", required=false) int limit, ModelAndView mv,
+			@RequestParam(value="search_field", defaultValue="-1") int index,
+			@RequestParam("search_word") String search_word ,
+			HttpSession session) throws Exception {
+		
+		System.out.println("index = " + index);
+		
+		List<Product> BestproductList = mainService.getBestProduct_List();
+		List<Product> NewproductList = mainService.getNewProduct_List();
+		
+		// 상태 토큰으로 사용할 랜덤 문자열 생성
+		String state = generateState();
+		// 세션에 상태 토큰을 저장
+		session.setAttribute("StringState", state);
+		
+		if(session.getAttribute("USER_ID") != null) {
+			String USER_ID = session.getAttribute("USER_ID").toString();
+			int recentView_Count = mainService.recentViewCount(USER_ID);
+			if(recentView_Count > 0) {
+				List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
+				mv.addObject("recentView", recentViewList);
+			}
+		}
+		
+		mv.addObject("newDim" , NewproductList);
+		mv.addObject("bestDim" , BestproductList);
+		
+		List<Product> list = null;
+		int listcount = 0;
+		
+		list = mainService.getSearchList(index, search_word, page, limit);
+		listcount = mainService.getSearchListCount(index, search_word);
+		
+		//총 페이지 수
+		int maxpage = (listcount + limit -1) / limit;
+						
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+				
+		//10, 20, 30 등
+		int endpage = startpage + 10 -1;
+						  
+		if (endpage > maxpage) endpage = maxpage;
+		
+		mv.setViewName("main/Search");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("ProductList", list);
+		mv.addObject("limit", limit);
+		mv.addObject("search_field", index);
+		mv.addObject("search_word", search_word);
+			
+		return mv;
+	}
 }
