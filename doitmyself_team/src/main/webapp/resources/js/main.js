@@ -237,7 +237,6 @@
 	};
 	contentWayPoint();
 
-
 	// navigation
 	var OnePageNav = function() {
 		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#']").on('click', function(e) {

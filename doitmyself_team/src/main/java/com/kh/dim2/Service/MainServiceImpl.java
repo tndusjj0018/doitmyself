@@ -79,7 +79,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Recent_View> getRecent_View_List(String uSER_ID) {
+	public List<HashMap<String, String>> getRecent_View_List(String uSER_ID) {
 		return dao.getRecent_View_List(uSER_ID);
 	}
 
@@ -106,4 +106,10 @@ public class MainServiceImpl implements MainService{
 		}
 		return result;
 	}
+
+	@Override
+	public int AddRecent(HashMap<String , String> map) {
+		return dao.addRecent(map);
+	}
+
 }

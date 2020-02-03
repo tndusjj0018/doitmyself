@@ -22,8 +22,9 @@ public interface MainService {
 	List<Product> getNewProduct_List();
 	int cartCount(String id);
 	int recentViewCount(String uSER_ID);
-	List<Recent_View> getRecent_View_List(String uSER_ID);
+	List<HashMap<String, String>> getRecent_View_List(String uSER_ID);
 	int NaverInsert(HashMap<String, String> map);
 	int isNaverId(String n_Id);
 	int Find_check(String uSER_ID , String uSER_EMAIL);
+	int AddRecent(HashMap<String, String> map);
 }

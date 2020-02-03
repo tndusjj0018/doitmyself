@@ -80,7 +80,7 @@
                               <div class="col-md-12">
                                  <div class="form-group">
                                     <label>아이디</label>
-                                    <input type="email" name="USER_ID" class="form-control" placeholder="비밀번호를 찾을 아이디를 입력하세요" required>
+                                    <input type="text" name="USER_ID" class="form-control" placeholder="비밀번호를 찾을 아이디를 입력하세요" required>
                                  </div>
                               </div>
                            </div>
@@ -139,19 +139,42 @@
    <script src="resources/js/paper-dashboard.min.js" type="text/javascript"></script>
    <script>
    		$(function(){
+   			
+   			var checkid = false;
+   			var checkemail = false;
+   			
    			$("#findBtn").submit(function(){
+   				
+   				if(checkid == true && checkemail == true)
    				$.ajax({
    					url : "check_findPass",
    					type : "POST",
    					data : {
-   						USER_ID : $("USER_ID").val(),
-   						USER_EMAIL : $("USER_EMAIL").val()
+   						
    					},
    					success : function(result) {
    						alert(result);
    					},
    				})
    			});
+   			$('input:eq(0)').on('keyup', function(){
+   				
+   				var USER_ID = $('input:eq(0)').val();
+   				
+   				$.ajax({
+   					url:"idcheck",
+   					data:{"USER_ID" : USER_ID},
+   					success: function(resp) {
+   						if(resp == -1) {
+   							$('i:eq(0)').css('opacity', '0.95');			
+   							checkid = true;
+   						} else {
+   							$('i:eq(0)').css('opacity', '0');
+   							checkid = false;
+   						}
+   					}
+   				});
+   			
    		})
    </script>
 </body>

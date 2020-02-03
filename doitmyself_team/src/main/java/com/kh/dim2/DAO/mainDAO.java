@@ -57,7 +57,7 @@ public class mainDAO {
 		return sqlSession.selectOne("Main.recentView_Count" , uSER_ID);
 	}
 
-	public List<Recent_View> getRecent_View_List(String uSER_ID) {
+	public List<HashMap<String, String>> getRecent_View_List(String uSER_ID) {
 		return sqlSession.selectList("Main.getRecent_View_List" , uSER_ID);
 	}
 
@@ -71,5 +71,9 @@ public class mainDAO {
 
 	public Member Find_check(String uSER_ID , String uSER_EMAIL) {
 		return sqlSession.selectOne("Main.Find_check" , uSER_ID);
+	}
+
+	public int addRecent(HashMap<String , String> map) {
+		return sqlSession.insert("Main.Add_Recent" , map);
 	}
 }
