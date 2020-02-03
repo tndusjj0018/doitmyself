@@ -51,13 +51,13 @@ function ajax(data){
 			$('#cart_checked > tbody').empty();
 			output = "";
 			output += "<tr>";
-			output += "		<th>";
+			output += "		<th>";	
 			output += 		data.total + "원<br>";
 			output += "		</th>";
 			output += "</tr>";
 			output += "<tr>";
 			output += "		<td colspan='2'>";
-			output += "		<input type='submit' value='결제 하러 가기' onclick=location.href='cartpay'; class='btn btn-primary btn-round'>";
+			output += "		<input type='submit' value='결제 하러 가기' onclick=location.href='cartpay?total="+data.total+"'; class='btn btn-primary btn-round'>";
 			output += "		</td>";
 			output += "</tr>";
 			$('#cart_checked > tbody').append(output);
