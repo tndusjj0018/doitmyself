@@ -21,4 +21,16 @@ public class categoryDAO {
 	public int getProductListcount(Map<String, Object> map) {
 		return sqlSession.selectOne("Category.getProductListcount",map);
 	}
+
+	public String checkDibs(Map<String,Object> map) {
+		return sqlSession.selectOne("Category.dibsCheck",map);
+	}
+
+	public int dibsInsert(Map<String, Object> map) {
+		return sqlSession.insert("Category.dibsInsert",map);
+	}
+
+	public int dibsDelete(Map<String, Object> map) {
+		return sqlSession.delete("Category.dibsDelete",map);
+	}
 }

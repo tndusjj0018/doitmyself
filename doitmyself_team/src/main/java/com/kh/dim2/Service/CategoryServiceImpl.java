@@ -23,4 +23,19 @@ public class CategoryServiceImpl implements CategoryService{
 	public int getProductListcount(Map<String, Object> map) {
 		return categoryDAO.getProductListcount(map);
 	}
+
+	@Override
+	public String checkDibs(Map<String,Object> map) {
+		return categoryDAO.checkDibs(map);
+	}
+
+	@Override
+	public int dibsInsert(Map<String, Object> map) {
+		return categoryDAO.dibsInsert(map);
+	}
+
+	@Override
+	public int dibsDelete(Map<String, Object> map) {
+		return categoryDAO.dibsDelete(map);
+	}
 }
