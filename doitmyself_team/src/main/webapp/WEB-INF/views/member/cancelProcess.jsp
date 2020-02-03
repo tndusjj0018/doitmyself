@@ -66,22 +66,7 @@
           			</button>
           			
           			<div class="collapse navbar-collapse justify-content-end" id="navigation">
-		            	
-            			
-            			<ul class="navbar-nav">
-							
-              				<li class="nav-item btn-rotate dropdown">
-                				<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  					<i class="nc-icon nc-bell-55"></i>
-                  					<p><span class="d-lg-none d-md-block">Some Actions</span></p>
-                				</a>
-                				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  					<a class="dropdown-item" href="#">Action</a>
-                  					<a class="dropdown-item" href="#">Another action</a>
-                  					<a class="dropdown-item" href="#">Something else here</a>
-                				</div>
-              				</li>             				
-            			</ul>
+		           
 					</div>
         		</div>
       		</nav>
@@ -137,26 +122,27 @@
 											${crl.ORDER_R_DATE }
 										</td>
 									
-										<c:if test="${crl.ORDER_STATUS == 1 && crl.REFUND_STATUS == 0}">
+										<c:if test="${crl.ORDER_STATUS == 1}">
 											<td>
 												취소완료
 											</td>
 										</c:if>
-										<c:if test="${crl.REFUND_STATUS == 0 }">
+										<c:if test="${crl.REFUND_STATUS == 0}">
 											<td>
 												반품신청
 											</td>
 										</c:if>
-										<c:if test="${crl.REFUND_STATUS == 1 }">
+										<c:if test="${crl.REFUND_STATUS == 1}">
 											<td>
 												반품처리중
 											</td>
 										</c:if>
-										<c:if test="${crl.REFUND_STATUS == 2 }">
+										<c:if test="${crl.REFUND_STATUS == 2}">
 											<td>
 												반품완료
 											</td>
 										</c:if>
+										
 			        				</tr>
 			        				</c:forEach>
 			        			</table>

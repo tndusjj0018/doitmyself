@@ -62,22 +62,7 @@
           			</button>
           			
           			<div class="collapse navbar-collapse justify-content-end" id="navigation">
-		            	
-            			
-            			<ul class="navbar-nav">
-							
-              				<li class="nav-item btn-rotate dropdown">
-                				<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  					<i class="nc-icon nc-bell-55"></i>
-                  					<p><span class="d-lg-none d-md-block">Some Actions</span></p>
-                				</a>
-                				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  					<a class="dropdown-item" href="#">Action</a>
-                  					<a class="dropdown-item" href="#">Another action</a>
-                  					<a class="dropdown-item" href="#">Something else here</a>
-                				</div>
-              				</li>             				
-            			</ul>
+		            
 					</div>
         		</div>
       		</nav>
@@ -128,7 +113,7 @@
 									<c:out value="${total_price }"/>원
 								</td>
 								<td>
-									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니까?') == true)location.href='wishdelete?P_NO=${cl.p_NO}&USER_ID=${USER_ID }';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
+									<button type="button" id="btn-wishdelete" onclick="if(confirm('장바구니에서 삭제하시겠습니까?') == true)location.href='cartdelete?P_NO=${cl.p_NO}&USER_ID=${USER_ID }';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
 								</td>
 							</tr>
 							</c:forEach>
@@ -187,7 +172,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							
+								<!-- cartList ajax -->
 							</tbody>
 						</table>
 						</div>

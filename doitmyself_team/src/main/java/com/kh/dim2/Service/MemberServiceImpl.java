@@ -278,4 +278,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.cartlist(map);
 	}
 
+	@Override
+	public int cartdelete(int p_no, String user_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("P_NO", p_no);
+		map.put("USER_ID", user_id);
+		
+		return dao.cartdelete(map);
+	}
+
 }

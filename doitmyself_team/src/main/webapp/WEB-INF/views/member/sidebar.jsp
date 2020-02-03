@@ -124,7 +124,7 @@
             			<div class="collapse" id="toggleDemo2" style="height: 0px;">
 							<ul class="nav nav-list">
 								<li class="mar20"><a href="orderDelivery?USER_ID=${USER_ID }&doc=od">주문 / 배송 조회</a></li>
-								<li class="mar20"><a href="cancelProcess?USER_ID=${USER_ID }&doc=cp">취소 / 반품 / 교환 현황</a></li>
+								<li class="mar20"><a href="cancelProcess?USER_ID=${USER_ID }&doc=cp">취소 / 반품 현황</a></li>
 							</ul>
 						</div>
           			</li>

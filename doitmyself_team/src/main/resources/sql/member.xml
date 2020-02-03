@@ -226,8 +226,8 @@
 	<!-- 취소/반품 현황 -->
 	<select id="cancelreturnlist" parameterType="HashMap" resultType="o_product">
 		select * from (select rownum rnum, b.*
-						from (select * from ORDER_TBL, PRODUCT_TBL,	REFUND_TBL
-								WHERE ORDER_P_NO = P_NO
+						from (select * from ORDER_TBL, PRODUCT_TBL, REFUND_TBL
+								WHERE ORDER_P_NO = P_NO AND ORDER_NO = REFUND_NO
 								AND ORDER_ID = #{USER_ID}
 								and ORDER_R_DATE is not NULL
 								order by ORDER_R_DATE desc)b)
@@ -291,4 +291,11 @@
 								order by CART_NO DESC)b)
 				where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="cartdelete" parameterType="map">
+		delete
+		from CART_TBL
+		where CART_P_NO = #{P_NO} AND CART_ID = #{USER_ID}
+	</delete>
 </mapper>
