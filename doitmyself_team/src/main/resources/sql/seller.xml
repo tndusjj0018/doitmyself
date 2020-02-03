@@ -55,6 +55,7 @@
 			from ORDER_TBL O join PRODUCT_TBL P
 			on P.P_NO = O.ORDER_P_NO
 			where O.ORDER_SELLER = #{USER_ID}
+			and O.ORDER_STATUS = 0 <!-- 주문상태인것만 -->
 			order by O.ORDER_P_NO asc)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
@@ -105,5 +106,40 @@
 			p_quantity = #{P_QUANTITY},
 			p_description = #{P_DESCRIPTION}
 		WHERE p_no = #{P_NO}
+	</update>
+	
+	<!-- 배송 상태 변경 -->
+	<update id="orderDelivery" parameterType="Map">
+		UPDATE order_tbl
+		SET
+			order_delivery = #{orderDeliveryVal}
+			<choose>
+				<when test="ORDER_TRNO != 0">
+				,order_trno = #{ORDER_TRNO}
+				</when>
+			</choose>
+		WHERE order_p_no = #{P_NO}
+	</update>
+	
+	<!-- 상품문의 답변 리스트 -->
+	<select id="sellerQna" parameterType="String" resultType="qna">
+		SELECT * FROM qna_tbl
+		WHERE qna_s_id = #{USER_ID}
+	</select>
+	
+	<!-- 상품문의 뷰 페이지 -->
+	<select id="QnaReplyView" parameterType="int" resultType="qna">
+		SELECT q.*, p.p_name FROM
+			(qna_tbl q JOIN product_tbl p
+			ON p.p_no = q.qna_p_no)
+		WHERE qna_no = #{q_p_no}
+	</select>
+	
+	<!-- 상품문의 답변 답변작성 -->
+	<update id="QnaUpdate" parameterType="Map">
+		UPDATE qna_tbl
+			SET qna_answer = #{QnaAnswer},
+				qna_isresponse = 1
+		WHERE qna_no = #{QnaNo}
 	</update>
 </mapper>

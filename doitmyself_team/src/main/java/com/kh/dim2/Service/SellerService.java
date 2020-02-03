@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
@@ -41,5 +42,16 @@ public interface SellerService {
 	
 	//상품 수정
 	int productUpdate(Product product);
+	
+	//주문 상태 변경
+	int orderStatus(int P_NO, int ORDER_TRNO, int orderDeliveryVal);
 
+	//상품문의 답변 리스트
+	List<Qna> sellerQna(String USER_ID);
+
+	//상품문의 답변 뷰페이지
+	Qna QnaReplyView(int q_p_no);
+
+	//상품문의 답변 답변작성
+	int QnaUpdate(int qnaNo, String qnaAnswer);
 }

@@ -10,6 +10,7 @@ import com.kh.dim2.DAO.SellerDAO;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
@@ -86,6 +87,34 @@ public class SellerServiceImpl implements SellerService{
 	@Override
 	public int productUpdate(Product product) {
 		return sellerDAO.productUpdate(product);
+	}
+
+	@Override
+	public int orderStatus(int P_NO, int ORDER_TRNO, int orderDeliveryVal) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("P_NO", P_NO);
+		map.put("ORDER_TRNO", ORDER_TRNO);
+		map.put("orderDeliveryVal", orderDeliveryVal);
+		return sellerDAO.orderStatus(map);
+	}
+
+	@Override
+	public List<Qna> sellerQna(String USER_ID) {
+		return sellerDAO.sellerQna(USER_ID);
+	}
+
+	@Override
+	public Qna QnaReplyView(int q_p_no) {
+		return sellerDAO.QnaReplyView(q_p_no);
+	}
+
+	@Override
+	public int QnaUpdate(int QnaNo, String QnaAnswer) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("QnaNo", QnaNo);
+		map.put("QnaAnswer", QnaAnswer);		
+		
+		return sellerDAO.QnaUpdate(map);
 	}
 
 }
