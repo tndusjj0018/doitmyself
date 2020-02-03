@@ -39,44 +39,44 @@ function ajax(data){
 				$(data.qnalist).each(function(index, item){
 					console.log(item.p_NO);
 					output += "<tr>";
-					output += "<td>";
-					output += item.qna_NO;
-					output += "</td>";
-					output += "<td>";
-					output += "<img src='" +item.p_IMG+"' class='product_img'>";
-					output += "</td>"
-					output += "<td>";
-					output += "<a href='detail?P_NO=" + item.p_NO + "' <span style='cursor: pointer'>" + item.p_NAME +"</span></a>";
-					output += "</td>";
-					output += "<td>";
-					output += item.p_SELLER;
-					output += "</td>";	
-					output += "<td>";
+					output += "		<td>";
+					output += 		item.qna_NO;
+					output += "		</td>";
+					output += "		<td>";
+					output += "		<img src='" +item.p_IMG+"' class='product_img'>";
+					output += "		</td>"
+					output += "		<td>";
+					output += "		<a href='detail?P_NO=" + item.p_NO + "' <span style='cursor: pointer'>" + item.p_NAME +"</span></a>";
+					output += "		</td>";
+					output += "		<td>";
+					output += 		item.p_SELLER;
+					output += "		</td>";	
+					output += "		<td>";
 					
-					if (item.qna_CATEGORY == 0){
-						output += "배송문의";
-					} else if (item.qna_CATEGORY == 1) {
-						output += "상품문의";
-					} else if (item.qna_CATEGORY == 2) {
-						output += "환불문의";
-					} else if (item.qna_CATEGORY == 3) {
-						output += "기타문의";
-					}
+									if (item.qna_CATEGORY == 0){
+										output += "배송문의";
+									} else if (item.qna_CATEGORY == 1) {
+										output += "상품문의";
+									} else if (item.qna_CATEGORY == 2) {
+										output += "환불문의";
+									} else if (item.qna_CATEGORY == 3) {
+										output += "기타문의";
+									}
 					
-					output += "</td>";
-					output += "<td>";
-					output += item.qna_SUBJECT;
-					output += "</td>";	
-					output += "<td>";
-					output += item.qna_DATE;
-					output += "</td>";
-					output += "<td>";
+					output += "		</td>";
+					output += "		<td>";
+					output += 		item.qna_SUBJECT;
+					output += "		</td>";	
+					output += "		<td>";
+					output += 		item.qna_DATE;
+					output += "		</td>";
+					output += "		<td>";
 					
-					if (item.qna_ISRESPONSE == 0) {
-						output += "<span style='color: #9d9da5'>답변예정</span>";
-					} else if (item.qna_ISRESPONSE == 1) {
-						output += "<a href='#'>답변완료</a>";
-					}
+									if (item.qna_ISRESPONSE == 0) {
+										output += "<span style='color: #9d9da5'>답변예정</span>";
+									} else if (item.qna_ISRESPONSE == 1) {
+										output += "<a href='detail?P_NO="+ item.p_NO +"'>답변완료</a>";
+									}
 						
 					output += "</td>";
 					output += "</tr>"

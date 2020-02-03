@@ -154,4 +154,8 @@ public class memberDAO {
 	public List<C_Product> cartlist(HashMap<String, Object> map) {
 		return sqlSession.selectList("Member.cartlist", map);
 	}
+
+	public int cartdelete(Map<String, Object> map) {
+		return sqlSession.delete("Member.cartdelete", map);
+	}
 }

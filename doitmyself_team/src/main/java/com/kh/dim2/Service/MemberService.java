@@ -98,5 +98,7 @@ public interface MemberService {
 
 	public int refundinsert(Refund refund);
 
+	public int cartdelete(int p_no, String user_id);
+
 	
 }

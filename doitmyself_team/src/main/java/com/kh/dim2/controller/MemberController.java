@@ -776,6 +776,28 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "/cartdelete", method = RequestMethod.GET)
+	public void cartdelete(@RequestParam("P_NO") int p_no,
+						   HttpServletResponse response,
+						   @RequestParam("USER_ID") String user_id) throws Exception {
+		
+		int cartdelete = memberservice.cartdelete(p_no, user_id);
+		System.out.println(cartdelete);
+		response.setContentType("text/html; charset=utf-8"); 
+		PrintWriter out = response.getWriter();
+		
+		if(cartdelete == 1) {
+			System.out.println("상품번호 " + p_no +" 장바구니 삭제 완료");
+			out.println("<script>");
+			out.println("alert('성공적으로 삭제 되었습니다.');");
+			out.println("location.href='cartList?USER_ID=" + user_id + "';");
+			out.println("</script>");
+		} else {
+			System.out.println("장바구니 삭제 중 오류");
+		}
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value="totalAjax")
 	public Object totalAjax(@RequestParam("USER_ID") String user_id,

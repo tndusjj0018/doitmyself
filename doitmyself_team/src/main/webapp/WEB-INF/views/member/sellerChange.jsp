@@ -137,22 +137,7 @@
           			</button>
           			
           			<div class="collapse navbar-collapse justify-content-end" id="navigation">
-		                 			
-            			<ul class="navbar-nav">
-							
-              				<li class="nav-item btn-rotate dropdown">
-                				<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  					<i class="nc-icon nc-bell-55"></i>
-                  					<p><span class="d-lg-none d-md-block">Some Actions</span></p>
-                				</a>
-                				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  					<a class="dropdown-item" href="#">Action</a>
-                  					<a class="dropdown-item" href="#">Another action</a>
-                  					<a class="dropdown-item" href="#">Something else here</a>
-                				</div>
-              				</li>
-              				
-            			</ul>
+		            
 					</div>
         		</div>
       		</nav>
