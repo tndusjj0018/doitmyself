@@ -27,7 +27,7 @@ public interface AdminService {
 	
 	
 	//리뷰 리스트 가져오기
-	public List<Review> getReviewList(int page, int limit, String orderBy);
+	public List<Review> getReviewList(Map<String, Object> map);
 
 	//유저 삭제
 	public int DeleteUser(int USER_NO);
@@ -67,7 +67,7 @@ public interface AdminService {
 
 	public int DeleteSeller(int SELLER_NO);
 
-	public List<Order> getOrderList();
+	public List<Order> getOrderList(Map<String, Object> map);
 
 	public int updateMajorCategory(Map<String, Object> map);
 
@@ -77,14 +77,20 @@ public interface AdminService {
 	
 	public int DeleteSubCategory(String category_name);
 
-	public List<Refund> getRefundList();
+	public List<Refund> getRefundList(Map<String, Object> map);
 
-	public List<Order> getExchangeList();
+	public List<Order> getExchangeList(Map<String, Object> map);
 
 	public List getCategoryNoList();
 
 	public List getCategoryName();
 
 	public Object getCategoryStatics(Object category);
+
+	public int getOrderListCount();
+
+	public int getRefundListCount();
+	
+	public int getExchangeListCount();
 
 }

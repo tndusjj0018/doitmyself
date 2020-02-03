@@ -4,6 +4,42 @@
 <html>
 <head>
 	<script>
+		var go = function(page){
+			console.log("function go");
+			num = page;
+			orderList();
+		}
+		
+		var pagination = function(page, startpage, maxpage){
+			$(".clearfix").empty();
+			console.log("function pagination");
+			pageoutput = "";
+			//페이지네이션 내용
+			pageoutput += "<ul class='pagination pull-right'>";
+			if(startpage<page){//이전페이지가 존재할 때
+				pageoutput += "<li><a href='javasript:go("+(page-1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+			}else{//이전페이지가 존재하지 않을 때
+				pageoutput += "<li><a href='#'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";	
+			}
+			
+			for(var i = startpage;i<=maxpage;i++){
+				if(i == page){
+					pageoutput += "<li><a href='#'>"+i+"</a></li>";
+				}else{
+					pageoutput += "<li><a href='javascript:go("+i+")'>"+i+"</a></li>";
+				}	
+				
+			}
+			if(page<maxpage){//다음페이지가 존재할 때
+				pageoutput += "<li><a href='javasript:go("+(page+1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+			}else{//다음페이지가 존재하지 않을 때
+				pageoutput += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";	
+			}
+			
+			
+			$(".clearfix").append(pageoutput);
+		}//function pagination end
+		
 		$(document).ready(function(){
 			var num = 1;
 			function refundList(){
@@ -51,7 +87,12 @@
 							output += "</tbody>";
 							
 							$(".refundlistTbl").append(output);
+							var page = rdata.num;
+							var startpage = rdata.startpage;
+							var maxpage = rdata.maxpage;
+							pagination(page, startpage, maxpage);
 						}
+						
 					},
 					error:function(){
 						console.log("에러");
@@ -71,5 +112,8 @@
 	<table class="refundlistTbl table table-striped">
 	
 	</table>
+	<div class="clearfix">
+   
+   	</div>
 </body>
 </html>

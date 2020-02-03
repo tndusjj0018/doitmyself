@@ -80,7 +80,7 @@
 							output +="			<td>가게 이름</td>";
 							output +="			<td>사업장 주소</td>";
 							output +="			<td>판매자 평점</td>";
-							output +="			<td>정보</td>";
+							//output +="			<td>정보</td>";
 							output +="			<td>권한 취소</td>";
 							output += "		</tr>";
 							output += "</thead>";
@@ -92,7 +92,7 @@
 								output +="			<td>"+this.seller_NAME+"</td>";
 								output +="			<td>"+this.seller_ADDRESS+"</td>";
 								output +="			<td>"+this.seller_RATE+"</td>";
-								output += "			<td><button class='btn btn-primary btn-xs info_view'><span class='glyphicon glyphicon-search'></span></button></td>";
+								//output += "			<td><button class='btn btn-primary btn-xs info_view'><span class='glyphicon glyphicon-search'></span></button></td>";
 								output += "			<td><button class='btn btn-danger btn-xs cancel'><span class='glyphicon glyphicon-remove'></span></button></td>";
 								output += "		</tr>";
 								

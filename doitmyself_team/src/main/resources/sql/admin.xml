@@ -50,11 +50,23 @@
 	</select>
 	
 	<select id="reviewList" resultType="review" parameterType="map">
-		select * from review_tbl
+		select * 
+		from(select rownum rnum, r.* 
+			from (select * 
+					from review_tbl
+					order by 
+					<choose>
+						<when test="reviewOrder == 'REVIEW_DATE DESC'">REVIEW_DATE DESC</when>
+						<when test="reviewOrder == 'REVIEW_WRITER DESC'">REVIEW_WRITER DESC</when>
+						<when test="reviewOrder == 'REVIEW_WRITER ASC'">REVIEW_WRITER ASC</when>
+						<when test="reviewOrder == 'REVIEW_RATE DESC'">REVIEW_RATE DESC</when>
+						<when test="reviewOrder == 'REVIEW_RATE ASC'">REVIEW_RATE ASC</when>
+					</choose> 
+				)r
+			)
 		<where>
-			
+			rnum &gt;=#{start} and rnum&lt;=#{end}
 		</where>
-		order by #{orderBy} 
 	</select>
 	
 	<delete id="deleteUser" parameterType="int">
@@ -174,8 +186,18 @@
 		where SELLER_NO = #{SELLER_NO}
 	</delete>
 	
-	<select id="getOrderList" resultType="order">
-		select * from order_tbl
+	<select id="getOrderList" resultType="order" parameterType="map">
+		select* from(select rownum rnum, o.* 
+			from(select * from order_tbl
+				order by 
+				<choose>
+					<when test="orderBy == 'ORDER_DATE DESC'">ORDER_DATE DESC</when>
+					<when test="orderBy == 'ORDER_ID DESC'">ORDER_ID DESC</when>
+					<when test="orderBy == 'ORDER_ID ASC'">ORDER_ID ASC</when>
+				</choose>
+			)o
+		)
+		where rnum &gt;= #{start} and rnum&lt;=#{end}
 	</select>
 	
 	<update id="updateMajorCategory" parameterType="map">
@@ -200,15 +222,23 @@
 		where C_NAME = #{C_NAME}
 	</delete>
 	
-	<select id="getRefundList" resultType="refund">
-		select o.*, r.REFUND_STATUS
-		from order_tbl o full outer join refund_tbl r
-		on o.order_no = r.refund_no
-		where o.order_delivery&gt;=1 and order_status=1 or order_status=2
+	<select id="getRefundList" resultType="refund" parameterType="map">
+		select * from 
+			(select rownum rnum,a.* from 	
+				(select o.*, r.REFUND_STATUS
+				from order_tbl o full outer join refund_tbl r
+				on o.order_no = r.refund_no
+				where o.order_delivery>=1 and order_status=1 or order_status=2)a
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>	
-	<select id="getExchangeList" resultType="order">
-		select * from ORDER_TBL
+	<select id="getExchangeList" resultType="order" parameterType="map">
+		select * from 
+		(select rownum rnum, o.* 
+			from (select * from ORDER_TBL)o
+		)
 		where order_delivery = 4 AND ORDER_STATUS = 3
+			and rnum &gt;=#{start} and rnum &lt;=#{end}
 	</select>
 	<select id="getCategoryNoList" resultType="int">
 		select SUBSTR(C_NO,1,1) from CATEGORY_TBL
@@ -219,6 +249,21 @@
 	<select id="getCategoryStatics" parameterType="Object" resultType="int">
 		select count(*) from order_tbl
 		where ORDER_CATEGORY like #{category}||'%' 
+	</select>
+	<select id="getOrderListCount" resultType="int">
+		select count(*) from order_tbl
+	</select>
+	
+	<select id="getRefundListCount" resultType="int">
+		select count(*)
+		from order_tbl o full outer join refund_tbl r
+		on o.order_no = r.refund_no
+		where o.order_delivery&gt;=1 and order_status=1 or order_status=2
+	</select>
+	
+	<select id="getExchangeListCount" resultType="int">
+		select count(*) from ORDER_TBL
+		where order_delivery = 4 AND ORDER_STATUS = 3
 	</select>
 </mapper>
 
