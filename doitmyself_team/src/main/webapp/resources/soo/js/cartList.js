@@ -25,7 +25,9 @@ $(document).ready(function(){
 		console.log(total);
 		
 		go(total)
-	});			
+	});
+	
+	
 
 });
 
@@ -55,7 +57,7 @@ function ajax(data){
 			output += "</tr>";
 			output += "<tr>";
 			output += "		<td colspan='2'>";
-			output += "		<input type='button' value='결제 하러 가기' class='btn btn-primary btn-round'>";
+			output += "		<input type='submit' value='결제 하러 가기' onclick=location.href='cartpay'; class='btn btn-primary btn-round'>";
 			output += "		</td>";
 			output += "</tr>";
 			$('#cart_checked > tbody').append(output);

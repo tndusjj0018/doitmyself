@@ -810,6 +810,11 @@ public class MemberController {
 		return cartajax;
 	}
 	
+	@RequestMapping(value="cartpay")
+	public String cartpay() {
+		return "detail/pay";
+	}
+	
 	
 
 	@RequestMapping(value = "/change_password", method = RequestMethod.GET)
