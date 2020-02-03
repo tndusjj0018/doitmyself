@@ -1,10 +1,12 @@
 package com.kh.dim2.controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dim2.Service.CartService;
+import com.kh.dim2.Service.MainService;
 import com.kh.dim2.Service.ProductService;
 import com.kh.dim2.Service.ReviewService;
 import com.kh.dim2.Service.qnaService;
@@ -44,6 +47,9 @@ public class DetailController {
 	
 	@Autowired
 	private CartService cartsvc;
+	
+	@Autowired
+	   private MainService mainService;
 
 	@GetMapping(value = "/qnaWrite")
 	public String qnaWrite() throws Exception {
@@ -149,7 +155,7 @@ public class DetailController {
 	public ModelAndView QnaList(@RequestParam(value = "page2", defaultValue = "1", required = false) int page2,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv,
-			@RequestParam("P_NO") int p_no) {
+			@RequestParam("P_NO") int p_no,  HttpSession session) {
 		// 페이지 이동
 		mv.setViewName("detail/detail");
 		
@@ -164,6 +170,24 @@ public class DetailController {
 		System.out.println("상품 정보 가져오기 성공~");
 		mv.addObject("prdData", prd); // 불러올 상품 정보
 
+		if(session.getAttribute("USER_ID") != null) {
+            String USER_ID = session.getAttribute("USER_ID").toString();
+            String P_NO = p_no + "";
+            System.out.println(USER_ID);
+            System.out.println(P_NO);
+            HashMap<String , String> map = new HashMap<>();
+            
+            map.put("USER_ID" , USER_ID);
+            map.put("P_NO" , P_NO);
+   
+            int result = mainService.AddRecent(map);
+            
+            if(result == 1) {//삽입 성공시
+               System.out.println("최근 본 상품 삽입 성공");
+            } else if(result == -1) {
+               System.out.println("최근 본 상품 삽입 실패");
+            }
+         }
 
 		
 		// 리뷰 페이지네이션

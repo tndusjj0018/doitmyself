@@ -19,8 +19,7 @@
 				<td><input type="radio" name="categories" value="0">상품</td>&emsp;
 				<td><input type="radio" name="categories" value="1">배송</td>&emsp;
 				<td><input type="radio" name="categories" value="2">반품/취소</td>&emsp;
-				<td><input type="radio" name="categories" value="3">교환/변경</td>&emsp;
-				<td><input type="radio" name="categories" value="4">기타</td>&emsp;
+				<td><input type="radio" name="categories" value="3">기타</td>&emsp;
 			</tr>
 			<tr>
 			<td>작성자</td>
