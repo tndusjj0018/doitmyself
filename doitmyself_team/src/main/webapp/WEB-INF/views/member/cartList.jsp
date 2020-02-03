@@ -91,7 +91,7 @@
 									<input type="checkbox" class="buyproduct" value="${total_price }">
 								</td>
 								<td>
-									${cl.p_NO}
+									<span class="cartpno">${cl.p_NO}</span>
 								</td>
 								<td>
 									<img src="${cl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${cl.p_NO}';">
@@ -106,7 +106,7 @@
 									${cl.p_PRICE }원
 								</td>
 								<td>
-									${cl.CART_COUNT }개
+									<span class="cartcount">${cl.CART_COUNT }</span>개
 								</td>
 								<td>
 									
