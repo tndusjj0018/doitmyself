@@ -35,4 +35,20 @@
 			)
 		where rnum &gt;=#{start} and rnum &lt;=#{end} 
 	</select>
+	
+	<select id="dibsCheck" parameterType="map" resultType="String">
+		select D_NO from DIBS_TBL
+		where D_USER_ID = #{D_USER_ID} and D_P_NO = #{P_NO}
+	</select>
+	<insert id="dibsInsert" parameterType="map">
+		<selectKey resultType="int" keyProperty="D_NO" order="BEFORE">
+			select nvl(max(D_NO),0)+1 from DIBS_TBL
+		</selectKey>
+		insert into DIBS_TBL
+		values(#{D_NO}, #{P_NO}, #{D_USER_ID})
+	</insert>
+	<delete id="dibsDelete" parameterType="map">
+		delete from DIBS_TBL
+		where D_USER_ID = #{D_USER_ID} and D_P_NO = #{P_NO}
+	</delete>
 </mapper>
