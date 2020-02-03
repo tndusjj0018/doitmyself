@@ -32,6 +32,7 @@ function ajax(data){
 		success : function(data){
 			$("#qnaCate").val(data.qnaCate);
 			console.log(data.qnaCate)
+			
 			if(data.qnacount > 0){
 				$('tbody').empty();
 				output = "";
