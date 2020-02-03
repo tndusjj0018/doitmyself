@@ -262,4 +262,10 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
+	@Override
+	public Object getOrderStatics(int i) {
+		return adminDAO.getOrderStatics(i);
+	}
+
+
 }

@@ -4,7 +4,7 @@
 	<select id="getProductListcount" parameterType="map" resultType="int">
 		select count(*) from product_tbl
 			<where>	
-				<if test="category != null">
+				<if test="category != 'all' and category != 0">
 					P_CATEGORY_NO like  #{category} ||'%'
 				</if>
 				<if test="search_word != null">
@@ -17,7 +17,7 @@
 		from (select rownum rnum, p.* 
 			from(select * from product_tbl 
 				<where>
-					<if test="category != null">
+					<if test="category != 'all' and category != 0">
 						P_CATEGORY_NO like  #{category} ||'%'
 					</if>
 					<if test="search_word != null">

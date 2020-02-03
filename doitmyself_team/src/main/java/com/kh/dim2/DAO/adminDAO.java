@@ -164,6 +164,10 @@ public class adminDAO {
 	public int getExchangeListCount() {
 		return sqlSession.selectOne("Admin.getExchangeListCount");
 	}
+
+	public Object getOrderStatics(int i) {
+		return sqlSession.selectOne("Admin.getOrderStatics",i);
+	}
 	
 
 }

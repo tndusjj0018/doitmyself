@@ -420,6 +420,7 @@ public class AdminController {
 		map.put("startpage", startpage);
 		map.put("maxpage", maxpage);
 		map.put("listcount", listcount);
+		map.put("num", num);
 		return map;
 	}
 
@@ -445,6 +446,7 @@ public class AdminController {
 		map.put("startpage", startpage);
 		map.put("maxpage", maxpage);
 		map.put("listcount", listcount);
+		map.put("num", num);
 		return map;
 	}
 
@@ -469,6 +471,7 @@ public class AdminController {
 		map.put("startpage", startpage);
 		map.put("maxpage", maxpage);
 		map.put("list", list);
+		map.put("num", num);
 		return map;
 	}
 
@@ -494,9 +497,19 @@ public class AdminController {
 	@PostMapping("OrderStatics")
 	public Object OrderStatics() {
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> status = new ArrayList<String>();
+		status.add("주문완료");
+		status.add("결제완료");
+		status.add("상품준비중");
+		status.add("배송중");
+		status.add("배송완료");
+		List<Object> statics = new ArrayList<Object>();
+		
 		for (int i = 0; i <= 4; i++) {// 0: 주문완료 / 1: 결제완료 / 2: 상품준비중 / 3: 배송중 / 4: 배송완료
-
+			statics.add(adminService.getOrderStatics(i));
 		}
+		map.put("statics", statics);
+		map.put("status", status);
 		return map;
 	}
 

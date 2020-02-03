@@ -228,17 +228,17 @@
 				(select o.*, r.REFUND_STATUS
 				from order_tbl o full outer join refund_tbl r
 				on o.order_no = r.refund_no
-				where o.order_delivery>=1 and order_status=1 or order_status=2)a
+				where o.order_delivery&gt;=1 and order_status=1 or order_status=2)a
 			)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>	
 	<select id="getExchangeList" resultType="order" parameterType="map">
 		select * from 
 		(select rownum rnum, o.* 
-			from (select * from ORDER_TBL)o
+			from (select * from ORDER_TBL 
+			where order_delivery = 4 AND ORDER_STATUS = 3)o
 		)
-		where order_delivery = 4 AND ORDER_STATUS = 3
-			and rnum &gt;=#{start} and rnum &lt;=#{end}
+		where rnum &gt;=#{start} and rnum &lt;=#{end}
 	</select>
 	<select id="getCategoryNoList" resultType="int">
 		select SUBSTR(C_NO,1,1) from CATEGORY_TBL
@@ -264,6 +264,11 @@
 	<select id="getExchangeListCount" resultType="int">
 		select count(*) from ORDER_TBL
 		where order_delivery = 4 AND ORDER_STATUS = 3
+	</select>
+	
+	<select id="getOrderStatics" parameterType="int" resultType="int">
+		select count(*) from ORDER_TBL
+		where order_status =0 and ORDER_DELIVERY = #{ORDER_DELIVERY}
 	</select>
 </mapper>
 
