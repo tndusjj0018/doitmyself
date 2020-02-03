@@ -2,15 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- 아래는 숫자 포맷을 사용하기 위한 라이브러리임 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
+
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/baha_js/pay.js"></script>
 
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="resources/js/baha_js/iamport.js"></script>
 <head>
 <link rel="stylesheet" href="resources/css/baha_css/pay.css">
+<script>
 
+</script>
 
 <meta charset="utf-8">
 <title>Insert title here</title>
@@ -19,7 +28,10 @@
 
 
 
-
+	<input type="hidden" name="P_SELLER" value="${prdInfo.p_SELLER }">
+	<input type="hidden" name="P_CATEGORY_NO"
+		value="${prdInfo.p_CATEGORY_NO }">
+	
 	<div id="BodyWrap" style="width: 1000px;">
 		<div class="Order_DetailCheck">
 			<div class="state1">
@@ -42,17 +54,23 @@
 				<tbody>
 					<tr>
 						<td class="test">
-							<div class="prd_Photo"><img src="resources/upload/${prdInfo.p_IMG}" class="img-fluid"
-						name="P_IMG" id="mainIMG"></div>
+							<div class="prd_Photo">
+								<img src="resources/upload/${prdInfo.p_IMG}" class="img-fluid"
+									name="P_IMG" id="mainIMG">
+							</div>
 						</td>
 						<td class="td_prdWrap">
-							<div class="prd_Name">${prdInfo.p_NAME }</div>						
+							<div class="prd_Name">${prdInfo.p_NAME }</div>
 						</td>
 						<td>
-							<div class="prd_Count">개수</div>
+							<div class="prd_Count">
+								<span id="tc"><%=request.getParameter("COUNT")%></span>
+							</div>
 						</td>
 						<td class="test2">
-							<div class="prd_Price">${prdInfo.p_PRICE }원</div>
+							<div class="prd_Price">
+								<span id="p">${prdInfo.p_PRICE }</span>원
+							</div>
 						</td>
 					</tr>
 				</tbody>
@@ -74,27 +92,31 @@
 					</tr>
 					<tr class="default">
 						<td>이름</td>
-						<td><input type="text" class="info_name" name="USER_NAME"
-							value="${locInfo.USER_NAME}"></td>
+						<td><input type="text" class="info_name" id="info_name1"
+							name="USER_NAME" value="${locInfo.USER_NAME}"></td>
 					</tr>
 					<tr class="default">
 						<td>주소</td>
-						<td><input type="text" class="info_loc1" name="USER_POSTCODE"
-							value="${locInfo.USER_POSTCODE}">&ensp;<input
+						<td><input type="text" class="info_loc1" id="info_postcode1"
+							name="USER_POSTCODE" value="${locInfo.USER_POSTCODE}">&ensp;<input
 							type="button" value="주소 찾기"></td>
 					</tr>
 					<tr class="default">
-						<td></td>
+						<td><input type="hidden" id="info_address1"
+							value="${locInfo.USER_ADDRESS }"></td>
 						<td><input type="text" class="info_loc2" name="USER_ADDRESS"
 							value="${locInfo.USER_ADDRESS}"></td>
 					</tr>
+
 					<tr class="default">
-						<td>연락처</td>
+						<td>연락처<input type="hidden" name="USER_PHONE"
+							id="info_phone1" value="${locInfo.USER_PHONE }"></td>
 						<c:set var="phone" value="${locInfo.USER_PHONE}" />
 						<td><input type="text" class="phone"
 							value="<c:out value="${fn:substring(phone,0,3)}"/>">&nbsp;-&nbsp;
-							<input type="text" class="phone" value="${fn:substring(phone,3,7)}">&nbsp;-&nbsp; <input
-							type="text" class="phone"value="${fn:substring(phone,7,11)}"></td>
+							<input type="text" class="phone"
+							value="${fn:substring(phone,3,7)}">&nbsp;-&nbsp; <input
+							type="text" class="phone" value="${fn:substring(phone,7,11)}"></td>
 					</tr>
 					<tr class="default">
 						<td>배송시 요구사항</td>
@@ -116,8 +138,8 @@
 					</tr>
 					<tr class="put">
 						<td>연락처</td>
-						<td><input type="text" class="phone">&nbsp;-&nbsp;
-							<input type="text" class="phone">&nbsp;-&nbsp; <input
+						<td><input type="text" class="phone">&nbsp;-&nbsp; <input
+							type="text" class="phone">&nbsp;-&nbsp; <input
 							type="text" class="phone"></td>
 					</tr>
 					<tr class="put">
@@ -154,7 +176,7 @@
 						<td>최종결제금액</td>
 					</tr>
 					<tr>
-						<td>10,000 원</td>
+						<td><span id="totalprice"></span>원</td>
 					</tr>
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;현금 영수증 신청<br></td>
@@ -207,9 +229,23 @@
 								확인하였으며 모든 내용에 동의합니다.</label></td>
 					</tr>
 					<tr>
-						<td><input type="submit" class="submit" value="결제하기"
-							onclick="location.href='#'"> <input type="reset"
-							class="reset" value="취소하기" onclick="location.href='/dim2/detail'"></td>
+						<td>				
+						
+								<input type="hidden" id="ORDER_P_NO" name="ORDER_P_NO" value="${prdInfo.p_NO }">
+								<input type="hidden" id="ORDER_ID" name="ORDER_ID" value="${USER_ID}">
+								<input type="hidden" id="ORDER_CATEGORY" name="ORDER_CATEGORY" value="${prdInfo.p_CATEGORY_NO}">
+								<input type="hidden" id="ORDER_PRICE" name="ORDER_PRICE" value="">
+								<input type="hidden" id="ORDER_PAYMENT" name="ORDER_PAYMENT" value="kakaopay">
+								<input type="hidden" id="ORDER_ADDRESS" name="ORDER_ADDRESS" value="">
+								<input type="hidden" id="ORDER_SELLER" name="ORDER_SELLER" value="${prdInfo.p_SELLER}">
+								<input type="hidden" id="ORDER_AMOUNT" name="ORDER_AMOUNT" value="">
+								
+								
+								<button  class="submit" id="paygo">결제하기</button>
+								<button class="reset" onclick="history.go(-1)">취소하기</button>
+							
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>

@@ -21,22 +21,18 @@ function getList(page) {
 
 							if (this.qna_CATEGORY == 0) {
 
-								output += "<tr><td>상품"
+								output += "<tr><td>배송"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 1) {
-								output += "<tr><td>배송"
+								output += "<tr><td>상품"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 2) {
 
 								output += "<tr><td>반품/취소"
 										+ "</td>";
 							} else if (this.qna_CATEGORY == 3) {
-
-								output += "<tr><td>교환/변경"
-										+ "</td>";
-							} else if (this.qna_CATEGORY == 4) {
 								output += "<tr><td>기타"
-										+ "</td>";
+									+ "</td>";
 							}
 							if (this.qna_ISRESPONSE == 0) {
 								output += "<td>답변대기"

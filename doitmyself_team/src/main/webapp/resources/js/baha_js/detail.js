@@ -80,6 +80,18 @@ $(document).on('change','#tno', function(){
     $('.totalprice').text(hidprc*c);
 })
 
+//결제하기 클릭시  수량값을 pay.jsp 로 보내기위한 문장
+$(window).load( function(){ 
+	 var c = $('#tno').val();
+	 $('#COUNT').val(c);
+})
+
+
+$(document).on('change','#tno',function(){
+	  var c = $('#tno').val();
+	  $('#COUNT').val(c);
+	
+})
 
 
 

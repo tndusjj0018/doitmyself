@@ -32,8 +32,7 @@
 						<label><input type="radio" name="categories" value="0">상품&emsp;</label>
 						<label><input type="radio" name="categories" value="1">배송&emsp;</label>
 						<label><input type="radio" name="categories" value="2">반품/취소&emsp;</label>
-						<label><input type="radio" name="categories" value="3">교환/변경&emsp;</label>
-						<label><input type="radio" name="categories" value="4">기타</label>
+						<label><input type="radio" name="categories" value="3">기타</label>
 					</div>
 			</td>
 			</tr>

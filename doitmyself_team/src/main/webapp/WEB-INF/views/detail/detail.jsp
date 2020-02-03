@@ -336,18 +336,15 @@
 								<tr>
 									<c:choose>
 										<c:when test="${qna.QNA_CATEGORY eq 0 }">
-											<td>상품</td>
+											<td>배송</td>
 										</c:when>
 										<c:when test="${qna.QNA_CATEGORY eq 1 }">
-											<td>배송</td>
+											<td>상품</td>
 										</c:when>
 										<c:when test="${qna.QNA_CATEGORY eq 2 }">
 											<td>반품/취소</td>
 										</c:when>
 										<c:when test="${qna.QNA_CATEGORY eq 3 }">
-											<td>교환/변경</td>
-										</c:when>
-										<c:when test="${qna.QNA_CATEGORY eq 4 }">
 											<td>기타</td>
 										</c:when>
 									</c:choose>
@@ -543,6 +540,7 @@
 									    <input type="hidden" name="P_NAME" value="${prdData.p_NAME}">
 									    <input type="hidden" name="P_QUANTITY" value="${prdData.p_QUANTITY}">
 										<input type="hidden" name="USER_ID" value="${USER_ID }">
+										<input type="hidden" name="COUNT" id="COUNT" value="">
 										<input type="submit" class="checkoutGo" value="결제하기" onclick="javascript: form.action='/dim2/pay';"/>
 									<button class="cartGo" value="장바구니" onclick="add()">장바구니</button>	
 								</form>
