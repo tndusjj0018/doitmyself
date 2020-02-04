@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +27,8 @@ public class CategoryController {
 	//@RequestMapping(value = "getProductList", method = {RequestMethod.GET,RequestMethod.POST})
 	public Object getProductList(int num, String option,
 			@RequestParam(value = "", required = false, defaultValue = "") String category,
-			@RequestParam(value = "search_word", defaultValue = "", required = false) String search_word) {
+			@RequestParam(value = "search_word", defaultValue = "", required = false) String search_word,
+			HttpSession session) {
 		System.out.println("category = " + category);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int limit = 12;// 한 번에 보여줄 컨텐츠의 갯수는 12개
@@ -48,6 +51,10 @@ public class CategoryController {
 
 		int listcount = categoryService.getProductListcount(map);
 		map.put("listcount", listcount);
+		System.out.println("접속 ID = "+session.getAttribute("USER_ID"));
+		if(session.getAttribute("USER_ID") != null) {
+			map.put("USER_ID", session.getAttribute("USER_ID"));
+		}
 		List<Product> list = categoryService.getProductList(map);
 		map.put("list", list);
 		return map;

@@ -15,7 +15,9 @@ public class categoryDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public List<Product> getProductList(Map<String, Object> map) {
+		System.out.println("categoryDAO user_ID = "+map.get("USER_ID"));
 		return sqlSession.selectList("Category.productList",map);
+		
 	}
 
 	public int getProductListcount(Map<String, Object> map) {
