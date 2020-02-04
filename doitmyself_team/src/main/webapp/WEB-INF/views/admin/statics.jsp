@@ -55,7 +55,7 @@
     				async:false,
     				success:function(rdata){
     					console.log(rdata);
-    					statics_data.pop();//배열 초기화 
+    					statics_data = [];//배열 초기화 
     					for(var i = 0; i<rdata.name.length;i++){
     						statics_data.push({text:rdata.name[i], 
     								   values:[rdata.statics[i]],
@@ -66,9 +66,7 @@
     			                            backgroundColor: bgcolor[i]
     			                        }
     								});//push end
-    								
-    								
-    					}
+    					}//for end
     					console.log("statics_data = "+statics_data);
     					console.log("statics_data 의  카테고리 이름="+statics_data[0].text);
     					console.log("statics_data 의  value="+statics_data[0].values);
@@ -86,8 +84,19 @@
     				url:"OrderStatics",
     				async:false,
     				success:function(rdata){
-    					statics_data.pop();
-    					
+    					statics_data = [];
+    					console.log(rdata);
+    					for(var i = 0; i<rdata.status.length;i++){
+    						statics_data.push({text:rdata.status[i], 
+    								   values:[rdata.statics[i]],
+    								   backgroundColor:bgcolor[i],
+    								   lineColor:bgcolor[i],
+    								   lineWidth: '1px',
+    								   marker: {
+    			                            backgroundColor: bgcolor[i]
+    			                        }
+    								});//push end
+    					}//for end
     				},
     				error:function(){
     					console.log("에러");
@@ -234,7 +243,15 @@
 	        $(".btndiv button").click(function(){
 	        	console.log($(this).text());
 	        	title = $(this).text();
-	        	zingdata = chartdata(); 
+	        	zingdata = chartdata();
+	        	if(title == '주문 현황'){
+	        		console.log("주문 현황 클릭");
+	        		allOrder();
+	        	}else{
+	        		console.log("카테고리별 판매 현황 클릭");
+	        		category();
+	        	}
+	        	zingdata = chartdata();
 		        zingchart.render({
 		            id: 'myChart',
 		            data: zingdata

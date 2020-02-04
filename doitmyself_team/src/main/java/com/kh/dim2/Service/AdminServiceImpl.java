@@ -33,7 +33,6 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.getListCount(map);
 	}
 	
-	
 	// 검색을 했을 때 유저 목록 보기
 	@Override
 	public List<Member> getMemberList(int page, int limit,String search_word, String search_col, String option) {

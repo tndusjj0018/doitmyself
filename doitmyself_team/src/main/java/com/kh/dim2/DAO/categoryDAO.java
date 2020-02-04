@@ -33,4 +33,5 @@ public class categoryDAO {
 	public int dibsDelete(Map<String, Object> map) {
 		return sqlSession.delete("Category.dibsDelete",map);
 	}
+	
 }

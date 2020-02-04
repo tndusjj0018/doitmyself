@@ -47,6 +47,5 @@
 			<li class = "first_category"><a href="admin?doc=admin_privilege_management">관리자 권한 관리</a></li>
 		</ul>
 	</div>
-	
 </body>
 </html>

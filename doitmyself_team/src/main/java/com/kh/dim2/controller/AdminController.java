@@ -53,6 +53,7 @@ public class AdminController {
 			mv.addObject("seller", seller);
 		}
 
+		
 		mv.addObject("num", num);
 		mv.addObject("doc", doc);
 		mv.setViewName("admin/admin");

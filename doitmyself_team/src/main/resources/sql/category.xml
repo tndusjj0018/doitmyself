@@ -51,4 +51,5 @@
 		delete from DIBS_TBL
 		where D_USER_ID = #{D_USER_ID} and D_P_NO = #{P_NO}
 	</delete>
+	
 </mapper>

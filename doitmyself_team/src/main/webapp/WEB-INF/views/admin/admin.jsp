@@ -35,7 +35,6 @@
 	<link rel = "stylesheet" href = "resources/css/homecss/style.css">
 	<link rel = "stylesheet" href = "resources/css/homecss/style.css.map">	
 	
-	
 	<style>
 		.admin_aside, .admin_content{
 			float:left
