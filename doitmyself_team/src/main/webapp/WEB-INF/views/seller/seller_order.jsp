@@ -8,7 +8,15 @@
 	#orderTRNOselect{padding:3px; margin-right:13px;}
 	.modal-title{margin-top:10px;}
 	.modal-body{margin:19x 0;}
+	.orderList-tb{margin-bottom:35px;}
 </style>
+<script>
+	$(function(){
+		$('input[name=orderRadio]').click(function(){			
+			//alert($(this).val())
+		})
+	})
+</script>
 <!-- session id 저장용 -->
 <input type="hidden" id="id" name="id" value="${USER_ID}">
 <div class="main-panel">
@@ -52,37 +60,36 @@
               		<tr>
               			<th>검색어</th>
               			<td>
-              				<select name="search_field" class="orderSelect">
-              					<option value="orderName">상품명</option>
-              					<option value="orderNo">주문 번호</option>
-              					<option value="orderId">주문자ID</option>
-              					<option value="orderAddress">배송정보</option>
+              				<select name="search_field" class="search_field">
+              					<option value="-1">선택</option>
+              					<option value="0">상품명</option>
+              					<option value="1">주문자ID</option>
               				</select>
-              				<input type="text" class="orderSearch">
+              				<input type="text" class="search_word orderSearch">
               			</td>
               		</tr>
               		<tr>
               			<th>기간</th>
               			<td>
-              				<label for="orderR-t"><input type="radio" name="orderRadio" id="orderR-t"> 오늘 </label>
-              				<label for="orderR-y"><input type="radio" name="orderRadio" id="orderR-y"> 어제 </label>
-              				<label for="orderR-1mon"><input type="radio" name="orderRadio" id="orderR-1mon"> 1개월 </label>
-              				<label for="orderR-6mon"><input type="radio" name="orderRadio" id="orderR-6mon"> 6개월 </label>
+              				<label for="orderR-t"><input type="radio" name="orderRadio" value="orderR-t" id="orderR-t"> 오늘 </label>
+              				<label for="orderR-1mon"><input type="radio" name="orderRadio" value="orderR-1mon" id="orderR-1mon"> 1개월 </label>
+              				<label for="orderR-6mon"><input type="radio" name="orderRadio" value="orderR-6mon" id="orderR-6mon"> 6개월 </label>
               			</td>
               		</tr>
               		<tr>
               			<th>주문상태</th>
               			<td>
-              				<label for="order-all"><input type="checkbox" name="orderCheck" id="order-all"> 전체 </label>               				
-              				<label for="order-paymentFinish"><input type="checkbox" name="orderCheck" id="order-paymentFinish"> 결제완료 </label>     				
-              				<label for="order-preparing"><input type="checkbox" name="orderCheck" id="order-preparing"> 배송 준비중 </label>     				
-              				<label for="order-shipping"><input type="checkbox" name="orderCheck" id="order-shipping"> 배송중 </label>               				
-              				<label for="order-complete"><input type="checkbox" name="orderCheck" id="order-complete"> 배송완료 </label>               				
+              				<label for="order-all"><input type="radio" name="orderCheck" id="order-all" value="order-all"> 전체 </label>               				
+              				<label for="order-success"><input type="radio" name="orderCheck" id="order-success" value="order-success"> 주문완료 </label>     				
+              				<label for="order-paymentFinish"><input type="radio" name="orderCheck" id="order-paymentFinish" value="order-paymentFinish"> 결제완료 </label>     				
+              				<label for="order-preparing"><input type="radio" name="orderCheck" id="order-preparing" value="order-preparing"> 상품 준비중 </label>     				
+              				<label for="order-shipping"><input type="radio" name="orderCheck" id="order-shipping" value="order-shipping"> 배송중 </label>               				
+              				<label for="order-complete"><input type="radio" name="orderCheck" id="order-complete" value="order-complete"> 배송완료 </label>               				
               			</td>
               		</tr>              		
               	</table>
               	<div class="order-btn">
-	              	<button type="submit">
+	              	<button type="button" id="orderBtn">
 	              		<img src="resources/img/d_search.png"> 검색
 	              	</button>
 	              	<button type="reset">초기화</button>
@@ -102,9 +109,9 @@
               	
               	<div class="orderList">
 	              	<select id="viewSelect">
-						<option>주문날짜순</option>              	
-						<option>수량순</option>              	
-						<option>총 가격순</option>              	
+						<option value="date">주문날짜순</option>              	
+						<option value="amount">수량순</option>              	
+						<option value="price">총 가격순</option>              	
 	              	</select>
 	              	<select id="viewcount">              	
 						<option value="10" selected>10개씩 보기</option>              	

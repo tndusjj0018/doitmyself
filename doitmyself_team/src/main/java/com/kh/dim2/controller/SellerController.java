@@ -212,13 +212,18 @@ public class SellerController {
 	@PostMapping(value="OrderList")
 	public Object OrderList(@RequestParam("USER_ID")String USER_ID,
 							@RequestParam(value="limit", defaultValue="10", required=false)int limit,
-							@RequestParam(value="page", defaultValue="1", required=false)int page)throws Exception{
+							@RequestParam(value="page", defaultValue="1", required=false)int page,
+							@RequestParam(value="viewSelect", required=false)String viewSelect,
+							@RequestParam(value="search_field", defaultValue="-1", required=false)int index,
+							@RequestParam(value="search_word", required=false)String search_word,
+							@RequestParam(value="startDate", required=false)String startDate,
+							@RequestParam(value="endDate", required=false)String endDate,
+							@RequestParam(value="status", required=false)String status)throws Exception{
 		//List<Order> list = sellerService.getOrderList(USER_ID);
 		
 		//총 리스트 수 
 		int listcount = sellerService.getOrderListCount(USER_ID);
 		System.out.println("listcount" + listcount);
-		
 		int maxpage = (listcount+limit-1)/limit;
 		System.out.println("총 페이지 수 " + maxpage);
 		
@@ -231,7 +236,7 @@ public class SellerController {
 			endpage = maxpage;
 		}
 		
-		List<Order> orderlist = sellerService.getOrderList(USER_ID, page, limit);
+		List<Order> orderlist = sellerService.getOrderList(USER_ID, page, limit, viewSelect, index, search_word, startDate, endDate, status);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -349,7 +354,7 @@ public class SellerController {
 	
 	//## 배송상태 처리 ##
 	@ResponseBody
-	@PostMapping(value="/orderDelivery")
+	@PostMapping(value="/orderDelivery2")
 	public void orderStatus(@RequestParam("ORDER_P_NO")int P_NO,
 							@RequestParam(value="ORDER_TRNO", required=false)int ORDER_TRNO,
 							@RequestParam("orderDeliveryVal")int orderDeliveryVal) {

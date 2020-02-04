@@ -1,23 +1,97 @@
 $(function(){
 	go(1)//처음 보여줄 페이지를 1페이지로 설정합니다.
 	$("#viewcount").change(function(){
-		go(1);
+		go(1); //페이지 이동값 1페이지
 	});
+	$('#viewSelect').change(function(){
+		go(1);
+	})
 	
-	// ## 01/28 여기부터 시작
 	// ## 검색 ##
-	$('.orderSearchForm').submit(function(){
-				
-		var data = "limit=" + limit + "&state=ajax&page=" + page + "&USER_ID=" + "admin";
-		ajax(data)
+	//검색한 값 유지하기 위해선 click했을시 전역변수에 담으면됨 -> change 저장한 변수값 가져감
+	$('#orderBtn').click(function(){
+		//검색 유효성 검사
+		var radioCheck = $('input[name=orderRadio]').is(':checked');
+		if(!radioCheck){
+			alert("기간을 선택해주세요.");
+			$('input[name=orderRadio]').focus();
+			return false;
+		}
+		
+		var checkCheck = $('input[name=orderCheck]').is(':checked');
+		if(!checkCheck){
+			alert("주문상태를 선택해주세요.");
+			$('input[name=orderCheck]').focus();
+			return false;
+		}
+		
+		var startDate = null;
+		var endDate = null;
+		var search_field = $('.search_field').val();//검색어 선택
+		var search_word = $('.search_word').val();//검색어 입력
+		var dateCheck =  $("input[name=orderRadio]:checked").val();//기간 선택
+		var status =  $("input[name=orderCheck]:checked").val();//주문상태 선택
+		
+		var dt = new Date(); //현재 날짜
+		//오늘날짜 구함
+		var recentYear = dt.getFullYear();
+		var recentMonth = dt.getMonth() + 1;
+		var recentDay = dt.getDate();
+		var recentDay2 = dt.getDate() + 1;
+		if(recentMonth < 10) recentMonth = "0" + recentMonth;
+		if(recentDay < 10) recentDay = "0" + recentDay;
+		if(dateCheck == "orderR-t"){//오늘
+			
+			if(recentDay2 < 10) recentDay2 = "0" + recentDay2;
+
+			var startDate = recentYear + "-" + recentMonth + "-" + recentDay;
+			var endDate = recentYear + "-" + recentMonth + "-" + recentDay2;
+			
+		}else if(dateCheck == "orderR-1mon"){//1개월
+			var dt = new Date();
+			dt.setMonth((dt.getMonth() + 1) - 1);
+
+			var year = dt.getFullYear();
+			var month = dt.getMonth();
+			var day = dt.getDate();
+
+			if(month < 10) month = "0" + month;
+			if(day < 10) day = "0" + day;
+
+			var startDate = year + "-" + month + "-" + day;
+			var endDate = recentYear + "-" + recentMonth + "-" + recentDay;
+			
+		}else if(dateCheck == "orderR-6mon"){//6개월
+			var dt = new Date();
+			dt.setMonth((dt.getMonth() + 1) - 6);
+
+			var year = dt.getFullYear();
+			var month = dt.getMonth();
+			var day = dt.getDate();
+
+			if(month < 10) month = "0" + month;
+			if(day < 10) day = "0" + day;
+
+			var startDate = year + "-" + month + "-" + day;
+			var endDate = recentYear + "-" + recentMonth + "-" + recentDay;
+		}
+		var limit = $('#viewcount').val(); //페이지 수
+		var viewSelect = $('#viewSelect').val(); //ㅇㅇ순 정렬
+		
+		var page = 1;
+		var data = "limit=" + limit + "&state=ajax&page=" + page + 
+					"&USER_ID=" + $('#USER_ID').val() + "&startDate=" + startDate + "&endDate=" + endDate +
+					"&search_field=" + search_field + "&search_word=" + search_word + "&status=" + status + "&viewSelect=" + viewSelect;
+		ajax(data);
+		
 	});	
 })
 
 function go(page){
 	var limit = $('#viewcount').val(); //페이지 몇개씩 보기
-	var USER_ID = $('#USER_ID').val();
-	var viewSelect = $('#viewSelect')
-	var data = "limit=" + limit + "&state=ajax&page=" + page + "&USER_ID=" + USER_ID;
+	var USER_ID = $('#USER_ID').val();	
+	var viewSelect = $('#viewSelect').val(); //ㅇㅇ순 정렬
+	var data = "limit=" + limit + "&state=ajax&page=" + page + "&USER_ID=" + USER_ID + "&viewSelect=" + viewSelect;
 	ajax(data);
 }
 
@@ -34,7 +108,6 @@ function setPaging(href, digit){
 
 function ajax(data){
 console.log(data)	
-	
 $.ajax({
 	type : 'post',
 	url : 'OrderList',
@@ -136,12 +209,15 @@ $.ajax({
 			$('.orderList-tb tbody').empty();
 			$('#message').text("주문상품이 없습니다.");
 		}
+		if(listcount == 0){
+			$('#message').text("검색 내용이 없습니다.");
+		}
 		// ## 총 주문수 ##
 		$('.orderCount').empty();
 		$('.orderCount').text(listcount);
 		// ## 총 주문금액 ##
 		$('.orderPriceAll').empty();
-		$('.orderPriceAll').text(orderPrice.toLocaleString());//자동 콤마
+		$('.orderPriceAll').text(orderPrice);//자동 콤마
 	}//success end
 })//orderList ajax end
 }
@@ -205,11 +281,11 @@ function orderDelivery(){
 					"ORDER_P_NO" : order_p_no}
 		$.ajax({
 			type : 'post',
-			url : 'orderDelivery',
+			url : 'orderDelivery2',
 			data : data,
 			cache : false,
 			success : function(data){
-				
+				//없음
 			}
 		})
 	})//orderStatus click
