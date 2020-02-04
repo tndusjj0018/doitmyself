@@ -111,7 +111,7 @@
     		var option = $(".order_option").val();
     		var category = "all";
     		
-    		var pa_category = <%=request.getParameter("category") %>;
+    		var pa_category = '<%=request.getParameter("category") %>';
     		if(pa_category){
     			category = pa_category;
     		}
