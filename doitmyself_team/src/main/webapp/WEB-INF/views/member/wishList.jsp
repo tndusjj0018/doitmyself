@@ -97,7 +97,7 @@
 									${wl.p_NO}
 								</td>
 								<td>
-									<img src="${wl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${wl.p_NO}';">
+									<img src="resources/upload/${wl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${wl.p_NO}';">
 								</td>
 								<td>
 									<span style="cursor: pointer" onclick="location.href='detail?P_NO=${wl.p_NO}';">${wl.p_NAME }</span>
