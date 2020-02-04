@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -112,8 +113,8 @@
 											<span style="cursor:pointer" onclick="location.href='detail?P_NO=${crl.p_NO}';">${crl.p_NAME }</span>
 										</td>
 										<td>
-											${crl.ORDER_PRICE}원<br>
-											(${crl.ORDER_AMOUNT }개)
+											<fmt:formatNumber value="${crl.ORDER_PRICE}" pattern="#,###,###" />원<br>
+											(<fmt:formatNumber value="${crl.ORDER_AMOUNT }" pattern="#,###,###" />개)
 										</td>
 										<td>
 											${crl.ORDER_SELLER }

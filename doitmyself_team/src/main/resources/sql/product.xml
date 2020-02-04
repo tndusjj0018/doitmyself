@@ -6,7 +6,9 @@
 
 <mapper namespace="Product">
 	<select id="detail" parameterType="int" resultType="product">
-	  select * from PRODUCT_TBL where P_NO = #{P_NO}
+	  select * from PRODUCT_TBL, SELLER_TBL
+	  WHERE P_SELLER = SELLER_NAME
+	  and P_NO = #{P_NO}
 	</select>
 	
 	

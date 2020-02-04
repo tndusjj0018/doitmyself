@@ -304,4 +304,11 @@
 		from CART_TBL
 		where CART_P_NO = #{P_NO} AND CART_ID = #{USER_ID}
 	</delete>
+	
+	<select id="qnaDetail" parameterType="int" resultType="Q_Product">
+		select *
+		from qna_tbl, seller_tbl
+		where qna_s_id = seller_id
+		and qna_no = #{qna_no}
+	</select>
 </mapper>

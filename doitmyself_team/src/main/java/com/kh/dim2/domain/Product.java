@@ -17,7 +17,7 @@ public class Product {
 	private String P_REGDATE; //상품 추가 날짜
 	
 	private String SELLER_ID;
-	
+	private String SELLER_ADDRESS;
 	
 	
 	public String getSELLER_ID() {
@@ -26,6 +26,18 @@ public class Product {
 	public void setSELLER_ID(String sELLER_ID) {
 		SELLER_ID = sELLER_ID;
 	}
+	
+	
+	
+	public String getSELLER_ADDRESS() {
+		return SELLER_ADDRESS;
+	}
+	public void setSELLER_ADDRESS(String sELLER_ADDRESS) {
+		SELLER_ADDRESS = sELLER_ADDRESS;
+	}
+
+
+
 	private String D_NO;// = > 상품 리스트 뽑아올 시 필요한 칼럼 : 찜이 되어 있지 않을 경우 0을 가져옴
 	
 	

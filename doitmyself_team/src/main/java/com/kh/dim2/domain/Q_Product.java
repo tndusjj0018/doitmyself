@@ -2,7 +2,6 @@ package com.kh.dim2.domain;
 
 //join 할 때 사용하는 vo
 //soo 만듦
-import java.sql.Date;
 
 public class Q_Product {
 
@@ -27,8 +26,26 @@ public class Q_Product {
 	private String QNA_S_ID;
 	private int QNA_SECRET;
 	private int QNA_ISRESPONSE;
+	private String QNA_ANSWER;
+	
+	private String SELLER_NAME;
 	
 	
+	
+	
+	
+	public String getSELLER_NAME() {
+		return SELLER_NAME;
+	}
+	public void setSELLER_NAME(String sELLER_NAME) {
+		SELLER_NAME = sELLER_NAME;
+	}
+	public String getQNA_ANSWER() {
+		return QNA_ANSWER;
+	}
+	public void setQNA_ANSWER(String qNA_ANSWER) {
+		QNA_ANSWER = qNA_ANSWER;
+	}
 	public int getP_NO() {
 		return P_NO;
 	}

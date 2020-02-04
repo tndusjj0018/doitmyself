@@ -287,4 +287,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.cartdelete(map);
 	}
 
+	@Override
+	public Q_Product qnaDetail(int qna_no) {
+		return dao.qnaDetail(qna_no);
+	}
+
 }

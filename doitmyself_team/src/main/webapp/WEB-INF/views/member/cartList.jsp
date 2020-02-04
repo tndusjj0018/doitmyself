@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -103,14 +104,13 @@
 									${cl.p_SELLER }
 								</td>
 								<td>
-									${cl.p_PRICE }원
+									<fmt:formatNumber value="${cl.p_PRICE }" pattern="#,###,###" />원<br>
 								</td>
 								<td>
 									<span class="cartcount">${cl.CART_COUNT }</span>개
 								</td>
 								<td>
-									
-									<c:out value="${total_price }"/>원
+									<fmt:formatNumber value="${total_price }" pattern="#,###,###" />원
 								</td>
 								<td>
 									<button type="button" id="btn-wishdelete" onclick="if(confirm('장바구니에서 삭제하시겠습니까?') == true)location.href='cartdelete?P_NO=${cl.p_NO}&USER_ID=${USER_ID }';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
