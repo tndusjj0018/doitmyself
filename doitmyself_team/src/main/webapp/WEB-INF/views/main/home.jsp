@@ -258,7 +258,6 @@
   <script src="resources/js/home_js/jquery.min.js"></script>
   <script src="resources/js/home_js/jquery-migrate-3.0.1.min.js"></script>
   <script src="resources/js/home_js/popper.min.js"></script>
-  <script src="resources/js/home_js/bootstrap.min.js"></script>
   <script src="resources/js/home_js/jquery.easing.1.3.js"></script>
   <script src="resources/js/home_js/jquery.waypoints.min.js"></script>
   <script src="resources/js/home_js/jquery.stellar.min.js"></script>
