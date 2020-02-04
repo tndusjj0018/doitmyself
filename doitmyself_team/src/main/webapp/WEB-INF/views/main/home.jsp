@@ -300,33 +300,6 @@
 	    		'complete' : function() {
 	    		}
 	    	});
-	    	
-	    	$("#first").on("click" , function(){
-	    		
-	    		var select = $('#first option:selected').val();
-	    		
-	    		function getCart_count(){
-	     			$.ajax({
-	     				type : "get",
-	     	 			url : "category",
-	     				data : {"selectValue" : "select"},
-	     				success : function(rdata){
-	     					
-	     					$('#cart_count').empty();
-	     					var output = "";
-	     					output += "<span class='icon-shopping_cart'></span>[" + rdata + "]";
-	     					$('#cart_count').append(output);
-	    					},
-	    				error : function(){
-	    					$('#cart_count').empty();
-	     					var output = "";
-	     					output += "<span class='icon-shopping_cart'></span>[0]";
-	     					$('#cart_count').append(output);
-	    				}
-	     			})
-	     		}
-	     		getCart_count();
-	    	})
 	    })
     </script>
   </body>

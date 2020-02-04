@@ -91,6 +91,9 @@
 	    				</div>
 	    			</div>
     			</c:forEach>
+    			<c:if test="${empty ProductList }">
+    					검색 결과가 없습니다.
+    			</c:if>
     		</div>
     	</div>
     		<div class="center-block">
