@@ -137,7 +137,21 @@ public class MainServiceImpl implements MainService{
 	         map.put("search_field", search_field[index]);
 	         map.put("search_word", "%" + search_word + "%");
 	     }
-		
 		return dao.getSearchListCount(map);
+	}
+
+	@Override
+	public int codeInsert(HashMap<String, Object> map) {
+		return dao.codeInsert(map);
+	}
+
+	@Override
+	public int isCode(String fIND_CODE) {
+		return dao.isCode(fIND_CODE);
+	}
+
+	@Override
+	public Member isPass(Member m) {
+		return dao.isPass(m);
 	}
 }
