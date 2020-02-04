@@ -258,7 +258,6 @@
   <script src="resources/js/home_js/jquery.min.js"></script>
   <script src="resources/js/home_js/jquery-migrate-3.0.1.min.js"></script>
   <script src="resources/js/home_js/popper.min.js"></script>
-  <script src="resources/js/home_js/bootstrap.min.js"></script>
   <script src="resources/js/home_js/jquery.easing.1.3.js"></script>
   <script src="resources/js/home_js/jquery.waypoints.min.js"></script>
   <script src="resources/js/home_js/jquery.stellar.min.js"></script>
@@ -300,33 +299,6 @@
 	    		'complete' : function() {
 	    		}
 	    	});
-	    	
-	    	$("#first").on("click" , function(){
-	    		
-	    		var select = $('#first option:selected').val();
-	    		
-	    		function getCart_count(){
-	     			$.ajax({
-	     				type : "get",
-	     	 			url : "category",
-	     				data : {"selectValue" : "select"},
-	     				success : function(rdata){
-	     					
-	     					$('#cart_count').empty();
-	     					var output = "";
-	     					output += "<span class='icon-shopping_cart'></span>[" + rdata + "]";
-	     					$('#cart_count').append(output);
-	    					},
-	    				error : function(){
-	    					$('#cart_count').empty();
-	     					var output = "";
-	     					output += "<span class='icon-shopping_cart'></span>[0]";
-	     					$('#cart_count').append(output);
-	    				}
-	     			})
-	     		}
-	     		getCart_count();
-	    	})
 	    })
     </script>
   </body>

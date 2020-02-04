@@ -29,7 +29,7 @@
 </head>
 <body>
     <section class="ftco-section2">
-     	<div id="floatMenu">
+     	<div id="floatMenu" style="height:110px;">
     		<c:if test="${empty recentView }">
     			추천 DIM
     			<br>
@@ -52,10 +52,25 @@
     		</c:if>
     	</div>
     	<div class="container">
+    	 <form action="Search_home" autocomplete="off" name="search_box" id= "searchbox_form" style="margin-top:4.2%;">
+		    <fieldset class="url">
+					<select name="search_field" size=1>
+						<option value='0'>전체</option>
+						<option value='1'>판매자 이름</option>
+						<option value='2'>상품</option>
+						<option value='3'>내용</option>
+					</select>
+		      		<input id="url" type="text" name="search_word" required style="min-width:350px;">
+		      <div class="after"></div>
+		    </fieldset>
+		    <fieldset class="enter">
+		      <button>검색</button>
+		    </fieldset>
+		</form>
 				<div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
           	<span class="subheading"></span>
-            <h2 class="mb-4">검색 결과</h2>
+            <h2 class="mb-4" style="margin-top:5%;">검색 결과</h2>
             <p>Search Result</p>
           </div>
         </div>   		
@@ -91,11 +106,23 @@
 	    				</div>
 	    			</div>
     			</c:forEach>
+    			<c:if test="${empty ProductList }">
+    					<div class="container">
+				<div class="row justify-content-center mb-3 pb-3">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+          	<span class="subheading"></span>
+            <h2 class="mb-4" style="margin-top:7%;">검색 결과가 없습니다</h2>
+            <p>다른 단어로 검색 해보세요.</p>
+          </div>
+        </div>   		
+    	</div>
+    			</c:if>
     		</div>
     	</div>
+    		<c:if test="${!empty ProductList }">
     		<div class="center-block">
 				<div class="row">
-					<div class="col">
+					<div class="col" style="margin-left:44.13%;">
 						<ul class="pagination">
 							<c:if test="${page <= 1 }">
 								<li class="page-item">
@@ -137,6 +164,7 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
     </section>
      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
