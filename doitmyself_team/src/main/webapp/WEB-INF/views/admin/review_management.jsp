@@ -12,6 +12,7 @@
       #reviewtable>thead{
 		border-bottom: 2px solid #ddd!important;
       }
+      
    </style>
    <script>
    var go = function(page){

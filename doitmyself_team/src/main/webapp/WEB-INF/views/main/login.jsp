@@ -37,6 +37,7 @@
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
           <div class="row w-100">
             <div class="col-lg-4 mx-auto" style="min-width:600px;">
+
               <div class="auto-form-wrapper">
                 <form action="home" method="post">
                   <div class="form-group">
@@ -45,7 +46,6 @@
                       <input type="text" name="USER_ID" class="form-control" placeholder="ID">
                       <div class="input-group-append">
                         <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
                         </span>
                       </div>
                     </div>

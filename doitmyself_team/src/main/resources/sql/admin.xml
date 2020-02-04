@@ -23,6 +23,7 @@
 		</if>
 	</select>
 	
+	
 	<select id="memberList" resultType="member" parameterType="map">
 		select * from user_tbl
 			<where>

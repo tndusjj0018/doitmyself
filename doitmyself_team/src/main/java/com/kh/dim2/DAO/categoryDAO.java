@@ -15,10 +15,25 @@ public class categoryDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public List<Product> getProductList(Map<String, Object> map) {
+		System.out.println("categoryDAO user_ID = "+map.get("USER_ID"));
 		return sqlSession.selectList("Category.productList",map);
+		
 	}
 
 	public int getProductListcount(Map<String, Object> map) {
 		return sqlSession.selectOne("Category.getProductListcount",map);
 	}
+
+	public String checkDibs(Map<String,Object> map) {
+		return sqlSession.selectOne("Category.dibsCheck",map);
+	}
+
+	public int dibsInsert(Map<String, Object> map) {
+		return sqlSession.insert("Category.dibsInsert",map);
+	}
+
+	public int dibsDelete(Map<String, Object> map) {
+		return sqlSession.delete("Category.dibsDelete",map);
+	}
+	
 }

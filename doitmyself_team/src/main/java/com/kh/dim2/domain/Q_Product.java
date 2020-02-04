@@ -22,7 +22,7 @@ public class Q_Product {
 	private String QNA_SUBJECT;
 	private String QNA_CONTENT;
 	private String QNA_WRITER;
-	private Date QNA_DATE;
+	private String QNA_DATE;
 	private int QNA_CATEGORY;
 	private String QNA_S_ID;
 	private int QNA_SECRET;
@@ -83,10 +83,10 @@ public class Q_Product {
 	public void setQNA_WRITER(String qNA_WRITER) {
 		QNA_WRITER = qNA_WRITER;
 	}
-	public Date getQNA_DATE() {
+	public String getQNA_DATE() {
 		return QNA_DATE;
 	}
-	public void setQNA_DATE(Date qNA_DATE) {
+	public void setQNA_DATE(String qNA_DATE) {
 		QNA_DATE = qNA_DATE;
 	}
 	public int getQNA_CATEGORY() {

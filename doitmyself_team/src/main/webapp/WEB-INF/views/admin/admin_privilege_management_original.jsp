@@ -40,7 +40,6 @@
 			height: 25px;
 			line-height: 25px
 		}
-		
 	</style>
 	<script>
 		var go = function(page){

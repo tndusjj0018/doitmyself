@@ -97,7 +97,7 @@
             	<table class="product_tb">
             		<tr>
             			<th class="p_th">상품명</th>
-            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME" value="${p.p_NAME}"></td>            			
+            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME" value="${p.p_NAME}" required></td>            			
             		</tr>
             		<tr>
             			<th class="p_th">사업지 명</th>
@@ -110,7 +110,7 @@
             			<td class="p_td">
             				<div id="main_cate">
             				<span>대분류</span>
-	            				<select size="3" id="main_cate_select">
+	            				<select size="3" id="main_cate_select" required>
 	            				
 	            				</select>
             				</div>
@@ -119,7 +119,7 @@
             				
             				<div id="sub_cate">
             				<span>소분류</span>
-	            				<select size="3" id="sub_cate_select">
+	            				<select size="3" id="sub_cate_select" required>
 	            					<option value="">-선택-</option>
 	            				</select>
             				</div>
@@ -140,11 +140,11 @@
             		<tr>
             			<th class="p_th">재고 수량</th>
             			<td class="p_td">
-            				<input type="text" name="P_QUANTITY" id="p_qa" value="${p.p_QUANTITY}" maxlength="5"> 개
+            				<input type="text" name="P_QUANTITY" id="p_qa" value="${p.p_QUANTITY}" maxlength="5" required> 개
             			</td>            			
             			<th class="p_th">가격</th>
             			<td class="p_td">							<!-- jstl 콤마추가 기능 -->
-            				<input type="text" id="p_price" value="<c:formatNumber value="${p.p_PRICE}"/>" maxlength="13"> 원 
+            				<input type="text" id="p_price" value="<c:formatNumber value="${p.p_PRICE}"/>" maxlength="13" required> 원 
             				<!-- 콤마뺀가격 저장 -->
             				<input type="hidden" id="p_price_removeComma" name="P_PRICE" maxlength="13">
             			</td>

@@ -18,10 +18,18 @@ values(8,1,3,2,'ccorcle',103,30000,'kakaopay','서울시 용산구',sysdate,'','
 
 
 insert into order_tbl
-values(9,1,4,3,'ccorcle',103,30000,'kakaopay','서울시 용산구',sysdate,'','가게이름1','TR2s32gg3',2);
+values(15,1,4,1,'ccorcle',103,306400,'kakaopay','서울시 중구',sysdate,'','가게이름1','TdRer2s32gg3',2);
 
 insert into order_tbl
-values(10,1,4,3,'ccorcle',103,30000,'kakaopay','서울시 용산구',sysdate,'','가게이름1','TR2s32gg3',2);
+values(16,1,4,1,'admin234in2',103,33400,'deposit','서울시 마포구',sysdate,'','가게이름1','TdR2s371g3',2);
+
+insert into order_tbl
+values(17,1,4,2,'admdin2',103,70000,'kakaopay','서울시 노원구',sysdate,'','가게이름1','TdR24445g3',2);
+
+insert into order_tbl
+values(18,1,4,2,'ajaava',103,830000,'deposit','서울시 영등포구',sysdate,'','가게이름1','TdR99975gg3',2);
+
+
 
 
 select *from ORDER_TBL;
@@ -30,6 +38,7 @@ select *from ORDER_TBL;
 
 select * from PRODUCT_TBL;
 
+select user_id from user_tbl;
 
 
 

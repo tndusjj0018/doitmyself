@@ -32,6 +32,7 @@ function ajax(data){
 		success : function(data){
 			$("#qnaCate").val(data.qnaCate);
 			console.log(data.qnaCate)
+			
 			if(data.qnacount > 0){
 				$('tbody').empty();
 				output = "";
@@ -43,7 +44,7 @@ function ajax(data){
 					output += 		item.qna_NO;
 					output += "		</td>";
 					output += "		<td>";
-					output += "		<img src='" +item.p_IMG+"' class='product_img'>";
+					output += "		<img src=resources/upload'" +item.p_IMG+"' class='product_img'>";
 					output += "		</td>"
 					output += "		<td>";
 					output += "		<a href='detail?P_NO=" + item.p_NO + "' <span style='cursor: pointer'>" + item.p_NAME +"</span></a>";

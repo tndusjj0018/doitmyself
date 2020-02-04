@@ -110,7 +110,7 @@
 								<table id="reviewUpdateTable">
 									<tr>
 										<td>구매 상품</td>
-										<td><img src="${reviewdetail.p_IMG }" class="review_img">${reviewdetail.p_NAME }</td>
+										<td><img src="resources/upload/${reviewdetail.p_IMG }" class="review_img">${reviewdetail.p_NAME }</td>
 									</tr>
 									<tr>
 										<td>상품 평가</td>

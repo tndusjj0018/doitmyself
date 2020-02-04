@@ -11,11 +11,18 @@
 	      	    margin-bottom: 28px!important;
 	      	    margin-top: 40px;
 	      	    float: right;
+	      	    background: #f4f3ef;
 	      }
 	      .sellerinfo_orderselect, .search_col{
 	      		height: 26px;
 	      		position: relative;
     			top: 1px;
+	      }
+	      .search *{
+	      	    height: 40px;
+	      }
+	      .seller_searchbtn{
+	      	width: 65px;
 	      }
 	</style>
 	<script>

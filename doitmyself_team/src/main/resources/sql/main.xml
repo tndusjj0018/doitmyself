@@ -102,4 +102,40 @@
 			#{USER_ID} , #{P_NO} , SYSDATE , RECENT_VIEW_SEQ.NEXTVAL
 		)
 	</insert>
+	
+	<select id="getSearchList" parameterType="map" resultType="product">
+		SELECT * FROM
+		PRODUCT_TBL
+		WHERE 
+		<if test="search_field == 'ALL'">
+			P_NAME || P_SELLER || P_DESCRIPTION
+		</if>
+		<if test="search_field != 'ALL'">
+			<choose>
+			  	<when test="search_field == 'P_NAME'">P_NAME</when>
+			  	<when test="search_field == 'P_SELLER'">P_SELLER</when>
+			  	<when test="search_field == 'P_DESCRIPTION'">P_DESCRIPTION</when>
+			</choose>
+		</if>
+		LIKE #{search_word}
+		ORDER BY P_READCOUNT DESC
+	</select>
+	
+	<select id="searchCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM
+		PRODUCT_TBL
+		WHERE 
+		<if test="search_field == 'ALL'">
+			P_NAME || P_SELLER || P_DESCRIPTION
+		</if>
+		<if test="search_field != 'ALL'">
+			<choose>
+			  	<when test="search_field == 'P_NAME'">P_NAME</when>
+			  	<when test="search_field == 'P_SELLER'">P_SELLER</when>
+			  	<when test="search_field == 'P_DESCRIPTION'">P_DESCRIPTION</when>
+			</choose>
+		</if>
+		LIKE #{search_word}
+	</select>
+	
 </mapper>
