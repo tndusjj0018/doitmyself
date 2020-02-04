@@ -106,13 +106,17 @@ public class MainController {
 
 	@RequestMapping(value="/emailcheck" , method=RequestMethod.GET)
 	@ResponseBody
-	public void emailcheck(@RequestParam("USER_EMAIL") String USER_EMAIL,
+	public void emailcheck(@RequestParam("USER_EMAIL") String USER_EMAIL, @RequestParam("USER_ID") String USER_ID , 
 			HttpServletResponse response) throws Exception {
 		
-		int result = mainService.isEmail(USER_EMAIL);
+		int emailcheck = mainService.isEmail(USER_EMAIL);
+		int idcheck = mainService.isId(USER_ID);
+		if(emailcheck == 1 && idcheck == 1) {
+		int result = 1;
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
+		}
 	}
 
 	@RequestMapping(value="/email_idcheck" , method=RequestMethod.GET)
@@ -120,12 +124,11 @@ public class MainController {
 	public void email_idcheck(@RequestParam("USER_EMAIL") String USER_EMAIL, @RequestParam("USER_ID") String USER_ID ,
 			HttpServletResponse response) throws Exception {
 		
-		int result = mainService.isId(USER_ID , USER_EMAIL);
+		int result = mainService.isEmail_Id(USER_ID , USER_EMAIL);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
-	
 	
 	
 	@RequestMapping(value="/joinProcess" , method = RequestMethod.POST)

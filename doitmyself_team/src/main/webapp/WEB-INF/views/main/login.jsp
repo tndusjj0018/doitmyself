@@ -46,7 +46,6 @@
                       <input type="text" name="USER_ID" class="form-control" placeholder="ID">
                       <div class="input-group-append">
                         <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
                         </span>
                       </div>
                     </div>
