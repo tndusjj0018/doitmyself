@@ -121,14 +121,14 @@
           			</li>
           			<li>
             			<a href="admin?doc=seller_info" data-toggle="collapse" data-target="#toggleDemo2" data-parent="#sidenav01" class="collapsed">
-	              			<i class="nc-icon nc-credit-card"></i>
+	              			<i class="nc-icon nc-alert-circle-i"></i>
 	              			<p>판매자 관리</p>
             			</a>
           			</li>
           			
 		          	<li>
 		            	<a href="#" id="ReviewQna" data-toggle="collapse" data-target="#toggleDemo3" data-parent="#sidenav01" class="collapsed">
-			              	<i class="nc-icon nc-chat-33"></i>
+			              	<i class="nc-icon nc-credit-card"></i>
 			              	<p>주문 관리</p>
 		            	</a>
 		            	<div class="collapse" id="toggleDemo3" style="height: 0px;">
@@ -154,13 +154,13 @@
           			
           			<li>
             			<a href="admin?doc=statics" id="cartList" class="collapsed">
-	              			<i class="nc-icon nc-cart-simple"></i>
+	              			<i class="nc-icon nc-chart-pie-36"></i>
 	              			<p>통계</p>
 						</a>
           			</li>
           			<li>
             			<a href="admin?doc=admin_privilege_management" id="cartList" class="collapsed">
-	              			<i class="nc-icon nc-cart-simple"></i>
+	              			<i class="nc-icon nc-settings-gear-65"></i>
 	              			<p>관리자 권한 관리</p>
 						</a>
           			</li>
