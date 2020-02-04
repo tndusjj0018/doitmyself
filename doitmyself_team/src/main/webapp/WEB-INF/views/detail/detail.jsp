@@ -97,12 +97,7 @@
 					<h3 id="p_name">${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
-							<a href="#" class="mr-2">${rate }</a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a>
+							<a href="#" class="mr-2">${rate }</a>
 						</p>
 					</div>
 					<input type="hidden" value="${prdData.p_PRICE}" id="hiddenprice">

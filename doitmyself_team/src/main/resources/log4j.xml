@@ -36,6 +36,12 @@
 		<level value="trace" />
 	</logger>
 	
+	<logger name="qna">
+		<level value="trace" />
+	</logger>
+	
+	
+	
 	<logger name="order">
 	    <level value="trace" />
 	</logger>

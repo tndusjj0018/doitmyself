@@ -10,9 +10,12 @@ select * from user_sys_privs;
 
 select * from review_tbl;
 
-select * from cart_tbl;
+select * from order_tbl;
 
-drop table cart_tbl;
+drop table qna_tbl;
+
+update order_tbl set ORDER_DELIVERY=4 where order_no = 9;
+
 
 CREATE TABLE REVIEW_TBL(
 	REVIEW_NO		NUMBER							PRIMARY KEY,
