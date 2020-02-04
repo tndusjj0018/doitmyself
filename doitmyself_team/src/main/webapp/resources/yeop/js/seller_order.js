@@ -7,19 +7,16 @@ $(function(){
 	// ## 01/28 여기부터 시작
 	// ## 검색 ##
 	$('.orderSearchForm').submit(function(){
-		var orderSelect = $('.orderSelect').val();
-		var orderSearch = $('.orderSearch').text();
-		var orderDay = $('input[name=radio]').text();
-		var orderS = $('input[name=checkbox]').text();
-		
+				
 		var data = "limit=" + limit + "&state=ajax&page=" + page + "&USER_ID=" + "admin";
 		ajax(data)
 	});	
 })
 
 function go(page){
-	var limit = $('#viewcount').val();
+	var limit = $('#viewcount').val(); //페이지 몇개씩 보기
 	var USER_ID = $('#USER_ID').val();
+	var viewSelect = $('#viewSelect')
 	var data = "limit=" + limit + "&state=ajax&page=" + page + "&USER_ID=" + USER_ID;
 	ajax(data);
 }
@@ -67,7 +64,7 @@ $.ajax({
 						  "		품명 : "+ this.p_NAME +"" +
 						  "		</div>" +
 						  "</td>";
-				output += "<td class='orderAddress'>" + this.order_ADDRESS + "</td>";
+				output += "<td class='orderAddress'><b>이름</b>: "+ this.user_NAME +"<br><b>연락처</b>: "+ this.user_PHONE +"<br><b>주소</b>: "+ this.order_ADDRESS + "</td>";
 				output += "<td class='orderAmount'>" + this.order_AMOUNT + "</td>";
 				output += "<td class='orderPrice'>" + this.order_PRICE.toLocaleString() + "</td>";
 				output += "<td class='orderPayment'>" + this.order_PAYMENT + "</td>";
@@ -92,8 +89,9 @@ $.ajax({
 					bg = "#5bb65b"
 						break;
 				}
-				output += "<td><button class='orderDelivery' value='"+ this.order_DELIVERY +"' style='background:"+bg+"'>"+DeleveryMessage+"</button>" +
-						"		<input type='hidden' value='"+ this.order_P_NO +"' id='hidden_p_no'></td>";
+				output += "<td class='orderDelivery'><button class='orderDelivery' value='"+ this.order_DELIVERY +"' style='background:"+bg+"'>"+DeleveryMessage+"</button>" +
+						"		<input type='hidden' value='"+ this.order_P_NO +"' id='hidden_p_no'>" +
+						"		<input type='hidden' value='"+ this.order_AMOUNT +"' id='hidden_amount'></td>";
 				output += "</tr>";
 				
 				//## 총 주문금액 ##
@@ -156,7 +154,8 @@ function orderDelivery(){
 		var orderDelivery = $(this).text();
 		//주문상태 : 1=결제완료, 2=상품준비중, 3=배송중, 4=배송완료
 		var orderDeliveryVal = $(this).val();
-		var order_p_no = $(this).next().val();
+		var order_p_no = $(this).next().val(); //상품번호
+		var order_amount = 0;
 		var ORDER_TRNO = 0; //운송장 번호
 		if(orderDelivery == "결제완료"){
 			var ready = confirm("상품준비중 처리하시겠습니까?");
@@ -176,7 +175,14 @@ function orderDelivery(){
 					$(this).text("배송중").css('background','#428bca');
 					ORDER_TRNO = orderTRNO;
 					orderDeliveryVal = 3; // 3=배송중
-					alert("배송처리 되었습니다.")
+					order_amount = $(this).next().next().val(); //구매수량
+					var data = "ORDER_P_NO=" + order_p_no + "&state=ajax&ORDER_AMOUNT=" + order_amount;
+					$.ajax({
+						type : 'post',
+						url : 'OrderAmountM',
+						data : data
+					})
+					alert("배송처리 되었습니다.");
 				}else{
 					alert("숫자로 입력해주세요");
 					return false;

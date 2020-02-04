@@ -56,7 +56,7 @@
               					<option value="orderName">상품명</option>
               					<option value="orderNo">주문 번호</option>
               					<option value="orderId">주문자ID</option>
-              					<option value="orderAddress">배송지</option>
+              					<option value="orderAddress">배송정보</option>
               				</select>
               				<input type="text" class="orderSearch">
               			</td>
@@ -101,7 +101,7 @@
               	</h5>
               	
               	<div class="orderList">
-	              	<select>
+	              	<select id="viewSelect">
 						<option>주문날짜순</option>              	
 						<option>수량순</option>              	
 						<option>총 가격순</option>              	

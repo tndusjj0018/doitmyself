@@ -105,7 +105,7 @@
             			<th class="p_th">메인사진</th>
             			<td class="p_td">
             				<input type="file" name="uploadfile" onchange="readURL(this);" id="uploadfile"
-								accept="image/gif, image/jpeg, image/png">
+								accept="image/gif, image/jpeg, image/png" required>
 							<img id="upLoadFileImg" src="resources/img/noimage.gif">
             			</td>            			
             		</tr> 		
