@@ -1,7 +1,5 @@
---�쑀�� �떆���뒪 �깮�꽦
 CREATE SEQUENCE USER_SEQ;
 
---�쑀�� �뀒�씠釉� �깮�꽦
 CREATE TABLE USER_TBL(
 	USER_NO				NUMBER 				PRIMARY KEY,
 	USER_ID				VARCHAR2(20)		UNIQUE 				NOT NULL,
@@ -21,7 +19,6 @@ select * from user_tbl
 
 select * from product_tbl;
 
---移댄뀒怨좊━ �뀒�씠釉� �깮�꽦
 CREATE TABLE CATEGORY_TBL(
 	C_NO		NUMBER(4)					PRIMARY KEY,
 	C_NAME		VARCHAR2(20)				NOT NULL
@@ -29,7 +26,6 @@ CREATE TABLE CATEGORY_TBL(
 
 --insert into CATEGORY_TBL values(101 , 'test') 
 
---�뙋留ㅼ옄 �젙蹂� �뀒�씠釉� �깮�꽦
 CREATE TABLE SELLER_TBL(
 	SELLER_NO 			NUMBER				PRIMARY KEY,
 	SELLER_NAME			VARCHAR2(30)		UNIQUE 							NOT NULL,
@@ -41,7 +37,6 @@ CREATE TABLE SELLER_TBL(
 
 --select * from SELLER_TBL
 
---�긽�뭹 �뀒�씠釉� �깮�꽦
 CREATE TABLE PRODUCT_TBL(
 	P_NO			NUMBER					PRIMARY KEY,	
 	P_NAME			VARCHAR2(40)													NOT NULL,
@@ -63,14 +58,12 @@ CREATE TABLE PRODUCT_TBL(
 insert into product_tbl values(11 , 'test11' , 'qweqrqqr' , 101 , 24000 , '11' , 1220 , 'test以묒엯�땲�꽕�떎11' , 221 , 1225 , sysdate);
 insert into product_tbl values(12 , 'test12' , 'qweqrqqr' , 101 , 60200 , '11' , 1430 , 'test以묒엯�땲�떎12' , 545 , 38 , sysdate);
 
---�긽�뭹 異붽� �궗吏� �뀒�씠釉�
 CREATE TABLE IMG_TBL(
 	IMG_NO		NUMBER														PRIMARY KEY,
 	IMG_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)	NOT NULL,
 	IMG_NAME	VARCHAR2(50)												NOT NULL
 );
 
---吏덉쓽 �쓳�떟 �뀒�씠釉�
 CREATE TABLE QNA_TBL(
 	QNA_NO 	NUMBER																	PRIMARY KEY,
 	QNA_P_NO	NUMBER						REFERENCES PRODUCT_TBL(P_NO)			NOT NULL,
@@ -87,14 +80,12 @@ CREATE TABLE QNA_TBL(
 
 DROP TABLE QNA_TBL;
 
---李� �뀒�씠釉�
 CREATE TABLE DIBS_TBL(
 	D_NO		NUMBER			  												PRIMARY KEY,
 	D_P_NO		NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
 	D_USER_ID	VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL
 );
 
---二쇰Ц/痍⑥냼/諛섑뭹/援먰솚 �궡�뿭 �뀒�씠釉�
 CREATE TABLE ORDER_TBL(
 	ORDER_NO		NUMBER																	PRIMARY KEY,
 	ORDER_P_NO		NUMBER					REFERENCES PRODUCT_TBL(P_NO)					NOT NULL,
@@ -111,7 +102,6 @@ CREATE TABLE ORDER_TBL(
 	ORDER_TRNO		VARCHAR2(20)
 );
 
---由щ럭 �뀒�씠釉�
 CREATE TABLE REVIEW_TBL(
 	REVIEW_NO		NUMBER					PRIMARY KEY,
 	REVIEW_RATE		NUMBER(1)													NOT NULL,
@@ -123,7 +113,6 @@ CREATE TABLE REVIEW_TBL(
 );
 
 
---理쒓렐 蹂� �긽�뭹 �뀒�씠釉�
 CREATE TABLE RECENT_VIEW_TBL(
 	RV_ID		VARCHAR2(30)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
 	RV_P_NO		NUMBER						REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
@@ -138,7 +127,18 @@ select * from RECENT_VIEW_TBL;
 		WHERE RV_ID = 'sun112'
 		ORDER BY RV_NO DESC
 
---�옣諛붽뎄�땲 �뀒�씠釉�
+		SELECT * FROM
+		PRODUCT_TBL
+		WHERE P_NAME || P_SELLER || P_DESCRIPTION
+		LIKE '%q%'
+		ORDER BY P_READCOUNT DESC
+		
+		SELECT COUNT(*) FROM 
+		PRODUCT_TBL
+		WHERE
+			P_NAME || P_SELLER || P_DESCRIPTION
+		LIKE '%1%'
+
 CREATE TABLE CART_TBL(
 	CART_NO 	NUMBER															PRIMARY KEY,
 	CART_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		NOT NULL,
@@ -149,13 +149,11 @@ CREATE TABLE CART_TBL(
 --insert into cart_tbl values(11112,'sun112',1);
 --insert into cart_tbl values(11113,'sun112',1);
 
---蹂댁븞 �씤利� 踰덊샇 �뀒�씠釉�
 CREATE TABLE SECURITY_NO_TBL(
 	SN_NO		NUMBER(6),
 	SN_ID		VARCHAR2(20)				REFERENCES USER_TBL(USER_ID)		PRIMARY KEY
 );
 
---�솚遺� �뀒�씠釉�
 CREATE TABLE REFUND_TBL(
 	REFUND_NO		NUMBER					REFERENCES PRODUCT_TBL(P_NO)		NOT NULL,
 	REFUND_P_NO		NUMBER					REFERENCES ORDER_TBL(ORDER_NO)		NOT NULL,

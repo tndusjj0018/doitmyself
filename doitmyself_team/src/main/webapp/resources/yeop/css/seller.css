@@ -96,8 +96,9 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 .order-btn button:hover{cursor:pointer; opacity:0.7;}
 .order-btn button:nth-child(1){width:80px; height:30px; background:#4f97c3d4; color:white; border:none;}
 .order-btn button:nth-child(2){width:80px; height:30px; background:white; color:#4f97c3d4; border:1px solid #4f97c3d4;}
+.orderList-tb{margin-bottom:35px;}
 .orderList-tb td{border:1px solid silver; text-align:center; padding:0 13px;}
-.orderList-tb thead>tr{background:#6da9cd6b;}
+.orderList-tb thead>tr{background:#6da9cd6b; font-weight: bold;}
 .orderList-tb tr>td{height:30px;}
 .orderList-tb{width:97%; margin:0 auto;}
 .orderList{text-align:right; margin-bottom:17px; margin-right:19px;}
@@ -109,14 +110,15 @@ input[type=file]{text-indent:0; border:none;}
 #upLoadFileImg{display:inline-block; width:120px;height:90px; border:1px solid #dedede;}
 #uploadfile{width:290px; color:gray;}
 .orderList-tb tbody>tr>td{height:53px; color:#717171;}
-.orderDate,.slaeDate{width:105px;}
+.orderDate,.slaeDate{width:113px;}
+.orderDelivery{width:117px;}
 .orderNo{width:115px;}
 .orderId{width:115px;}
 .saleName{width:230px;}
 .saleUpdate,.saleDelete{width:90px; height:30px; border:none; color:white}
 .saleUpdate:hover,.saleDelete:hover{cursor:pointer; opacity:0.7; transition:.3s;}
-.saleUpdate{margin-bottom:13px; background:#38b1a0;}
-.saleDelete{background:#ff3c3c;}
+.saleUpdate{margin-bottom:13px; background:#6db5e0;}
+.saleDelete{background:#3e3e3ecf;}
 .saleBtn{width:177px;}
 
 .ftco-navbar-light{background:white!important;}
@@ -127,10 +129,10 @@ input[type=file]{text-indent:0; border:none;}
 .orderProgress>b:nth-child(2){color:#e6811a;}
 .orderProgress>b:nth-child(3){color:#428bca;}
 .orderProgress>b:nth-child(4){color:#5bb65b;}
-.orderStatus{background:#ca1b1b; border:none; width:89px; height:35px; color:white;}
-.orderStatus:hover{opacity:0.7; transition:.3s; cursor:pointer;}
-.orderImg img{width:96px; margin-top:3px; display:block;}
-.saleImg img{width:96px; margin-top:3px; display:block; margin:0 auto;}
+.orderDelivery{border:none; width:89px; height:35px; color:white;}
+.orderDelivery:hover{opacity:0.7; transition:.3s; cursor:pointer;}
+.orderImg img{width:96px; height:96px; margin:0 auto; margin-top:3px; display:block;}
+.saleImg img{width:96px; height:96px; margin-top:3px; display:block; margin:0 auto;}
 
 .center-block{display:flex; justify-content:center;} /*가운데 정렬*/
 #viewcount{width:10%;}

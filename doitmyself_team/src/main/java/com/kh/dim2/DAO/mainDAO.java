@@ -2,6 +2,7 @@ package com.kh.dim2.DAO;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,17 @@ public class mainDAO {
 
 	public int addRecent(HashMap<String , String> map) {
 		return sqlSession.insert("Main.Add_Recent" , map);
+	}
+
+	public List<Product> getSearchList(Map<String, Object> map) {
+		return sqlSession.selectList("Main.getSearchList" , map);
+	}
+
+	public int getSearchListCount(Map<String, String> map) {
+		return sqlSession.selectOne("Main.searchCount" , map);
+	}
+
+	public Member isEmail_Id(String uSER_ID, String uSER_EMAIL) {
+		return sqlSession.selectOne("Main.idcheck" , uSER_ID);
 	}
 }

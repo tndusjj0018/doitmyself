@@ -29,6 +29,8 @@ public class O_Product {
 	private String ORDER_TRNO;
 	private int ORDER_AMOUNT;
 	
+	private String SELLER_ID;
+	
 	private int REVIEW_NO;
 	private String REVIEW_DATE;
 	private int REVIEW_RATE;
@@ -38,6 +40,12 @@ public class O_Product {
 	
 	private int REFUND_STATUS;
 	
+	public String getSELLER_ID() {
+		return SELLER_ID;
+	}
+	public void setSELLER_ID(String sELLER_ID) {
+		SELLER_ID = sELLER_ID;
+	}
 	public int getREFUND_STATUS() {
 		return REFUND_STATUS;
 	}

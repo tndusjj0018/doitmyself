@@ -22,7 +22,6 @@
 
 <head>
 <jsp:include page="../main/header.jsp" />
-<title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -109,6 +108,7 @@
 					<p class="price">
 						<span id="mainPrice"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 					</p>
+
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
@@ -683,7 +683,6 @@
 
 	<script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/js/popper.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/jquery.easing.1.3.js"></script>
 	<script src="resources/js/jquery.waypoints.min.js"></script>
 	<script src="resources/js/jquery.stellar.min.js"></script>

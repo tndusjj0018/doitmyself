@@ -23,7 +23,6 @@
 	            var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 	            var extraRoadAddr = ''; // 도로명 조합형 주소 변수
 
-	            
 	            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
 	            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){

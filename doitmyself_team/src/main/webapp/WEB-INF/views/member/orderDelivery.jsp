@@ -112,7 +112,7 @@
 								${ol.ORDER_DATE }
 								</td>
 								<td>
-									<img src="${ol.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ol.p_NO}';">
+									<img src="resources/upload/${ol.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ol.p_NO}';">
 								</td>
 								<td>
 									<span style="cursor:pointer" onclick="location.href='detail?P_NO=${ol.p_NO}';">${ol.p_NAME }</span>

@@ -17,7 +17,21 @@ public class Order {
 	private String ORDER_SELLER; 
 	private String ORDER_TRNO;
 	private int ORDER_AMOUNT;
+	private String USER_NAME;
+	private String USER_PHONE;
 	
+	public String getUSER_NAME() {
+		return USER_NAME;
+	}
+	public void setUSER_NAME(String uSER_NAME) {
+		USER_NAME = uSER_NAME;
+	}
+	public String getUSER_PHONE() {
+		return USER_PHONE;
+	}
+	public void setUSER_PHONE(String uSER_PHONE) {
+		USER_PHONE = uSER_PHONE;
+	}
 	public String getP_IMG() {
 		return P_IMG;
 	}

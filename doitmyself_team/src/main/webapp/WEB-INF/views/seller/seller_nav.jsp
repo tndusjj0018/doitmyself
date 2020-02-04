@@ -77,6 +77,9 @@
 		case 'seller_sale':
 			$('.nav').children().eq(3).addClass('active');
 			break;
+		case 'seller_qna':
+			$('.nav').children().eq(5).addClass('active');
+			break;
 		default:
 			break;
 		}
@@ -99,8 +102,8 @@
 <!-- doc저장 -->
 <input type="hidden" value="${doc}" class="doc">
 <!-- session id 저장 -->
-<%-- <input type="hidden" value="${USER_ID}" id="USER_ID"> --%>
-<input type="hidden" value="admin" id="USER_ID">
+<input type="hidden" value="${USER_ID}" id="USER_ID">
+<!-- <input type="hidden" value="admin" id="USER_ID"> -->
 <body class="">
   <div class="wrapper ">
    	<jsp:include page="../main/header.jsp"/>
@@ -141,9 +144,9 @@
             </a>
           </li>          
           <li>
-            <a href="./tables.html">
+            <a href="seller?doc=seller_qna">
               <i class="nc-icon nc-tile-56"></i>
-              <p>판매통계</p>
+              <p>상품문의 답변</p>
             </a>
           </li>
         </ul>

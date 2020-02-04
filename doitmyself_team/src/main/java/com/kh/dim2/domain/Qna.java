@@ -13,8 +13,15 @@ public class Qna {
 	private int QNA_SECRET;
 	private int QNA_ISRESPONSE;
 	private String QNA_ANSWER;
+	private String P_NAME;
 	
 	
+	public String getP_NAME() {
+		return P_NAME;
+	}
+	public void setP_NAME(String p_NAME) {
+		P_NAME = p_NAME;
+	}
 	public int getQNA_NO() {
 		return QNA_NO;
 	}
