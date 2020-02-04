@@ -2,6 +2,13 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="resources/yeop/js/seller_order.js"></script>
+<style>
+	.modal-dialog{margin:0 auto; margin-top:271px;}
+	.btn{margin:0; padding:7px 16px;}
+	#orderTRNOselect{padding:3px; margin-right:13px;}
+	.modal-title{margin-top:10px;}
+	.modal-body{margin:19x 0;}
+</style>
 <!-- session id 저장용 -->
 <input type="hidden" id="id" name="id" value="${USER_ID}">
 <div class="main-panel">
@@ -17,44 +24,6 @@
               </button>
             </div>
             <a class="navbar-brand" href="#pablo">주문관리 페이지</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link btn-magnify" href="#pablo">
-                  <i class="nc-icon nc-layout-11"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-bell-55"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="#pablo">
-                  <i class="nc-icon nc-settings-gear-65"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </nav>
@@ -87,7 +56,7 @@
               					<option value="orderName">상품명</option>
               					<option value="orderNo">주문 번호</option>
               					<option value="orderId">주문자ID</option>
-              					<option value="orderAddress">배송지</option>
+              					<option value="orderAddress">배송정보</option>
               				</select>
               				<input type="text" class="orderSearch">
               			</td>
@@ -132,7 +101,7 @@
               	</h5>
               	
               	<div class="orderList">
-	              	<select>
+	              	<select id="viewSelect">
 						<option>주문날짜순</option>              	
 						<option>수량순</option>              	
 						<option>총 가격순</option>              	
@@ -163,8 +132,8 @@
 	            		<!-- orderList ajax -->	            		
 	            	</tbody>	            	
             	</table>
-            	<div id="message"></div>  
-            	
+            	<div id="message"></div>   	            	
+            
             	<div class="center-block">
 					<div class="row">
 						<div class="col">
@@ -182,3 +151,28 @@
       </div>
      
     </div>
+    
+    <!-- OrderTRNO Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">운송장 번호 입력</h4>
+        </div>
+        <div class="modal-body">
+          <select id="orderTRNOselect">
+          	<option>CJ대한통운</option>
+          </select>
+          	운송장번호 입력
+          <input type="text" class="orderTRNO" maxlength="20">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary order-m-btn" data-dismiss="modal">입력</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

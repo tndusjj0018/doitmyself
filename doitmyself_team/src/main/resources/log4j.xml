@@ -20,6 +20,10 @@
 		<level value="trace" />
 	</logger>
 	
+	<logger name="Main">
+		<level value="trace" />
+	</logger>
+	
 	<logger name="Admin">
 		<level value="trace" />
 	</logger>

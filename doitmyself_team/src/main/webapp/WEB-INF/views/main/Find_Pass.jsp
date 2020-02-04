@@ -75,12 +75,13 @@
                         <h5 class="card-title">비밀번호 찾기</h5>
                      </div>
                      <div class="card-body">
-                        <form action='find_pass' method='post' id="findBtn">
+                        <form action='Find_Pass' method='post' id="findBtn">
                            <div class="row">
                               <div class="col-md-12">
                                  <div class="form-group">
                                     <label>아이디</label>
                                     <input type="text" name="USER_ID" class="form-control" placeholder="비밀번호를 찾을 아이디를 입력하세요" required>
+                                    <span><i class="far fa-check-circle input_check id_checkbar"></i></span>
                                  </div>
                               </div>
                            </div>
@@ -89,6 +90,7 @@
                                  <div class="form-group">
                                     <label>이메일</label>
                                     <input type="email" name="USER_EMAIL" class="form-control" placeholder="회원가입에 사용했던 이메일을 입력하세요" required>
+                                    <span><i class="far fa-check-circle input_check email_checkbar"></i></span>
                                  </div>
                               </div>
                            </div>
@@ -103,14 +105,15 @@
                               <div class="addr_box">
                                  <div class="form-group">
                                     <label>코드번호</label>
-                                    <input type="text" class="form-control" name="PASS_CODE" id="PostCode" required>
+                                    <input type="text" class="form-control" name="FIND_CODE" id="PostCode" required>
                                  </div>                                 
                               </div>
                               <div class="col-md-3">
                                  <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-round" placeholder="이메일로 전송된 코드를 입력하세요" onclick="Postcode()" style="position: relative; top: 16px;" required>코드 확인</button>
+                                    <button type="button" class="btn btn-primary btn-round" id="code_idf" placeholder="이메일로 전송된 코드를 입력하세요" style="position: relative; top: 16px;" required>코드 확인</button>
                                  </div>
-                              </div>                                    
+                              </div>
+                                                           
                            </div>
                            </form>
                      </div>
@@ -143,17 +146,17 @@
    			var checkid = false;
    			var checkemail = false;
    			
-   			$("#findBtn").submit(function(){
-   				
+   			$("#findBtn").submit(function(event){
+   				event.preventDefault();
    				if(checkid == true && checkemail == true)
    				$.ajax({
-   					url : "check_findPass",
+   					url : "MailSender",
    					type : "POST",
    					data : {
-   						
+   						"USER_ID" : $('input:eq(0)').val() , "USER_EMAIL" : $('input:eq(1)').val()
    					},
    					success : function(result) {
-   						alert(result);
+   						alert('메일이 발송되었습니다.');
    					},
    				})
    			});
@@ -166,15 +169,55 @@
    					data:{"USER_ID" : USER_ID},
    					success: function(resp) {
    						if(resp == -1) {
-   							$('i:eq(0)').css('opacity', '0.95');			
-   							checkid = true;
-   						} else {
-   							$('i:eq(0)').css('opacity', '0');
+   							$('i:eq(0)').css('opacity', '0');			
    							checkid = false;
+   						} else {
+   							$('i:eq(0)').css('opacity', '0.95');
+   							checkid = true;
    						}
    					}
    				});
-   			
+	   		})
+
+	   		$('input:eq(1)').on('keyup', function(){
+   				
+	   			var USER_ID = $('input:eq(0)').val();
+   				var USER_EMAIL = $('input:eq(1)').val();
+   				
+   				$.ajax({
+   					url:"email_id_check",
+   					data:{"USER_EMAIL" : USER_EMAIL , "USER_ID" : USER_ID},
+   					success: function(resp) {
+   						if(resp == -1) {
+   							$('i:eq(1)').css('opacity', '0');			
+   							checkemail = false;
+   						} else {
+   							$('i:eq(1)').css('opacity', '0.95');
+   							checkemail = true;
+   						}
+   					}
+   				});
+	   		})
+	   		
+	   		$('#code_idf').on('click', function(){
+   				
+	   			var USER_ID = $('input:eq(0)').val();
+   				var FIND_CODE = $('input:eq(2)').val();
+   				
+   				$.ajax({
+   					url:"code_identify",
+   					data:{"FIND_CODE" : FIND_CODE , "USER_ID" : USER_ID},
+   					type: "GET",
+   					success: function(resp) {
+   						if(resp > 0) {
+   							alert(USER_ID + "님의 비밀번호는 " + resp + "입니다.");
+   						} else {
+   							alert('코드번호를 확인해주세요');
+   						}		
+   					}
+   				});
+	   		})
+	   		
    		})
    </script>
 </body>

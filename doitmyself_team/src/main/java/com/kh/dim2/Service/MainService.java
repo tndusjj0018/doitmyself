@@ -27,4 +27,9 @@ public interface MainService {
 	int isNaverId(String n_Id);
 	int Find_check(String uSER_ID , String uSER_EMAIL);
 	int AddRecent(HashMap<String, String> map);
+	List<Product> getSearchList(int index, String search_word, int page, int limit);
+	int getSearchListCount(int index, String search_word);
+	int codeInsert(HashMap<String, Object> map);
+	int isCode(String fIND_CODE);
+	Member isPass(Member m);
 }

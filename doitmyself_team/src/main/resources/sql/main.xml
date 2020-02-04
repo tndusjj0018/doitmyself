@@ -102,4 +102,63 @@
 			#{USER_ID} , #{P_NO} , SYSDATE , RECENT_VIEW_SEQ.NEXTVAL
 		)
 	</insert>
+	
+	<select id="getSearchList" parameterType="map" resultType="product">
+		SELECT * 
+		FROM (SELECT ROWNUM RNUM , P.*
+			FROM (SELECT * FROM PRODUCT_TBL
+				WHERE 
+				<if test="search_field == 'ALL'">
+					P_NAME || P_SELLER || P_DESCRIPTION
+					LIKE #{search_word}
+				</if>
+				<if test="search_field != 'ALL'">
+					<choose>
+					  	<when test="search_field == 'P_NAME'">P_NAME</when>
+					  	<when test="search_field == 'P_SELLER'">P_SELLER</when>
+					  	<when test="search_field == 'P_DESCRIPTION'">P_DESCRIPTION</when>
+					</choose>
+					LIKE #{search_word}
+				</if>
+			ORDER BY P_READCOUNT) P
+			)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<select id="searchCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM
+		PRODUCT_TBL
+		WHERE 
+		<if test="search_field == 'ALL'">
+			P_NAME || P_SELLER || P_DESCRIPTION
+		</if>
+		<if test="search_field != 'ALL'">
+			<choose>
+			  	<when test="search_field == 'P_NAME'">P_NAME</when>
+			  	<when test="search_field == 'P_SELLER'">P_SELLER</when>
+			  	<when test="search_field == 'P_DESCRIPTION'">P_DESCRIPTION</when>
+			</choose>
+		</if>
+		LIKE #{search_word}
+	</select>
+
+	<insert id="codeInsert" parameterType="map">
+		INSERT INTO 
+		CODE_IDENTIFY
+		VALUES(
+			#{USER_ID} , #{FIND_CODE}
+		)
+	</insert>
+	
+	<select id="isCode" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM
+		CODE_IDENTIFY
+		WHERE FIND_CODE = #{USER_ID}
+	</select>
+	
+	<select id="isPass" resultType="member" parameterType="String">
+		SELECT *
+		FROM USER_TBL
+		WHERE USER_ID = #{USER_ID}
+	</select>
 </mapper>

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import com.kh.dim2.domain.Mail;
 
-
 @Component
 public class SendMail {
 	

@@ -106,7 +106,7 @@
 			        						${crl.ORDER_DATE }
 			        					</td>
 			        					<td>
-											<img src="${crl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${crl.p_NO}';">
+											<img src="resources/upload/${crl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${crl.p_NO}';">
 										</td>
 										<td>
 											<span style="cursor:pointer" onclick="location.href='detail?P_NO=${crl.p_NO}';">${crl.p_NAME }</span>
@@ -121,28 +121,29 @@
 										<td>
 											${crl.ORDER_R_DATE }
 										</td>
-									
-										<c:if test="${crl.ORDER_STATUS == 1}">
+										<c:choose>
+										<c:when test="${crl.ORDER_STATUS == 1}">
 											<td>
 												취소완료
 											</td>
-										</c:if>
-										<c:if test="${crl.REFUND_STATUS == 0}">
+										</c:when>
+										<c:when test="${crl.REFUND_STATUS == 0}">
 											<td>
 												반품신청
 											</td>
-										</c:if>
-										<c:if test="${crl.REFUND_STATUS == 1}">
+										</c:when>
+										<c:when test="${crl.REFUND_STATUS == 1}">
 											<td>
 												반품처리중
 											</td>
-										</c:if>
-										<c:if test="${crl.REFUND_STATUS == 2}">
+										</c:when>
+										<c:when test="${crl.REFUND_STATUS == 2}">
 											<td>
 												반품완료
 											</td>
-										</c:if>
-										
+										</c:when>
+										</c:choose>
+									
 			        				</tr>
 			        				</c:forEach>
 			        			</table>

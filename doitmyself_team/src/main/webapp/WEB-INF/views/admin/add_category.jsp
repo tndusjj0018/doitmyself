@@ -23,7 +23,6 @@
 			margin-left: 281px;
     		margin-top: 49px;
 		}
-		
 		.categoryAdd{
 			width: 174px;
 		    margin-left: 100px;

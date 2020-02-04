@@ -233,7 +233,7 @@
 								<input type="hidden" id="ORDER_PRICE" name="ORDER_PRICE" value="">
 								<input type="hidden" id="ORDER_PAYMENT" name="ORDER_PAYMENT" value="kakaopay">
 								<input type="hidden" id="ORDER_ADDRESS" name="ORDER_ADDRESS" value="">
-								<input type="hidden" id="ORDER_SELLER" name="ORDER_SELLER" value="${prdInfo.p_SELLER}">
+								<input type="hidden" id="ORDER_SELLER" name="ORDER_SELLER" value="${prdInfo.SELLER_ID}">
 								<input type="hidden" id="ORDER_AMOUNT" name="ORDER_AMOUNT" value="">
 								
 								

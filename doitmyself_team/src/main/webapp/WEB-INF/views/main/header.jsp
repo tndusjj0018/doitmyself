@@ -63,17 +63,17 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="product?category=100" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">가구</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="product?category=101">침실</a>
-                <a class="dropdown-item" href="product?category=102">주방</a>
-                <a class="dropdown-item" href="product?category=103">수납</a>
-                <a class="dropdown-item" href="product?category=104">거실</a>
-                <a class="dropdown-item" href="product?category=105">욕실</a>
+                <a class="dropdown-item" href="getProductList?category=101&num=101">침실</a>
+                <a class="dropdown-item" href="getProductList?category=" value="101">주방</a>
+                <a class="dropdown-item" href="category=" value="101">수납</a>
+                <a class="dropdown-item" href="category=104">거실</a>
+                <a class="dropdown-item" href="category=105">욕실</a>
               </div>
               </li>
                <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="product?category=200"id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">음식</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="product?category=206">한실</a>
+                <a class="dropdown-item" href="product?category=206">한식</a>
                 <a class="dropdown-item" href="product?category=207">일식</a>
                 <a class="dropdown-item" href="product?category=208">양식</a>
                 <a class="dropdown-item" href="product?category=209">중식</a>
@@ -83,7 +83,7 @@
                <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="product?category=300" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">취미</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="product?category=311">드로잉</a>
+                <a class="dropdown-item" href="product?category=" value="103">드로잉</a>
                 <a class="dropdown-item" href="product?category=312">미니어쳐</a>
                 <a class="dropdown-item" href="product?category=313">캔들&향수</a>
                 <a class="dropdown-item" href="product?category=314">슬라임</a>
@@ -104,9 +104,9 @@
           	</c:if>
 
           	<c:if test="${adminNumber == 1}">
-	          	 <a class="navbar-brand" href="login" style="font-size:13pt !important; margin-left: 20px; margin-top: 3.7px;">관리자</a>
+	          	 <a class="navbar-brand" href="admin" style="font-size:13pt !important; margin-left: 20px; margin-top: 3.7px;">관리자</a>
 	          	 <li class="nav-item">
-	                 <a class="nav-link" href="#" id="dropdown04">관리자페이지</a>
+	                 <a class="nav-link" href="admin" id="dropdown04">관리자페이지</a>
 	              </li>
 	          	 <li class="nav-item">
 	                 <a class="nav-link" href="logout" id="dropdown04" style="background: #3a8aa2; color: white;">관리자모드 종료</a>

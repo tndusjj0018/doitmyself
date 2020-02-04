@@ -37,13 +37,15 @@ function ajax(data){
 							  "</td>";
 					output += "<td class='salePrice'>" + this.p_PRICE.toLocaleString() + "원</td>";
 					output += "<td class='saleQuantity'>" + this.p_QUANTITY + "개</td>";
-					output += "<td class='saleReadCount'>찜:" + this.p_READCOUNT +"<br>조회수:"+ this.p_DIBS + "</td>";
+					output += "<td class='saleReadCount'>조회수:" + this.p_READCOUNT +"<br>찜:"+ this.p_DIBS + "</td>";
 					output += "<td class='saleBtn'>" +
 							"		<input type='hidden' value='"+ this.p_NO +"'>" +
 							"		<a href='productInfo?P_NO="+ this.p_NO +"'>" +
 							"			<button class='saleUpdate'>상품수정</button>" +
 							"		</a>" +
-							"		<button class='saleDelete'>상품삭제</button>" +
+							"		<a href='productDelete?P_NO="+ this.p_NO +"'>" +
+							"			<button class='saleDelete'>상품삭제</button>" +
+							"		</a>" +
 							"</td>";
 					output += "</tr>";		
 				}); //each end
