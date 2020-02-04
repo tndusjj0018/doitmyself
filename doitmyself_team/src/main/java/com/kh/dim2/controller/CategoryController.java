@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +22,7 @@ public class CategoryController {
 
 	@ResponseBody
 	@PostMapping("getProductList")
+	//@RequestMapping(value = "getProductList", method = {RequestMethod.GET,RequestMethod.POST})
 	public Object getProductList(int num, String option,
 			@RequestParam(value = "", required = false, defaultValue = "") String category,
 			@RequestParam(value = "search_word", defaultValue = "", required = false) String search_word) {

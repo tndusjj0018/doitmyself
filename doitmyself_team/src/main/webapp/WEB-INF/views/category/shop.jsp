@@ -111,9 +111,12 @@
     		var option = $(".order_option").val();
     		var category = "all";
     		
-    		if("${category}"){
-    			category = "${category}";
+    		var pa_category = <%=request.getParameter("category") %>;
+    		if(pa_category){
+    			category = pa_category;
     		}
+    		console.log("접속 했을 때 category = "+category);
+    		
     		var search_word = "";
     		
     		function productList(){
