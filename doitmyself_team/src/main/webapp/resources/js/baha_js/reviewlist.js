@@ -3,7 +3,8 @@ function getList2(page2) {
 				type : "get",
 				url : "ReviewListAjax.bo",
 				data : {
-					"page2" : page2
+					"page2" : page2,
+					"P_NO" : $('#prd_no').val()
 				},
 				dataType : "json",
 				success : function(rdata) {

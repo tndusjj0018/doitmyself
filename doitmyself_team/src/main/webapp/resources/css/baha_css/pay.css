@@ -104,20 +104,24 @@
    border-right: hidden;
 }
 
+#mth {
+	font-weight: bold;
+}
+
 .table_PayMethod thead tr td {
    height: 48px;
    background: #E9EDF6
 }
 
 .table_PayMethod tbody tr td {
-   height: 252px;
+   height: 204px;  
 }
 
 
 /* ~~~~~~~~~~~~~~~~~~~ Total Price ~~~~~~~~~~~~~~~~~~~~~~ */
 .table_TotalPrice {
    width: 300px;
-   height: 583px;
+   height: 255px;
    margin-top: 35px;
    margin-left: 8px;
    display: inline-block;
@@ -137,7 +141,7 @@
 .table_TotalPrice tr:nth-child(2) {
 font-size:25px;
 font-weight: bold;
-color:red;
+color:#3a8aa2;
 background:white;
 }
 .table_TotalPrice tr:nth-child(3) {
@@ -180,14 +184,14 @@ height;
 }
 
 .agree {
-   width: 292px;
-   height: 50px;
+   width: 225px;
+   height: 80px;
    resize: none;
 }
 
 
 .submit {
-background-color: red;
+background-color: #3a8aa2;
   color: white;
   padding: 1em 2em;
   border: none;

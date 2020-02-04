@@ -3,6 +3,7 @@ package com.kh.dim2.controller;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,12 +53,11 @@ public class PayController {
 		PrintWriter out = response.getWriter();
 		int result = ordersvc.insertOrder(order);
 		out.println("<script>");
-	
+
 		
 		//주문 테이블에 입력된 경우
 		if(result == 1) {
-			out.println("alert('주문이 완료되었습니다.');");
-			out.println("location.href='/dim2/orderDelivery'");
+			out.println("alert('주문이 완료되었습니다.');");			
 		} else {
 			out.println("alert('주문에 실패했습니다.');");
 			out.println("location.href='/dim2/home'");

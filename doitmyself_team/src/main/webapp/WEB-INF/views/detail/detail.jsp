@@ -11,10 +11,7 @@
 <script src="resources/js/baha_js/qnalist.js"></script>
 <script src="resources/js/baha_js/reviewlist.js"></script>
 <script>
-	$(function() {
-		//문의글의 제목만 내용은 숨김. 제목을 클릭시 나오게 할 것.
 
-	})
 </script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -100,7 +97,7 @@
 					<h3 id="p_name">${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
-							<a href="#" class="mr-2">5.0</a> <a href="#"><span
+							<a href="#" class="mr-2">${rate }</a> <a href="#"><span
 								class="ion-ios-star-outline"></span></a> <a href="#"><span
 								class="ion-ios-star-outline"></span></a> <a href="#"><span
 								class="ion-ios-star-outline"></span></a> <a href="#"><span
@@ -112,7 +109,6 @@
 					<p class="price">
 						<span id="mainPrice"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 					</p>
-					<p>${prdData.p_DESCRIPTION}</p>
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
@@ -184,8 +180,7 @@
 						<table border="1" class="product_detail">
 							<tr>
 
-								<td><img src="resources/upload/${prdData.p_IMG}"
-									class="img-fluid" name="P_IMG" alt="Colorlib Template"><br>
+								<td>
 									<p>${prdData.p_DESCRIPTION}</p></td>
 
 							</tr>
@@ -385,7 +380,7 @@
 												onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes');"
 												id='qnaUpdate'> 수정 </a>
 											&emsp;
-											<a href='qnaDelete?QNA_NO=${qna.QNA_NO }' id='qnaDelete'>삭제</a><hr>
+											<a href='qnaDelete?qna_no=${qna.QNA_NO }' id='qnaDelete'>삭제</a><hr>
 											<c:if test ="${qna.QNA_ISRESPONSE eq 1 && qna.QNA_WRITER eq USER_ID}">
 									 답변 :&emsp;${qna.QNA_ANSWER}<hr>
 									</c:if>
@@ -449,10 +444,11 @@
 					</c:if>
 
 					<span class="qnaWrite">
+					<c:if test="${USER_ID ne null}">
 						<button
 							onclick="window.open('qnaWrite?QNA_P_NO=${prdData.p_NO}','qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes');">상품
 							문의하기</button>
-							
+							</c:if>
 					</span>
 
 				</div>
@@ -535,13 +531,13 @@
 															value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 								</div>
 								<div class="checkout">
-								<form>
+								<form action="/dim2/pay" onsubmit="return chkoutGo()" >
 								<input type="hidden" id="prd_no" value="${prdData.p_NO}" name="P_NO">
 									    <input type="hidden" name="P_NAME" value="${prdData.p_NAME}">
 									    <input type="hidden" name="P_QUANTITY" value="${prdData.p_QUANTITY}">
 										<input type="hidden" name="USER_ID" value="${USER_ID }">
 										<input type="hidden" name="COUNT" id="COUNT" value="">
-										<input type="submit" class="checkoutGo" value="결제하기" onclick="javascript: form.action='/dim2/pay';"/>
+										<input type="submit" class="checkoutGo" value="결제하기"/>
 									<button class="cartGo" value="장바구니" onclick="add()">장바구니</button>	
 								</form>
 										
@@ -719,6 +715,7 @@
 
 				// Increment
 
+			
 			});
 
 			$('.quantity-left-minus').click(function(e) {
@@ -748,9 +745,24 @@
 				success : function(data) {
 					alert(data)
 			}
-			})
-			
+			})			
 		}
+		
+		function chkoutGo(){
+			var idchk = $('#loginid').val();
+			if(idchk == '') {
+				alert('로그인 하셔야 합니다.');
+				return false;
+			} else {
+				alert('이거 되는거?');
+                return true;
+			}
+		}
+		
+
+			
+		
+		
 	</script>
 
 </body>
