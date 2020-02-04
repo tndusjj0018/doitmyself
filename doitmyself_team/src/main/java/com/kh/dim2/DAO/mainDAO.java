@@ -89,4 +89,16 @@ public class mainDAO {
 	public Member isEmail_Id(String uSER_ID, String uSER_EMAIL) {
 		return sqlSession.selectOne("Main.idcheck" , uSER_ID);
 	}
+
+	public int codeInsert(HashMap<String, Object> map) {
+		return sqlSession.insert("Main.codeInsert" , map);
+	}
+
+	public int isCode(String fIND_CODE) {
+		return sqlSession.selectOne("Main.isCode" , fIND_CODE);
+	}
+
+	public Member isPass(Member m) {
+		return sqlSession.selectOne("Main.isPass" , m);
+	}
 }

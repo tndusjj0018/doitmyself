@@ -33,7 +33,7 @@
     			<br>
     			<c:forEach var="recommend" items="${bestDim }" begin="0" end="3" step="1">
    					<a href="detail?P_NO=${recommend.p_NO}">
-						<img src="resources/upload/${recommend.p_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
+						<img src="resources/upload/${recommend.p_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px; z-index:-1;">
 					</a>
 				<br>
 				</c:forEach>
@@ -48,10 +48,8 @@
 				<br>
     			</c:forEach>
     		</c:if>
-			
-			
 		</div>
-		  <div class="home-slider owl-carousel">
+		  <div class="home-slider owl-carousel" style="z-index:7;">
 	      <div class="slider-item" style="background-image: url(resources/img/img_w_banner_30406_ctc.jpg);">
 	      	<div class="overlay"></div>
 	        <div class="container">

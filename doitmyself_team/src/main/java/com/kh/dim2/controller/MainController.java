@@ -67,7 +67,6 @@ public class MainController {
 			int recentView_Count = mainService.recentViewCount(USER_ID);
 			if(recentView_Count > 0) {
 				List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
-				mv.addObject("recentView", recentViewList);
 			}
 		}
 		
@@ -433,13 +432,43 @@ public class MainController {
 			mail.setReceiver(m.getUSER_EMAIL());
 			mail.setSubject("안녕하세요 "+USER_ID + "님," + "USER_ID" + "님의 비밀번호 코드를 확인해주세요");
 			sendMail.SendEmail(mail);
-			session.invalidate();
+
+			System.out.println("USER_ID = " + USER_ID);
+			System.out.println("FIND_CODE = " + Find_Code);
+			
+			HashMap<String , Object> map = new HashMap<>();
+			
+			map.put("USER_ID" , USER_ID);
+			map.put("FIND_CODE" , Find_Code.toString());
+			
+			int result = mainService.codeInsert(map);
+	}
+	
+	@RequestMapping(value="/code_identify" , method=RequestMethod.GET)
+	@ResponseBody
+	public void code_identify(@RequestParam("FIND_CODE") String FIND_CODE, @RequestParam("USER_ID") String USER_ID , 
+			HttpServletResponse response , Member m) throws Exception {
+		
+		int findcode = mainService.isCode(FIND_CODE);
+		int idcheck = mainService.isId(USER_ID);
+		int result = -1;
+		PrintWriter out = response.getWriter();
+		System.out.println(idcheck);
+		System.out.println(findcode);
+		if(findcode == 1 && idcheck == 1) {
+			m = mainService.isPass(m);
+			String USER_PASS = m.getUSER_PASSWORD();
+			response.setContentType("text/html;charset=utf-8");
+			result = 1;
+			out.print(USER_PASS);
+			System.out.println("USER_PASS = "+USER_PASS);
+		}
 	}
 	
 	@RequestMapping(value="/Search_home" , method = RequestMethod.GET)
 	public ModelAndView memberList(
 			@RequestParam(value="page", defaultValue="1", required=false) int page,
-			@RequestParam(value="limit", defaultValue="3", required=false) int limit, ModelAndView mv,
+			@RequestParam(value="limit", defaultValue="8", required=false) int limit, ModelAndView mv,
 			@RequestParam(value="search_field", defaultValue="-1") int index,
 			@RequestParam(value="search_word", defaultValue="") String search_word ,
 			HttpSession session) throws Exception {

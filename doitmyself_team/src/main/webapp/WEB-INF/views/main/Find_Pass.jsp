@@ -105,14 +105,15 @@
                               <div class="addr_box">
                                  <div class="form-group">
                                     <label>코드번호</label>
-                                    <input type="text" class="form-control" name="PASS_CODE" id="PostCode" required>
+                                    <input type="text" class="form-control" name="FIND_CODE" id="PostCode" required>
                                  </div>                                 
                               </div>
                               <div class="col-md-3">
                                  <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-round" placeholder="이메일로 전송된 코드를 입력하세요" onclick="Postcode()" style="position: relative; top: 16px;" required>코드 확인</button>
+                                    <button type="button" class="btn btn-primary btn-round" id="code_idf" placeholder="이메일로 전송된 코드를 입력하세요" style="position: relative; top: 16px;" required>코드 확인</button>
                                  </div>
-                              </div>                                    
+                              </div>
+                                                           
                            </div>
                            </form>
                      </div>
@@ -155,7 +156,7 @@
    						"USER_ID" : $('input:eq(0)').val() , "USER_EMAIL" : $('input:eq(1)').val()
    					},
    					success : function(result) {
-   						alert(result);
+   						alert('메일이 발송되었습니다.');
    					},
    				})
    			});
@@ -197,6 +198,26 @@
    					}
    				});
 	   		})
+	   		
+	   		$('#code_idf').on('click', function(){
+   				
+	   			var USER_ID = $('input:eq(0)').val();
+   				var FIND_CODE = $('input:eq(2)').val();
+   				
+   				$.ajax({
+   					url:"code_identify",
+   					data:{"FIND_CODE" : FIND_CODE , "USER_ID" : USER_ID},
+   					type: "GET",
+   					success: function(resp) {
+   						if(resp > 0) {
+   							alert(USER_ID + "님의 비밀번호는 " + resp + "입니다.");
+   						} else {
+   							alert('코드번호를 확인해주세요');
+   						}		
+   					}
+   				});
+	   		})
+	   		
    		})
    </script>
 </body>

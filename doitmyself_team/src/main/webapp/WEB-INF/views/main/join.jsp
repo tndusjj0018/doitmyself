@@ -183,7 +183,7 @@
                               <div class="addr_box">
                                  <div class="form-group">
                                     <label>우편번호</label>
-                                    <input type="text" class="form-control" name="USER_POSTCODE" id="PostCode" required>
+                                    <input type="text" class="form-control" name="USER_POSTCODE" id="PostCode" required readOnly>
                                     <span><i class="far fa-check-circle input_check post_checkbar" style="margin-left: 95%;"></i></span>
                                  </div>                                 
                               </div>
@@ -197,7 +197,7 @@
                               <div class="col-md-12">
                                  <div class="form-group">
                                  <label>주소</label>
-                                    <input type="text" class="form-control" id="Address" name="USER_ADDRESS" required>
+                                    <input type="text" class="form-control" id="Address" name="USER_ADDRESS" required readOnly>
                                     <span><i class="far fa-check-circle input_check addr_checkbar" style="margin-left: 95.5%;"></i></span>
                                  </div>
                               </div>
