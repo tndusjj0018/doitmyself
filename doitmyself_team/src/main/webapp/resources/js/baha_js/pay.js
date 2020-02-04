@@ -1,8 +1,15 @@
 $(function() {
-
-    var tc = parseInt($('#tc').text()); //수량
+	//가격, 세 자리 수 마다 콤마
+	function com(str) {
+	 str = String(str);
+	 return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	 }
+   		
+	var tc = parseInt($('#tc').text()); //수량
 	var p = parseInt($('#p').text());   //가격
-	$('#totalprice').text(tc*p);  //총액
+	tempC = tc*p;
+	$('#p').text(com(p));
+	$('#totalprice').text(com(tempC));  //총액
 	$('#ORDER_PRICE').val(tc*p); //총액
 	$('#ORDER_AMOUNT').val(tc);
 	

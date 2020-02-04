@@ -49,35 +49,39 @@ $(document).on('change','#tno', function(){
 })
 
 //가격, 세 자리 수 마다 콤마
- function comma(str) {
-        str = String(str);
-        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-    }
+function com(str) {
+ str = String(str);
+ return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+ }
 
 //수량 변동시 가격 변동시킴
 $(document).on('change','#tno', function(){
     var c = $('#tno').val();
     var hidprc = $('#hiddenprice').val();
-    $('#tno_price').text(hidprc*c)
- 
+    sq = Number(hidprc*c);
+    $('#tno_price').text(com(sq));
+
 })
 
 $(document).on('change','.input-number', function(){
     var c = $('.input-number').val();
     var hidprc = $('#hiddenprice').val();
-    $('#tno_price').text(hidprc*c);
+    sq = Number(hidprc*c);
+    $('#tno_price').text(com(sq));
 })
 
 $(document).on('change','.input-number', function(){
     var c = $('.input-number').val();
     var hidprc = $('#hiddenprice').val();
-    $('.totalprice').text(hidprc*c);
+    sq = Number(hidprc*c);
+    $('.totalprice').text(com(sq));
 })
 
 $(document).on('change','#tno', function(){
     var c = $('#tno').val();
     var hidprc = $('#hiddenprice').val();
-    $('.totalprice').text(hidprc*c);
+    sq = Number(hidprc*c);
+    $('.totalprice').text(com(sq));
 })
 
 //결제하기 클릭시  수량값을 pay.jsp 로 보내기위한 문장
