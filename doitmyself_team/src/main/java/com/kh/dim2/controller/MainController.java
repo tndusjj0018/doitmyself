@@ -114,6 +114,18 @@ public class MainController {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
+
+	@RequestMapping(value="/email_idcheck" , method=RequestMethod.GET)
+	@ResponseBody
+	public void email_idcheck(@RequestParam("USER_EMAIL") String USER_EMAIL, @RequestParam("USER_ID") String USER_ID ,
+			HttpServletResponse response) throws Exception {
+		
+		int result = mainService.isId(USER_ID , USER_EMAIL);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
 	
 	
 	@RequestMapping(value="/joinProcess" , method = RequestMethod.POST)
@@ -421,10 +433,8 @@ public class MainController {
 			@RequestParam(value="page", defaultValue="1", required=false) int page,
 			@RequestParam(value="limit", defaultValue="3", required=false) int limit, ModelAndView mv,
 			@RequestParam(value="search_field", defaultValue="-1") int index,
-			@RequestParam("search_word") String search_word ,
+			@RequestParam(value="search_word", defaultValue="") String search_word ,
 			HttpSession session) throws Exception {
-		
-		System.out.println("index = " + index);
 		
 		List<Product> BestproductList = mainService.getBestProduct_List();
 		List<Product> NewproductList = mainService.getNewProduct_List();
