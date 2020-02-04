@@ -16,6 +16,16 @@ public class Product {
 	private int P_DIBS; //상품 찜 수
 	private String P_REGDATE; //상품 추가 날짜
 	
+	private String SELLER_ID;
+	
+	
+	
+	public String getSELLER_ID() {
+		return SELLER_ID;
+	}
+	public void setSELLER_ID(String sELLER_ID) {
+		SELLER_ID = sELLER_ID;
+	}
 	private String D_NO;// = > 상품 리스트 뽑아올 시 필요한 칼럼 : 찜이 되어 있지 않을 경우 0을 가져옴
 	
 	

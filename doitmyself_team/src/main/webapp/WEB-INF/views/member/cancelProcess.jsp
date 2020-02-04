@@ -106,7 +106,7 @@
 			        						${crl.ORDER_DATE }
 			        					</td>
 			        					<td>
-											<img src="${crl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${crl.p_NO}';">
+											<img src="resources/upload/${crl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${crl.p_NO}';">
 										</td>
 										<td>
 											<span style="cursor:pointer" onclick="location.href='detail?P_NO=${crl.p_NO}';">${crl.p_NAME }</span>

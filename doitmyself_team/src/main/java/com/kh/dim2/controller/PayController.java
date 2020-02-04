@@ -3,6 +3,7 @@ package com.kh.dim2.controller;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,17 +48,18 @@ public class PayController {
 	}
 	
 	@GetMapping(value = "/payComplete")
-	public void payComplete(Order order, HttpServletResponse response) throws Exception {
+	public void payComplete(Order order, HttpServletResponse response, HttpSession session) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int result = ordersvc.insertOrder(order);
 		out.println("<script>");
-	
+		
+		String user_id = session.getAttribute("USER_ID").toString();
 		
 		//주문 테이블에 입력된 경우
 		if(result == 1) {
 			out.println("alert('주문이 완료되었습니다.');");
-			out.println("location.href='/dim2/orderDelivery'");
+			out.println("location.href='/dim2/orderDelivery?USER_ID=" + user_id + "'");
 		} else {
 			out.println("alert('주문에 실패했습니다.');");
 			out.println("location.href='/dim2/home'");

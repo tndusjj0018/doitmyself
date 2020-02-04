@@ -111,7 +111,7 @@
 					<p class="price">
 						<span id="mainPrice"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 					</p>
-					<p>${prdData.p_DESCRIPTION}</p>
+					
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
