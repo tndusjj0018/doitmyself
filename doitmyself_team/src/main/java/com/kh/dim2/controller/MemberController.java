@@ -827,7 +827,7 @@ public class MemberController {
 		Product p = memberservice.productDetail(p_no);
 		System.out.println("장바구니" + user_id);
 		mv.addObject("total", total);
-		mv.addObject("count", cartcount);
+		mv.addObject("cartcount", cartcount);
 		mv.addObject("memberinfo", m);
 		mv.addObject("productdetail", p);
 		mv.setViewName("member/cartpay");
