@@ -28,9 +28,9 @@
 
 
 
-	<input type="hidden" name="P_SELLER" value="${prdInfo.p_SELLER }">
+	<input type="hidden" name="P_SELLER" value="${productdetail.p_SELLER }">
 	<input type="hidden" name="P_CATEGORY_NO"
-		value="${prdInfo.p_CATEGORY_NO }">
+		value="${productdetail.p_CATEGORY_NO }">
 	
 	<div id="BodyWrap" style="width: 1000px;">
 		<div class="Order_DetailCheck">
@@ -55,7 +55,7 @@
 					<tr>
 						<td class="test">
 							<div class="prd_Photo">
-								<img src="resources/upload/${productdetail.p_IMG}" class="img-fluid"
+								<img src="${productdetail.p_IMG}" class="img-fluid"
 									name="P_IMG" id="mainIMG">
 							</div>
 						</td>
@@ -69,7 +69,7 @@
 						</td>
 						<td class="test2">
 							<div class="prd_Price">
-								<span id="p">${prdInfo.p_PRICE }</span>원
+								<span id="p">${productdetail.p_PRICE }</span>원
 							</div>
 						</td>
 					</tr>
@@ -187,7 +187,7 @@
 						</label> <label><input type="radio" name="receipt">미신청</label></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">개인정보
+						<td>&nbsp;<label><input type="checkbox" id="chk1">개인정보
 								판매자 제공에 동의합니다.</label></td>
 					</tr>
 					<tr>
@@ -198,7 +198,7 @@
 보유기간 : 구매확정 후 3개월까지></textarea></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">개인정보
+						<td>&nbsp;<label><input type="checkbox" id="chk2">개인정보
 								수집 및 이용에 동의합니다.</label></td>
 					</tr>
 					<tr>
@@ -218,14 +218,14 @@
 결제수단에 따른 개인정보 수집.이용 항목이 상이할 수 있음</textarea></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">주문
+						<td>&nbsp;<label><input type="checkbox" id="chk3">주문
 								상품정보에 동의</label></td>
 					</tr>
 					<tr>
 						<td><textarea class="agree">주문 상품의 상품명,가격,배송정보에 동의합니다.</textarea></td>
 					</tr>
 					<tr>
-						<td>&nbsp;<label><input type="checkbox">위 내용을
+						<td>&nbsp;<label><input type="checkbox" id="allchk">위 내용을
 								확인하였으며 모든 내용에 동의합니다.</label></td>
 					</tr>
 					<tr>
@@ -241,7 +241,7 @@
 								<input type="hidden" id="ORDER_AMOUNT" name="ORDER_AMOUNT" value="">
 								
 								
-								<button  class="submit" id="paygo">결제하기</button>
+								<button  class="submit" class="paygo">결제하기</button>
 								<button class="reset" onclick="history.go(-1)">취소하기</button>
 							
 						</td>
