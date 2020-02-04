@@ -39,8 +39,7 @@ public class MainController {
 	@Autowired
 	public MainService mainService;
 	
-	private Mail mail;
-	
+	@Autowired
 	private SendMail sendMail;
 	
 	private String access_token = "";
@@ -106,30 +105,29 @@ public class MainController {
 
 	@RequestMapping(value="/emailcheck" , method=RequestMethod.GET)
 	@ResponseBody
-	public void emailcheck(@RequestParam("USER_EMAIL") String USER_EMAIL, @RequestParam("USER_ID") String USER_ID , 
+	public void emailcheck(@RequestParam("USER_EMAIL") String USER_EMAIL , 
 			HttpServletResponse response) throws Exception {
 		
-		int emailcheck = mainService.isEmail(USER_EMAIL);
-		int idcheck = mainService.isId(USER_ID);
-		if(emailcheck == 1 && idcheck == 1) {
-		int result = 1;
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
-		}
-	}
-
-	@RequestMapping(value="/email_idcheck" , method=RequestMethod.GET)
-	@ResponseBody
-	public void email_idcheck(@RequestParam("USER_EMAIL") String USER_EMAIL, @RequestParam("USER_ID") String USER_ID ,
-			HttpServletResponse response) throws Exception {
-		
-		int result = mainService.isEmail_Id(USER_ID , USER_EMAIL);
-		response.setContentType("text/html;charset=utf-8");
+		int result = mainService.isEmail(USER_EMAIL);
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
 	
+	@RequestMapping(value="/email_id_check" , method=RequestMethod.GET)
+	@ResponseBody
+	public void email_id_check(@RequestParam("USER_EMAIL") String USER_EMAIL, @RequestParam("USER_ID") String USER_ID , 
+			HttpServletResponse response) throws Exception {
+		
+		int emailcheck = mainService.isEmail(USER_EMAIL);
+		int idcheck = mainService.isId(USER_ID);
+		int result = -1;
+		if(emailcheck == 1 && idcheck == 1) {
+			response.setContentType("text/html;charset=utf-8");
+			result = 1;
+		}
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
 	
 	@RequestMapping(value="/joinProcess" , method = RequestMethod.POST)
 	@ResponseBody
@@ -261,7 +259,6 @@ public class MainController {
 	      }
 	      br.close();
 	      if(responseCode==200) {
-	        System.out.println(res.toString());
 	        String json = res.toString();
 	        access_token = json.substring(17, json.indexOf("\"", 18));// 네아로 접근 토큰 값";
 	      }
@@ -405,30 +402,38 @@ public class MainController {
 		
 			return "main/Find_Pass";
 	}
-
-	@RequestMapping(value="/check_findPass" , method=RequestMethod.POST)
-	public String check_findPass(HttpServletResponse response , @RequestParam("USER_ID") String USER_ID  , @RequestParam("USER_EMAIL") String USER_EMAIL) throws Exception {
-		
-		int result = mainService.Find_check(USER_ID , USER_EMAIL);
-		if(result == 1) {
-			
-		}
-		return "main/Find_Pass";
-	}
-
-	@RequestMapping(value="/MailSender" , method = RequestMethod.GET)
+	
+	@RequestMapping(value="/MailSender")
 	@ResponseBody
-	public void MailSender(@RequestParam("USER_PASSWORD") String USER_PASSWORD , 
+	public void MailSender(@RequestParam("USER_ID") String USER_ID , Member m ,
 			HttpServletResponse response , HttpSession session) throws Exception{
+
+			StringBuffer Find_Code = new StringBuffer();
+			Random rnd = new Random();
+			for (int i = 0; i < 6; i++) {
+			    int rIndex = rnd.nextInt(3);
+			    switch (rIndex) {
+			    case 0:
+			        // a-z
+			    	Find_Code.append((char) ((int) (rnd.nextInt(26)) + 97));
+			        break;
+			    case 1:
+			        // A-Z
+			    	Find_Code.append((char) ((int) (rnd.nextInt(26)) + 65));
+			        break;
+			    case 2:
+			        // 0-9
+			    	Find_Code.append((rnd.nextInt(10)));
+			        break;
+			    }
+			}
 		
-				String USER_ID = session.getId();
-				session.getAttribute(USER_PASSWORD);
-				mail.setContent("당신의 비밀번호는 " + USER_PASSWORD + " 입니다.");
-				mail.setReceiver(USER_PASSWORD);
-				mail.setSubject("안녕하세요 "+USER_ID + "님," + "USER_ID" + "님의 비밀번호를 확인해주세요");
-				sendMail.SendEmail(mail);
-				System.out.println(mail);
-				session.invalidate();
+			Mail mail = new Mail();
+			mail.setContent("당신의 비밀번호를 찾기 위한 코드는 " + Find_Code + " 입니다.");
+			mail.setReceiver(m.getUSER_EMAIL());
+			mail.setSubject("안녕하세요 "+USER_ID + "님," + "USER_ID" + "님의 비밀번호 코드를 확인해주세요");
+			sendMail.SendEmail(mail);
+			session.invalidate();
 	}
 	
 	@RequestMapping(value="/Search_home" , method = RequestMethod.GET)

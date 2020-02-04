@@ -145,14 +145,14 @@
    			var checkid = false;
    			var checkemail = false;
    			
-   			$("#findBtn").submit(function(){
-   				
+   			$("#findBtn").submit(function(event){
+   				event.preventDefault();
    				if(checkid == true && checkemail == true)
    				$.ajax({
-   					url : "check_findPass",
+   					url : "MailSender",
    					type : "POST",
    					data : {
-   						
+   						"USER_ID" : $('input:eq(0)').val() , "USER_EMAIL" : $('input:eq(1)').val()
    					},
    					success : function(result) {
    						alert(result);
@@ -184,15 +184,15 @@
    				var USER_EMAIL = $('input:eq(1)').val();
    				
    				$.ajax({
-   					url:"emailcheck",
+   					url:"email_id_check",
    					data:{"USER_EMAIL" : USER_EMAIL , "USER_ID" : USER_ID},
    					success: function(resp) {
    						if(resp == -1) {
    							$('i:eq(1)').css('opacity', '0');			
-   							checkid = false;
+   							checkemail = false;
    						} else {
    							$('i:eq(1)').css('opacity', '0.95');
-   							checkid = true;
+   							checkemail = true;
    						}
    					}
    				});

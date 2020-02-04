@@ -29,5 +29,4 @@ public interface MainService {
 	int AddRecent(HashMap<String, String> map);
 	List<Product> getSearchList(int index, String search_word, int page, int limit);
 	int getSearchListCount(int index, String search_word);
-	int isEmail_Id(String uSER_ID, String uSER_EMAIL);
 }

@@ -140,18 +140,4 @@ public class MainServiceImpl implements MainService{
 		
 		return dao.getSearchListCount(map);
 	}
-
-	@Override
-	public int isEmail_Id(String uSER_ID, String uSER_EMAIL) {
-		Member mb = dao.isEmail_Id(uSER_ID , uSER_EMAIL);
-		int result = -1;
-		if(mb != null) {
-			if(mb.getUSER_EMAIL().equals(uSER_EMAIL)) {
-				result = 1;
-			} else {
-				result = 0;
-			}
-		}
-		return result;
-	}
 }
