@@ -39,14 +39,6 @@
 	</insert>
 	
 	<!-- 주문관리 리스트 -->
-	<!-- <select id="OrderList" parameterType="String" resultType="order">
-		select O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
-				O.ORDER_PRICE, O.ORDER_PAYMENT, O.ORDER_ADDRESS, O.ORDER_DATE,
-				O.ORDER_AMOUNT, P.P_IMG, P.P_NAME
-		from ORDER_TBL O join PRODUCT_TBL P
-		on P.P_NO = O.ORDER_P_NO
-		where O.ORDER_SELLER = #{user_id}
-	</select> -->
 	<select id="OrderList" parameterType="Map" resultType="order">
 		select * from
 		   (select rownum rnum, U.USER_PHONE, U.USER_NAME, J.*
@@ -58,7 +50,34 @@
 		         on P.P_NO = O.ORDER_P_NO
 		         where O.ORDER_SELLER = #{USER_ID}
 		         and O.ORDER_STATUS = 0 <!-- 주문상태인것만 -->
-		         order by O.ORDER_P_NO asc)J join USER_TBL U
+		         <if test="status != null">
+		         	<choose>
+		         		<when test="status == 'order-all'"></when>
+		         		<when test="status == 'order-success'">and order_delivery = 0</when>
+		         		<when test="status == 'order-paymentFinish'">and order_delivery = 1</when>
+		         		<when test="status == 'order-preparing'">and order_delivery = 2</when>
+		         		<when test="status == 'order-shipping'">and order_delivery = 3</when>
+		         		<when test="status == 'order-complete'">and order_delivery = 4</when>
+		         	</choose>
+		         </if>
+		         <if test="search_field != null">
+		         and
+		         <choose>
+		         	<when test="search_field == 'order_name'">P.P_NAME</when>
+		         	<when test="search_field == 'order_id'">O.ORDER_ID</when>
+		         </choose>		       
+		         like #{search_word}  
+		         </if>
+		         <if test="startDate != null">
+		         and O.ORDER_DATE between #{startDate} and #{endDate}
+		         </if>
+		         order by
+	         	 <choose>
+	         		<when test="viewSelect == 'date'">O.ORDER_DATE</when>
+	         		<when test="viewSelect == 'amount'">O.ORDER_AMOUNT</when>
+	         		<when test="viewSelect == 'price'">O.ORDER_PRICE</when>
+	         	 </choose>
+		         desc)J join USER_TBL U
 		   on J.ORDER_ID = U.USER_ID)
       where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>

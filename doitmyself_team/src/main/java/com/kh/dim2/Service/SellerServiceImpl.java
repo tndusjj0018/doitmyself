@@ -50,14 +50,28 @@ public class SellerServiceImpl implements SellerService{
 	}
 
 	@Override
-	public List<Order> getOrderList(String USER_ID, int page, int limit) {
+	public List<Order> getOrderList(String USER_ID, int page, int limit, String viewSelect, int index, String search_word, String startDate, String endDate, String status) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if(index != -1) {
+			String[] search_field = new String[] {"order_name", "order_id"};
+			System.out.println("검색어 = " + search_word);
+			map.put("search_field", search_field[index]);
+			map.put("search_word", "%" + search_word + "%");//검색 입력값
+		}			
+		if(status != "") { //주문상태 선택
+			map.put("status", status);
+		}
+		map.put("startDate", startDate); //기간선택
+		map.put("endDate", endDate);
+		map.put("viewSelect", viewSelect);
 		
 		int startrow = (page-1) * limit + 1;
 		int endrow = startrow + limit -1;
 		map.put("USER_ID", USER_ID);
 		map.put("start", startrow);
 		map.put("end", endrow);
+		
 		return sellerDAO.getOrderList(map);
 	}
 

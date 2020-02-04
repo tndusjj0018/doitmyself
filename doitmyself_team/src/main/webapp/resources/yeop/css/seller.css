@@ -1,4 +1,6 @@
 li{list-style:none;}
+#message{margin-bottom: 30px; font-size: 11pt; color:gray; text-align: center;}
+.content{margin-bottom:35px;}
 .order-h5{font-size:10.5pt; color:gray; margin-bottom:0;}
 .saleCount,.orderCount{color:red;}
 .orderPriceAll{color:red;}

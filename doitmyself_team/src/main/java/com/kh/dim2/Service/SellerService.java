@@ -25,9 +25,6 @@ public interface SellerService {
 	//상품등록
 	void insertProduct(Product product);
 	
-	//주문관리 주문리스트
-	List<Order> getOrderList(String USER_ID, int page, int limit);
-
 	//가게이름 가져옴
 	String getSellerName(String USER_ID);
 
@@ -60,5 +57,9 @@ public interface SellerService {
 	
 	//배송중 확인시 재고수량 감소
 	int OrderAmountM(int ORDER_AMOUNT, int ORDER_P_NO);
+
+	//주문관리 주문리스트
+	List<Order> getOrderList(String USER_ID, int page, int limit, String viewSelect, int index, String search_word,
+			String startDate, String endDate, String status);
 	
 }
