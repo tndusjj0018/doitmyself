@@ -46,7 +46,7 @@ $('#paygo').click(function () {
 			msg += '상점 거래ID : ' + rsp.merchant_uid;
 			msg += '결제 금액 : ' + rsp.paid_amount;
 			msg += '카드 승인번 : ' + rsp.apply_num;
-			location.href="/dim2/payComplete" + "?ORDER_NO=" + ORDER_NO +
+			location.href="/dim2/orderDelivery?USERID="+ $('#ORDER_ID').val()+  + "&ORDER_NO=" + ORDER_NO +
 					"&ORDER_P_NO="+$('#ORDER_P_NO').val() + "&ORDER_ID=" + $('#ORDER_ID').val() + "&ORDER_CATEGORY=" +$('#ORDER_CATEGORY').val() + "&ORDER_PRICE=" + $('#ORDER_PRICE').val() + "&ORDER_PAYMENT=" +$('#ORDER_PAYMENT').val()+ "&ORDER_ADDRESS=" +$('#ORDER_ADDRESS').val()+ "&ORDER_SELLER=" +$('#ORDER_SELLER').val()+ "&ORDER_AMOUNT=" +$('#ORDER_AMOUNT').val()
 		} else { // 실패시
 			var msg = '결제에 실패하였습니다.';

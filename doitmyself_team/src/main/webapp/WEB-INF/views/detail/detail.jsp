@@ -22,6 +22,7 @@
 
 <head>
 <jsp:include page="../main/header.jsp" />
+<title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -96,19 +97,13 @@
 					<h3 id="p_name">${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
-							<a href="#" class="mr-2">${rate }</a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a>
+							<a href="#" class="mr-2">${rate }</a>
 						</p>
 					</div>
 					<input type="hidden" value="${prdData.p_PRICE}" id="hiddenprice">
 					<p class="price">
 						<span id="mainPrice"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 					</p>
-
 					<div class="row mt-4">
 						<div class="col-md-6">
 							<div class="form-group d-flex">
@@ -683,6 +678,7 @@
 
 	<script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/js/popper.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/jquery.easing.1.3.js"></script>
 	<script src="resources/js/jquery.waypoints.min.js"></script>
 	<script src="resources/js/jquery.stellar.min.js"></script>
