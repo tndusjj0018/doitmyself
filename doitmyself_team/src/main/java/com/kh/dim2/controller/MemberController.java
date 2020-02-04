@@ -464,7 +464,7 @@ public class MemberController {
 				String fileName = uploadfile.getOriginalFilename(); //원래 파일명
 				review.setREVIEW_IMG(fileName); //원래 파일명 저장
 				
-				String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
+				String saveFolder = "C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
 				
 				// 난수를 구합니다.(랜덤)
 				Random r = new Random();

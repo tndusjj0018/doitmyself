@@ -134,8 +134,9 @@
 	<!-- 주문내역 불러오기 -->	
 	<select id="orderlist" resultType="o_product" parameterType="HashMap">
 		select * from (select rownum rnum, b.*
-						from (select * from ORDER_TBL, PRODUCT_TBL
+						from (select * from ORDER_TBL, PRODUCT_TBL, SELLER_TBL
 								WHERE ORDER_P_NO = P_NO
+								AND ORDER_SELLER = SELLER_ID
 								AND ORDER_ID = #{USER_ID}
 								and ORDER_R_DATE is NULL
 								order by ORDER_DATE DESC)b)

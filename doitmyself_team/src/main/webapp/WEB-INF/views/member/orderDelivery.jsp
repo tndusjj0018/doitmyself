@@ -122,7 +122,7 @@
 									(${ol.ORDER_AMOUNT }개)
 								</td>
 								<td>
-									${ol.ORDER_SELLER }
+									${ol.SELLER_NAME }
 								</td>
 								
 								<c:if test="${ol.ORDER_DELIVERY == 0}">

@@ -94,7 +94,7 @@
 									<span class="cartpno">${cl.p_NO}</span>
 								</td>
 								<td>
-									<img src="${cl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${cl.p_NO}';">
+									<img src="resources/upload/${cl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${cl.p_NO}';">
 								</td>
 								<td>
 									<span style="cursor: pointer" onclick="location.href='detail?P_NO=${cl.p_NO}';">${cl.p_NAME }</span>
