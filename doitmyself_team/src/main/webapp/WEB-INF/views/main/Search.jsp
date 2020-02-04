@@ -29,7 +29,7 @@
 </head>
 <body>
     <section class="ftco-section2">
-     	<div id="floatMenu" style="height:110px;">
+     	<div id="floatMenu" style="height:450px;">
     		<c:if test="${empty recentView }">
     			추천 DIM
     			<br>
@@ -132,7 +132,7 @@
 							
 							<c:if test="${page > 1 }">
 								<li class="page-item">
-									<a href="member_list.net?page=${page -1 }&search_field=${search_field}&search_word=${search_word}" class="page-link">이전</a> &nbsp;
+									<a href="Search_home?page=${page -1 }&search_field=${search_field}&search_word=${search_word}" class="page-link">이전</a> &nbsp;
 								</li>
 							</c:if>
 							
@@ -144,7 +144,7 @@
 								</c:if>
 								<c:if test="${a != page }">
 									<li class="page-item">
-										<a href="member_list.net?page=${a }&search_field=${search_field}&search_word=${search_word}" class="page-link">${a }</a>
+										<a href="Search_home?page=${a }&search_field=${search_field}&search_word=${search_word}" class="page-link">${a }</a>
 									</li>
 								</c:if>
 							</c:forEach>
@@ -156,7 +156,7 @@
 							</c:if>
 							<c:if test="${page < maxpage }">
 								<li class="page-item">
-									<a href="member_list.net?page=${page+1 }&search_field=${search_field}&search_word=${search_word}" class="page-link">&nbsp;다음</a>
+									<a href="Search_home?page=${page+1 }&search_field=${search_field}&search_word=${search_word}" class="page-link">&nbsp;다음</a>
 								</li>
 							</c:if>
 							
@@ -171,7 +171,6 @@
   <script src="resources/js/home_js/jquery.min.js"></script>
   <script src="resources/js/home_js/jquery-migrate-3.0.1.min.js"></script>
   <script src="resources/js/home_js/popper.min.js"></script>
-  <script src="resources/js/home_js/bootstrap.min.js"></script>
   <script src="resources/js/home_js/jquery.easing.1.3.js"></script>
   <script src="resources/js/home_js/jquery.waypoints.min.js"></script>
   <script src="resources/js/home_js/jquery.stellar.min.js"></script>
