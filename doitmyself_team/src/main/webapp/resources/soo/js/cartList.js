@@ -69,8 +69,8 @@ $(document).ready(function(){
 			console.log("p_total : " + p_total);
 		});
 	});
+	
 		
-
 });
 
 function go(total){
