@@ -33,7 +33,19 @@
         .btndiv{
         	text-align: center;
         }
-        
+        .categorybtn,.allorderbtn{
+        	height: 38px;
+		    color: white;
+		    border: none;
+		    width: 200px;
+		    margin-top: 20px;
+        }
+        .categorybtn{
+		    background: #3a8aa2;
+        }
+        .allorderbtn{
+        	background: #8d9192;
+        }
         
     </style>
 </head>
