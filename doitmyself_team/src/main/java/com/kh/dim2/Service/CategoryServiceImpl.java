@@ -38,4 +38,5 @@ public class CategoryServiceImpl implements CategoryService{
 	public int dibsDelete(Map<String, Object> map) {
 		return categoryDAO.dibsDelete(map);
 	}
+	
 }

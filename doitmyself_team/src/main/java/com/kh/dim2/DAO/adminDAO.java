@@ -169,5 +169,6 @@ public class adminDAO {
 		return sqlSession.selectOne("Admin.getOrderStatics",i);
 	}
 	
+	
 
 }

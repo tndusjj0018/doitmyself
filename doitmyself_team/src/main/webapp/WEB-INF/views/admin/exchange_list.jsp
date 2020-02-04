@@ -39,7 +39,6 @@
 				pageoutput += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";	
 			}
 			
-			
 			$(".clearfix").append(pageoutput);
 		}//function pagination end
 		
