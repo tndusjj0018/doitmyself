@@ -12,7 +12,7 @@ select * from review_tbl;
 
 select * from order_tbl;
 
-delete from order_tbl;
+
 
 update order_tbl set ORDER_DELIVERY=4 where order_no = 9;
 
