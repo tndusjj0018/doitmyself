@@ -53,6 +53,7 @@ public class PayController {
 		PrintWriter out = response.getWriter();
 		int result = ordersvc.insertOrder(order);
 		out.println("<script>");
+
 		
 		String user_id = session.getAttribute("USER_ID").toString();
 		

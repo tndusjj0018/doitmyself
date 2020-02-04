@@ -1,9 +1,11 @@
 function getList(page) {
+	console.log(this.qna_);
 	$.ajax({
 		type : "get",
 		url : "QnaListAjax.bo",
 		data : {
-			"page" : page
+			"page" : page,
+			"P_NO" : $('#prd_no').val()
 		},
 		dataType : "json",
 		success : function(rdata) {
@@ -81,7 +83,10 @@ function getList(page) {
 
 			}
 
-		}
+		},
+		error:function(){
+			console.log("에러");
+		 }
 	})
 
 }

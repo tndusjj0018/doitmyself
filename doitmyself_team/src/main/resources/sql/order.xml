@@ -6,10 +6,10 @@
 
 <mapper namespace="order">
 <insert id="insertOrder" parameterType="order">
-<selectKey resultType="int" order="BEFORE"
-			keyProperty="ORDER_NO">
-			select nvl(max(ORDER_NO),0)+1 from ORDER_TBL
-		</selectKey>
+<!-- <selectKey resultType="int" order="BEFORE" -->
+<!-- 			keyProperty="ORDER_NO"> -->
+<!-- 			select nvl(max(ORDER_NO),0)+1 from ORDER_TBL -->
+<!-- 		</selectKey> -->
 		insert into ORDER_TBL(ORDER_NO, ORDER_P_NO, ORDER_DELIVERY, ORDER_STATUS,
 		ORDER_ID, ORDER_CATEGORY, ORDER_PRICE, ORDER_PAYMENT, ORDER_ADDRESS, ORDER_DATE, ORDER_SELLER, ORDER_AMOUNT)
 		values(#{ORDER_NO}, #{ORDER_P_NO}, 1, 0, #{ORDER_ID}, #{ORDER_CATEGORY}, #{ORDER_PRICE}, #{ORDER_PAYMENT}, #{ORDER_ADDRESS}, SYSDATE, #{ORDER_SELLER}, #{ORDER_AMOUNT})

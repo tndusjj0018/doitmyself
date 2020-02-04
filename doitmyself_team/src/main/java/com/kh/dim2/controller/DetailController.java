@@ -36,6 +36,7 @@ import com.kh.dim2.domain.Review;
 
 @Controller
 public class DetailController {
+	
 	@Autowired
 	private qnaService qnasvc;
 
@@ -133,7 +134,8 @@ public class DetailController {
 	@RequestMapping(value = "/QnaListAjax.bo")
 	public Object QnaListAjax(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit,
-			@RequestParam(value="P_NO") int p_no) throws Exception {
+			@RequestParam(value="P_NO", required = false) int p_no) throws Exception {
+		System.out.println("p_no ="+p_no);
 		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit);
 		return qnalist;
 
@@ -208,8 +210,23 @@ public class DetailController {
 			endpage2 = maxpage2;
 
 		List<Review> reviewlist = reviewsvc.getReviewList(p_no, page2, limit2);
+		
+		//평점 평균 구하기
+		int i;
+		int sum = 0;
+		
+		if(reviewlist.size()>0) {
+		for(i = 0; i < reviewlist.size(); i++) {
+			
+			sum = sum + reviewlist.get(i).getREVIEW_RATE();
+		    
+		}
+		mv.addObject("rate", (float)sum/listcount2);
+		} else {
+			mv.addObject("rate", 0);
+		}
 		mv.addObject("reviewlist", reviewlist);
-
+	
 		mv.addObject("page2", page2);
 		mv.addObject("maxpage2", maxpage2);
 		mv.addObject("startpage2", startpage2);
@@ -271,7 +288,7 @@ public class DetailController {
 	}
 	
 	//문의글 삭제하기
-	@GetMapping("qnaDelete")
+	@GetMapping(value = "/qnaDelete")
 	public void qnaDelete(int qna_no, HttpServletResponse response) throws Exception {
 		System.out.println("qna no  : " + qna_no);
 		int result = qnasvc.qnaDelete(qna_no);
@@ -286,7 +303,6 @@ public class DetailController {
 		   PrintWriter out = response.getWriter();
 		   out.println("<script>");
 		   out.println("alert('삭제 되었습니다');");
-		   out.println("location.href='detail';");
 		   out.println("</script>");
 		   out.close();
 			
