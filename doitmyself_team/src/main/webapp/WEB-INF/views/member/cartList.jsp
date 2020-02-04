@@ -88,7 +88,7 @@
 							<c:set var= "total_price" value="${cl.CART_COUNT * cl.p_PRICE}" />
 							<tr>
 								<td>
-									<input type="checkbox" class="buyproduct" value="${total_price }">
+									<input type="checkbox" name="buyproduct" class="buyproduct" value="${total_price }">
 								</td>
 								<td>
 									<span class="cartpno">${cl.p_NO}</span>
