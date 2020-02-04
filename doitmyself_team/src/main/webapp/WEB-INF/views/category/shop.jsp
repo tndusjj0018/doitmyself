@@ -55,7 +55,12 @@
 		.main_li1,.main_li2,.main_li3,.allcategory_li{
 			list-style-type: none;
 		}
-		.heart_background{ background: red!important;}	    
+		.heart_background{ background: red!important;}	
+		.view_more{
+			text-align: center;
+    		border-top: 1px solid #d3d3d345;
+    		cursor: pointer;
+		}    
     </style>
       <script>
       
@@ -131,7 +136,6 @@
     				async:false,
     				dataType:"json",
     				success:function(rdata){
-    					$(".productsection").empty();
     					console.log(rdata);
     					var output = "";
     					if(rdata.list.length == 0){
@@ -184,6 +188,7 @@
 	    						output += "<div class='view_more'>더보기▼</div>";
 	    					}//if end
     					}//else end
+    					
     					$(".productsection").append(output);
     					
     					$(".heart").click(function(){//찜 클릭시 바로 하트 색 바꿔 주기
@@ -245,6 +250,7 @@
     		})//click end
     		
     		$(".searchbtn").click(function(){
+    			$(".productsection").empty();
     			console.log("검색 버튼누름");
     			search_word = $(".productsearch").val();
     			console.log("입력된 검색어 = "+search_word);
@@ -334,7 +340,7 @@
 				
 	    		<%-- 상품들 --%>
             	<section class = "productsection">
-
+					
             	</section>
     		<div class="row mt-5">
 	          <div class="col text-center">
