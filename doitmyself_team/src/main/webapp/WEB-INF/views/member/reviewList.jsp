@@ -147,7 +147,7 @@
 												${ral.ORDER_DATE }
 											</td>
 											<td>
-												<img src="${ral.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ral.p_NO}';">
+												<img src="resources/upload/${ral.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ral.p_NO}';">
 											</td>
 											<td>
 												<span style="cursor:pointer"onclick="location.href='detail?P_NO=${ral.p_NO}';">${ral.p_NAME }</span>
@@ -242,7 +242,7 @@
 												${rwl.REVIEW_DATE }
 											</td>
 											<td>
-												<img src="${rwl.p_IMG}" class="product_img" onclick="location.href='detail?P_NO=${rwl.p_NO}';">
+												<img src="resources/upload/${rwl.p_IMG}" class="product_img" onclick="location.href='detail?P_NO=${rwl.p_NO}';">
 											</td>
 											<td>
 												<span style="cursor:pointer" onclick="location.href='detail?P_NO=${rwl.p_NO}';">${rwl.p_NAME}</span>

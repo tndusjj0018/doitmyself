@@ -8,31 +8,62 @@
 					P_CATEGORY_NO like  #{category} ||'%'
 				</if>
 				<if test="search_word != null">
-					P_NAME like '%'||#{search_word}||'%'
+					and P_NAME like '%'||#{search_word}||'%'
 				</if>
 			</where>
 	</select>
 	<select id = "productList" parameterType="map" resultType="product">
 		select * 
-		from (select rownum rnum, p.* 
-			from(select * from product_tbl 
+		from (select rownum rnum, pd.* 
+			from(select p.*
+			<if test="USER_ID != null">
+				,d.d_no
+			</if>
+				from product_tbl p 
+				<if test="USER_ID != null">
+					full outer join 
+					(select * 
+						from dibs_tbl
+						<where>
+							D_USER_ID = #{USER_ID}
+						</where>
+					)d
+					on p.p_no = d.d_p_no
+				</if>
 				<where>
 					<if test="category != 'all' and category != 0">
-						P_CATEGORY_NO like  #{category} ||'%'
+						p.P_CATEGORY_NO like  #{category} ||'%'
 					</if>
 					<if test="search_word != null">
-						P_NAME like '%'||#{search_word}||'%'
+						and p.P_NAME like '%'||#{search_word}||'%'
 					</if>
 				</where>
 				order by 
 				<choose>
-					<when test="option == 'P_REGDATE DESC'">P_REGDATE DESC</when>
-					<when test="option == 'P_DIBS DESC'">P_DIBS DESC</when>
-					<when test="option == 'P_PRICE DESC'">P_PRICE DESC</when>
-					<when test="option == 'P_PRICE ASC'">P_PRICE ASC</when>
+					<when test="option == 'P_REGDATE DESC'">p.P_REGDATE DESC</when>
+					<when test="option == 'P_DIBS DESC'">p.P_DIBS DESC</when>
+					<when test="option == 'P_PRICE DESC'">p.P_PRICE DESC</when>
+					<when test="option == 'P_PRICE ASC'">p.P_PRICE ASC</when>
 				</choose>
-				)p
+				)pd
 			)
 		where rnum &gt;=#{start} and rnum &lt;=#{end} 
 	</select>
+	
+	<select id="dibsCheck" parameterType="map" resultType="String">
+		select D_NO from DIBS_TBL
+		where D_USER_ID = #{D_USER_ID} and D_P_NO = #{P_NO}
+	</select>
+	<insert id="dibsInsert" parameterType="map">
+		<selectKey resultType="int" keyProperty="D_NO" order="BEFORE">
+			select nvl(max(D_NO),0)+1 from DIBS_TBL
+		</selectKey>
+		insert into DIBS_TBL
+		values(#{D_NO}, #{P_NO}, #{D_USER_ID})
+	</insert>
+	<delete id="dibsDelete" parameterType="map">
+		delete from DIBS_TBL
+		where D_USER_ID = #{D_USER_ID} and D_P_NO = #{P_NO}
+	</delete>
+	
 </mapper>

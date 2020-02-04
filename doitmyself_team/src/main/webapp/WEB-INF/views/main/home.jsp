@@ -32,7 +32,9 @@
     			추천 DIM
     			<br>
     			<c:forEach var="recommend" items="${bestDim }" begin="0" end="3" step="1">
-					<img src="resources/upload/${recommend.p_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
+   					<a href="detail?P_NO=${recommend.p_NO}">
+						<img src="resources/upload/${recommend.p_IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px; z-index:-1;">
+					</a>
 				<br>
 				</c:forEach>
     		</c:if>
@@ -40,14 +42,14 @@
     			방금 본 DIM
     			<br>
     			<c:forEach var="rv" items="${recentView }" begin="0" end="3" step="1">
-					<img src="resources/upload/${rv.IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
+    				<a href="detail?P_NO=${rv.IMG}">
+						<img src="resources/upload/${rv.IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
+					</a>
 				<br>
     			</c:forEach>
     		</c:if>
-			
-			
 		</div>
-		  <div class="home-slider owl-carousel">
+		  <div class="home-slider owl-carousel" style="z-index:7;">
 	      <div class="slider-item" style="background-image: url(resources/img/img_w_banner_30406_ctc.jpg);">
 	      	<div class="overlay"></div>
 	        <div class="container">
@@ -66,27 +68,25 @@
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">Do It Myself</h1>
 	              <h2 class="subheading mb-4">DIM</h2>
 	              <p><a href="#" class="btn btn-primary">View Details</a></p>
 	            </div>
-
 	          </div>
 	        </div>
 	      </div>
 	    </div>
     </section>
-		<form action="#" autocomplete="off" name="selectbox_form" id= "selectbox_form">
+		<form action="Search_home" autocomplete="off" name="search_box" id= "searchbox_form">
 		    	<fieldset class="url">
-					<select name=first onchange="firstChange()" size=1>
-						
+					<select name="search_field" size=1>
+						<option value='0'>전체</option>
+						<option value='1'>판매자 이름</option>
+						<option value='2'>상품</option>
+						<option value='3'>내용</option>
 					</select>
-					
-					<c:if test=""></c:if>
-					
-		      		<input id="url" type="text" name="url" required>
+		      		<input id="url" type="text" name="search_word" required>
 		      <div class="after"></div>
 		    </fieldset>
 		    <fieldset class="enter">
@@ -148,7 +148,7 @@
 				<div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
           	<span class="subheading"></span>
-            <h2 class="mb-4">Best DIM</h2>
+            <h2 class="mb-4">BEST</h2>
             <p>Best DIY</p>
           </div>
         </div>   		
@@ -172,7 +172,7 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="Product?No=${best.p_NO}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    							<a href="detail?P_NO=${best.p_NO}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
 	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
@@ -193,7 +193,7 @@
 				<div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
           	<span class="subheading"></span>
-            <h2 class="mb-4">New DIM</h2>
+            <h2 class="mb-4">NEW ARRIVALS</h2>
             <a href="product?category=all" style="color: cornflowerblue;"><p>새로운 DIY 더 보기</p></a>
           </div>
         </div>
@@ -256,7 +256,6 @@
   <script src="resources/js/home_js/jquery.min.js"></script>
   <script src="resources/js/home_js/jquery-migrate-3.0.1.min.js"></script>
   <script src="resources/js/home_js/popper.min.js"></script>
-  <script src="resources/js/home_js/bootstrap.min.js"></script>
   <script src="resources/js/home_js/jquery.easing.1.3.js"></script>
   <script src="resources/js/home_js/jquery.waypoints.min.js"></script>
   <script src="resources/js/home_js/jquery.stellar.min.js"></script>
@@ -298,33 +297,6 @@
 	    		'complete' : function() {
 	    		}
 	    	});
-	    	
-	    	$("#first").on("click" , function(){
-	    		
-	    		var select = $('#first option:selected').val();
-	    		
-	    		function getCart_count(){
-	     			$.ajax({
-	     				type : "get",
-	     	 			url : "category",
-	     				data : {"selectValue" : "select"},
-	     				success : function(rdata){
-	     					
-	     					$('#cart_count').empty();
-	     					var output = "";
-	     					output += "<span class='icon-shopping_cart'></span>[" + rdata + "]";
-	     					$('#cart_count').append(output);
-	    					},
-	    				error : function(){
-	    					$('#cart_count').empty();
-	     					var output = "";
-	     					output += "<span class='icon-shopping_cart'></span>[0]";
-	     					$('#cart_count').append(output);
-	    				}
-	     			})
-	     		}
-	     		getCart_count();
-	    	})
 	    })
     </script>
   </body>

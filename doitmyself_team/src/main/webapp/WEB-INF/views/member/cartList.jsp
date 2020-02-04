@@ -88,13 +88,13 @@
 							<c:set var= "total_price" value="${cl.CART_COUNT * cl.p_PRICE}" />
 							<tr>
 								<td>
-									<input type="checkbox" class="buyproduct" value="${total_price }">
+									<input type="checkbox" name="buyproduct" class="buyproduct" value="${total_price }">
 								</td>
 								<td>
-									${cl.p_NO}
+									<span class="cartpno">${cl.p_NO}</span>
 								</td>
 								<td>
-									<img src="${cl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${cl.p_NO}';">
+									<img src="resources/upload/${cl.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${cl.p_NO}';">
 								</td>
 								<td>
 									<span style="cursor: pointer" onclick="location.href='detail?P_NO=${cl.p_NO}';">${cl.p_NAME }</span>
@@ -106,7 +106,7 @@
 									${cl.p_PRICE }원
 								</td>
 								<td>
-									${cl.CART_COUNT }개
+									<span class="cartcount">${cl.CART_COUNT }</span>개
 								</td>
 								<td>
 									

@@ -134,10 +134,12 @@
 	<!-- 주문내역 불러오기 -->	
 	<select id="orderlist" resultType="o_product" parameterType="HashMap">
 		select * from (select rownum rnum, b.*
-						from (select * from ORDER_TBL, PRODUCT_TBL
+						from (select * from ORDER_TBL, PRODUCT_TBL, SELLER_TBL
 								WHERE ORDER_P_NO = P_NO
+								AND ORDER_SELLER = SELLER_ID
 								AND ORDER_ID = #{USER_ID}
-								and ORDER_R_DATE is NULL)b)
+								and ORDER_R_DATE is NULL
+								order by ORDER_DATE DESC)b)
 				where rnum &gt;= #{start} and rnum &lt;= #{end}		
 	</select>
 	
@@ -226,11 +228,15 @@
 	<!-- 취소/반품 현황 -->
 	<select id="cancelreturnlist" parameterType="HashMap" resultType="o_product">
 		select * from (select rownum rnum, b.*
-						from (select * from ORDER_TBL, PRODUCT_TBL, REFUND_TBL
-								WHERE ORDER_P_NO = P_NO AND ORDER_NO = REFUND_NO
-								AND ORDER_ID = #{USER_ID}
-								and ORDER_R_DATE is not NULL
-								order by ORDER_R_DATE desc)b)
+						from (select *
+		from (select * 
+			  from order_tbl natural join product_tbl 
+			  where order_status in(2,1)
+			  and ORDER_P_NO = P_NO) left outer join REFUND_TBL 
+			  						 on ORDER_NO = REFUND_NO
+			  						 AND ORDER_ID = #{USER_ID}
+									and ORDER_R_DATE is not NULL
+									order by ORDER_R_DATE desc)b)
 				where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	

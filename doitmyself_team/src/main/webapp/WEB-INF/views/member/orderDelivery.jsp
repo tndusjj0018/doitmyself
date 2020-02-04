@@ -112,7 +112,7 @@
 								${ol.ORDER_DATE }
 								</td>
 								<td>
-									<img src="${ol.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ol.p_NO}';">
+									<img src="resources/upload/${ol.p_IMG }" class="product_img" onclick="location.href='detail?P_NO=${ol.p_NO}';">
 								</td>
 								<td>
 									<span style="cursor:pointer" onclick="location.href='detail?P_NO=${ol.p_NO}';">${ol.p_NAME }</span>
@@ -122,7 +122,7 @@
 									(${ol.ORDER_AMOUNT }개)
 								</td>
 								<td>
-									${ol.ORDER_SELLER }
+									${ol.SELLER_NAME }
 								</td>
 								
 								<c:if test="${ol.ORDER_DELIVERY == 0}">

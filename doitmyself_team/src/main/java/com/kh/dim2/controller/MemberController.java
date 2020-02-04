@@ -464,7 +464,7 @@ public class MemberController {
 				String fileName = uploadfile.getOriginalFilename(); //원래 파일명
 				review.setREVIEW_IMG(fileName); //원래 파일명 저장
 				
-				String saveFolder = "C:\\Users\\USER\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
+				String saveFolder = "C:\\Users\\user1\\git\\doitmyself\\doitmyself_team\\src\\main\\webapp\\resources\\reviewupload\\";
 				
 				// 난수를 구합니다.(랜덤)
 				Random r = new Random();
@@ -803,11 +803,14 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="totalAjax")
 	public Object totalAjax(@RequestParam("USER_ID") String user_id,
-							@RequestParam(value="total", defaultValue="0") int total) throws Exception {
+							@RequestParam(value="total", defaultValue="0") int total,
+							@RequestParam("P_NO") int p_no,
+							@RequestParam("cartcount") int cartcount) throws Exception {
 		
 		Map<String, Object> cartajax = new HashMap<String, Object>();
 		cartajax.put("total", total);
-		
+		cartajax.put("p_no", p_no);
+		cartajax.put("cartcount", cartcount);
 		System.out.println("total " + total);
 		return cartajax;
 	}
@@ -815,14 +818,20 @@ public class MemberController {
 	@RequestMapping(value="cartpay")
 	public ModelAndView cartpay(ModelAndView mv,
 								HttpSession session,
-								@RequestParam("total") int total) {
+								@RequestParam("total") int total,
+								@RequestParam("P_NO") int p_no,
+								@RequestParam("cartcount") int cartcount) {
 		
 		String user_id = session.getAttribute("USER_ID").toString();
 		Member m = memberservice.memberInfo(user_id);
+		Product p = memberservice.productDetail(p_no);
 		System.out.println("장바구니" + user_id);
 		mv.addObject("total", total);
+		mv.addObject("cartcount", cartcount);
 		mv.addObject("memberinfo", m);
+		mv.addObject("productdetail", p);
 		mv.setViewName("member/cartpay");
+		System.out.println("count" + cartcount);
 		return mv;
 	}
 	

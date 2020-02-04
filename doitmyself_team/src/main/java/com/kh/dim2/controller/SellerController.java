@@ -2,7 +2,6 @@ package com.kh.dim2.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -10,13 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +28,7 @@ import com.kh.dim2.Service.SellerService;
 import com.kh.dim2.domain.Category;
 import com.kh.dim2.domain.Order;
 import com.kh.dim2.domain.Product;
+import com.kh.dim2.domain.Qna;
 import com.kh.dim2.domain.Seller;
 import com.kh.dim2.domain.SubCategory;
 
@@ -40,13 +39,20 @@ public class SellerController {
 	private SellerService sellerService;
 	
 	@RequestMapping(value = "/seller")
-	public ModelAndView seller(String doc, ModelAndView mv) {
-		if(doc == null) {
-			doc = "seller_info";
-		}
-		mv.addObject("doc",doc);
-		mv.setViewName("seller/seller_nav");
-		return mv;
+	   public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) {
+	      String seller = session.getAttribute("SELLER_RESULT").toString();
+
+	      if(seller == null) {
+	         mv.setViewName("main/login");
+	         return mv;
+	      }
+	      
+	      if(doc == null) {
+	         doc = "seller_info";
+	      }
+	      mv.addObject("doc",doc);
+	      mv.setViewName("seller/seller_nav");
+	      return mv;
 	}
 	
 	// ## 판매자 정보 보기 ##
@@ -152,6 +158,11 @@ public class SellerController {
 		//set에 저장된 uploadfile을 가져옴
 		MultipartFile uploadfile = product.getUploadfile();
 		String fileName = uploadfile.getOriginalFilename();
+		
+		String p_description = product.getP_DESCRIPTION();
+		if(p_description.equals("")) {
+			product.setP_DESCRIPTION("상품설명을 등록해주세요.");
+		}
 		
 //		if(!uploadfile.isEmpty()) {
 //			String fileName = uploadfile.getOriginalFilename();//원래 파일명
@@ -310,10 +321,101 @@ public class SellerController {
 			out.println("alert('상품수정 실패')");
 			out.println("history.back()");
 		}else {
-			out.println("confirm('수정하시겠습니까?')");
+			out.println("alert('상품수정 완료')");
 			out.println("setTimeout(function(){location.href='seller?doc=seller_sale';}, 2000);");
 		}
 		out.println("</script>");
+	}
+	
+	//## 상품 삭제 ##
+	@GetMapping(value="/productDelete")
+	public void productDelete(int P_NO, HttpServletResponse response)throws Exception {
+		int result = sellerService.productDelete(P_NO);
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>");
+		if(result == 0) {
+			out.println("alert('상품삭제 실패')");
+			out.println("history.back()");
+		}else {
+			out.println("alert('상품삭제 완료')");
+			out.println("location.href='seller?doc=seller_sale'");
+		}
+		out.println("</script>");
+	}
+	
+	//## 배송상태 처리 ##
+	@ResponseBody
+	@PostMapping(value="/orderDelivery")
+	public void orderStatus(@RequestParam("ORDER_P_NO")int P_NO,
+							@RequestParam(value="ORDER_TRNO", required=false)int ORDER_TRNO,
+							@RequestParam("orderDeliveryVal")int orderDeliveryVal) {
+		System.out.println("ORDER_P_NO = " + P_NO);
+		String ORDER_TRNO_S = Integer.toString(ORDER_TRNO);
+		int result = sellerService.orderStatus(P_NO, ORDER_TRNO_S, orderDeliveryVal);
+		if(result == 1) {
+			System.out.println("주문상태 변경 완료");
+		}else {
+			System.out.println("주문상태 변경 실패");
+		}
+	}
+	
+	//## 상품문의 답변 리스트 ##
+	@ResponseBody
+	@PostMapping(value="/sellerQna")
+	public List<Qna> sellerQna(@RequestParam("USER_ID")String USER_ID){
+		//@RequestParam("qnaSelect")String qnaSelect
+		List<Qna> list = sellerService.sellerQna(USER_ID);
+		return list; 
+	}
+	
+	//## 질문 답변 페이지 ##
+	@GetMapping(value="/QnaReplyView")
+	public ModelAndView QnaReplyView(int q_p_no, ModelAndView mv) {
+		Qna qnaView = sellerService.QnaReplyView(q_p_no);
+		System.out.println(q_p_no);
+		mv.setViewName("seller/seller_nav");
+		mv.addObject("doc", "QnaReplyView"); // QnaReplyView.jsp 이동
+		mv.addObject("qnaView", qnaView);
+		
+		return mv;
+	}
+	
+	//## 질문 답변 답변작성 ##
+	@GetMapping(value="/QnaUpdate")
+	public void QnaUpdate(HttpServletResponse response,
+							int QnaNo, String QnaAnswer)throws Exception {
+		int result = sellerService.QnaUpdate(QnaNo, QnaAnswer);
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		//수정 실패한 경우
+		out.println("<script>");
+		if(result == 0) {
+			out.println("alert('답변작성 실패')");
+			out.println("history.back()");
+		}else {
+			//out.println("confirm('수정하시겠습니까?')");
+			out.println("alert('답변작성 완료')");
+			out.println("location.href='seller?doc=seller_qna'");
+		}
+		out.println("</script>");
+	}
+	
+	//## 배송중 확인시 재고수량 - ##
+	@PostMapping(value="/OrderAmountM")
+	public void OrderAmountM(int ORDER_AMOUNT, int ORDER_P_NO) {
+		int result = sellerService.OrderAmountM(ORDER_AMOUNT, ORDER_P_NO);
+		if(result == 0){
+			System.out.println("재고수량 변경 실패");
+		}else {
+			System.out.println("재고수량 변경 완료");
+		}
 	}
 }
 	
