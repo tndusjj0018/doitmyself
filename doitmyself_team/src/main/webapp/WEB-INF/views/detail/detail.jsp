@@ -515,7 +515,7 @@
 
 								<div class="option_detail">
 									<label><input type="number" id="tno" value="1" min="1"></label>
-									<span id="tno_price">${prdData.p_PRICE}</span>원
+									<span id="tno_price"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###,###" /></span>원
 								</div>
 							</td>
 						</tr>
@@ -749,7 +749,6 @@
 				alert('로그인 하셔야 합니다.');
 				return false;
 			} else {
-				alert('이거 되는거?');
                 return true;
 			}
 		}

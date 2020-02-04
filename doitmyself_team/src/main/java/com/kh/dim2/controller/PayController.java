@@ -48,25 +48,27 @@ public class PayController {
 	}
 	
 	@GetMapping(value = "/payComplete")
-	public void payComplete(Order order, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		int result = ordersvc.insertOrder(order);
-		out.println("<script>");
+	   public void payComplete(Order order, HttpServletResponse response, HttpSession session) throws Exception {
+	      response.setContentType("text/html; charset=utf-8");
+	      PrintWriter out = response.getWriter();
+	      int result = ordersvc.insertOrder(order);
+	      out.println("<script>");
 
-		
-		//주문 테이블에 입력된 경우
-		if(result == 1) {
-			out.println("alert('주문이 완료되었습니다.');");			
-		} else {
-			out.println("alert('주문에 실패했습니다.');");
-			out.println("location.href='/dim2/home'");
-		}
-		out.println("</script>");
-		out.close();
-
-		
-	}
+	      
+	      String user_id = session.getAttribute("USER_ID").toString();
+	      
+	      //주문 테이블에 입력된 경우
+	      if(result == 1) {
+	         out.println("alert('주문이 완료되었습니다.');");
+	         out.println("location.href='/dim2/orderDelivery?USER_ID=" + user_id + "'");
+	      } else {
+	         out.println("alert('주문에 실패했습니다.');");
+	         out.println("location.href='/dim2/home'");
+	      }
+	      out.println("</script>");
+	      out.close();
+      
+	   }
 	
 
 //	@GetMapping(value = "/paycom")
