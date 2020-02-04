@@ -8,7 +8,7 @@
 					P_CATEGORY_NO like  #{category} ||'%'
 				</if>
 				<if test="search_word != null">
-					P_NAME like '%'||#{search_word}||'%'
+					and P_NAME like '%'||#{search_word}||'%'
 				</if>
 			</where>
 	</select>
@@ -23,7 +23,7 @@
 						p.P_CATEGORY_NO like  #{category} ||'%'
 					</if>
 					<if test="search_word != null">
-						p.P_NAME like '%'||#{search_word}||'%'
+						and p.P_NAME like '%'||#{search_word}||'%'
 					</if>
 				</where>
 				order by 
