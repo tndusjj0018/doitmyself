@@ -43,8 +43,11 @@ public interface SellerService {
 	//상품 수정
 	int productUpdate(Product product);
 	
+	//상품 삭제
+	int productDelete(int p_NO);
+	
 	//주문 상태 변경
-	int orderStatus(int P_NO, int ORDER_TRNO, int orderDeliveryVal);
+	int orderStatus(int P_NO, String ORDER_TRNO, int orderDeliveryVal);
 
 	//상품문의 답변 리스트
 	List<Qna> sellerQna(String USER_ID);
@@ -54,4 +57,8 @@ public interface SellerService {
 
 	//상품문의 답변 답변작성
 	int QnaUpdate(int qnaNo, String qnaAnswer);
+	
+	//배송중 확인시 재고수량 감소
+	int OrderAmountM(int ORDER_AMOUNT, int ORDER_P_NO);
+	
 }

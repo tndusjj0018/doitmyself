@@ -59,7 +59,7 @@
 	            			<td width="10%">상품번호</td>
 	            			<td width="30%">제목</td>
 	            			<td width="14%">작성자</td>
-	            			<td>답변여부</td>
+	            			<td width="10%">답변여부</td>
 	            		</tr>
 	            	</thead>
 	            	<tbody>

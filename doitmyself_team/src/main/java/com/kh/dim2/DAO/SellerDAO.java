@@ -64,7 +64,7 @@ public class SellerDAO {
 		return sqlSession.update("Seller.productUpdate", product);
 	}
 
-	public int orderStatus(HashMap<String, Integer> map) {
+	public int orderStatus(HashMap<String, Object> map) {
 		return sqlSession.update("Seller.orderDelivery", map);
 	}
 
@@ -78,6 +78,14 @@ public class SellerDAO {
 
 	public int QnaUpdate(HashMap<String, Object> map) {
 		return sqlSession.update("Seller.QnaUpdate", map);
+	}
+
+	public int OrderAmountM(HashMap<String, Integer> map) {
+		return sqlSession.update("Seller.OrderAmountM", map);
+	}
+
+	public int productDelete(int P_NO) {
+		return sqlSession.delete("Seller.productDelete", P_NO);
 	}
 
 }

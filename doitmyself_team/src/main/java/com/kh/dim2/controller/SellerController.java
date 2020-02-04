@@ -40,7 +40,7 @@ public class SellerController {
 	
 	@RequestMapping(value = "/seller")
 	   public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) {
-	      String seller = (String) session.getAttribute("SELLER_RESULT");
+	      String seller = session.getAttribute("SELLER_RESULT").toString();
 
 	      if(seller == null) {
 	         mv.setViewName("main/login");
@@ -158,6 +158,11 @@ public class SellerController {
 		//set에 저장된 uploadfile을 가져옴
 		MultipartFile uploadfile = product.getUploadfile();
 		String fileName = uploadfile.getOriginalFilename();
+		
+		String p_description = product.getP_DESCRIPTION();
+		if(p_description.equals("")) {
+			product.setP_DESCRIPTION("상품설명을 등록해주세요.");
+		}
 		
 //		if(!uploadfile.isEmpty()) {
 //			String fileName = uploadfile.getOriginalFilename();//원래 파일명
@@ -316,8 +321,28 @@ public class SellerController {
 			out.println("alert('상품수정 실패')");
 			out.println("history.back()");
 		}else {
-			out.println("confirm('수정하시겠습니까?')");
+			out.println("alert('상품수정 완료')");
 			out.println("setTimeout(function(){location.href='seller?doc=seller_sale';}, 2000);");
+		}
+		out.println("</script>");
+	}
+	
+	//## 상품 삭제 ##
+	@GetMapping(value="/productDelete")
+	public void productDelete(int P_NO, HttpServletResponse response)throws Exception {
+		int result = sellerService.productDelete(P_NO);
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>");
+		if(result == 0) {
+			out.println("alert('상품삭제 실패')");
+			out.println("history.back()");
+		}else {
+			out.println("alert('상품삭제 완료')");
+			out.println("location.href='seller?doc=seller_sale'");
 		}
 		out.println("</script>");
 	}
@@ -329,7 +354,8 @@ public class SellerController {
 							@RequestParam(value="ORDER_TRNO", required=false)int ORDER_TRNO,
 							@RequestParam("orderDeliveryVal")int orderDeliveryVal) {
 		System.out.println("ORDER_P_NO = " + P_NO);
-		int result = sellerService.orderStatus(P_NO, ORDER_TRNO, orderDeliveryVal);
+		String ORDER_TRNO_S = Integer.toString(ORDER_TRNO);
+		int result = sellerService.orderStatus(P_NO, ORDER_TRNO_S, orderDeliveryVal);
 		if(result == 1) {
 			System.out.println("주문상태 변경 완료");
 		}else {
@@ -379,6 +405,17 @@ public class SellerController {
 			out.println("location.href='seller?doc=seller_qna'");
 		}
 		out.println("</script>");
+	}
+	
+	//## 배송중 확인시 재고수량 - ##
+	@PostMapping(value="/OrderAmountM")
+	public void OrderAmountM(int ORDER_AMOUNT, int ORDER_P_NO) {
+		int result = sellerService.OrderAmountM(ORDER_AMOUNT, ORDER_P_NO);
+		if(result == 0){
+			System.out.println("재고수량 변경 실패");
+		}else {
+			System.out.println("재고수량 변경 완료");
+		}
 	}
 }
 	

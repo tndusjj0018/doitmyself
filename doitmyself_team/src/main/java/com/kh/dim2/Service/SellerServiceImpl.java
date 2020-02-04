@@ -90,8 +90,8 @@ public class SellerServiceImpl implements SellerService{
 	}
 
 	@Override
-	public int orderStatus(int P_NO, int ORDER_TRNO, int orderDeliveryVal) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+	public int orderStatus(int P_NO, String ORDER_TRNO, int orderDeliveryVal) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("P_NO", P_NO);
 		map.put("ORDER_TRNO", ORDER_TRNO);
 		map.put("orderDeliveryVal", orderDeliveryVal);
@@ -115,6 +115,19 @@ public class SellerServiceImpl implements SellerService{
 		map.put("QnaAnswer", QnaAnswer);		
 		
 		return sellerDAO.QnaUpdate(map);
+	}
+	
+	@Override
+	public int productDelete(int P_NO) {
+		return sellerDAO.productDelete(P_NO);
+	}
+
+	@Override
+	public int OrderAmountM(int ORDER_AMOUNT, int ORDER_P_NO) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("ORDER_AMOUNT", ORDER_AMOUNT);
+		map.put("ORDER_P_NO", ORDER_P_NO);		
+		return sellerDAO.OrderAmountM(map);
 	}
 
 }
