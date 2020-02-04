@@ -6,7 +6,7 @@ $(function() {
 	   sub = no.substring(4);
 	   ORDER_NO = Number(sub);
 $('#paygo').click(function () {
-	console.log('오더 넘버는~' + ORDER_NO);
+	console.log('오더 넘버는~ ' + ORDER_NO);
 	
 	
 	
