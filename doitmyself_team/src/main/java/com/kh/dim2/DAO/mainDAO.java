@@ -85,4 +85,8 @@ public class mainDAO {
 	public int getSearchListCount(Map<String, String> map) {
 		return sqlSession.selectOne("Main.searchCount" , map);
 	}
+
+	public Member isEmail_Id(String uSER_ID, String uSER_EMAIL) {
+		return sqlSession.selectOne("Main.idcheck" , uSER_ID);
+	}
 }

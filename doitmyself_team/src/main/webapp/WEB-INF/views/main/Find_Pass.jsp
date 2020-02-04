@@ -180,11 +180,12 @@
 
 	   		$('input:eq(1)').on('keyup', function(){
    				
-   				var USER_EMAIL = $('input:eq(0)').val();
+	   			var USER_ID = $('input:eq(0)').val();
+   				var USER_EMAIL = $('input:eq(1)').val();
    				
    				$.ajax({
    					url:"emailcheck",
-   					data:{"USER_EMAIL" : USER_EMAIL},
+   					data:{"USER_EMAIL" : USER_EMAIL , "USER_ID" : USER_ID},
    					success: function(resp) {
    						if(resp == -1) {
    							$('i:eq(1)').css('opacity', '0');			

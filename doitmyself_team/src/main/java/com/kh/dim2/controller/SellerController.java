@@ -40,7 +40,7 @@ public class SellerController {
 	
 	@RequestMapping(value = "/seller")
 	   public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) {
-	      String seller = (String) session.getAttribute("SELLER_RESULT");
+	      String seller = session.getAttribute("SELLER_RESULT").toString();
 
 	      if(seller == null) {
 	         mv.setViewName("main/login");
