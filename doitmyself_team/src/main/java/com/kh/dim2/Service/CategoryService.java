@@ -15,4 +15,5 @@ public interface CategoryService {
 	public int dibsInsert(Map<String, Object> map);
 	
 	public int dibsDelete(Map<String, Object> map);
+	
 }

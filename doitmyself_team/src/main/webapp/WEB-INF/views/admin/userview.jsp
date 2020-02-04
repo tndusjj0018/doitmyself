@@ -8,7 +8,6 @@
 			width: 550px;
 			display: inline-block;
 			text-align: right;
-			
 		}
 		.user_search{
 			width: 285px;

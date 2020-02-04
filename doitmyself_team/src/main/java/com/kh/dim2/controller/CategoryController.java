@@ -73,6 +73,7 @@ public class CategoryController {
 		return result;
 	}
 	
+	
 	//상품 리스트를 보여줄 때 찜인 상품과 찜이 아닌 상품을 구별
 	@ResponseBody
 	@PostMapping("ProductDibsCheck")

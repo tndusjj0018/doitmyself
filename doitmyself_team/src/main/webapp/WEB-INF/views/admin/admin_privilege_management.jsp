@@ -42,7 +42,6 @@
 		.disabled_btn:disabled{
 			
 		}
-		
 	</style>
 	<script>
 		var go = function(page){
