@@ -193,9 +193,11 @@
     							console.log("현재 색 = "+current_color);
     							
     							if(current_color != "rgb(255, 0, 0)"){
-    								$(this).css("backgroundColor","#3a8aa2");
+    								$(this).addClass("heart_background");
+    								console.log($(this).css("backgroundColor"));
     							}else{
-    								$(this).css("backgroundColor","red");
+    								$(this).removeClass("heart_background");
+    								console.log($(this).css("backgroundColor"));
     							}
     							
     						}
