@@ -11,6 +11,8 @@
 		}
 		.order_select{
 			float: right;
+		    height: 40px;
+		    margin-bottom: 16px;
 		}
 		
 	</style>

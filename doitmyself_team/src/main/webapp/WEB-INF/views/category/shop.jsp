@@ -131,6 +131,7 @@
     				async:false,
     				dataType:"json",
     				success:function(rdata){
+    					$(".productsection").empty();
     					console.log(rdata);
     					var output = "";
     					if(rdata.list.length == 0){
