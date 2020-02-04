@@ -96,7 +96,8 @@ function ajax(data){
 			$('#cart_checked > tbody').empty();
 			output = "";
 			output += "<tr>";
-			output += "		<th>";	
+			output += "		<th>";
+//			output += "<fmt:formatNumber value='" + data.total +"' pattern='#,###,###' />원";
 			output += 		data.total + "원<br>";
 			output += "		</th>";
 			output += "</tr>";

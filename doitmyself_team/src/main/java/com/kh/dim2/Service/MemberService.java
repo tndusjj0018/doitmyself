@@ -100,5 +100,6 @@ public interface MemberService {
 
 	public int cartdelete(int p_no, String user_id);
 
+	public Q_Product qnaDetail(int qna_no);
 	
 }

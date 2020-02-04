@@ -158,4 +158,9 @@ public class memberDAO {
 	public int cartdelete(Map<String, Object> map) {
 		return sqlSession.delete("Member.cartdelete", map);
 	}
+	
+	public Q_Product qnaDetail(int qna_no) {
+		return sqlSession.selectOne("Member.qnaDetail", qna_no);
+		
+	}
 }

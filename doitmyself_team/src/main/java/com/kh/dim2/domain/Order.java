@@ -3,7 +3,7 @@ package com.kh.dim2.domain;
 public class Order {
 	private String P_IMG;
 	private String P_NAME;	
-	private String ORDER_NO;
+	private int ORDER_NO;
 	private int ORDER_P_NO;
 	private int ORDER_DELIVERY;
 	private int ORDER_STATUS;
@@ -44,10 +44,10 @@ public class Order {
 	public void setP_NAME(String p_NAME) {
 		P_NAME = p_NAME;
 	}
-	public String getORDER_NO() {
+	public int getORDER_NO() {
 		return ORDER_NO;
 	}
-	public void setORDER_NO(String oRDER_NO) {
+	public void setORDER_NO(int oRDER_NO) {
 		ORDER_NO = oRDER_NO;
 	}
 	public int getORDER_P_NO() {

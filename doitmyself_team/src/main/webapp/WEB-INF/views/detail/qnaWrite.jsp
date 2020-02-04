@@ -18,6 +18,7 @@
 		<input type="hidden" id="category" name="QNA_CATEGORY"> <input
 			type="hidden" name="QNA_P_NO"
 			value="<%=request.getParameter("QNA_P_NO")%>">
+		<input type="hidden" value="<%=request.getParameter("QNA_S_ID") %>" name="QNA_S_ID">
 		<table>
 			<colgroup>
 				<col style="width: 25%">

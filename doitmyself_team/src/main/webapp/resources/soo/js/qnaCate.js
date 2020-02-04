@@ -40,11 +40,11 @@ function ajax(data){
 				$(data.qnalist).each(function(index, item){
 					console.log(item.p_NO);
 					output += "<tr>";
+//					output += "		<td>";
+//					output += 		item.qna_NO;
+//					output += "		</td>";
 					output += "		<td>";
-					output += 		item.qna_NO;
-					output += "		</td>";
-					output += "		<td>";
-					output += "		<img src=resources/upload'" +item.p_IMG+"' class='product_img'>";
+					output += "		<img src='resources/upload/" +item.p_IMG+"' class='product_img'>";
 					output += "		</td>"
 					output += "		<td>";
 					output += "		<a href='detail?P_NO=" + item.p_NO + "' <span style='cursor: pointer'>" + item.p_NAME +"</span></a>";
@@ -76,9 +76,9 @@ function ajax(data){
 									if (item.qna_ISRESPONSE == 0) {
 										output += "<span style='color: #9d9da5'>답변예정</span>";
 									} else if (item.qna_ISRESPONSE == 1) {
-										output += "<a href='detail?P_NO="+ item.p_NO +"'>답변완료</a>";
+										output += "<span style='color:#3a8aa2; cursor:pointer' onclick=window.open('qna_answer?qna_NO="+item.qna_NO+"','','width=700,height=500,left=450,top=100');>답변완료</span>";
 									}
-						
+									
 					output += "</td>";
 					output += "</tr>"
 				});

@@ -841,4 +841,13 @@ public class MemberController {
 	public String change_password() {
 		return "member/change_password";
 	}
+	
+	@RequestMapping(value = "/qna_answer", method = RequestMethod.GET)
+	public ModelAndView qna_answer(ModelAndView mv,
+									@RequestParam("qna_NO") int qna_no) {
+		Q_Product q = memberservice.qnaDetail(qna_no);
+		mv.addObject("qnadetail", q);
+		mv.setViewName("member/qna_answer");
+		return mv;
+	}
 }

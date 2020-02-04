@@ -84,8 +84,7 @@
 			        	<table class="table">
 			        		<thead>
 								<tr>
-									<td width="8%">문의 번호</td>
-									<td colspan="2" width="20%">상품 정보</td>
+									<td colspan="2" width="25%">상품 정보</td>
 									<td width="15%">스토어 명</td>
 									<td width="10%"><select id="qnaCate">
 											<option value="q_all">문의 분류</option>
@@ -96,7 +95,7 @@
 											<option value="q_other">기타문의</option>
 										</select></td>
 									<td width="20%">문의 제목</td>
-									<td width="17%">작성일</td>
+									<td width="18%">작성일</td>
 									<td width="15%">답변 상태</td>
 								</tr>
 							</thead>

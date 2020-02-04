@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="perfect-scrollbar-on"><head>
 	<meta charset="utf-8">
@@ -106,7 +107,7 @@
 									${wl.p_SELLER }
 								</td>
 								<td>
-									${wl.p_PRICE }원
+									<fmt:formatNumber value="${wl.p_PRICE }" pattern="#,###,###" />원<br>
 								</td>
 								<td>
 									<button type="button" id="btn-wishdelete" onclick="if(confirm('찜 목록에서 삭제하시겠습니까?') == true)location.href='wishdelete?P_NO=${wl.p_NO}&USER_ID=${USER_ID }';"><img src="resources/soo/img/trash.png" style="width: 25px; height: 25px;"></button>
