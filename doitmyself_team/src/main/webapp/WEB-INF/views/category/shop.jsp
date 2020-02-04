@@ -115,6 +115,7 @@
     		if(pa_category){
     			category = pa_category;
     		}
+    		$("list li[value = '"+category+"]'").prop("box-shadow","lightgrey 1px 1px 10px 1px inset");
     		console.log("접속 했을 때 category = "+category);
     		
     		var search_word = "";
@@ -159,10 +160,15 @@
 	    						//output += "						</a>";
 	    						
 	    						//찜하기 되어 있을 경우 .heart_background a태그에 주어야함
-	    						
-	    						output += "						<a href='javascript:dibs("+this.p_NO+")' class='heart d-flex justify-content-center align-items-center '>";
-								output += "							<span><i class='ion-ios-heart'></i></span>"
-								output += "						</a>"
+	    						if(this.d_NO == null){
+	    							output += "						<a href='javascript:dibs("+this.p_NO+")' class='heart d-flex justify-content-center align-items-center '>";
+	    							output += "							<span><i class='ion-ios-heart'></i></span>"
+	    							output += "						</a>"
+	    						}else{
+	    							output += "						<a href='javascript:dibs("+this.p_NO+")' class=' heart_background heart d-flex justify-content-center align-items-center '>";
+	    							output += "							<span><i class='ion-ios-heart'></i></span>"
+	    							output += "						</a>"
+	    						}
 	    						output += "					</div>";
 	    						output += "				</div>";
 	    						output += "			</div>";
@@ -179,6 +185,23 @@
     					}//else end
     					$(".productsection").append(output);
     					
+    					$(".heart").click(function(){//찜 클릭시 바로 하트 색 바꿔 주기
+    						var login_id = '<%=session.getAttribute("USER_ID")%>';
+    						console.log("login한 아이디="+ login_id);
+    						if(login_id != null){//로그인 했을 때만 찜 /찜 취소 가능
+								var current_color = $(this).css("backgroundColor");
+    							console.log("현재 색 = "+current_color);
+    							
+    							if(current_color != "rgb(255, 0, 0)"){
+    								$(this).css("backgroundColor","#3a8aa2");
+    							}else{
+    								$(this).css("backgroundColor","red");
+    							}
+    							
+    						}
+    						
+    						console.log("선택한 하트 = "+$(this).prop('href'));
+    					})
     					
     					
     				},//success end
@@ -330,7 +353,7 @@
   <script src="resources/js/jquery.min.js"></script>
   <script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="resources/js/popper.min.js"></script>
-  <script src="resources/js/bootstrap.min.js"></script>
+  <%--<script src="resources/js/bootstrap.min.js"></script> --%>
   <script src="resources/js/jquery.easing.1.3.js"></script>
   <script src="resources/js/jquery.waypoints.min.js"></script>
   <script src="resources/js/jquery.stellar.min.js"></script>

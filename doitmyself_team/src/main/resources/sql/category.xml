@@ -14,24 +14,26 @@
 	</select>
 	<select id = "productList" parameterType="map" resultType="product">
 		select * 
-		from (select rownum rnum, p.* 
-			from(select * from product_tbl 
+		from (select rownum rnum, pd.* 
+			from(select p.*,d.d_no
+				from product_tbl p full outer join dibs_tbl d
+				on p.p_no = d.d_p_no
 				<where>
 					<if test="category != 'all' and category != 0">
-						P_CATEGORY_NO like  #{category} ||'%'
+						p.P_CATEGORY_NO like  #{category} ||'%'
 					</if>
 					<if test="search_word != null">
-						P_NAME like '%'||#{search_word}||'%'
+						p.P_NAME like '%'||#{search_word}||'%'
 					</if>
 				</where>
 				order by 
 				<choose>
-					<when test="option == 'P_REGDATE DESC'">P_REGDATE DESC</when>
-					<when test="option == 'P_DIBS DESC'">P_DIBS DESC</when>
-					<when test="option == 'P_PRICE DESC'">P_PRICE DESC</when>
-					<when test="option == 'P_PRICE ASC'">P_PRICE ASC</when>
+					<when test="option == 'P_REGDATE DESC'">p.P_REGDATE DESC</when>
+					<when test="option == 'P_DIBS DESC'">p.P_DIBS DESC</when>
+					<when test="option == 'P_PRICE DESC'">p.P_PRICE DESC</when>
+					<when test="option == 'P_PRICE ASC'">p.P_PRICE ASC</when>
 				</choose>
-				)p
+				)pd
 			)
 		where rnum &gt;=#{start} and rnum &lt;=#{end} 
 	</select>
