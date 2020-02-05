@@ -119,6 +119,7 @@ function getList(page) {
 				$('#qnapage').append(output)
 
 			} else {
+				$(".qna_subjects tbody").empty();
 				$("#qnapage").empty();
 				output =''
 				output += "<td id='message' colspan='5'>등록된 문의글이 없습니다.</td>"
