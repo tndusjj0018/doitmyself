@@ -235,7 +235,7 @@ function orderDelivery(){
 		var order_no = $(this).next().val(); //주문번호
 		var order_p_no = $(this).next().next().next().val(); //상품번호
 		var order_amount = 0;
-		var ORDER_TRNO = null; //운송장 번호 
+		var ORDER_TRNO = null; //운송장 번호  
 		if(orderDelivery == "주문완료"){// 0 = 주문완료
 			var ready = confirm("결제완료 처리하시겠습니다?");
 			if(ready){
