@@ -154,4 +154,10 @@ public class MainServiceImpl implements MainService{
 	public Member isPass(Member m) {
 		return dao.isPass(m);
 	}
+
+	@Override
+	public int AddReadCount(int p_no) {
+		return dao.AddReadCount(p_no);
+	}
+
 }

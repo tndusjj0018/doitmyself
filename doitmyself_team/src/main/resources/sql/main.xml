@@ -161,4 +161,10 @@
 		FROM USER_TBL
 		WHERE USER_ID = #{USER_ID}
 	</select>
+	
+	<update id="AddReadCount" parameterType="int">
+		UPDATE PRODUCT_TBL
+		SET P_READCOUNT = P_READCOUNT+1
+		WHERE P_NO = #{P_NO}
+	</update>
 </mapper>
