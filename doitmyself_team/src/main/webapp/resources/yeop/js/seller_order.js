@@ -279,7 +279,7 @@ function orderDelivery(){
 		}else if(orderDelivery == "배송중"){
 			var ready = confirm("배송완료 처리하시겠습니까?");
 			if(ready){
-				$(this).text("배송완료").css('background','#e6811a');
+				$(this).text("배송완료").css('background','#5bb65b');
 				orderDeliveryVal = 4; // 4=배송완료
 			}else{
 				return false;
