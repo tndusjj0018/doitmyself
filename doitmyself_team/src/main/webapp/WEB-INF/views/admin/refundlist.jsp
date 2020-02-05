@@ -66,7 +66,7 @@
 							output +="			<td>아이디</td>";
 							output +="			<td>판매자</td>";
 							output +="			<td>결제 방법</td>";
-							output +="			<td>환불 날짜</td>";
+							output +="			<td>주문 날짜</td>";
 							output +="			<td>카테고리</td>";
 							output +="			<td>수량</td>";
 							output +="			<td>환불 금액</td>";
