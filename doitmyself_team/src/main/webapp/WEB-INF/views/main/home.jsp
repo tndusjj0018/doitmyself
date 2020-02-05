@@ -128,7 +128,7 @@
                 <span>더 나은 품질</span>
               </div>
             </div>      
-          </div>
+          </div>  
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
@@ -175,7 +175,7 @@
 	    							<a href="detail?P_NO=${best.p_NO}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
+	    							<a href="javascript:dibs(${best.p_NO })" class="heart d-flex justify-content-center align-items-center">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
     							</div>

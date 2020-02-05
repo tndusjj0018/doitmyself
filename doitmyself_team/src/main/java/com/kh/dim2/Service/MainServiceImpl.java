@@ -128,7 +128,7 @@ public class MainServiceImpl implements MainService{
 	     }
 		return dao.getSearchList(map);
 	}
-
+  
 	@Override
 	public int getSearchListCount(int index, String search_word) {
 		Map<String, String> map=new HashMap<String,String>();

@@ -45,7 +45,7 @@
                     <div class="input-group">
                       <input type="text" name="USER_ID" class="form-control" placeholder="ID">
                       <div class="input-group-append">
-                        <span class="input-group-text">
+                        <span class="input-group-text"> 
                         </span>
                       </div>
                     </div>

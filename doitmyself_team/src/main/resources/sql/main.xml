@@ -102,11 +102,11 @@
 			#{USER_ID} , #{P_NO} , SYSDATE , RECENT_VIEW_SEQ.NEXTVAL
 		)
 	</insert>
-	
+	 
 	<select id="getSearchList" parameterType="map" resultType="product">
 		SELECT * 
 		FROM (SELECT ROWNUM RNUM , P.*
-			FROM (SELECT * FROM PRODUCT_TBL
+			FROM (SELECT * FROM PRODUCT_TBL 
 				WHERE 
 				<if test="search_field == 'ALL'">
 					P_NAME || P_SELLER || P_DESCRIPTION
@@ -117,7 +117,7 @@
 					  	<when test="search_field == 'P_NAME'">P_NAME</when>
 					  	<when test="search_field == 'P_SELLER'">P_SELLER</when>
 					  	<when test="search_field == 'P_DESCRIPTION'">P_DESCRIPTION</when>
-					</choose>
+					</choose> 
 					LIKE #{search_word}
 				</if>
 			ORDER BY P_READCOUNT) P
