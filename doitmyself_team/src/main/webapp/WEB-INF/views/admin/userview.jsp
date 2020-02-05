@@ -138,11 +138,11 @@ var pagination = function(rdata){
 			output += "<li><a href='javascript:go("+(num-1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
 			
 			//현재페이지보다 작은 페이지 버튼
-			if(num <3){//현재 페이지 num 이 3 미만인 경우
-				output += "<li><a href='javascript:go("+(num-1)+")'>"+(num-1)+"</a></li>"  
-			}else{//현재페이지 num 이 3 이상인 경우
+			if(maxpage ==3 && (num-startpage) == 2){//총 페이지가 3이고 이전페이지가 2개일 때 
 				output += "<li><a href='javascript:go("+(num-2)+")'>"+(num-2)+"</a></li>"
 				output += "<li><a href='javascript:go("+(num-1)+")'>"+(num-1)+"</a></li>"
+			}else{//현재페이지 num 이 3 이상인 경우
+				output += "<li><a href='javascript:go("+(num-1)+")'>"+(num-1)+"</a></li>"  
 			}
 		}
 		
