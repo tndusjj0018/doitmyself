@@ -10,9 +10,7 @@
 <script src="resources/js/baha_js/detail.js"></script>
 <script src="resources/js/baha_js/qnalist.js"></script>
 <script src="resources/js/baha_js/reviewlist.js"></script>
-<script>
 
-</script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="resources/css/baha_css/detail.css">
@@ -86,7 +84,7 @@
 	<!-- 		</div> -->
 	<!-- 	</div> -->
 
-	<section class="ftco-section">
+	<section class="ftco-section" style="margin-top: 40px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
@@ -97,12 +95,15 @@
 					<h3 id="p_name">${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
-							<a href="#" class="mr-2">${rate }</a>
+							<a href="#" class="mr-2"><c:if test="${rate eq 0}">현재 등록된 평점이 없습니다.</c:if>
+							<c:if test="${rate ne 0 }">평점 ${rate }</c:if>
+							</a>
 						</p>
 					</div>
 					<input type="hidden" value="${prdData.p_PRICE}" id="hiddenprice">
 					<p class="price">
-						<span id="mainPrice"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
+						<span id="mainPrice"><fmt:formatNumber
+								value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 					</p>
 					<div class="row mt-4">
 						<div class="col-md-6">
@@ -143,9 +144,9 @@
 						</div>
 					</div>
 					<p>
-						<a class="btn btn-black py-3 px-5" onclick="add()" style="color:white">Add to
-							Cart</a>
-							
+						<a class="btn btn-black py-3 px-5" onclick="add()"
+							style="color: white">장바구니 담기</a>
+
 					</p>
 				</div>
 			</div>
@@ -157,7 +158,7 @@
 			<div class="ServiceWrap">
 				<div class="service">
 					<table class="product_service">
-						<tr>
+						<tr id="menubar">
 							<td><input type="button" class="svsBTN" name="serviceBTN"
 								id="detail" value="상세정보"></td>
 							<td><input type="button" class="svsBTN" name="serviceBTN"
@@ -176,7 +177,8 @@
 							<tr>
 
 								<td>
-									<p>${prdData.p_DESCRIPTION}</p></td>
+									<p>${prdData.p_DESCRIPTION}</p>
+								</td>
 
 							</tr>
 						</table>
@@ -184,15 +186,9 @@
 				</div>
 				<div class="ReviewWrap">
 					<div class="review">
-						<p>전체 리뷰</p>
+						<p>리뷰</p>
 					</div>
-					<span class="product_review"><select name="filter"
-						id="filter">
-							<option value="all" selected>모든 리뷰</option>
-							<option value="new">최신 등록순</option>
-							<option value="high">평점 높은순</option>
-							<option value="low">평점 낮은순</option>
-					</select></span>
+					<span class="product_review"></span>
 					<c:if test="${listcount2 > 0 }">
 						<c:set var="num" value="${listcount2-(page2-1)*10 }" />
 						<c:forEach var="review" items="${reviewlist}">
@@ -230,7 +226,8 @@
 										${review.REVIEW_DATE}</span>
 								</div>
 								<div id="review_body">
-									<span><img src="resources/reviewupload/${review.REVIEW_IMG}"
+									<span><img
+										src="resources/reviewupload/${review.REVIEW_IMG}"
 										id="review_img"> </span> <span id="review_prdname">&ensp;&ensp;&ensp;${prdData.p_NAME }
 									</span> <br>
 									<p id="review_content">${review.REVIEW_CONTENT }</p>
@@ -247,7 +244,7 @@
 
 				<c:if test="${listcount2 > 0 }">
 					<div class="center-block">
-
+						<input type="hidden" id="hidpag" name="PAGE" value=${page }>
 						<div class="row">
 							<div class="col">
 								<ul class="pagination">
@@ -292,158 +289,40 @@
 					<div class="qna">
 						<p>문의</p>
 					</div>
-					<span class="qna_category"><select name="category"
-						id="category">
+					<span class="qna_category"><select name="cate" id="category">
 							<option value="all" selected>문의유형(전체)</option>
+							<option value="del">배송</option>
 							<option value="prd">상품</option>
-							<option value="track">배송</option>
-							<option value="return">반품/취소</option>
-							<option value="swap">교환/변경</option>
-							<option value="swap">기타</option>
+							<option value="ret">반품/취소</option>
+							<option value="etc">기타</option>
 					</select></span>
 					<table class="qna_subjects">
 						<colgroup width="10%">
-
-							<colgroup width="8%">
-						
+						<colgroup width="8%">
 						<colgroup width="52%">
-						
 						<colgroup width="10%">
-						
 						<colgroup width="20%">
-						
-						<tr>
-							<td>문의유형</td>
-							<td>답변상태</td>
-							<td>문의/답변</td>
-							<td>작성자</td>
-							<td>작성일</td>
-						</tr>						
+						<tbody>
 
-						<c:if test="${listcount > 0 }">
-							<c:set var="num" value="${listcount-(page-1)*10}" />
-							<c:forEach var="qna" items="${qnalist}">
-								<tr>
-									<c:choose>
-										<c:when test="${qna.QNA_CATEGORY eq 0 }">
-											<td>배송</td>
-										</c:when>
-										<c:when test="${qna.QNA_CATEGORY eq 1 }">
-											<td>상품</td>
-										</c:when>
-										<c:when test="${qna.QNA_CATEGORY eq 2 }">
-											<td>반품/취소</td>
-										</c:when>
-										<c:when test="${qna.QNA_CATEGORY eq 3 }">
-											<td>기타</td>
-										</c:when>
-									</c:choose>
-									<c:choose>
-										<c:when test="${qna.QNA_ISRESPONSE eq 0 }">
-											<td>답변대기</td>
-										</c:when>
-										<c:when test="${qna.QNA_ISRESPONSE eq 1 }">
-											<td>답변완료</td>
-										</c:when>
-									</c:choose>
-									<td class="clickable">${qna.QNA_SUBJECT}</td>
-									<td>${qna.QNA_WRITER}</td>
-									<td>${qna.QNA_DATE}</td>
+						</tbody>
 
-								</tr>
-
-								<tr class='qna_content'>
-									<td></td>
-									<td></td>
-									<td><br>
-									<c:if test= "${qna.QNA_SECRET eq 1 && qna.QNA_WRITER ne USER_ID}">
-									비밀글로 작성되었습니다.<hr> 
-									</c:if>
-									<c:if test= "${qna.QNA_SECRET eq 1 && qna.QNA_WRITER eq USER_ID}">
-									문의 :&emsp;${qna.QNA_CONTENT}<br> 
-									</c:if>
-									<c:if test= "${qna.QNA_SECRET eq 0 && qna.QNA_WRITER eq USER_ID }">
-									문의 :&emsp;${qna.QNA_CONTENT}<br> 
-									</c:if>
-									<c:if test= "${qna.QNA_SECRET eq 0 && qna.QNA_WRITER ne USER_ID }">
-									문의 :&emsp;${qna.QNA_CONTENT}<hr> 
-									</c:if>
-																	
-									<c:if
-											test="${USER_ID eq qna.QNA_WRITER}">
-											<a
-												onclick="window.open('qnaUpdateView?num=${qna.QNA_NO}','qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes');"
-												id='qnaUpdate'> 수정 </a>
-											&emsp;
-											<a href='qnaDelete?qna_no=${qna.QNA_NO }' id='qnaDelete'>삭제</a><hr>
-											<c:if test ="${qna.QNA_ISRESPONSE eq 1 && qna.QNA_WRITER eq USER_ID}">
-									 답변 :&emsp;${qna.QNA_ANSWER}<hr>
-									</c:if>
-
-										</c:if></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<input type="hidden" value="${qna.QNA_NO}" name="QNA_NO">
-							</c:forEach>
-						</c:if>
-						
-						
-						<c:if test="${listcount == 0 }">
-							<td id="message" colspan="5">등록된 글이 없습니다.</td>
-						</c:if>
 					</table>
-					
-					
-					<c:if test="${listcount > 0 }">
-						<div class="center-block">
 
-							<div class="row">
-								<div class="col">
-									<ul class="pagination">
-										<c:if test="${page <= 1 }">
-											<li class="page-item"><a class="page-link pgnation_qna"
-												href="#">이전&nbsp;</a>
-											</li>
-										</c:if>
-										<c:if test="${page > 1 }">
-											<li class="page-item"><a href="detail?page=${page-1 }"
-												class="page-link pgnation_qna">이전</a>&nbsp;</li>
-										</c:if>
+					<div class="center-block">
 
-										<c:forEach var="a" begin="${startpage }" end="${endpage }">
-											<c:if test="${a == page }">
-												<li class="page-item"><a class="page-link pgnation_qna"
-													href="#">${a }</a>
-												</li>
-											</c:if>
-											<c:if test="${a != page }">
-												<li class="page-item"><a href="detail?page=${a }"
-													class="page-link pgnation_qna">${a }</a></li>
-											</c:if>
-										</c:forEach>
+						<div class="row">
+							<div class="col">
+								<ul class="pagination" id="qnapage">
 
-										<c:if test="${page >= maxpage }">
-											<li class="page-item"><a class="page-link pgnation_qna"
-												href="#">&nbsp;다음</a>
-											</li>
-										</c:if>
-										<c:if test="${page < maxpage }">
-											<li class="page-item"><a href="detail?page=${page+1 }"
-												class="page-link pgnation_qna">&nbsp;다음</a></li>
-										</c:if>
-									</ul>
-								</div>
+								</ul>
 							</div>
 						</div>
-					</c:if>
+					</div>
 
-					<span class="qnaWrite">
-					<c:if test="${USER_ID ne null}">
-						<button
-							onclick="window.open('qnaWrite?QNA_P_NO=${prdData.p_NO}','qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes');">상품
-							문의하기</button>
-							</c:if>
+					<span class="qnaWrite"> <input type="hidden" id="s_id"
+						value="${prdData.SELLER_ID }">
+						<button id="qnabtn">상품 문의하기</button>
+
 					</span>
 
 				</div>
@@ -455,9 +334,7 @@
 					</div>
 					<table class="seller_info">
 						<colgroup width="15%">
-						
 						<colgroup width="85%">
-						
 						<tr>
 							<td>고객문의 대표번호</td>
 							<td>&emsp;070-5133-4629</td>
@@ -473,8 +350,7 @@
 						</tr>
 						<tr>
 							<td>반품/교환지 주소</td>
-							<td>&emsp;보내실 곳: 08507 서울특별시 금천구 가산디지털1로 128 (가산동,에스티엑스브이타워)
-								16층 1603호</td>
+							<td>&emsp;보내실 곳: ${prdData.SELLER_ADDRESS}</td>
 						</tr>
 						<tr>
 							<td>반품/교환 기준</td>
@@ -495,27 +371,28 @@
 
 			</div>
 			<!-- class="ServiceWrap" 끝 -->
-		<div class="SelectedWrap">
+			<div class="SelectedWrap">
 
-								<div class="selected">
+				<div class="selected">
 					<table class="product_selected">
 						<tr>
 							<td></td>
 						</tr>
-						
+
 
 						<tr>
 							<td>
 								<div class="chosen">
 									<span id="prd_img"><img
-														src="resources/upload/${prdData.p_IMG}" class="img-fluid"
-														name="P_IMG" alt="Colorlib Template" id="detailIMG"> </span> <span
-														id="prd_name">${prdData.p_NAME}</span>
+										src="resources/upload/${prdData.p_IMG}" class="img-fluid"
+										name="P_IMG" alt="Colorlib Template" id="detailIMG"> </span> <span
+										id="prd_name">${prdData.p_NAME}</span>
 								</div>
 
 								<div class="option_detail">
 									<label><input type="number" id="tno" value="1" min="1"></label>
-									<span id="tno_price"><fmt:formatNumber value="${prdData.p_PRICE}" pattern="#,###,###,###" /></span>원
+									<span id="tno_price"><fmt:formatNumber
+											value="${prdData.p_PRICE}" pattern="#,###,###,###" /></span>원
 								</div>
 							</td>
 						</tr>
@@ -523,19 +400,21 @@
 							<td>
 								<div class="total_price">
 									<span class="total">총</span><span class="totalprice"><fmt:formatNumber
-															value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
+											value="${prdData.p_PRICE}" pattern="#,###,###" /></span><span>원</span>
 								</div>
 								<div class="checkout">
-								<form action="/dim2/pay" onsubmit="return chkoutGo()" >
-								<input type="hidden" id="prd_no" value="${prdData.p_NO}" name="P_NO">
-									    <input type="hidden" name="P_NAME" value="${prdData.p_NAME}">
-									    <input type="hidden" name="P_QUANTITY" value="${prdData.p_QUANTITY}">
-										<input type="hidden" name="USER_ID" value="${USER_ID }">
-										<input type="hidden" name="COUNT" id="COUNT" value="">
-										<input type="submit" class="checkoutGo" value="결제하기"/>
-									<button class="cartGo" value="장바구니" onclick="add()">장바구니</button>	
-								</form>
-										
+
+									<form action="/dim2/pay" onsubmit="return chkoutGo()"
+										id=btnform>
+										<input type="hidden" id="prd_no" value="${prdData.p_NO}"
+											name="P_NO"> <input type="hidden" name="P_NAME"
+											value="${prdData.p_NAME}"> <input type="hidden"
+											name="P_QUANTITY" value="${prdData.p_QUANTITY}"> <input
+											type="hidden" name="USER_ID" value="${USER_ID }"> <input
+											type="hidden" name="COUNT" id="COUNT" value=""> <input
+											type="submit" class="checkoutGo" value="결제하기" />
+									</form>
+									<button class="cartGo" value="장바구니" onclick="add()">장바구니</button>
 								</div>
 							</td>
 						</tr>
@@ -544,37 +423,38 @@
 				</div>
 			</div>
 			<!-- class="SelectedWrap" 끝 -->
-
-
-
-
-		
-						</div>
+		</div>
 		<!-- class="WRAP" 끝 -->
 	</section>
-    
-	<footer class="ftco-footer ftco-section" style="clear: both">
-	<hr>
-      <div class="container">
-         <div class="row"></div>
-      </div>
-      
-      <div class="row">
-         <div class="col-md-12 text-center">
 
-            <p>
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-               Copyright ©
-               <script>
-                  document.write(new Date().getFullYear());
-               </script>2020
-               All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-         </div>
-      </div>
-      
-   </footer>
+	<!--  상단바 이동 버튼 -->
+	<a id="MOVE_TOP_BTN" href="#">TOP</a>
+
+
+	<footer class="ftco-footer ftco-section" style="clear: both">
+		<hr>
+		<div class="container">
+			<div class="row"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center">
+
+				<p>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright ©
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
+					2020 All rights reserved | This template is made with <i
+						class="icon-heart color-danger" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
+			</div>
+		</div>
+
+	</footer>
 
 
 
@@ -613,7 +493,6 @@
 
 				// Increment
 
-			
 			});
 
 			$('.quantity-left-minus').click(function(e) {
@@ -632,34 +511,57 @@
 
 		});
 
-		function add(){
-			
-			var no = $('#prd_no').val()
-			var data = {"CART_ID" : $('#loginid').val(), "CART_P_NO" : no, "CART_COUNT" : $('#quantity').val()}
-			$.ajax({
-				type : "POST",
-				url : "addCart",
-				data : data,
-				success : function(data) {
-					alert(data)
-			}
-			})			
-		}
-		
-		function chkoutGo(){
-			var idchk = $('#loginid').val();
-			if(idchk == '') {
-				alert('로그인 하셔야 합니다.');
+		function add() {
+
+			var log = $('#loginid').val()
+			if (log == '') {
+				alert('로그인 하셔야 이용 가능합니다.');
 				return false;
 			} else {
-                return true;
+
+				var no = $('#prd_no').val()
+				var data = {
+					"CART_ID" : $('#loginid').val(),
+					"CART_P_NO" : no,
+					"CART_COUNT" : $('#quantity').val()
+				}
+				$.ajax({
+					type : "POST",
+					url : "addCart",
+					data : data,
+					success : function(data) {
+						alert(data)
+					}
+				})
 			}
 		}
-		
 
-			
-		
-		
+		function chkoutGo() {
+			var idchk = $('#loginid').val();
+			if (idchk == '') {
+				alert('로그인 하셔야 이용 가능합니다.');
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		$(function() {
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 400) {
+					$('#MOVE_TOP_BTN').fadeIn();
+				} else {
+					$('#MOVE_TOP_BTN').fadeOut();
+				}
+			});
+
+			$("#MOVE_TOP_BTN").click(function() {
+				$('html, body').animate({
+					scrollTop : 0
+				}, 0);
+				return false;
+			});
+		});
 	</script>
 
 </body>

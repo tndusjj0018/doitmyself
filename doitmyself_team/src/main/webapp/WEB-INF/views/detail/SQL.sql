@@ -2,6 +2,8 @@ alter table
 
 select * from qna_tbl;
 
+delete from qna_tbl;
+
 select * from user_tbl;
 
 select * from product_tbl;
@@ -11,8 +13,8 @@ select * from user_sys_privs;
 select * from review_tbl;
 
 select * from order_tbl;
-
-
+select * from (select rownum rnum, QNA_CATEGORY, QNA_ISRESPONSE, QNA_SUBJECT, QNA_WRITER, QNA_CONTENT, QNA_DATE, QNA_NO, QNA_ANSWER, QNA_SECRET from (select * from qna_tbl where QNA_P_NO = 1 order by QNA_NO desc)) where rnum >= 1 and rnum <= 10 and QNA_CATEGORY = 1; 
+select * from (select rownum rnum, QNA_CATEGORY, QNA_ISRESPONSE, QNA_SUBJECT, QNA_WRITER, QNA_CONTENT, QNA_DATE, QNA_NO, QNA_ANSWER, QNA_SECRET from (select * from qna_tbl where QNA_P_NO = 1 order by QNA_NO desc)) where rnum >= 1 and rnum <= 10 and QNA_CATEGORY = 0;
 
 update order_tbl set ORDER_DELIVERY=4 where order_no = 9;
 

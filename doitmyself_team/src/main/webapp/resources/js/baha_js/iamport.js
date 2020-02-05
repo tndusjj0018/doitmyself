@@ -1,14 +1,17 @@
 $(function() {
 	   var IMP = window.IMP; // 생략가능
 	   IMP.init('imp62546931');  // 가맹점 식별 코드
+	   
 	   var d = new Date();
-	   no = String(d.getTime());
-	   sub = no.substring(4);
-	   ORDER_NO = Number(sub);
+	   year = String(d.getFullYear());
+	   y = year.substring(2,4);
+	   m = String(d.getMonth()+1);
+	   day = String(d.getDate());
+	    no = String(d.getTime());
+	   sub = no.substring(9);
+	   
+	   ORDER_NO = Number(y+''+m+''+day+''+sub);  //2020년 2월 5일 기준으로 => 2025(연월일)xxxx(밀리세컨드) 로 나올 것이다.
 $('#paygo').click(function () {
-	console.log('오더 넘버는~ ' + ORDER_NO);
-	
-	
 	
 	var chk1 = $('#chk1').is(":checked")
 	var chk2 = $('#chk2').is(":checked")
@@ -24,7 +27,7 @@ $('#paygo').click(function () {
 		alert('주문 상품 정보에 동의하셔야 합니다.');
 		return false;
 	} else if (paychk==false){
-		alert('결제 방식을 선택하셔야 합니다.');
+		alert('결제 수단을 선택하셔야 합니다.');
 		return false;
 	} else {
 
