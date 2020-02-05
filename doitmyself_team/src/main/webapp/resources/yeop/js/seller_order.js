@@ -134,16 +134,17 @@ $.ajax({
 				output += "<td class='orderName'>" +
 						  "		<div class='orderImg'>" +
 						  "			<img src='resources/upload/"+ this.p_IMG +"'>" +
-						  "		품명 : "+ this.p_NAME +"" +
+						  "		<b>품명</b> : "+ this.p_NAME +"" +
 						  "		</div>" +
 						  "</td>";
 				output += "<td class='orderAddress'><b>이름</b>: "+ this.user_NAME +"<br><b>연락처</b>: "+ this.user_PHONE +"<br><b>주소</b>: "+ this.order_ADDRESS + "</td>";
 				output += "<td class='orderAmount'>" + this.order_AMOUNT + "</td>";
-				output += "<td class='orderPrice'>" + this.order_PRICE.toLocaleString() + "</td>";
+				output += "<td class='orderPrice'>" + this.order_PRICE.toLocaleString() + "&#8361;</td>";
 				output += "<td class='orderPayment'>" + this.order_PAYMENT + "</td>";
 				switch (this.order_DELIVERY) {
 				case 0:
 					DeleveryMessage = "주문완료"
+					bg = "silver"
 					break;
 				case 1:
 					DeleveryMessage = "결제완료"
@@ -233,7 +234,15 @@ function orderDelivery(){
 		var order_p_no = $(this).next().val(); //상품번호
 		var order_amount = 0;
 		var ORDER_TRNO = 0; //운송장 번호
-		if(orderDelivery == "결제완료"){
+		if(orderDelivery == "주문완료"){// 0 = 주문완료
+			var ready = confirm("결제완료 처리하시겠습니다?");
+			if(ready){
+				$(this).text("결제완료").css('background','#ca1b1b');
+				orderDeliveryVal = 1; // 1=결제완료
+			}else{
+				
+			}
+		}else if(orderDelivery == "결제완료"){
 			var ready = confirm("상품준비중 처리하시겠습니까?");
 			if(ready){
 				$(this).text("상품준비중").css('background','#e6811a');

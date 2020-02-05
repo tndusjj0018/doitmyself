@@ -54,6 +54,7 @@
             	<table class="orderList-tb">            	
 	            	<thead>
 	            		<tr>
+	            			<td width="7%">번호</td>
 	            			<td width="10%">작성일</td>
 	            			<td width="13%">질문 분류</td>
 	            			<td width="10%">상품번호</td>

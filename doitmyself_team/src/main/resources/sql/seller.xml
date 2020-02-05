@@ -45,7 +45,7 @@
 		   from 
 		         (select  O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
 		               O.ORDER_PRICE, O.ORDER_PAYMENT, O.ORDER_ADDRESS, O.ORDER_DATE,
-		               O.ORDER_AMOUNT, P.P_IMG, P.P_NAME
+		               O.ORDER_AMOUNT,O.ORDER_SELLER, P.P_IMG, P.P_NAME
 		         from ORDER_TBL O join PRODUCT_TBL P
 		         on P.P_NO = O.ORDER_P_NO
 		         where O.ORDER_SELLER = #{USER_ID}
@@ -177,4 +177,26 @@
 		DELETE FROM product_tbl
 		WHERE p_no = #{P_NO}
 	</delete>
+	
+	<!-- 상품명 중복검사 -->
+	<select id="productNameCheck" parameterType="String" resultType="String">
+		SELECT p_name FROM product_tbl
+		WHERE p_name = #{p_name}
+	</select>
+	
+	<!-- 취소상품 리스트 -->
+	<select id="CancelList" parameterType="Map" resultType="order">
+	select * from
+	   (select U.USER_PHONE, U.USER_NAME, J.*
+	   from 
+		(select O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
+			O.ORDER_PRICE, O.ORDER_PAYMENT, O.ORDER_ADDRESS, O.ORDER_DATE,
+			O.ORDER_AMOUNT, O.ORDER_R_DATE, P.P_IMG, P.P_NAME
+			from ORDER_TBL O join PRODUCT_TBL P
+			on P.P_NO = O.ORDER_P_NO
+			where O.ORDER_SELLER = #{USER_ID}
+			and O.ORDER_STATUS = #{status} <!-- 취소상태인것만 -->
+		order by O.ORDER_P_NO asc)J join USER_TBL U
+	on J.ORDER_ID = U.USER_ID)
+	</select>
 </mapper>

@@ -61,5 +61,11 @@ public interface SellerService {
 	//주문관리 주문리스트
 	List<Order> getOrderList(String USER_ID, int page, int limit, String viewSelect, int index, String search_word,
 			String startDate, String endDate, String status);
+
+	//상품명 중복검사
+	String productNameCheck(String p_name);
+	
+	//취소상품 리스트
+	List<Order> CancelList(String USER_ID, int status);
 	
 }

@@ -31,13 +31,13 @@ function ajax(data){
 					output += "<td class='slaeDate'>" + regdate[0] + "</td>";				
 					output += "<td class='saleName'>" +
 							  "		<div class='saleImg'>" +
-							  "			<img src='resources/upload/"+ this.p_IMG +"'>" +
+							  "			<a href='detail?P_NO="+this.p_NO+"' title=상세페이지이동><img src='resources/upload/"+ this.p_IMG +"'></a>" +
 							  "		품명 : "+ this.p_NAME +"" +
 							  "		</div>" +
 							  "</td>";
-					output += "<td class='salePrice'>" + this.p_PRICE.toLocaleString() + "원</td>";
-					output += "<td class='saleQuantity'>" + this.p_QUANTITY + "개</td>";
-					output += "<td class='saleReadCount'>조회수:" + this.p_READCOUNT +"<br>찜:"+ this.p_DIBS + "</td>";
+					output += "<td class='salePrice'>" + this.p_PRICE.toLocaleString() + "&#8361;</td>";
+					output += "<td class='saleQuantity'><b>" + this.p_QUANTITY + "개</b></td>";
+					output += "<td class='saleReadCount'>조회수: " + this.p_READCOUNT +"<br>찜: "+ this.p_DIBS + "</td>";
 					output += "<td class='saleBtn'>" +
 							"		<input type='hidden' value='"+ this.p_NO +"'>" +
 							"		<a href='productInfo?P_NO="+ this.p_NO +"'>" +

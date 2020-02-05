@@ -30,8 +30,8 @@
   <!-- ck에디터 -->
   <script type="text/javascript" src="resources/yeop/ckeditor/ckeditor.js"></script>
   <script>
-  	$(function(){  		  		
-  		$('#sub_cate_select').click(function(){
+  	$(function(){  		  		  		
+  		$('#sub_cate_select').click(function(){//카테고리 불러오는용
   			$('#cate_message').empty();
   			var output = ""; 
   			if($(this).val() != "" && $(this).val() != null){
@@ -77,6 +77,9 @@
 		case 'seller_sale':
 			$('.nav').children().eq(3).addClass('active');
 			break;
+		case 'seller_cancel':
+			$('.nav').children().eq(4).addClass('active');
+			break;
 		case 'seller_qna':
 			$('.nav').children().eq(5).addClass('active');
 			break;
@@ -97,6 +100,8 @@
 	.nav-link{color:black!important; font-size:11.5px!important;}
 	#id_X{color:white!important}
 	body{margin-bottom:10px;}
+	.navbar-toggler{color:gray!important;}
+	.sidebar{border-right:none;}
 </style>
 </head>
 <!-- doc저장 -->
@@ -140,7 +145,7 @@
           <li>
             <a href="seller?doc=seller_cancel">
               <i class="nc-icon nc-cart-simple"></i>
-              <p>취소/교환/환불</p>
+              <p>주문취소/반품/환불</p>
             </a>
           </li>          
           <li>

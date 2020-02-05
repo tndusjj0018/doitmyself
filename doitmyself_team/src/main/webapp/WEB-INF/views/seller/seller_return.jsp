@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<script src="resources/yeop/js/seller_sale.js"></script>
 <style>
 	.content{margin-bottom:45px;}
-	.saleImg img:hover{cursor:pointer; opacity:0.7; transition:.3s;}
+	#cancel,#return{display:inline-block; background:white; width:179px; height:60px; margin-bottom:-10px; text-align:center; line-height:47px; border-radius:0 17px 0 0; font-size:11pt; color:#2e6d80; font-weight:bold;}
+	#cancel:hover,#return:hover{background:white; cursor:pointer; transition:.3s;}
+	#cancel{background:#eaeaea;}
 </style>
 <div class="main-panel">
       <!-- Navbar -->
@@ -17,7 +18,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">상품관리 페이지</a>
+            <a class="navbar-brand" href="#pablo">취소/반품 페이지</a>
           </div>
         </div>
       </nav>
@@ -29,16 +30,23 @@
 
 </div> -->
       <div class="content">
+      	<div>
+      		<a href="seller?doc=seller_cancel">
+      			<div id="cancel">취소관리</div>
+      		</a>
+      		<a href="seller?doc=seller_return">
+      			<div id="return">반품관리</div>
+      		</a>
+      	</div>
         <div class="row">
           <div class="col-md-12">
             <div class="card card-1 card-order">
               <div class="card-header">
-                <h5 class="title">상품관리</h5>
                 <p class="category">*판매자가 등록한상품 보기, 수정, 삭제</p>
                 <hr>
               </div>
                	 <div class="card-body">
-              	<h5 class="order-h5">[총 상품등록수 : <span class="saleCount">0</span>개]</h5>
+              	<h5 class="order-h5">[총 물품수 : <span class="saleCount">0</span>개]</h5>
               	
               	<div class="orderList">
 	              	<select class="saleSelect">
@@ -52,12 +60,12 @@
             	<table class="orderList-tb">            	
 	            	<thead>
 	            		<tr>
-	            			<td>등록일</td>
-	            			<td>상품이름</td>
-	            			<td>가격</td>
-	            			<td>재고수량</td>
-	            			<td>찜, 조회수</td>
-	            			<td>상품관리</td>
+	            			<td>1</td>
+	            			<td>2</td>
+	            			<td>3</td>
+	            			<td>4</td>
+	            			<td>5</td>
+	            			<td>6</td>
 	            		</tr>
 	            	</thead>
 	            	<tbody>

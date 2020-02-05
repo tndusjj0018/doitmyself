@@ -1,9 +1,10 @@
 li{list-style:none;}
-#message{margin-bottom: 30px; font-size: 11pt; color:gray; text-align: center;}
-.content{margin-bottom:35px;}
+#message{margin-bottom: 30px; margin-top:30px; font-size: 11pt; color:gray; text-align: center;}
+.content{margin-bottom:75px!important;}
 .order-h5{font-size:10.5pt; color:gray; margin-bottom:0;}
 .saleCount,.orderCount{color:red;}
 .orderPriceAll{color:red;}
+.orderPrice{width:117px;}
 .product-h5{font-size:9.5pt; color:gray; margin-bottom:3px;}
 .product-h5-1{font-size:9pt; color:silver; margin-bottom:3px;}
 .product_hr{background:#3c8cbc; margin:0; opacity:0.7;}
@@ -15,7 +16,9 @@ input::placeholder{color:#dddddd!important;}
 input,textarea{border:1px solid #DDDDDD; border-radius:4px; padding:1px;}
  	.p_th{width:150px; height:39px; background:#4f97c3d4; text-align:center; font-weight:bold; color:white; font-size:10pt;}
  	.p_th,.p_td{border:1px solid #e0e0e0;}
- 	#test_dname,#test_name{width:97%; display:block; margin:0 auto;}
+ 	#test_name{width:97%; display:block; margin:0 auto;}
+ 	#test_dname{width:77%; margin-left:10px; display:inline-block;}
+ 	.dnameMessage{font-size:9pt; margin-left:5px;}
  	#test_name{background:#f3f3f3;}
  	select{margin-left:10px!important; border-radius: 0 0 3px 3px; color:gray; font-size:10pt!important;}
  	#new_p{float:right; margin:20px 10px 0 0; width:110px; height:33px; border-style:none; background:#4f97c3d4; color:white; margin-bottom:35px;}
@@ -86,7 +89,7 @@ option:hover{cursor:pointer; font-weight:bold; transition:.3s;}
 	}
 .col-md-9{flex:0 0 83%; max-width:83%;}
 .card-1{box-shadow:none;}
-.card-order{width:1206px!important;}
+.card-order{width:1270px!important;}
 .orderSearch-tb{width:97%; margin:0 auto;}
 .orderSearch-tb th,.orderSearch-tb td{border:1px solid silver;}
 .orderSearch-tb th{width:150px; height:39px; background:#4f97c3d4; color:white; padding-left:10px;}
@@ -113,6 +116,9 @@ input[type=file]{text-indent:0; border:none;}
 #uploadfile{width:290px; color:gray;}
 .orderList-tb tbody>tr>td{height:53px; color:#717171;}
 .orderDate,.slaeDate{width:113px;}
+.orderAmount{width:59px;}
+.orderAddress{width:323px;}
+.orderId{width:115px;}
 .orderDelivery{width:117px;}
 .orderNo{width:115px;}
 .orderId{width:115px;}
@@ -122,6 +128,7 @@ input[type=file]{text-indent:0; border:none;}
 .saleUpdate{margin-bottom:13px; background:#6db5e0;}
 .saleDelete{background:#3e3e3ecf;}
 .saleBtn{width:177px;}
+.saleQuantity>b{color:#204b58;}
 
 .ftco-navbar-light{background:white!important;}
 .order-btn img{margin-left:-5px; width:17px; opacity:0.5;}
@@ -133,10 +140,14 @@ input[type=file]{text-indent:0; border:none;}
 .orderProgress>b:nth-child(4){color:#5bb65b;}
 .orderDelivery{border:none; width:89px; height:35px; color:white;}
 .orderDelivery:hover{opacity:0.7; transition:.3s; cursor:pointer;}
-.orderImg img{width:96px; height:96px; margin:0 auto; margin-top:3px; display:block;}
-.saleImg img{width:96px; height:96px; margin-top:3px; display:block; margin:0 auto;}
+.orderImg{margin-bottom:3px;}
+.saleImg{margin-bottom:6px;}
+.orderImg img{width:79px; height:77px; margin:0 auto; margin-top:3px; margin-bottom:7px; display:block;}
+.saleImg img{width:79px; height:77px; display:block; margin:0 auto; margin-top:6px; margin-bottom:6px;}
 
 .center-block{display:flex; justify-content:center;} /*가운데 정렬*/
 #viewcount{width:10%;}
 .rows{display:flex; justify-content:flex-end;}
-.gray{color:#65afff!important;}
+.gray{color:gray!important;}
+
+.qnaWriter{font-weight:bold;}
