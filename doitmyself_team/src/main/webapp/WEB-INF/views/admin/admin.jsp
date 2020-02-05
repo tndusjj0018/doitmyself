@@ -62,7 +62,7 @@
         	margin-top: 40px;   
         }
         .navbar-brand{
-        	width: 100px;
+        	width: 100px!important;
         }
 	</style>
 	<!-- .goto-here {background: #f4f3ef;} -->
