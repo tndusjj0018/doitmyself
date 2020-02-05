@@ -135,7 +135,7 @@
 							<ul class="nav nav-list">
 								<li class="mar20"><a href="admin?doc=orderlist">전체 주문 내역</a></li>
 								<li class="mar20"><a href="admin?doc=refundlist">환불 내역</a></li>
-								<li class="mar20"><a href="admin?doc=exchange_list">교환 내역</a></li>
+								<%-- <li class="mar20"><a href="admin?doc=exchange_list">교환 내역</a></li> --%>
 							</ul>
 						</div>
 		          	</li>
