@@ -20,12 +20,26 @@
 		(select rownum rnum, QNA_CATEGORY, QNA_ISRESPONSE, QNA_SUBJECT, 
 		QNA_WRITER, QNA_CONTENT, QNA_DATE, QNA_NO, QNA_ANSWER, QNA_SECRET
 		from
-		(select * from qna_tbl where QNA_P_NO = #{QNA_P_NO} order by QNA_NO desc))
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		(select * from qna_tbl where QNA_P_NO = #{QNA_P_NO} <choose>
+		<when  test="cate == 'all'"></when>
+		<when test="cate == 'del'">and QNA_CATEGORY = 0</when>
+		<when test="cate == 'prd'">and QNA_CATEGORY = 1</when>
+		<when test="cate == 'ret'">and QNA_CATEGORY = 2</when>
+		<when test="cate == 'etc'">and QNA_CATEGORY = 3</when>
+		</choose> 
+		order by QNA_NO desc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end} 
+		
 	</select>
 <!--문의글 개수 구하기-->
-	<select id="count" resultType="int">
-		select count(*) from qna_tbl where QNA_P_NO = #{QNA_P_NO}
+	<select id="count" resultType="int" parameterType="java.util.Map">
+		select count(*) from qna_tbl where QNA_P_NO = #{QNA_P_NO} <choose>
+		<when  test="cate == 'all'"></when>
+		<when test="cate == 'del'">and QNA_CATEGORY = 0</when>
+		<when test="cate == 'prd'">and QNA_CATEGORY = 1</when>
+		<when test="cate == 'ret'">and QNA_CATEGORY = 2</when>
+		<when test="cate == 'etc'">and QNA_CATEGORY = 3</when>
+		</choose> 
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="qna">

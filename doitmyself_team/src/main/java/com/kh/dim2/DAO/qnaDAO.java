@@ -25,13 +25,13 @@ public class qnaDAO {
 	}
 
 
-	public List<Qna> getQnaList(HashMap<String, Integer> map) {
+	public List<Qna> getQnaList(HashMap<String, Object> map) {
 		return sqlSession.selectList("qna.list", map);
 	}
 
 
-	public int getListCount(int p_no) {
-		return sqlSession.selectOne("qna.count", p_no);
+	public int getListCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne("qna.count", map);
 	}
 
 

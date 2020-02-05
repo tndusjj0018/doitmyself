@@ -3,6 +3,7 @@ package com.kh.dim2.controller;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -134,10 +135,42 @@ public class DetailController {
 	@RequestMapping(value = "/QnaListAjax.bo")
 	public Object QnaListAjax(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit,
+			@RequestParam(value = "cate", defaultValue ="all", required = false) String cate,
 			@RequestParam(value="P_NO", required = false) int p_no) throws Exception {
 		System.out.println("p_no ="+p_no);
-		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit);
-		return qnalist;
+		
+		int listcount = qnasvc.getListCount(p_no,cate); // 총 리스트 수를 받아옴
+
+		// 총 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+
+		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+
+		// 현재 페이지에 보여줄 마지막 페이지 수 (10, 20, 30 등..)
+		int endpage = startpage + 10 - 1;
+		
+		if (endpage > maxpage)
+			endpage = maxpage;
+				
+		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit, cate);
+		
+		//맵 이용하기
+				System.out.println("========Map이용하기=======");
+		        Map<String, Object> map = new HashMap<String, Object>();
+				
+		        map.put("page", page);
+		        map.put("maxpage", maxpage);
+		        map.put("startpage", startpage);
+		        map.put("endpage", endpage);
+		        map.put("listcount", listcount);
+		        map.put("qnalist",qnalist);
+		        map.put("limit", limit);
+
+				return map;
+		
+		
+		
 
 	}
 	
@@ -157,6 +190,7 @@ public class DetailController {
 	public ModelAndView QnaList(@RequestParam(value = "page2", defaultValue = "1", required = false) int page2,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv,
+			@RequestParam(value = "cate", defaultValue = "all", required = false) String cate,
 			@RequestParam("P_NO") int p_no,  HttpSession session) {
 		// 페이지 이동
 		mv.setViewName("detail/detail");
@@ -165,6 +199,7 @@ public class DetailController {
 		
 		// 상품 불러오기
 		Product prd = prdsvc.getDetail(p_no);
+		System.out.println(prd + "=============");
 		if (prd == null) {
 			System.out.println("상품 정보 가져오기 실패!");
 			mv.setViewName("detail/error");
@@ -172,6 +207,7 @@ public class DetailController {
 		System.out.println("상품 정보 가져오기 성공~");
 		mv.addObject("prdData", prd); // 불러올 상품 정보
 
+        mainService.AddReadCount(p_no);
 		if(session.getAttribute("USER_ID") != null) {
             String USER_ID = session.getAttribute("USER_ID").toString();
             String P_NO = p_no + "";
@@ -240,7 +276,7 @@ public class DetailController {
 		// 문의글 페이지네이션
 		int limit = 10; // 한 화면에 출력할 레코드 갯수
 
-		int listcount = qnasvc.getListCount(p_no); // 총 리스트 수를 받아옴
+		int listcount = qnasvc.getListCount(p_no,cate); // 총 리스트 수를 받아옴
 
 		// 총 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
@@ -254,9 +290,10 @@ public class DetailController {
 		if (endpage > maxpage)
 			endpage = maxpage;
 
-		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit);
-       
+		List<Qna> qnalist = qnasvc.getQnaList(p_no, page, limit, cate);
+
 		mv.addObject("qnalist", qnalist); // 문의글 집합 목록
+		mv.addObject("cate", cate); //카테고리 밸류 값
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);

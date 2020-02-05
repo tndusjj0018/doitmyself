@@ -20,6 +20,7 @@ public class Product {
 	private String SELLER_ADDRESS;
 	
 	
+	
 	public String getSELLER_ID() {
 		return SELLER_ID;
 	}

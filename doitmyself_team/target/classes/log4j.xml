@@ -16,6 +16,14 @@
 		<level value="info" />
 	</logger>
 	
+	<logger name="Category">
+		<level value="trace" />
+	</logger>
+	
+	<logger name="Main">
+		<level value="trace" />
+	</logger>
+	
 	<logger name="Admin">
 		<level value="trace" />
 	</logger>
@@ -30,6 +38,16 @@
 	
   	<logger name="Member">
 		<level value="trace" />
+	</logger>
+	
+	<logger name="qna">
+		<level value="trace" />
+	</logger>
+	
+	
+	
+	<logger name="order">
+	    <level value="trace" />
 	</logger>
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

@@ -42,7 +42,7 @@ $(document).on('change','.input-number', function(){
 	var main = $('.input-number').val();
 	$('#tno').val(main);
 })
-
+//수량 변동을 연동시킴
 $(document).on('change','#tno', function(){
 	var main = $('#tno').val();
 	$('.input-number').val(main);
@@ -62,21 +62,21 @@ $(document).on('change','#tno', function(){
     $('#tno_price').text(com(sq));
 
 })
-
+//수량 변동시 가격 변동시킴
 $(document).on('change','.input-number', function(){
     var c = $('.input-number').val();
     var hidprc = $('#hiddenprice').val();
     sq = Number(hidprc*c);
     $('#tno_price').text(com(sq));
 })
-
+//수량 변동시 가격 변동시킴
 $(document).on('change','.input-number', function(){
     var c = $('.input-number').val();
     var hidprc = $('#hiddenprice').val();
     sq = Number(hidprc*c);
     $('.totalprice').text(com(sq));
 })
-
+//수량 변동시 가격 변동시킴
 $(document).on('change','#tno', function(){
     var c = $('#tno').val();
     var hidprc = $('#hiddenprice').val();
@@ -90,10 +90,21 @@ $(window).load( function(){
 	 $('#COUNT').val(c);
 })
 
-
+//결제하기 클릭시  수량값을 pay.jsp 로 보내기위한 문장
 $(document).on('change','#tno',function(){
 	  var c = $('#tno').val();
-	  $('#COUNT').val(c);
+	  $('#COUNT').val(c);	
+})
+
+//상품 문의하기 클릭시 로그인상태가 아니면 거절
+$('#qnabtn').click(function(){
+	var log = $('#loginid').val()
+	if(log==''){
+		alert('로그인하셔야 이용 가능합니다.')
+		return false
+	} else {
+		window.open('qnaWrite?QNA_P_NO='+$('#prd_no').val()+'&QNA_S_ID='+$('#s_id').val(),'qnaWrite_pop','width=670,height=510,location=no,status=no,scrollbars=yes')
+	}
 	
 })
 

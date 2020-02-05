@@ -1,15 +1,31 @@
+function go(page) {
+	getList(page);
+}
+
+function setPaging(href, digit){
+	output += "<li class=page-item>";
+	gray = "";
+	if(href == ""){
+		gray = "gray";
+	}
+	anchor = "<a class='page-link " + gray + "'" + href + ">"
+				+ digit + "</a></li>";
+	output += anchor;
+}
+
 function getList(page) {
-	console.log(this.qna_);
+	
 	$.ajax({
 		type : "get",
 		url : "QnaListAjax.bo",
 		data : {
 			"page" : page,
-			"P_NO" : $('#prd_no').val()
+			"P_NO" : $('#prd_no').val(),
+			"cate" : $('#category').val()
 		},
 		dataType : "json",
 		success : function(rdata) {
-			if (rdata.length > 0) {
+			if (rdata.qnalist.length > 0) {
 				$(".qna_subjects tbody").empty();
 				output = '';
 				output += "<tr><td>문의유형</td>"
@@ -17,10 +33,9 @@ function getList(page) {
 				output += "<td>문의/답변</td>"
 				output += "<td>작성자</td>"
 				output += "<td>작성일</td></tr>"
-				// output+= '<table>';
-				$(rdata).each(
+				
+				$(rdata.qnalist).each(
 						function() {
-
 							if (this.qna_CATEGORY == 0) {
 
 								output += "<tr><td>배송"
@@ -72,15 +87,42 @@ function getList(page) {
 							output += "</td>";
 							output += "<td></td><td></td>"
 							output += "</tr>";
-
+									    																					
 						});
-				// output += '</table>';
-				$(".qna_subjects tbody").append(output);
+				
+				$(".qna_subjects tbody").append(output); //문의글 완성
+				
+				$('#qnapage').empty(); //페이징 처리
+				output = "";
+			    digit = '이전&nbsp;'
+				    href="";
+				    if(rdata.page >1) {
+				    	href = 'href=javascript:go(' + (rdata.page - 1) + ')';
+				    }
+				    setPaging(href, digit);
+
+				for (var i = rdata.startpage; i<= rdata.endpage; i++) {
+					digit = i;
+					href= "";
+					if(i != rdata.page){
+						href='href=javascript:go('+i+')';
+					}
+					setPaging(href, digit);
+				}
+				digit = '다음&nbsp;';
+				href="";
+				if(rdata.page < rdata.maxpage){
+					href='href=javascript:go('+(rdata.page+1)+')';
+				}
+				setPaging(href, digit);
+
+				$('#qnapage').append(output)
 
 			} else {
 				$(".qna_subjects tbody").empty();
-				output += "<td id='message' colspan='5'>등록된 글이 없습니다.</td>"
-
+				output =''
+				output += "<td id='message' colspan='5'>등록된 문의글이 없습니다.</td>"
+					$('#qnapage').append(output)
 			}
 
 		},
@@ -92,8 +134,20 @@ function getList(page) {
 }
 
 $(function() {
-	$('.pgnation_qna').click(function(e) {
-		e.preventDefault();
-		getList($(this).text());
-	})
+	
+	go(1)
+		$('#category').on('change',function(){
+			go(1);
+		})
+	
+//	$('.pgnation_qna').click(function(e) {
+//		e.preventDefault();
+//			getList($(this).text());
+//		
+//		
+//	})
+	
+	
+	
+	
 })

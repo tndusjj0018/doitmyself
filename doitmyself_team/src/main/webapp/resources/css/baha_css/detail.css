@@ -1,11 +1,12 @@
 @charset "UTF-8";
  *:focus { outline:none; }
  
+
 #mainIMG {
 	width:330px;
 	height:330px;
 }
- 
+
 .wrap-section {
 	
 }
@@ -18,7 +19,7 @@
 
 .ServiceWrap {
 	float: left;
-	margin-left: 300px;
+	margin-left: 330px;
 	width: 1050px;
 }
 
@@ -138,6 +139,10 @@ float:left;
     line-height:18px;
 	font-size:13px;
 	color:#333;
+}
+
+#message{
+	margin-left:41px;
 }
 
 #message2 {
@@ -340,14 +345,13 @@ float:left;
 	border: 1px solid #dadada;
 	background: #f7f7f7;
 }
-
-.chosen td {
-	height: 140px;
-}
-
 .chosen {
+	margin-left:30px;
 	height: 52px;
 	width: 100%;
+}
+.chosen td {
+	height: 140px;
 }
 
 #prd_img {
@@ -363,6 +367,7 @@ float:left;
 }
 
 .option_detail {
+	margin-left:30px;
 	float: left;
 }
 
@@ -406,15 +411,17 @@ float:left;
 	font-size:22px;
 }
 .checkout {
+	margin-left:10px;
 	clear:both;
 	height:50px;	
 	text-align:center;
 }
 
-#paygo {
-	width:100px;
-	margin:0;
+#btnform {
+	float:left;
+	margin-left:28px;
 }
+
 .checkoutGo {
 	width:102px;
 	height:48px;
@@ -452,6 +459,16 @@ background-color: white;
 {
     text-decoration: none;
     outline: none;
+}
+
+#MOVE_TOP_BTN {
+	border-radius: 5px;
+	font-weight:bold;
+    position: fixed;
+    right: 50%;
+    bottom: 50px;
+    display: none;
+    z-index: 1010;
 }
 
 /************* detail.js 연동 부분 *****************/
