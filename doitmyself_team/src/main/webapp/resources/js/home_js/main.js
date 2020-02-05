@@ -38,6 +38,49 @@ AOS.init({
     scrollProperty: 'scroll'
   });
 
+	 $('.heart').on('click' , function(){
+		 
+		 var P_NO = $('#Product_NO').val();
+		 var USER_ID = $('#USER_ID').val();
+		 
+		 if(USER_ID == null){
+			 $.ajax({
+				type:"POST",
+				url:"jjim",
+				data:{"P_NO" : P_NO , "D_USER_ID" : USER_ID},
+				success:function(rdata){
+					if(rdata == 2){
+						console.log("찜 취소 완료");
+					}else{
+						console.log("찜 하기 완료");
+					}
+				},
+				error:function(){
+					console.log("에러");
+				}//error end
+			})//ajax end
+		 } else {
+			 alert('로그인 후 이용해주세요');
+		 }
+	 })
+
+//	 $('body').on('load' , function(){
+		 console.log("$('body').on('load')");
+		 var P_NO = $('#Product_NO').val();
+		 var USER_ID = $('#USER_ID').val();
+		 console.log(USER_ID);
+		 var heart_color = "";
+		 if(USER_ID != null){
+			$.ajax({
+				type:"POST",
+				url:"ProductDibsCheck",
+				data:{"P_NO" : P_NO , "D_USER_ID" : USER_ID},
+				success:function(rdata){
+					$('.heart_div').css('background' , '#3a8aa2');
+				}
+		})			 
+	 }
+	
 
 	var fullHeight = function() {
 
