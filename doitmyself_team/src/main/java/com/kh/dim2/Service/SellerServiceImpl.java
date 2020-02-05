@@ -144,4 +144,18 @@ public class SellerServiceImpl implements SellerService{
 		return sellerDAO.OrderAmountM(map);
 	}
 
+	@Override
+	public String productNameCheck(String p_name) {
+		return sellerDAO.productNameCheck(p_name);
+	}
+
+	@Override
+	public List<Order> CancelList(String USER_ID, int status) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("USER_ID", USER_ID);
+		map.put("status", status);
+		
+		return sellerDAO.CancelList(map);
+	}
+
 }

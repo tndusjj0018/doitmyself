@@ -88,4 +88,12 @@ public class SellerDAO {
 		return sqlSession.delete("Seller.productDelete", P_NO);
 	}
 
+	public String productNameCheck(String p_name) {
+		return sqlSession.selectOne("Seller.productNameCheck", p_name);
+	}
+
+	public List<Order> CancelList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Seller.CancelList", map);
+	}
+
 }

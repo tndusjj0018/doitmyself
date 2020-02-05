@@ -27,7 +27,9 @@ function ajax(data){
 				qnaCategory = '';
 				qnaIsresponse = '';
 				qnaColor = '';
+				qnaNo = data.length;
 				$(data).each(function(){
+					var qnaDate = this.qna_DATE.split(" ");
 					switch (this.qna_CATEGORY) {
 					case 0:
 						qnaCategory = "배송문의";
@@ -55,13 +57,15 @@ function ajax(data){
 					}
 					output += "<tr>";
 					output += "<input type='hidden' value='"+ this.qna_NO+"'>";
-					output += "<td>"+ this.qna_DATE +"</td>";
+					output += "<td>"+ qnaNo +"</td>";
+					output += "<td>"+ qnaDate[0] +"</td>";
 					output += "<td>"+ qnaCategory +"</td>";
 					output += "<td>"+ this.qna_P_NO +"</td>";
 					output += "<td>"+ this.qna_SUBJECT +"</td>";
 					output += "<td>"+ this.qna_WRITER +"</td>";
 					output += "<td class='qnaWriter' style='color:"+qnaColor+"'>"+ qnaIsresponse +"</td>";
 					output += "</tr>";
+					qnaNo --;
 				}); //each end
 				
 				$('.orderList-tb tbody').append(output);				

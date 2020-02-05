@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <script type="text/javascript" src="resources/yeop/ckeditor/ckeditor.js"></script>
+<script>
+	$(function(){
+		//상품명 중복검사
+		$('#test_dname').keyup(function(){
+			var data = $(this).val();
+			$.ajax({
+				type : 'post',
+				url : 'productNameCheck',
+				data : {"p_name" : data},
+				success : function(data){
+					if(data == -1){
+						$('.dnameMessage').css('color','green').html('사용가능한 상품명입니다.');
+						$('#new_p').attr('disabled',false);
+					}else{
+						$('.dnameMessage').css('color','red').html('사용중인 상품명입니다.');
+						$('#new_p').attr('disabled',true);
+					}
+				}
+			})
+		})
+	})
+</script>
 <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -42,7 +64,7 @@
             	<table class="product_tb">
             		<tr>
             			<th class="p_th">상품명</th>
-            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME" required></td>            			
+            			<td class="p_td"><input type="text" id="test_dname" name="P_NAME" required><span class="dnameMessage"></span></td>            			
             		</tr>
             		<tr>
             			<th class="p_th">사업지 명</th>

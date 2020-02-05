@@ -38,27 +38,27 @@ public class SellerController {
 	@Autowired
 	private SellerService sellerService;
 	
-	@RequestMapping(value = "/seller")
-	   public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) throws Exception{
-		try {
-	      String seller = session.getAttribute("SELLER_RESULT").toString();
+   @RequestMapping(value = "/seller")
+      public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) throws Exception{
+      try {//seller 접근시 판매자 아니면 login페이지로 이동
+         String seller = session.getAttribute("SELLER_RESULT").toString();
 
-	      if(seller == null) {
-	         mv.setViewName("main/login");
-	         return mv;
-	      }
-	      
-	      if(doc == null) {
-	         doc = "seller_info";
-	      }
-	      mv.addObject("doc",doc);
-	      mv.setViewName("seller/seller_nav");
-		} catch(Exception e) {
-			mv.setViewName("main/login");
-			return mv;
-		}
-		return mv;
-	}
+         if(seller == null) {
+            mv.setViewName("main/login");
+            return mv;
+         }
+         
+         if(doc == null) {
+            doc = "seller_info";
+         }
+         mv.addObject("doc",doc);
+         mv.setViewName("seller/seller_nav");
+      } catch(Exception e) {
+         mv.setViewName("main/login");
+         return mv;
+      }
+      return mv;
+   }
 	
 	// ## 판매자 정보 보기 ##
 	@ResponseBody
@@ -427,6 +427,32 @@ public class SellerController {
 			System.out.println("재고수량 변경 완료");
 		}
 	}
+	
+	//## 상품명 중복검사 ##
+	@ResponseBody
+	@PostMapping(value="/productNameCheck")
+	public void productNameCheck(String p_name, HttpServletResponse response)throws Exception {
+		String r_p_name = sellerService.productNameCheck(p_name);
+		int result = 0;
+		
+		PrintWriter out = response.getWriter();
+		if(r_p_name == null) {
+			result = -1;
+		}else {
+			result = 0;
+		}
+		out.println(result);
+	}
+	
+	//## 취소 상품 리스트 ##
+	@ResponseBody
+	@PostMapping(value="/CancelList")
+	public List<Order> CancelList(String USER_ID, int status){
+		List<Order> list = sellerService.CancelList(USER_ID, status);
+		
+		return list;
+	}
+	//## 반품 상품 리스트 ##
 }
 	
 
