@@ -183,7 +183,7 @@
 					//다음 페이지 버튼 : 1개씩 이동
 					
 					//현재페이지보다 큰 페이지 버튼
-					if(num == 1){//현재 페이지가 1일때
+					if(num == 1 && (maxpage - num) >= 2){//현재 페이지가 1일때
 						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
 						output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
 					}else{
