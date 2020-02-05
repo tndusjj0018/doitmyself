@@ -39,7 +39,8 @@ public class SellerController {
 	private SellerService sellerService;
 	
 	@RequestMapping(value = "/seller")
-	   public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) {
+	   public ModelAndView seller(String doc, ModelAndView mv , HttpSession session) throws Exception{
+		try {
 	      String seller = session.getAttribute("SELLER_RESULT").toString();
 
 	      if(seller == null) {
@@ -52,7 +53,11 @@ public class SellerController {
 	      }
 	      mv.addObject("doc",doc);
 	      mv.setViewName("seller/seller_nav");
-	      return mv;
+		} catch(Exception e) {
+			mv.setViewName("main/login");
+			return mv;
+		}
+		return mv;
 	}
 	
 	// ## 판매자 정보 보기 ##

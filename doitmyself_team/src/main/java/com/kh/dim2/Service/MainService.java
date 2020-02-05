@@ -32,4 +32,5 @@ public interface MainService {
 	int codeInsert(HashMap<String, Object> map);
 	int isCode(String fIND_CODE);
 	Member isPass(Member m);
+	int AddReadCount(int p_no);
 }

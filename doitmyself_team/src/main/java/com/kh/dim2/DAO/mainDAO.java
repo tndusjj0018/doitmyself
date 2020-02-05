@@ -101,4 +101,8 @@ public class mainDAO {
 	public Member isPass(Member m) {
 		return sqlSession.selectOne("Main.isPass" , m);
 	}
+
+	public int AddReadCount(int p_no) {
+		return sqlSession.update("Main.AddReadCount" , p_no);
+	}
 }
