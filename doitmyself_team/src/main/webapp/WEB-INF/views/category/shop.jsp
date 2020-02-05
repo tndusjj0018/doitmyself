@@ -152,7 +152,7 @@
 	    						output += "				<h3><a href='#'>"+this.p_NAME+"</a></h3>";
 	    						output += "				<div class='d-flex'>";
 	    						output += "					<div class='pricing'>";
-	    						output += "						<p class='price'><span>"+this.p_PRICE+"원</span></p>";
+	    						output += "						<p class='price'><span>&#8361;"+this.p_PRICE.toLocaleString()+"</span></p>";
 	    						output += "					</div>";
 	    						output += "				</div>";
 	    						output += "				<div class='bottom-area d-flex px-3'>";
@@ -350,10 +350,11 @@
 	          </div>
 	        </div>
     	</div>
+    	</div>
     </section>
 
     
-  
+  	<jsp:include page="footer.jsp"></jsp:include>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
