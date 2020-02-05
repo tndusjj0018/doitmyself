@@ -159,7 +159,7 @@
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product product-add" style="width:255px; height:300px;">
     					<a href="detail?P_NO=${best.p_NO}" class="img-prod">
-    					<input type="hidden" name="Product_NO" value="${best.p_NO}">
+    					<input type="hidden" name="Product_NO" value="${best.p_NO}" id="Product_NO">
     					<img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template"style="width:253px; height:205px;">
     						<div class="overlay"></div>
     					</a>
@@ -172,9 +172,8 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
+	    							<a href='#' class='heart d-flex justify-content-center align-items-center heart_div'>
+	    							<span><i class='ion-ios-heart'></i></span></a>
     							</div>
     						</div>
     					</div>
@@ -214,9 +213,8 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
+	    							<a href='#' class='heart d-flex justify-content-center align-items-center heart_div'>
+	    							<span><i class='ion-ios-heart'></i></span></a>
 	    								<input type="hidden" name="USER_ID" id="USER_ID" value="${USER_ID }">
     							</div>
     						</div>
@@ -236,7 +234,6 @@
           	<span></span>
           </div>
           <div class="col-md-6 d-flex align-items-center">
-            
           </div>
         </div>
       </div>
@@ -291,7 +288,6 @@
 	    		'complete' : function() {
 	    		}
 	    	});
-	
 	})
     </script>
   </body>

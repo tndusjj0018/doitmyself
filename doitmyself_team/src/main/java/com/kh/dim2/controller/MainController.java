@@ -208,7 +208,9 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/naverLoginProcess" , method=RequestMethod.GET)
-	public String naverLoginProcess(@RequestParam("state") String state , @RequestParam("code") String code , HttpSession session ,  HttpServletResponse response) throws Exception{
+	public String naverLoginProcess(@RequestParam("state") String state , 
+									@RequestParam("code") String code , HttpSession session , 
+									HttpServletResponse response) throws Exception{
 		
 		String NaverState = state;
 		
@@ -311,10 +313,7 @@ public class MainController {
 						String N_Gender = ProfileObject.get("gender").toString().replace("\"", "");
 						String N_Email = ProfileObject.get("email").toString().replace("\"", "");
 					
-						//int index = N_Id.indexOf("@");
-						//String NaverId = N_Id.substring(0 , index);
 					int result = mainService.isNaverId(N_Id);
-						//System.out.println("NaverId result = "+result);
 					if(result == 1) { //네아로 가입된 아이디가 있을 시
 						session.setAttribute("USER_ID", N_Id);
 						int seller_result = mainService.isSeller(N_Id);
@@ -324,7 +323,7 @@ public class MainController {
 						session.setAttribute("SELLER_RESULT" , seller_result);
 						
 						if(recentView_Count > 0) {
-							List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(N_Id); //최근 본 DIM
+							List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(N_Id);	
 							mv.addObject("recentView", recentViewList);
 						}
 						mv.addObject("newDim" , NewproductList);
