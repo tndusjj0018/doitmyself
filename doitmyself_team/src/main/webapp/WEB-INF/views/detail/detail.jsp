@@ -87,11 +87,11 @@
 	<section class="ftco-section" style="margin-top: 40px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 mb-5 ftco-animate">
+				<div  id="img_place">
 					<img src="resources/upload/${prdData.p_IMG}" class="img-fluid"
 						name="P_IMG" id="mainIMG">
 				</div>
-				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate" id="des_place">
 					<h3 id="p_name">${prdData.p_NAME}</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
@@ -110,7 +110,7 @@
 							<div class="form-group d-flex">
 								<div class="select-wrap">
 									<div class="icon">
-										<span class="ion-ios-arrow-down"></span>
+										
 									</div>
 
 								</div>
@@ -428,7 +428,7 @@
 	</section>
 
 	<!--  상단바 이동 버튼 -->
-	<a id="MOVE_TOP_BTN" href="#">TOP</a>
+	<button id="MOVE_TOP_BTN" href="#">TOP</button>
 
 
 	<footer class="ftco-footer ftco-section" style="clear: both">

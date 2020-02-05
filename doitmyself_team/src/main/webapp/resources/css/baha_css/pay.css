@@ -1,11 +1,15 @@
 #BodyWrap {
    margin: 0 auto;
+   width: 1000px;
 }
 
 .table_DetailCheck .table_InfoCheck .table_PayMethod .table_TotalPrice{
    border-collapse: collapse;
 }
 
+.Order_DetailCheck {
+	margin-top:40px;
+}
 
 .table_DetailCheck {
    width: 1000px;
@@ -130,6 +134,9 @@
    border-left: hidden;
    border-right: hidden;
    background:#E9EDF6
+}
+.table_TotalPrice tr td {
+	width:300px;
 }
 
 .table_TotalPrice tr:first-child td {
