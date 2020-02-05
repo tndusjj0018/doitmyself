@@ -37,7 +37,7 @@
 	<input type="hidden" name="P_CATEGORY_NO"
 		value="${prdInfo.p_CATEGORY_NO }">
 	
-	<div id="BodyWrap" style="width: 1000px;">
+	<div id="BodyWrap">
 		<div class="Order_DetailCheck">
 			<div class="state1">
 				<h3 class="state1_1">주문 상품 확인</h3>
