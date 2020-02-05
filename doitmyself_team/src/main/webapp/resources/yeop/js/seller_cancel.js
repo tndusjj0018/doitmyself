@@ -13,7 +13,7 @@ $.ajax({
 			console.log(data)
 			$(data).each(function(){
 				//시간빼고 날짜만 뽑아옴
-				//var orderDateAll = this.order_R_DATE ;
+				//var orderDateAll = this.order_R_DATE;
 				//var orderDate = orderDateAll.split(" ");
 				output += "<tr>";
 				output += "<td class='orderDate'>" + this.order_R_DATE + "</td>";

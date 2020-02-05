@@ -165,7 +165,7 @@
 		WHERE qna_no = #{QnaNo}
 	</update>
 	
-	<!-- 배송중 확인시 재고수량 감소  -->
+	<!-- 배송중 확인시 재고수량 감소 -->
 	<update id="OrderAmountM" parameterType="int">
 		UPDATE product_tbl
 			SET p_quantity = p_quantity - #{ORDER_AMOUNT} <!-- 재고수량 감소 -->
