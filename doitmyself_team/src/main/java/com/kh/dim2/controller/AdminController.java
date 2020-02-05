@@ -30,6 +30,7 @@ import com.kh.dim2.domain.SubCategory;
 @Controller
 public class AdminController {
 	String word = "";// 검색어를 저장할 변수 => ajax를 통해 검색을 할 수 있지만, 저장할 변수가 없으면 제대로 기능을 수행하지 못함
+	String saved_doc = "";
 	@Autowired
 	AdminService adminService;
 
@@ -38,7 +39,7 @@ public class AdminController {
 	public ModelAndView AdminPage(String doc,
 			@RequestParam(value = "num", defaultValue = "1", required = false) int num, ModelAndView mv,
 			HttpServletRequest request) {
-
+			word = "";//메뉴 누를 때 마다 검색어 초기화
 		System.out.println("doc = " + doc);
 		if (doc == null) {
 			doc = "userview";

@@ -179,6 +179,7 @@ var pagination = function(rdata){
 
 
 $(document).ready(function(){
+	search_word = "";
 
 	$(".user_searchbtn").click(function(){
 		

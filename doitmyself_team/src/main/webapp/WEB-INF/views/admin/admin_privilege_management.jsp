@@ -205,6 +205,7 @@
 		
 		
 		$(function(){
+			search_word = "";
 			
 			
 			//검색버튼 눌렀을 때
