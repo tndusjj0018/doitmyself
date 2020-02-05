@@ -157,10 +157,10 @@
     		<div class="row">
     			<c:forEach var="best" items="${bestDim}" begin="0" end="7" step="1">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product product-add" style="width:255px; height:266.87px;">
+    				<div class="product product-add" style="width:255px; height:300px;">
     					<a href="detail?P_NO=${best.p_NO}" class="img-prod">
     					<input type="hidden" name="Product_NO" value="${best.p_NO}">
-    					<img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template"style="width:253px; height:168.62px;">
+    					<img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template"style="width:253px; height:205px;">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -199,10 +199,10 @@
     		<div class="row">
     			<c:forEach var="New" items="${newDim }" begin="0" end="11" step="1">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product product-add" style="width:255px; height:266.87px;">
+    				<div class="product product-add" style="width:255px; height:300px;">
     					<a href="detail?P_NO=${New.p_NO }" class="img-prod">
     					<input type="hidden" name="Product_NO" value="${New.p_NO}">
-    					<img class="img-fluid" src="resources/upload/${New.p_IMG }" alt="Colorlib Template" style="width:253px; height:168.62px;">
+    					<img class="img-fluid" src="resources/upload/${New.p_IMG }" alt="Colorlib Template" style="width:253px; height:205px;">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
