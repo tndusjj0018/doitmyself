@@ -146,7 +146,7 @@
 						</a>
 						<div class="collapse" id="toggleDemo4" style="height: 0px;">
 							<ul class="nav nav-list">
-								<li class="mar20"><a href="admin?doc=category_management">카테고리 수정</a></li>
+								<li class="mar20"><a href="admin?doc=category_management">카테고리 수정/삭제</a></li>
 								<li class="mar20"><a href="admin?doc=add_category">카테고리 추가</a></li>
 							</ul>
 						</div>
