@@ -61,6 +61,16 @@
     		border-top: 1px solid #d3d3d345;
     		cursor: pointer;
 		}    
+		.img-fluid {
+		    min-width: 190px;
+		    min-height: 183px;
+		}
+		.product .text h3  {
+			width: 154px;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		}
     </style>
       <script>
       
