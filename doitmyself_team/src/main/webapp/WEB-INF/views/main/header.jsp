@@ -87,7 +87,7 @@
                 <a class="dropdown-item" href="product?category=312">미니어쳐</a>
                 <a class="dropdown-item" href="product?category=313">캔들&향수</a>
                 <a class="dropdown-item" href="product?category=314">슬라임</a>
-                <a class="dropdown-item" href="product?category=315">악세서리</a>
+                <a class="dropdown-item" href="product?category=315">기타</a>
               </div>
             </li>
 

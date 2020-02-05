@@ -21,7 +21,7 @@
   <body>
 	 <%
 		    String clientId = "iOLTY0IrYPUE_O2gwkSU";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://192.168.40.48:8088/dim2/naverLoginProcess", "UTF-8");
+		    String redirectURI = URLEncoder.encode("http://192.168.40.10:8088/dim2/naverLoginProcess", "UTF-8");
 		    SecureRandom random = new SecureRandom();
 		    String state = new BigInteger(130, random).toString();
 		    

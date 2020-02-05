@@ -3462,7 +3462,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   content: "";
   display: inline-block;
   position: absolute;
-  right: 12px;
+  right: 120px;
   top: -12px;
 }
 
@@ -3478,7 +3478,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   content: "";
   display: inline-block;
   position: absolute;
-  right: 12px;
+  right: 120px;
   top: -11px;
 }
 
