@@ -149,7 +149,7 @@
     					console.log(rdata);
     					$(".view_more").remove();
     					var output = "";
-    					if(rdata.list.length == 0 num <2){
+    					if(rdata.list.length == 0 && num <2){
     						output += "<div style='text-align:center;line-height: 300px;'>상품이 존재하지 않습니다.</div>";
     					}else{
     						
