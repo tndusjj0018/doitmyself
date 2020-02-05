@@ -68,9 +68,8 @@
 		$(document).ready(function(){
 			var adminOrNot = <%=session.getAttribute("adminNumber")%>;
 			if(adminOrNot != 1){
-				$(".admin_content").empty();
-				alert("비정상적인 접근입니다.");
 				history.back();
+				alert("비정상적인 접근입니다.");
 			}
 			
 			
