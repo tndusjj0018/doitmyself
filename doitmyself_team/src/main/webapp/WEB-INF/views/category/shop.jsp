@@ -152,7 +152,7 @@
 	    						output += "				<h3><a href='#'>"+this.p_NAME+"</a></h3>";
 	    						output += "				<div class='d-flex'>";
 	    						output += "					<div class='pricing'>";
-	    						output += "						<p class='price'><span>"+this.p_PRICE+"원</span></p>";
+	    						output += "						<p class='price'><span>&#8361;"+this.p_PRICE.toLocaleString()+"</span></p>";
 	    						output += "					</div>";
 	    						output += "				</div>";
 	    						output += "				<div class='bottom-area d-flex px-3'>";
