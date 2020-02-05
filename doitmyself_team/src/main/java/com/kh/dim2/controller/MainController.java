@@ -67,6 +67,7 @@ public class MainController {
 			int recentView_Count = mainService.recentViewCount(USER_ID);
 			if(recentView_Count > 0) {
 				List<HashMap<String, String>> recentViewList = mainService.getRecent_View_List(USER_ID); //최근 본 DIM
+				mv.addObject("recentView", recentViewList);
 			}
 		}
 		
