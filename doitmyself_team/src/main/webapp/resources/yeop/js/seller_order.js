@@ -164,8 +164,9 @@ $.ajax({
 						break;
 				}
 				output += "<td class='orderDelivery'><button class='orderDelivery' value='"+ this.order_DELIVERY +"' style='background:"+bg+"'>"+DeleveryMessage+"</button>" +
-						"		<input type='hidden' value='"+ this.order_P_NO +"' id='hidden_p_no'>" +
+						"		<input type='hidden' value="+ this.order_NO +" id='hidden_no'>" +
 						"		<input type='hidden' value='"+ this.order_AMOUNT +"' id='hidden_amount'></td>";
+						"		<input type='hidden' value='"+ this.order_P_NO +"' id='hidden_p_no'></td>";
 				output += "</tr>";
 				
 				//## 총 주문금액 ##
@@ -218,7 +219,7 @@ $.ajax({
 		$('.orderCount').text(listcount);
 		// ## 총 주문금액 ##
 		$('.orderPriceAll').empty();
-		$('.orderPriceAll').text(orderPrice);//자동 콤마
+		$('.orderPriceAll').text(orderPrice.toLocaleString());//자동 콤마
 	}//success end
 })//orderList ajax end
 }
@@ -231,9 +232,10 @@ function orderDelivery(){
 		var orderDelivery = $(this).text();
 		//주문상태 : 1=결제완료, 2=상품준비중, 3=배송중, 4=배송완료
 		var orderDeliveryVal = $(this).val();
-		var order_p_no = $(this).next().val(); //상품번호
+		var order_no = $(this).next().val(); //주문번호
+		var order_p_no = $(this).next().next().next().val(); //상품번호
 		var order_amount = 0;
-		var ORDER_TRNO = 0; //운송장 번호
+		var ORDER_TRNO = null; //운송장 번호
 		if(orderDelivery == "주문완료"){// 0 = 주문완료
 			var ready = confirm("결제완료 처리하시겠습니다?");
 			if(ready){
@@ -287,7 +289,7 @@ function orderDelivery(){
 		//송장번호	
 		var order_p_no = $(this).next().val(); //상품 번호
 		var data = {"orderDeliveryVal" : orderDeliveryVal, "ORDER_TRNO" : ORDER_TRNO,
-					"ORDER_P_NO" : order_p_no}
+					"ORDER_NO" : order_no}
 		$.ajax({
 			type : 'post',
 			url : 'orderDelivery2',

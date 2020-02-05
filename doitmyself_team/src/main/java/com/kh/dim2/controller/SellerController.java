@@ -360,12 +360,11 @@ public class SellerController {
 	//## 배송상태 처리 ##
 	@ResponseBody
 	@PostMapping(value="/orderDelivery2")
-	public void orderStatus(@RequestParam("ORDER_P_NO")int P_NO,
-							@RequestParam(value="ORDER_TRNO", required=false)int ORDER_TRNO,
+	public void orderStatus(@RequestParam("ORDER_NO")int P_NO,
+							@RequestParam(value="ORDER_TRNO", required=false)String ORDER_TRNO,
 							@RequestParam("orderDeliveryVal")int orderDeliveryVal) {
-		System.out.println("ORDER_P_NO = " + P_NO);
-		String ORDER_TRNO_S = Integer.toString(ORDER_TRNO);
-		int result = sellerService.orderStatus(P_NO, ORDER_TRNO_S, orderDeliveryVal);
+		System.out.println("ORDER_NO = " + P_NO + " ORDER_TRNO = " + ORDER_TRNO);
+		int result = sellerService.orderStatus(P_NO, ORDER_TRNO, orderDeliveryVal);
 		if(result == 1) {
 			System.out.println("주문상태 변경 완료");
 		}else {

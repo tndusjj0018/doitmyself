@@ -17,7 +17,7 @@ $.ajax({
 				//var orderDate = orderDateAll.split(" ");
 				output += "<tr>";
 				output += "<td class='orderDate'>" + this.order_R_DATE + "</td>";
-				output += "<td class='orderNo'>" + this.order_P_NO + "</td>";
+				output += "<td class='orderNo'>" + this.order_NO + "</td>";
 				output += "<td class='orderId'>" + this.order_ID + "</td>";				
 				output += "<td class='orderName'>" +
 						  "		<div class='orderImg'>" +
