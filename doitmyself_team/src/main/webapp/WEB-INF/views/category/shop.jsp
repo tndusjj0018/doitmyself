@@ -202,6 +202,11 @@
     					}//else end
     					
     					$(".productsection").append(output);
+    					$(".view_more").click(function(){//더보기 클릭 시 
+    		    			num++;//더보기 클릭시 num 의 값은 1씩 올라감
+    		    			console.log("더보기 클릭 num = "+num);
+    		    			productList();	
+    		    		})//click end
     					
     					$(".heart").click(function(){//찜 클릭시 바로 하트 색 바꿔 주기
     						var login_id = '<%=session.getAttribute("USER_ID")%>';
@@ -224,6 +229,8 @@
     					})
     					
     					
+    					
+    					
     				},//success end
     				error:function(){
     					console.log("실패");
@@ -244,11 +251,7 @@
     			productList();	
     		})//change end
     		
-    		$(".view_more").click(function(){//더보기 클릭 시 
-    			num++;//더보기 클릭시 num 의 값은 1씩 올라감
-    			console.log("더보기 클릭 num = "+num);
-    			productList();	
-    		})//click end
+    		
     		
     		$(".list li").click(function(){
                 $(".productsection").empty();
