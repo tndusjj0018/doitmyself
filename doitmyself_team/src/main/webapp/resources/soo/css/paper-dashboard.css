@@ -2911,7 +2911,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   position: absolute;
   width: 100%;
   padding-top: 10px;
-  z-index: 1029;
+  z-index: 8;
 }
 
 .documentation .navbar.fixed-top {
@@ -3462,7 +3462,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   content: "";
   display: inline-block;
   position: absolute;
-  right: 12px;
+  right: 110px;
   top: -12px;
 }
 
@@ -3478,7 +3478,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   content: "";
   display: inline-block;
   position: absolute;
-  right: 12px;
+  right: 110px;
   top: -11px;
 }
 

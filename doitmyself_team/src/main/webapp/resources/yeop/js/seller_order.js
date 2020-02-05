@@ -59,7 +59,7 @@ $(function(){
 			if(day < 10) day = "0" + day;
 
 			var startDate = year + "-" + month + "-" + day;
-			var endDate = recentYear + "-" + recentMonth + "-" + recentDay;
+			var endDate = recentYear + "-" + recentMonth + "-" + recentDay2;
 			
 		}else if(dateCheck == "orderR-6mon"){//6개월
 			var dt = new Date();
@@ -73,7 +73,7 @@ $(function(){
 			if(day < 10) day = "0" + day;
 
 			var startDate = year + "-" + month + "-" + day;
-			var endDate = recentYear + "-" + recentMonth + "-" + recentDay;
+			var endDate = recentYear + "-" + recentMonth + "-" + recentDay2;
 		}
 		var limit = $('#viewcount').val(); //페이지 수
 		var viewSelect = $('#viewSelect').val(); //ㅇㅇ순 정렬

@@ -1,5 +1,6 @@
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
   <head>
@@ -54,7 +55,6 @@
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
 	            <div class="col-md-12 ftco-animate text-center">
 	              <h1 class="mb-2">Do It Myself</h1>
 	              <h2 class="subheading mb-4">DIM - final project</h2>
@@ -94,7 +94,7 @@
 		    </fieldset>
 		  </form>
     <section class="ftco-section1">
-			<div class="container">
+		<div class="container">
 				<div class="row no-gutters ftco-services">
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
@@ -113,8 +113,8 @@
             		<span class="flaticon-diet"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">신선한 재료</h3>
-                <span>갓 캐낸듯한 신선함</span>
+                <h3 class="heading">맛있는 음식</h3>
+                <span>간단한 조리</span>
               </div>
             </div>    
           </div>
@@ -128,7 +128,7 @@
                 <span>더 나은 품질</span>
               </div>
             </div>      
-          </div>
+          </div>  
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
@@ -141,7 +141,7 @@
             </div>      
           </div>
         </div>
-			</div>
+		</div>
 		</section>
     <section class="ftco-section2">
     	<div class="container">
@@ -157,24 +157,21 @@
     		<div class="row">
     			<c:forEach var="best" items="${bestDim}" begin="0" end="7" step="1">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product product-add">
+    				<div class="product product-add" style="width:255px; height:300px;">
     					<a href="detail?P_NO=${best.p_NO}" class="img-prod">
     					<input type="hidden" name="Product_NO" value="${best.p_NO}">
-    					<img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template">
+    					<img class="img-fluid" src="resources/upload/${best.p_IMG}" alt="Colorlib Template"style="width:253px; height:205px;">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
     						<h3><a href="#">${best.p_NAME}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
-		    						<p class="price"><span>${best.p_PRICE}</span></p>
+		    						<p class="price"><span>&#8361; <fmt:formatNumber value="${best.p_PRICE}" pattern="#,###,###" /></span></p>
 		    					</div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="detail?P_NO=${best.p_NO}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
 	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
@@ -187,7 +184,7 @@
     		</div>
     	</div>
     </section>
-    
+
     <section class="ftco-section2">
     	<div class="container">
 				<div class="row justify-content-center mb-3 pb-3">
@@ -202,28 +199,25 @@
     		<div class="row">
     			<c:forEach var="New" items="${newDim }" begin="0" end="11" step="1">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product product-add">
+    				<div class="product product-add" style="width:255px; height:300px;">
     					<a href="detail?P_NO=${New.p_NO }" class="img-prod">
     					<input type="hidden" name="Product_NO" value="${New.p_NO}">
-    					<img class="img-fluid" src="resources/upload/${New.p_IMG }" alt="Colorlib Template">
+    					<img class="img-fluid" src="resources/upload/${New.p_IMG }" alt="Colorlib Template" style="width:253px; height:205px;">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
     						<h3><a href="#">${New.p_NAME }</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
-		    						<p class="price"><span>${New.p_PRICE }</span></p>
+		    						<p class="price"><span>&#8361; <fmt:formatNumber value="${New.p_PRICE }" pattern="#,###,###" /></span></p>
 		    					</div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="detail?P_NO=${New.p_NO }" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
-	    						
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    							<a href="#" class="heart d-flex justify-content-center align-items-center" style="background:red;">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
+	    								<input type="hidden" name="USER_ID" id="USER_ID" value="${USER_ID }">
     							</div>
     						</div>
     					</div>
@@ -269,7 +263,7 @@
   <script src="resources/js/home_js/google-map.js"></script>
   <script src="resources/js/home_js/main.js"></script>
   <script>
-	    $(function(){
+	$(function(){
 	      	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 	    	var floatPosition = parseInt($("#floatMenu").css('top'));
 	    	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
@@ -297,7 +291,8 @@
 	    		'complete' : function() {
 	    		}
 	    	});
-	    })
+	
+	})
     </script>
   </body>
 </html>

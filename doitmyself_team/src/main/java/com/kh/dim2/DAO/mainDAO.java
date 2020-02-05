@@ -80,8 +80,8 @@ public class mainDAO {
 
 	public List<Product> getSearchList(Map<String, Object> map) {
 		return sqlSession.selectList("Main.getSearchList" , map);
-	}
-
+	} 
+  
 	public int getSearchListCount(Map<String, String> map) {
 		return sqlSession.selectOne("Main.searchCount" , map);
 	}
@@ -100,5 +100,9 @@ public class mainDAO {
 
 	public Member isPass(Member m) {
 		return sqlSession.selectOne("Main.isPass" , m);
+	}
+
+	public int AddReadCount(int p_no) {
+		return sqlSession.update("Main.AddReadCount" , p_no);
 	}
 }

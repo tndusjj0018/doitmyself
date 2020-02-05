@@ -61,6 +61,16 @@
     		border-top: 1px solid #d3d3d345;
     		cursor: pointer;
 		}    
+		.img-fluid {
+		    width: 190px;
+		    height: 183px;
+		}
+		.product .text h3  {
+			width: 154px;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		}
     </style>
       <script>
       
@@ -137,8 +147,9 @@
     				dataType:"json",
     				success:function(rdata){
     					console.log(rdata);
+    					$(".view_more").remove();
     					var output = "";
-    					if(rdata.list.length == 0){
+    					if(rdata.list.length == 0 && num <2){
     						output += "<div style='text-align:center;line-height: 300px;'>상품이 존재하지 않습니다.</div>";
     					}else{
     						
@@ -152,7 +163,7 @@
 	    						output += "				<h3><a href='#'>"+this.p_NAME+"</a></h3>";
 	    						output += "				<div class='d-flex'>";
 	    						output += "					<div class='pricing'>";
-	    						output += "						<p class='price'><span>"+this.p_PRICE+"원</span></p>";
+	    						output += "						<p class='price'><span>&#8361;"+this.p_PRICE.toLocaleString()+"</span></p>";
 	    						output += "					</div>";
 	    						output += "				</div>";
 	    						output += "				<div class='bottom-area d-flex px-3'>";
@@ -187,9 +198,15 @@
 	    					if(rdata.listcount>rdata.end){
 	    						output += "<div class='view_more'>더보기▼</div>";
 	    					}//if end
+	    					
     					}//else end
     					
     					$(".productsection").append(output);
+    					$(".view_more").click(function(){//더보기 클릭 시 
+    		    			num++;//더보기 클릭시 num 의 값은 1씩 올라감
+    		    			console.log("더보기 클릭 num = "+num);
+    		    			productList();	
+    		    		})//click end
     					
     					$(".heart").click(function(){//찜 클릭시 바로 하트 색 바꿔 주기
     						var login_id = '<%=session.getAttribute("USER_ID")%>';
@@ -212,6 +229,8 @@
     					})
     					
     					
+    					
+    					
     				},//success end
     				error:function(){
     					console.log("실패");
@@ -232,11 +251,7 @@
     			productList();	
     		})//change end
     		
-    		$(".view_more").click(function(){//더보기 클릭 시 
-    			num++;//더보기 클릭시 num 의 값은 1씩 올라감
-    			console.log("더보기 클릭 num = "+num);
-    			productList();	
-    		})//click end
+    		
     		
     		$(".list li").click(function(){
                 $(".productsection").empty();
@@ -332,7 +347,7 @@
 		                   <li class="sub_li" value="312">미니어쳐</li>
 		                   <li class="sub_li" value="313">캔들/향수</li>
 		                   <li class="sub_li" value="314">슬라임</li>
-		                   <li class="sub_li" value="315">액세서리</li>
+		                   <li class="sub_li" value="315">기타</li>
 		                 </ul>
                 	</div>
             	</div>
@@ -350,10 +365,11 @@
 	          </div>
 	        </div>
     	</div>
+    	</div>
     </section>
 
     
-  
+  	<jsp:include page="footer.jsp"></jsp:include>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

@@ -128,7 +128,7 @@ public class MainServiceImpl implements MainService{
 	     }
 		return dao.getSearchList(map);
 	}
-
+  
 	@Override
 	public int getSearchListCount(int index, String search_word) {
 		Map<String, String> map=new HashMap<String,String>();
@@ -154,4 +154,10 @@ public class MainServiceImpl implements MainService{
 	public Member isPass(Member m) {
 		return dao.isPass(m);
 	}
+
+	@Override
+	public int AddReadCount(int p_no) {
+		return dao.AddReadCount(p_no);
+	}
+
 }

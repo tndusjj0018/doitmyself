@@ -499,7 +499,7 @@ public class MainController {
 		list = mainService.getSearchList(index, search_word, page, limit);
 		listcount = mainService.getSearchListCount(index, search_word);
 		
-		//총 페이지 수
+		//총 페이지 수   
 		int maxpage = (listcount + limit -1) / limit;
 						
 		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등..)

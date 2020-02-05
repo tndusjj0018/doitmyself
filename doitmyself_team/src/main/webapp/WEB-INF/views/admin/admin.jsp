@@ -61,7 +61,9 @@
         	margin-left: 300px;
         	margin-top: 40px;   
         }
-        
+        .navbar-brand{
+        	width: 100px!important;
+        }
 	</style>
 	<!-- .goto-here {background: #f4f3ef;} -->
 	<script>
@@ -69,8 +71,8 @@
 			var adminOrNot = <%=session.getAttribute("adminNumber")%>;
 			if(adminOrNot != 1){
 				$(".admin_content").empty();
-				alert("비정상적인 접근입니다.");
 				history.back();
+				alert("비정상적인 접근입니다.");
 			}
 			
 			
@@ -127,8 +129,8 @@
 		</article>		
 	
 	</div>
-    
 	
+	<jsp:include page="footer.jsp"></jsp:include>	
 	
 	
 	

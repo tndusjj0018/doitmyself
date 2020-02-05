@@ -179,13 +179,13 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="row" style="margin-bottom: -10px; width: 84%;">
+                           <div class="row" style="margin-bottom: -10px; width: 84%;"> 
                               <div class="addr_box">
                                  <div class="form-group">
                                     <label>우편번호</label>
                                     <input type="text" class="form-control" name="USER_POSTCODE" id="PostCode" required readOnly>
                                     <span><i class="far fa-check-circle input_check post_checkbar" style="margin-left: 95%;"></i></span>
-                                 </div>                                 
+                                 </div>                                   
                               </div>
                               <div class="col-md-3">
                                  <div class="form-group">
