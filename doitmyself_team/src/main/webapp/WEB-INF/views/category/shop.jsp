@@ -62,8 +62,8 @@
     		cursor: pointer;
 		}    
 		.img-fluid {
-		    min-width: 190px;
-		    min-height: 183px;
+		    width: 190px;
+		    height: 183px;
 		}
 		.product .text h3  {
 			width: 154px;
@@ -147,8 +147,9 @@
     				dataType:"json",
     				success:function(rdata){
     					console.log(rdata);
+    					$(".view_more").remove();
     					var output = "";
-    					if(rdata.list.length == 0){
+    					if(rdata.list.length == 0 num <2){
     						output += "<div style='text-align:center;line-height: 300px;'>상품이 존재하지 않습니다.</div>";
     					}else{
     						
@@ -197,6 +198,7 @@
 	    					if(rdata.listcount>rdata.end){
 	    						output += "<div class='view_more'>더보기▼</div>";
 	    					}//if end
+	    					
     					}//else end
     					
     					$(".productsection").append(output);
@@ -342,7 +344,7 @@
 		                   <li class="sub_li" value="312">미니어쳐</li>
 		                   <li class="sub_li" value="313">캔들/향수</li>
 		                   <li class="sub_li" value="314">슬라임</li>
-		                   <li class="sub_li" value="315">액세서리</li>
+		                   <li class="sub_li" value="315">기타</li>
 		                 </ul>
                 	</div>
             	</div>
