@@ -129,7 +129,7 @@ $.ajax({
 				var bg = null; //배송 상태 bg
 				output += "<tr>";
 				output += "<td class='orderDate'>" + orderDate[0] + "</td>";
-				output += "<td class='orderNo'>" + this.order_P_NO + "</td>";
+				output += "<td class='orderNo'>" + this.order_NO + "</td>";
 				output += "<td class='orderId'>" + this.order_ID + "</td>";				
 				output += "<td class='orderName'>" +
 						  "		<div class='orderImg'>" +
