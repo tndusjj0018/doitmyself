@@ -80,8 +80,8 @@ public class mainDAO {
 
 	public List<Product> getSearchList(Map<String, Object> map) {
 		return sqlSession.selectList("Main.getSearchList" , map);
-	}
-
+	} 
+  
 	public int getSearchListCount(Map<String, String> map) {
 		return sqlSession.selectOne("Main.searchCount" , map);
 	}

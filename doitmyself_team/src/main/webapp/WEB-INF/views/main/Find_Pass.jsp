@@ -198,7 +198,7 @@
    					}
    				});
 	   		})
-	   		
+	   		   
 	   		$('#code_idf').on('click', function(){
    				
 	   			var USER_ID = $('input:eq(0)').val();

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.kh.dim2.domain.Mail;
 
-@Component
+@Component 
 public class SendMail {
 	
 	 @Autowired
@@ -32,7 +32,7 @@ public class SendMail {
             
          }catch(MessagingException e) {
              System.out.println("MessagingException");
-             e.printStackTrace();
+             e.printStackTrace(); 
          }
          try {
              mailSender.send(msg);
