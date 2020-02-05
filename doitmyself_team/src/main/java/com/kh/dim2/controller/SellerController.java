@@ -363,7 +363,7 @@ public class SellerController {
 	public void orderStatus(@RequestParam("ORDER_NO")int P_NO,
 							@RequestParam(value="ORDER_TRNO", required=false)String ORDER_TRNO,
 							@RequestParam("orderDeliveryVal")int orderDeliveryVal) {
-		System.out.println("ORDER_NO = " + P_NO + "  ORDER_TRNO = " + ORDER_TRNO);
+		System.out.println("ORDER_NO = " + P_NO + " ORDER_TRNO = " + ORDER_TRNO);
 		int result = sellerService.orderStatus(P_NO, ORDER_TRNO, orderDeliveryVal);
 		if(result == 1) {
 			System.out.println("주문상태 변경 완료");
