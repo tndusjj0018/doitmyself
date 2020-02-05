@@ -22,6 +22,7 @@
 }
 
 .WRAP {
+	margin-top:30px;
 	float: left;
 	position: relative;
 	width: 100%;
@@ -139,7 +140,7 @@
 
 #review_prdname {
 float:left;
-	width:100px;
+	width:400px;
 	height:13px;
 	font-size:11px;
 	color:#333;
