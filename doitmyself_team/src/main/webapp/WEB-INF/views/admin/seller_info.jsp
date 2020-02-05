@@ -52,7 +52,7 @@
 					
 				}
 				if(page<maxpage){//다음페이지가 존재할 때
-					pageoutput += "<li><a href='javasript:go("+(page+1)+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>";
+					pageoutput += "<li><a href='javasript:go("+(page+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
 				}else{//다음페이지가 존재하지 않을 때
 					pageoutput += "<li><a href='#'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";	
 				}
