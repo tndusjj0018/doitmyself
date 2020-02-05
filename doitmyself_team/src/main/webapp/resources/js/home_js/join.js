@@ -91,25 +91,19 @@ $(document).ready(function(){
 		
 		var pattern = /^\w+@\w+[.]\w{3}$/;  //+의 의미는 무조건 글자 한개 이상 필요
 		var USER_EMAIL = $("input:eq(7)").val();
-		
-		$.ajax({
-			url:"emailcheck",
-			data:{"USER_EMAIL" : USER_EMAIL},
-			success: function(resp) {
-				if(resp == -1) {
-					if(pattern.test(USER_EMAIL)){
-						$('.email_checkbar').css('opacity', '0.95');				
-						checkemail = true;
-					} else {
-						$('.email_checkbar').css('opacity', '0');
-					}
-				} else {
-					$('.email_checkbar').css('opacity', '0');
-					checkemail = false;
-				}
+		if(!pattern.test(USER_ID)) {
+			$('i:eq(7)').css('opacity', '0');
+			
+			if(pattern.test(USER_EMAIL)){
+				$('.email_checkbar').css('opacity', '0.95');	
+				checkemail = true;
+			} else {
+				$('.email_checkbar').css('opacity', '0');
+				checkemail = false;
 			}
+			return;
+		}
 		});
-	});
 	
 	$('input:eq(1)').on('keyup' , function(){
 		
@@ -186,7 +180,5 @@ $(document).ready(function(){
 		} else {
 			$('.addr_checkbar').css('opacity' , '0');
 		}
-		
-		
 	})
 });
