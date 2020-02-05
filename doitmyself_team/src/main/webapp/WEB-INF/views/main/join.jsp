@@ -197,7 +197,7 @@
                               <div class="col-md-12">
                                  <div class="form-group">
                                  <label>주소</label>
-                                    <input type="text" class="form-control" id="Address" name="USER_ADDRESS" required readOnly>
+                                    <input type="text" class="form-control" id="Address" name="USER_ADDRESS" required>
                                     <span><i class="far fa-check-circle input_check addr_checkbar" style="margin-left: 95.5%;"></i></span>
                                  </div>
                               </div>

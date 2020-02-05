@@ -164,7 +164,7 @@
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">${best.p_NAME}</a></h3>
+    						<h3  style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width:225px;"><a href="#" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width:150px; height:20px;">${best.p_NAME}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>&#8361; <fmt:formatNumber value="${best.p_PRICE}" pattern="#,###,###" /></span></p>
@@ -206,7 +206,7 @@
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">${New.p_NAME }</a></h3>
+    						<h3 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width:225px;"><a href="#">${New.p_NAME }</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>&#8361; <fmt:formatNumber value="${New.p_PRICE }" pattern="#,###,###" /></span></p>
@@ -214,7 +214,7 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center" style="background:red;">
+	    							<a href="#" class="heart d-flex justify-content-center align-items-center">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
 	    								<input type="hidden" name="USER_ID" id="USER_ID" value="${USER_ID }">
