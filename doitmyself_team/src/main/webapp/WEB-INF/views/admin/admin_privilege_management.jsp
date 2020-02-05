@@ -187,7 +187,7 @@
 						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
 					}else{//다음페이지가 두개 이상 존재할 때
 						output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
-						output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
+						//output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
 					}
 					output += "<li><a href='javascript:go("+(num+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
 					
