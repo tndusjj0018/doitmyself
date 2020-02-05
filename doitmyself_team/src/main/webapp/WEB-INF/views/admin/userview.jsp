@@ -156,11 +156,11 @@ var pagination = function(rdata){
 			//다음 페이지 버튼 : 1개씩 이동
 			
 			//현재페이지보다 큰 페이지 버튼
-			if((maxpage - num) == 1){//다음 페이지가 한개 존재할 때
+			if(num == 1){//현재 페이지가 1일때
 				output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
-			}else{//다음페이지가 두개 이상 존재할 때
+				output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
+			}else{
 				output += "<li><a href='javascript:go("+(num+1)+")'>"+(num+1)+"</a></li>";
-				//output += "<li><a href='javascript:go("+(num+2)+")'>"+(num+2)+"</a></li>";
 			}
 			output += "<li><a href='javascript:go("+(num+1)+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>";
 			
