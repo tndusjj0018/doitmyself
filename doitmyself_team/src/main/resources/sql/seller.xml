@@ -43,7 +43,7 @@
 		select * from
 		   (select rownum rnum, U.USER_PHONE, U.USER_NAME, J.*
 		   from 
-		         (select  O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
+		         (select  O.ORDER_NO, O.ORDER_P_NO, O.ORDER_DELIVERY, O.ORDER_STATUS, O.ORDER_ID,
 		               O.ORDER_PRICE, O.ORDER_PAYMENT, O.ORDER_ADDRESS, O.ORDER_DATE,
 		               O.ORDER_AMOUNT,O.ORDER_SELLER, P.P_IMG, P.P_NAME
 		         from ORDER_TBL O join PRODUCT_TBL P
@@ -140,7 +140,7 @@
 				,order_trno = #{ORDER_TRNO}
 				</when>
 			</choose>
-		WHERE order_p_no = #{P_NO}
+		WHERE order_no = #{P_NO}
 	</update>
 	
 	<!-- 상품문의 답변 리스트 -->
