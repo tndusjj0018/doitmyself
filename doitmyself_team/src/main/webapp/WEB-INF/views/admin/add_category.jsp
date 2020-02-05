@@ -241,7 +241,7 @@
 	</script>
 </head>
 <body>
-	<font id = "admin_viewtitle">관리자 권한 관리</font><br>
+	<font id = "admin_viewtitle">카테고리 수정</font><br>
 	<form class="categoryAddForm">
 		<select class="category_select mm">
 			<option>대분류</option>
