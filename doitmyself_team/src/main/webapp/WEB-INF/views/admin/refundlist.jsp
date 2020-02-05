@@ -77,7 +77,7 @@
 							
 							$(rdata.list).each(function(){
 								output += "<tr>";
-								output +="	<td>"+this.order_TRNO+"</td>";
+								output +="	<td>"+this.order_NO+"</td>";
 								output +="	<td>"+this.order_ID+"</td>";
 								output +="	<td>"+this.order_SELLER+"</td>";
 								if(this.order_PAYMENT == 'deposit'){
