@@ -40,9 +40,6 @@ function ajax(data){
 				$(data.qnalist).each(function(index, item){
 					console.log(item.p_NO);
 					output += "<tr>";
-//					output += "		<td>";
-//					output += 		item.qna_NO;
-//					output += "		</td>";
 					output += "		<td>";
 					output += "		<img src='resources/upload/" +item.p_IMG+"' class='product_img'>";
 					output += "		</td>"

@@ -119,7 +119,7 @@
 									<when test="qnaCate == 'q_cancel'">AND QNA_CATEGORY = 2</when>
 									<when test="qnaCate == 'q_other'">AND QNA_CATEGORY = 3</when>
 								</choose>
-								ORDER BY QNA_NO DESC
+				ORDER BY QNA_NO DESC
 	</select>
 		
 	
@@ -232,7 +232,8 @@
 		from (select * 
 			  from order_tbl natural join product_tbl 
 			  where order_status in(2,1)
-			  and ORDER_P_NO = P_NO) left outer join REFUND_TBL 
+			  and ORDER_P_NO = P_NO
+			  and order_id = #{USER_ID}) left outer join REFUND_TBL 
 			  						 on ORDER_NO = REFUND_NO
 			  						 AND ORDER_ID = #{USER_ID}
 									and ORDER_R_DATE is not NULL

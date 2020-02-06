@@ -117,7 +117,7 @@
 											(<fmt:formatNumber value="${crl.ORDER_AMOUNT }" pattern="#,###,###" />개)
 										</td>
 										<td>
-											${crl.ORDER_SELLER }
+											${crl.p_SELLER }
 										</td>
 										<td>
 											${crl.ORDER_R_DATE }

@@ -9,14 +9,19 @@
 
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/baha_js/pay.js"></script>
-
+<script src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="resources/js/baha_js/iamport.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<link rel="stylesheet" href="resources/css/baha_css/style.css">
 <head>
+<jsp:include page="../main/header.jsp" />
 <link rel="stylesheet" href="resources/css/baha_css/pay.css">
+
 <script>
 
 </script>
@@ -28,11 +33,11 @@
 
 
 
-	<input type="hidden" name="P_SELLER" value="${productdetail.p_SELLER }">
+	<input type="hidden" name="P_SELLER" value="${prdInfo.p_SELLER }">
 	<input type="hidden" name="P_CATEGORY_NO"
-		value="${productdetail.p_CATEGORY_NO }">
+		value="${prdInfo.p_CATEGORY_NO }">
 	
-	<div id="BodyWrap" style="width: 1000px;">
+	<div id="BodyWrap">
 		<div class="Order_DetailCheck">
 			<div class="state1">
 				<h3 class="state1_1">주문 상품 확인</h3>
@@ -55,7 +60,7 @@
 					<tr>
 						<td class="test">
 							<div class="prd_Photo">
-								<img src="${productdetail.p_IMG}" class="img-fluid"
+								<img src="resources/upload/${productdetail.p_IMG}" class="img-fluid"
 									name="P_IMG" id="mainIMG">
 							</div>
 						</td>
@@ -86,8 +91,8 @@
 				<tbody>
 					<tr>
 						<td>배송지 선택</td>
-						<td><label><input type="radio" name="loc" id="dft"
-								checked>기본배송지</label> <label><input type="radio"
+						<td><label><input type="radio" class="addrchk" name="loc" id="dft"
+								checked>기본배송지</label> <label><input type="radio" class="addrchk"
 								name="loc" id="input">직접입력</label></td>
 					</tr>
 					<tr class="default">
@@ -98,12 +103,10 @@
 					<tr class="default">
 						<td>주소</td>
 						<td><input type="text" class="info_loc1" id="info_postcode1"
-							name="USER_POSTCODE" value="${memberinfo.USER_POSTCODE}">&ensp;<input
-							type="button" value="주소 찾기"></td>
+							name="USER_POSTCODE" value="${memberinfo.USER_POSTCODE}">&ensp;</td>
 					</tr>
 					<tr class="default">
-						<td><input type="hidden" id="info_address1"
-							value="${memberinfo.USER_ADDRESS }"></td>
+						<td><input type="hidden" id="info_address1" value="${memberinfo.USER_ADDRESS}"></td>
 						<td><input type="text" class="info_loc2" name="USER_ADDRESS"
 							value="${memberinfo.USER_ADDRESS}"></td>
 					</tr>
@@ -129,12 +132,12 @@
 					</tr>
 					<tr class="put">
 						<td>주소</td>
-						<td><input type="text" class="info_loc1" name="USER_POSTCODE">&ensp;<input
-							type="button" value="주소 찾기"></td>
+						<td><input type="text" class="info_loc1" name="USER_POSTCODE" id="input_postcode" value="">&ensp;<input
+							type="button" value="주소 찾기"  id="Postcode"></td>
 					</tr>
 					<tr class="put">
 						<td></td>
-						<td><input type="text" class="info_loc2" name="USER_ADDRESS"></td>
+						<td><input type="text" class="info_loc2" name="USER_ADDRESS" id="input_address" value=""></td>
 					</tr>
 					<tr class="put">
 						<td>연락처</td>
@@ -154,55 +157,25 @@
 		<div class="Order_PayMethod">
 			<table class="table_PayMethod" border="1">
 				<thead>
-					<tr>
-						<td><label><input type="radio" name="pay">신용카드</label>
-							&ensp;<label><input type="radio" name="pay">무통장입금</label>
+					<tr >
+						<td colspan="3">&emsp;<span id="mth">결제 수단&nbsp;&emsp;&emsp;</span><label><input type="radio" name="pay" id="kaka">카카오페이</label>
+							
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>미정</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-
-		<div class="Order_TotalPrice">
-			<table class="table_TotalPrice" border="1">
-				<tbody>
-					<tr>
-						<td>최종결제금액</td>
-					</tr>
-					<tr>
-						<td>${total }원</td>
-					</tr>
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;현금 영수증 신청<br></td>
-					</tr>
-					<tr>
-						<td><label>&nbsp;&nbsp;<input type="radio"
-								name="receipt">신청
-						</label> <label><input type="radio" name="receipt">미신청</label></td>
-					</tr>
-					<tr>
 						<td>&nbsp;<label><input type="checkbox" id="chk1">개인정보
-								판매자 제공에 동의합니다.</label></td>
-					</tr>
-					<tr>
-						<td><textarea class="agree">고객님께서는 아래 내용에 대하여 동의를 거부하실 수 있으며, 거부시 상품 배송, CS가 제한됩니다.
+								판매자 제공에 동의합니다.</label><br>						<textarea class="agree">고객님께서는 아래 내용에 대하여 동의를 거부하실 수 있으며, 거부시 상품 배송, CS가 제한됩니다.
 제공받는자 : [(주)DIM]
 목적 : 주문상품의 배송(예약), 고객상담 및 불만처리
 항목 : 성명, 주소, 연락처(안심번호 적용 시 연락처는 제외), 개인통관고유부호(선택시), 현관비밀번호(입력시)
 보유기간 : 구매확정 후 3개월까지></textarea></td>
-					</tr>
-					<tr>
-						<td>&nbsp;<label><input type="checkbox" id="chk2">개인정보
-								수집 및 이용에 동의합니다.</label></td>
-					</tr>
-					<tr>
-						<td><textarea class="agree">고객님께서는 아래 내용에 대하여 동의를 거부하실 수 있으며, 거부 시 상품배송, 구매 및 결제, 일부 포인트 적립이 제한됩니다.
+<td>&nbsp;<label><input type="checkbox" id="chk2">개인정보
+								수집 및 이용에 동의합니다.</label><br>
+				
+				
+					<textarea class="agree">고객님께서는 아래 내용에 대하여 동의를 거부하실 수 있으며, 거부 시 상품배송, 구매 및 결제, 일부 포인트 적립이 제한됩니다.
 
 <수집이용목적>
 대금 결제/환불 서비스 제공, 주문/배송/거래 내역 조회 서비스 제공, 전자상거래법 준수 등 신용카드 정보, 계좌 정보, 주문/배송/거래 내역   
@@ -216,32 +189,55 @@
 이용계약(이용약관)이 존속중인 탈퇴하지 않은 회원의 경우 보유기간은 보존의무기간 이상 보관할 수 있으며 이 기간이 경과된 기록에 대해서 파기요청이 있는 경우 파기함
 <수집 항목보유기간>
 결제수단에 따른 개인정보 수집.이용 항목이 상이할 수 있음</textarea></td>
-					</tr>
-					<tr>
+					
+					
 						<td>&nbsp;<label><input type="checkbox" id="chk3">주문
-								상품정보에 동의</label></td>
+								상품정보에 동의</label><br>										
+					<textarea class="agree">주문 상품의 상품명,가격,배송정보에 동의합니다.</textarea></td>
+					</tr>
+
+					
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="Order_TotalPrice">
+			<table class="table_TotalPrice" border="1">
+				<tbody>
+					<tr>
+						<td>최종결제금액</td>
 					</tr>
 					<tr>
-						<td><textarea class="agree">주문 상품의 상품명,가격,배송정보에 동의합니다.</textarea></td>
+						<td><span id="totalprice"></span>원</td>
 					</tr>
+					<tr>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+					</tr>
+					
+					
+					
 					<tr>
 						<td>&nbsp;<label><input type="checkbox" id="allchk">위 내용을
 								확인하였으며 모든 내용에 동의합니다.</label></td>
 					</tr>
 					<tr>
 						<td>				
-						
+
 								<input type="hidden" id="ORDER_P_NO" name="ORDER_P_NO" value="${prdInfo.p_NO }">
 								<input type="hidden" id="ORDER_ID" name="ORDER_ID" value="${USER_ID}">
 								<input type="hidden" id="ORDER_CATEGORY" name="ORDER_CATEGORY" value="${prdInfo.p_CATEGORY_NO}">
 								<input type="hidden" id="ORDER_PRICE" name="ORDER_PRICE" value="">
 								<input type="hidden" id="ORDER_PAYMENT" name="ORDER_PAYMENT" value="kakaopay">
 								<input type="hidden" id="ORDER_ADDRESS" name="ORDER_ADDRESS" value="">
-								<input type="hidden" id="ORDER_SELLER" name="ORDER_SELLER" value="${prdInfo.p_SELLER}">
+								<input type="hidden" id="ORDER_SELLER" name="ORDER_SELLER" value="${prdInfo.SELLER_ID}">
 								<input type="hidden" id="ORDER_AMOUNT" name="ORDER_AMOUNT" value="">
 								
 								
-								<button  class="submit" class="paygo">결제하기</button>
+								<button  class="submit" id="paygo">결제하기</button>
 								<button class="reset" onclick="history.go(-1)">취소하기</button>
 							
 						</td>
@@ -255,5 +251,27 @@
 	</div>
 
 </body>
+<footer class="ftco-footer ftco-section" style="clear: both">
+	<hr>
+      <div class="container">
+         <div class="row"></div>
+      </div>
+      
+      <div class="row">
+         <div class="col-md-12 text-center">
+
+            <p>
+               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+               Copyright ©
+               <script>
+                  document.write(new Date().getFullYear());
+               </script>2020
+               All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+         </div>
+      </div>
+      
+   </footer>
 
 </html>

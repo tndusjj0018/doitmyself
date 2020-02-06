@@ -72,7 +72,7 @@
 			<div class="content">
 			  <div class="row">
 			    <div class="col-md-10">
-			      <div class="card card-user" style="width: 1100px;">
+			      <div class="card card-user">
 			        <div class="card-header">
 			          <h5 class="card-title">나의 QNA</h5>
 			        </div>
