@@ -55,7 +55,7 @@
 	</select>
 
 	<select id="getRecent_View_List" resultType="map" parameterType="String">
-		SELECT PT.P_IMG img , RVT.RV_NO no FROM
+		SELECT PT.P_IMG img , RVT.RV_NO, RVT.RV_P_NO no FROM
 		RECENT_VIEW_TBL RVT JOIN PRODUCT_TBL PT
 		ON RV_P_NO = P_NO
 		WHERE RV_ID = #{USER_ID}

@@ -114,7 +114,7 @@
 						<option value="price">총 가격순</option>              	
 	              	</select>
 	              	<select id="viewcount">              	
-						<option value="10" selected>10개씩 보기</option>              	
+						<!-- <option value="10" selected>10개씩 보기</option> -->              	
 						<option value="20">20개씩 보기</option>              	
 						<option value="30">30개씩 보기</option>              	
 	              	</select>

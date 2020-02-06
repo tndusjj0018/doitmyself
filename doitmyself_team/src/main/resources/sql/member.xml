@@ -229,16 +229,16 @@
 	<select id="cancelreturnlist" parameterType="HashMap" resultType="o_product">
 		select * from (select rownum rnum, b.*
 						from (select *
-		from (select * 
-			  from order_tbl natural join product_tbl 
-			  where order_status in(2,1)
-			  and ORDER_P_NO = P_NO
-			  and order_id = #{USER_ID}) left outer join REFUND_TBL 
-			  						 on ORDER_NO = REFUND_NO
-			  						 AND ORDER_ID = #{USER_ID}
-									and ORDER_R_DATE is not NULL
-									order by ORDER_R_DATE desc)b)
-				where rnum &gt;= #{start} and rnum &lt;= #{end}
+								from (select * 
+									  from order_tbl natural join product_tbl 
+									  where order_status in(2,1)
+									  and ORDER_P_NO = P_NO
+									  and order_id = #{USER_ID}) left outer join REFUND_TBL 
+									  						 on ORDER_NO = REFUND_NO
+									  						 AND ORDER_ID = #{USER_ID}
+															and ORDER_R_DATE is not NULL
+															order by ORDER_R_DATE desc)b)
+										where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	

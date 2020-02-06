@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="resources/css/homecss/style.css">
     <link rel="stylesheet" href="resources/css/homecss/home.css">
     <jsp:include page="header.jsp"/>
+    
   </head>
   
   <body class="goto-here">
@@ -43,7 +44,7 @@
     			방금 본 DIM
     			<br>
     			<c:forEach var="rv" items="${recentView }" begin="0" end="3" step="1">
-    				<a href="detail?P_NO=${rv.IMG}">
+    				<a href="detail?P_NO=${rv.NO}">
 						<img src="resources/upload/${rv.IMG}" class="float_img" style="width:100px; height:100px; border-radius:10px; padding:2px;">
 					</a>
 				<br>
@@ -170,12 +171,12 @@
 		    						<p class="price"><span>&#8361; <fmt:formatNumber value="${best.p_PRICE}" pattern="#,###,###" /></span></p>
 		    					</div>
 	    					</div>
-	    					<div class="bottom-area d-flex px-3">
+	    					<%-- <div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href='#' class='heart d-flex justify-content-center align-items-center heart_div'>
-	    							<span><i class='ion-ios-heart'></i></span></a>
+	    							<!-- <a href='#' class='heart d-flex justify-content-center align-items-center heart_div'> -->
+	    							<!-- <span><i class='ion-ios-heart'></i></span></a> -->
     							</div>
-    						</div>
+    						</div>--%>
     					</div>
     				</div>
     			</div>
@@ -213,8 +214,8 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href='#' class='heart d-flex justify-content-center align-items-center heart_div'>
-	    							<span><i class='ion-ios-heart'></i></span></a>
+	    							<!-- <a href='#' class='heart d-flex justify-content-center align-items-center heart_div'>
+	    							<span><i class='ion-ios-heart'></i></span></a> -->
 	    								<input type="hidden" name="USER_ID" id="USER_ID" value="${USER_ID }">
     							</div>
     						</div>
